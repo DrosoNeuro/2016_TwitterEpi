@@ -1,0 +1,132 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{options}\hlstd{(}\hlkwc{width} \hlstd{=} \hlnum{60}\hlstd{)}
+\hlkwd{summary}\hlstd{(iris)}
+\end{alltt}
+\begin{verbatim}
+##   Sepal.Length    Sepal.Width     Petal.Length  
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600  
+##  Median :5.800   Median :3.000   Median :4.350  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900  
+##   Petal.Width          Species  
+##  Min.   :0.100   setosa    :50  
+##  1st Qu.:0.300   versicolor:50  
+##  Median :1.300   virginica :50  
+##  Mean   :1.199                  
+##  3rd Qu.:1.800                  
+##  Max.   :2.500
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Let's see how to work with child documents in knitr. Below we input
+the file \textsf{Test.Rnw}:
+
+
+This chunk below is from the child document.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{1}\hlopt{+}\hlnum{1}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\begin{alltt}
+\hlkwd{rnorm}\hlstd{(}\hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1]  0.09993958  0.36033177  0.02012915  0.07647863
+## [5] -1.34508076
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(}\hlnum{1}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=2in]{figure/test-child-1} 
+\begin{kframe}\begin{alltt}
+\hlkwd{boxplot}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=2in]{figure/test-child-2} 
+\begin{kframe}\begin{alltt}
+\hlkwd{str}\hlstd{(mtcars)}
+\end{alltt}
+\begin{verbatim}
+## 'data.frame':	32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Done!
+
+\end{document}

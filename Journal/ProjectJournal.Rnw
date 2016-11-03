@@ -1,0 +1,256 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[ansinew]{inputenc}
+\usepackage[authoryear]{natbib} %defines bibliography style used
+\usepackage[margin=10pt]{caption}
+\usepackage[margin=10pt]{subcaption}
+\title{How reliable is Twitter for influenza surveillance?}
+\author{Servan Grüninger}
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+# set global chunk options
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
+options(formatR.arrow=TRUE,width=90)
+standard_path <- "C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/Journal"
+@
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+%http://yihui.name/knitr/demo/externalization/
+
+\section{Administrative Information}
+\label{sec:admin}
+\begin{description}
+\item [General] Reinhard Furrer (RF) \& Marcel Salathé (MS) will jointly supervise project. RH  will be primary supervisor regarding statistical questions; MS will be primary supervisor regarding machine learning questions.
+\item [EPFL] Sharada Mohanty (SM) \& Gianrocco Lazzari (GL) are PhD students in MS' group with knowledge in data management. They act as first contact persons regarding data management and processing question.
+\item [UZH] Reinhard Furrer will assign a PhD student who acts as first contact person for statistical questions arising during project.
+\item [Abbreviations]
+\begin{itemize}
+\item []
+\item Reinhard Furrer = RF
+\item Marcel Salathé = MS
+\item Servan Grüninger = SG
+\item Sharada Mohanty = SM
+\item Gianrocco Lazzari = GL
+\end{itemize}
+\end{description}
+\newpage
+
+
+\section{Current \& Achieved Goals}
+\subsection{Support Vector Machines \& Naive Bayes Classifiers}
+\label{goal:svm_bayes}
+Added: 2016.03.20\\
+Task: Continue reading into theory behind support vector machines and naive bayes classifiers (see also progress report~\ref{subsec:2016.03.20})\\
+Status: In process 
+
+\subsection{C4.5 \& meta-classifiers}
+\label{goal:c4.5_meta}
+Added: 2016.03.20\\
+Task: Get acquainted with principles behind C4.5 algorithm and meta-classifiers (see also progress report~\ref{subsec:2016.03.20})\\
+Status: In process 
+
+\subsection{Explorative Data Analysis}
+\label{goal:exp_dat_ana}
+Added: 2016.02.04\\
+I will have a look at the algorithm itself; get acquainted with it; read, explore and visualise some data with it.\\
+Task: Get algorithm to work on my local environment; test it out with small data sets \\
+Status: not started
+
+\subsection{Define Fine-Grained Goals - Done} 
+\label{goal:fin_goal}
+Added: 2016.02.04\\
+In order to plan the next steps, we need fine-grained goals concerning the master project\\
+Task: Define fine-grained goals based on general goals defined during last meeting (see \ref{subsec:2016.03.20})\\
+Status: Done (see \ref{subsec:2016.03.20})\\
+Finished: 2016.03.20
+
+\subsection{Define General Goals - Done} 
+\label{goal:gen_goal}
+In order to narrow down the direction of the project, we need general goals concerning the master thesis\\
+Added: 2016.02.04 \\
+Task: Define general goals\\
+Status: Done (see \ref{subsec:2016.02.04})\\
+Finished: 2016.02.04
+
+\subsection{Theoretical Background - Done} 
+\label{goal:theor_back}
+Added: 2016.02.04 \\
+In a first step, SG shall get acquainted with the theoretical prerequisites to understand and use the algorithm.\\
+Task: Read into literature cited in \citep{bodnar2014ground} and related work; generate an overview over relevant topics which I have to refresh or get acquainted with.\\
+Status: Done (see \ref{subsec:2016.02.04})\\
+Finished: 2016.03.20
+
+\newpage
+
+
+\section{Updates \& Meetings}
+\label{sec:updates}
+
+\subsection{2016.07.20 - Progress Report}
+\label{subsec:2016.07.20}
+
+\subsubsection{Exploratory Analysis of Twitter Data}
+
+
+I used GL's summary and script for a first analysis of the data see ("Masterarbeit/TwitterData/tweets\_from\_todd" for script and summary
+
+Questions/Key observations:
+\begin{description}
+\item [What does "sick" label mean in this context?] I assume that the label "sick" in the data set shows the result of Todd's code. How else should we have been able to receive an assessment of who's sick and who isn't? Need to double-check with MS \& GL
+\item [False assignments] If the data handed to me by GL are supposed to represent the results obtained by running Todd's code, there are quite a lot of assignment mistakes. In the data containing the healthy users, 16009 out of 2873372 users (0.005571503) were mistakenly labelled as "sick". In the data containing the sick users, a full 199060 out of 222446 users (0.8948689) were regardes as healthy even though none of their tweets has ever been labelled as "sick" (i.e. they found their way into the "sick" data set for some reason but actually were never labelled as such). One possibility is, that "sick episodes" are hidden in a file that I haven't analysed yet. However, then the mislabelled tweets in the "healthy" dataset should still not occur. Another possibility is, that Todd's code is not working properly with this huge dataset.\\
+
+\item [geographic distribution] Overall, the tweets labelled as "sick" do not show any special geographical distribution as compared to the overall dataset, the tweets labelled as "healthy" or the mislabelled tweets. However, the analysis is still very coarse at the moment and needs some improvement. Also, I will need to check the CDC data in order to see whether we *should* expect any geographic pattern with regard to flu incidences.
+
+\item [Name of the states] Is there anywhere a sheet linking the numbers of each state with its corresponding name?
+
+\item [Creating plots] Due to the high amount of single tweets to be plotted, scatterplots tend to be extremly big and take a lot of memory when being created. I used hexbin-plots as a workaround. Other solutions like sunflower plots or the bigvis package are presented here: 
+  \begin{itemize}
+  \item http://stackoverflow.com/questions/16665420/reduce-pdf-file-size-of-plots-by-filtering-hidden-objects/16668596#16668596
+  \item bigvis package: https://github.com/hadley/bigvis
+  \item sunflower plots: https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/sunflowerplot.html
+  \end{itemize}
+
+
+\end{description}
+
+\subsubsection{Exploratory Analysis of Twitter Data - Code }
+<<eval=F, echo=F,child-demo, child=paste(standard_path,"/Rnw_Subfiles/Test.Rnw",sep="")>>=
+#switch eval to TRUE in order to execute code in child
+ @
+
+\newpage
+
+\subsection{2016.05.23 - Progress Report}
+\label{subsec:2016.05.23}
+
+\subsubsection{Remarks on Todd Bodnar's Dissertation}
+Todd decided to create six subsets from twitter data set
+\begin{itemize}
+\item entire data set grouped by each week
+\item tweets containing flu keywords ("flu", "cough", "fever", "headache", "head ache")
+\item tweets containing zombie keywords ("zombie", "zed", "undead", "living dead")
+\item same three subsets above, but divided based on which region tweet came from
+\end{itemize}
+
+The idea behind using the zombie keywords was the assumption that they would be unrelated to the flu. However, this is most likely not the case, since some people might tweet about "feeling like a zombie" or using \#zombie, \#undead when talking about having the flu. Urban Dictionary even knows the expression "Zombie flu" http://www.urbandictionary.com/define.php?term=zombie+flu ; https://twitter.com/SnKTyphooon/status/726593663095177216\\
+
+1000 most common words in each subset were used as list of keywords for the models (keyword trends were measured by their frequency due to fluctuations)\newline
+
+Models used:
+\begin{itemize}
+\item univariate logit: $logit(CDCRate) = \beta_0 + \beta_1logit(x) + \epsilon$; x is the fraction of tweets containing at least one ILI keyword
+\item multivariate logit: $logit(CDCRate) = \beta_0 + \sum_{i=1}^n\beta_ilogit(x_i) + \epsilon$; $x_i$ is the frequency of the $i^{th}$ keyword
+\item select best keywords (only use that keyword for regression fitting)
+\item SVM regression
+\end{itemize}
+
+Data sample:\\
+104 individuals with influenza, 122 individuals without influenza. How was absence of influenza assessed? Could individuals have had influenza without having gone to the doctor?\\
+Twitter handle only available for 119 individuals, of which 15 were discarded; two additional discarded because they tweeted too often. Totally 37599 tweets from seed accounts and 30950958 tweets from 913082 connected accounts\\
+Question: When did tweet collection start? I.e. did it start *after* or *before* diagnosis? And did users know that they participated in the study?
+
+\newpage
+
+\subsection{2016.03.20 - Progress Report}
+\label{subsec:2016.03.20}
+
+\subsubsection{Theory} 
+I looked into the models mentioned in \citep{bodnar2014ground} and started refreshing and/or getting acquainted with them. Current status:
+\begin{itemize}
+\item random forests: basic knowledge present, I just refreshed some key concepts
+\item logistic regrssion: basic knowledge present, I just refreshed some key concepts
+\item support vector machines: no previous knowledge; I started reading into theory (starting from \citep{burges1998tutorial}, \citep{hearst1998support} and online resources)
+\item naive bayes classifiers: no previous knowledge; I started reading into theory (starting from \citep{mccallum1998comparison}, \citep{lewis1994comparison}, \citep{rennie2003tackling} and online resources) 
+end{itemize}
+\item C4.5 classifier: no previous knowledge; did not start reading yet
+\item metaclassifiers: no previous knowledge; did not start reading yet
+\end{itemize}
+
+\subsubsection{Courses}
+I'm taking a total of two (three) courses at EPFL and one course at UZH - all revolving around topics/subjects I'll need in my master thesis
+\begin{itemize}
+\item Parallel and High-Performance Computing (5 credit points, EPFL)
+\item Convex Optimization And Applications (4 credit points, EPFL)
+\item Computational Linear Algebra (4 credit points, EPFL) - I will probably drop this one, however
+\item Advanced R progrmaming (3 credit points, UZH)
+\end{itemize}
+
+\subsubsection{Questions, Remarks \& Goals}
+The goals below are a first suggestion from my side. The list is not supposed to be complete and the single goals are open for changes and amendments
+\begin{description}
+\item [How representative are geotagged tweets?] From the report forwarded to me by GL, we can see that the highest peak in tweets/day occurs in autumn 2013 - without apparent explanation. Also, in \citep{bodnar2013validating} it is also mentioned that the restriction of the dataset to geotagged tweets could introduce biases. Finally, not every tweet that is sent by the same user is geotagged. Hence, we would need to find out how complete each user's tweet history is. If geotags are only added to tweets fo specific purposes, our dataset will be heavily biased.\\
+Is there any possibility to compare our geo-tagged tweets with a representative sample from the general twitter population? For example, I would like to know whether the maximum in tweets/day occured also in autumn 2013 or not. Intuitively, I would have believed that the Ebola craze in 2014 would have created many more sickness-related tweets than any other event in the recent years. At least when it comes to media-reporting, the Ebola epidemic was by far the most talked-about disease-related event in the past 15 years (see \hyperlink{http://www.informationisbeautiful.net/visualizations/mountains-out-of-molehills/}{mountainsOutOfMolehills}), so I would have assumed that we could observe a similar pattern on Twitter\\
+\textbf{Goal: Compare tweets from geotagged dataset with a representative sample of the "general twitter" population. Find out whether geotagged tweets have specific biases. Also, find out whether geotagged tweets of one user consist of all the tweets which were sent by said user}
+
+\item [How representative is the dataset used to build the algorithm?] From \citep{bodnar2014ground} we learn that the data set used to build the algorithm consisted of totally 104 twitter accounts generating a total of 37'599 tweets. Out of this sample, 35 users fell sick during the study period and generated a total of 1609 tweets in the month in which they were sick. Furthermore, all twitter users stemmed from the same state (Pennsylvania) and belonged to approximately the same socio-economic group (young students of the Pennsylvania State University). Hence, one would assume that their tweeting behaviour is different from that of the average twitter user. Hence, we need to test the performance of the algorithm for different cities and states and compare the results with reliable epidemiological data.\\
+\textbf{Goal: Apply algorithm to small datasets from other area. Using cities within the Pennsylvania, neighbouring states as well as randomly chosen states and cities from all over the US in order to test the algorithm and see whether results make sense (aka hold up against a comparison with CDC data)}
+
+\item [What is the temporal resolution of the algorithm?] Due to privacy concerns, the authors of \citep{bodnar2014ground} only knew in which month an indiviual was diagnosed with influenza. Hence, this might heavily reduce the temporal resolution of the algorithm. Hence, we should assess how the algorithm performs for assessing the influenza infection rates in time frames which are shorter than a month.\\ 
+\textbf{Goal: Find out the temporal resolution of the algorithm by comparing algorithm prediction with CDC data}
+
+\item [How do we label the training set when using large datasets?] Due to the small sample size, the tweets in \cite{bodnar2014ground} were labelled manually in order to identify tweets that directly talk about influenza and those that don't. For larger data sets, this won't be possible anymore. Hence, we should either resort to Amazon mechanical turks or try to implement code that can distinguish between influenza-related and -unrelated tweets. Possible candidates are described in \citep{paul2011you} (Ailment Topic Aspect Model), \cite{culotta2010towards}, and (probably most relevant for our purpose) \citep{lamb2013separating}.\\
+\textbf{Goal: Implement algorithm that identify between tweets that are flu-related, concern the tweeter himself (and not one of his relatives or friends) and talk about an infection (as opposed to general awareness about the flu)}
+
+\item [Can the performance of the algorithm be improved by incorporating prior knowledge?] According to \citep{goel2010predicting} the incorporation of prior information can help to improve the performance of an algorithmed destined to identify twitter patterns linked to disease outbreaks. Prior knowledge can either be used to refine keyword searches (\citep{lamb2013separating,paul2011you}) or to improve the prediction model itself by incorporating results from other web data-based prediction models - like "google flu trends" (\citep{ginsberg2009detecting}, "Sickweather" or "FluNearYou" \cite{butler2013google}) -  and/or results from autoregressive models based on CDC data or data from local authorities (like the Emergeency Department Fever and Respiratory Complaint Surveillance in New York City \citep{olson2007monitoring}.\\
+\textbf{Goal: Test whether the incorporation of prior information enhances the performance of the algorithm}
+
+\item [Optional: Can we incorporate Spanish tweets as well?] This would give us more data points to train and expand the model. Also, it will tell us if the algorithm holds up for twitter users speaking a different language but living in the same country/region. The people behind Google Flu Trends expanded their algorithm to Mexico, so we might copy some ideas from them \hyperlink{https://youtu.be/YE6ZQijRqLA?t=15m54s}{Google Faculty Summit 2009: Google Flu Trends}\\
+\textbf{Goal: Incorporate Spanish tweets}
+
+\end{description}
+
+
+\subsubsection{Next Steps (by Sunday, April 10th)} 
+\begin{itemize}
+\item start with explorative data analysis (see goal~\ref{goal:exp_dat_ana})
+\item continue theory review (i.e. goals \ref{goal:svm_bayes} and \ref{goal:c4.5_meta} )
+\item finalize concrete project plan (for UZH Mastervereinbarung)
+\end{itemize}
+
+
+\newpage
+
+\subsection{2016.02.04 - Skype Meeting}
+\label{subsec:2016.02.04}
+We discussed the tentative Master project plan in order to narrow down the possible direction of the thesis. The following three goals were defined:
+\begin{description}
+  \item [Extension of Algorithm Scope] The primary goal is the assessment of the reliability of the algorithm developed by \citep{bodnar2014ground}. The algorithm is based on a comparably small data set: 104 individual twitter users from the same university account for 37'599 tweets. Only 35 of these twitter users fell sick during the study period and tweeted a total of 1609 during the month in which they contracted influenza. Hence, we need to find out whether the algorithm can be used for
+  \begin{itemize}
+    \item different locations
+    \item different time periods
+    \item a more general Twitter population
+    \item a bigger data set
+  \end{itemize}
+
+\item [Reliability Assessment] Partially dependent on the results from the first goal. If applicability of algorithm could not be extended, we should of course assess the reasons for that. However, if scope of algorithm can be extended to other regions, time-periods and twitter populations, yielding reasonable results, we should assess some key statistical properties, in order to find out whether we can trust the results
+  \begin{itemize}
+    \item how stable is algorithm for extreme events?
+    \item do algorithm parameters make sense from an epidemiological point of view?
+    \item perform basic performance checks such as cross-validation on single models
+    \item evaluate performance of meta-classifier
+    \item how much do results from algorithm fit other epidemiological data, e.g. CDC ILI data
+    \item compare algorithm with other web-based disease surveillance algorithms such as google flu trends (GFT)
+  \end{itemize}
+
+
+
+\item [Spatiotemporal Analysis of Dataset] This last point is option. If - for which reason whatsoever - the achievement of the first two goals is not feasible or if we proceed faster than expected, we can use the data set in order to look at spatiotemporal differences in influenza-related tweeting behaviour and the propagation of influenza related tweets on the social network.
+
+\end{description}
+
+\newpage
+
+\bibliographystyle{unsrtnat}
+%\bibliographystyle{plainnat}
+\bibliography{C:/Users/DrosoNeuro/Dropbox/Stats/Bibliographies/MasterThesis}
+
+\end{document}

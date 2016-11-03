@@ -1,0 +1,99 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bodnar et~al.(2014)Bodnar, Barclay, Ram, Tucker, and
+  Salath{\'e}]{bodnar2014ground}
+Todd Bodnar, Victoria~C Barclay, Nilam Ram, Conrad~S Tucker, and Marcel
+  Salath{\'e}.
+\newblock On the ground validation of online diagnosis with twitter and medical
+  records.
+\newblock pages 651--656, 2014.
+
+\bibitem[Burges(1998)]{burges1998tutorial}
+Christopher~JC Burges.
+\newblock A tutorial on support vector machines for pattern recognition.
+\newblock \emph{Data mining and knowledge discovery}, 2\penalty0 (2):\penalty0
+  121--167, 1998.
+
+\bibitem[Hearst et~al.(1998)Hearst, Dumais, Osman, Platt, and
+  Scholkopf]{hearst1998support}
+Marti~A. Hearst, Susan~T Dumais, Edgar Osman, John Platt, and Bernhard
+  Scholkopf.
+\newblock Support vector machines.
+\newblock \emph{Intelligent Systems and their Applications, IEEE}, 13\penalty0
+  (4):\penalty0 18--28, 1998.
+
+\bibitem[McCallum et~al.(1998)McCallum, Nigam, et~al.]{mccallum1998comparison}
+Andrew McCallum, Kamal Nigam, et~al.
+\newblock A comparison of event models for naive bayes text classification.
+\newblock In \emph{AAAI-98 workshop on learning for text categorization},
+  volume 752, pages 41--48. Citeseer, 1998.
+
+\bibitem[Lewis and Ringuette(1994)]{lewis1994comparison}
+David~D Lewis and Marc Ringuette.
+\newblock A comparison of two learning algorithms for text categorization.
+\newblock In \emph{Third annual symposium on document analysis and information
+  retrieval}, volume~33, pages 81--93, 1994.
+
+\bibitem[Rennie et~al.(2003)Rennie, Shih, Teevan, Karger,
+  et~al.]{rennie2003tackling}
+Jason~D Rennie, Lawrence Shih, Jaime Teevan, David~R Karger, et~al.
+\newblock Tackling the poor assumptions of naive bayes text classifiers.
+\newblock In \emph{ICML}, volume~3, pages 616--623. Washington DC), 2003.
+
+\bibitem[Bodnar and Salath{\'e}(2013)]{bodnar2013validating}
+Todd Bodnar and Marcel Salath{\'e}.
+\newblock Validating models for disease detection using twitter.
+\newblock In \emph{Proceedings of the 22nd international conference on World
+  Wide Web companion}, pages 699--702. International World Wide Web Conferences
+  Steering Committee, 2013.
+
+\bibitem[Paul and Dredze(2011)]{paul2011you}
+Michael~J Paul and Mark Dredze.
+\newblock You are what you tweet: Analyzing twitter for public health.
+\newblock \emph{ICWSM}, 20:\penalty0 265--272, 2011.
+
+\bibitem[Culotta(2010)]{culotta2010towards}
+Aron Culotta.
+\newblock Towards detecting influenza epidemics by analyzing twitter messages.
+\newblock In \emph{Proceedings of the first workshop on social media
+  analytics}, pages 115--122. ACM, 2010.
+
+\bibitem[Lamb et~al.(2013)Lamb, Paul, and Dredze]{lamb2013separating}
+Alex Lamb, Michael~J Paul, and Mark Dredze.
+\newblock Separating fact from fear: Tracking flu infections on twitter.
+\newblock In \emph{HLT-NAACL}, pages 789--795, 2013.
+
+\bibitem[Goel et~al.(2010)Goel, Hofman, Lahaie, Pennock, and
+  Watts]{goel2010predicting}
+Sharad Goel, Jake~M Hofman, S{\'e}bastien Lahaie, David~M Pennock, and Duncan~J
+  Watts.
+\newblock Predicting consumer behavior with web search.
+\newblock \emph{Proceedings of the National academy of sciences}, 107\penalty0
+  (41):\penalty0 17486--17490, 2010.
+
+\bibitem[Ginsberg et~al.(2009)Ginsberg, Mohebbi, Patel, Brammer, Smolinski, and
+  Brilliant]{ginsberg2009detecting}
+Jeremy Ginsberg, Matthew~H Mohebbi, Rajan~S Patel, Lynnette Brammer, Mark~S
+  Smolinski, and Larry Brilliant.
+\newblock Detecting influenza epidemics using search engine query data.
+\newblock \emph{Nature}, 457\penalty0 (7232):\penalty0 1012--1014, 2009.
+
+\bibitem[Butler(2013)]{butler2013google}
+Declan Butler.
+\newblock When google got flu wrong.
+\newblock \emph{Nature}, 494\penalty0 (7436):\penalty0 155, 2013.
+
+\bibitem[Olson et~al.(2007)Olson, Heffernan, Paladini, Konty, Weiss, and
+  Mostashari]{olson2007monitoring}
+Donald~R Olson, Richard~T Heffernan, Marc Paladini, Kevin Konty, Don Weiss, and
+  Farzad Mostashari.
+\newblock Monitoring the impact of influenza by age: emergency department fever
+  and respiratory complaint surveillance in new york city.
+\newblock \emph{PLoS Med}, 4\penalty0 (8):\penalty0 e247, 2007.
+
+\end{thebibliography}
