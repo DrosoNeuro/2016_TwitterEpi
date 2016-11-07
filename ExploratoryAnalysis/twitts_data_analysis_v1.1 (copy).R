@@ -33,7 +33,8 @@ profvis({
   root_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/ExploratoryAnalysis" # defining root_path containing all relevant documents
   script_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/Non_R_Code"
   
-###general functions needed for plotting etc. -------------
+  ###general functions needed for plotting etc. -------------
+  
   # Multiple plot function
   #http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
   # ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
@@ -84,8 +85,8 @@ profvis({
   # # NB!! the BEST WAY TO CHOOSE THE BIN IS probably ***** "FD" *****:
   # # http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram-for-n-where-n-ranges-from-30
   # 
-
-# # LOADING and MERGING DATA FRAMES  -----------------
+  
+  # # LOADING and MERGING DATA FRAMES  -----------------
   # 
   #   setwd(root_path) # setting WD
   #   #function to make  selection of datatable based on pre_set coordinates
@@ -149,8 +150,7 @@ profvis({
   #   #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
   #   #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
   
-  
-# EXPLORATORY DATA ANALYSIS ------
+  # EXPLORATORY DATA ANALYSIS ------
   #if the code above has been executed once, you can uncomment it and start directly from here  
   setwd(root_path) # set WD back
   load(file="Twitter_datatables.RData") #use if you decided to export the whole working space
@@ -231,9 +231,9 @@ profvis({
   
   
   
-# ---------------- here we analyse the data `in space' ------------
+  # ---------------- here we analyse the data `in space' ------------
   
-# # tweets on maps using scatterplots----
+  # # tweets on maps using scatterplots----
   # 
   #     plot_location <- function(datatable,explore,tag)
   #     {
@@ -342,8 +342,7 @@ profvis({
   #     plot_location(healthy_df,explore_healthy,"healthy_df")
   #  
   
-  
-#tweets on maps using hexbin plots----
+  #tweets on maps using hexbin plots----
   
   plot_location_hexbin <- function(datatable,explore,tag)  #function print spatial distribution of sick tweets
   {
@@ -416,8 +415,7 @@ profvis({
   plot_location_hexbin(sick_df,explore_sick,"sick_df")
   plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
   
-  
-#  histogram of longitude and latitude ----
+  #  histogram of longitude and latitude ----
   
   hist_coord <- function(datatable, tag,explore){
     
@@ -468,10 +466,10 @@ profvis({
   
   
   
-### ---------------- here we analyse the user/state activity ------------
+  ### ---------------- here we analyse the user/state activity ------------
   
   
-##hist of US states activity ----
+  ##hist of US states activity ----
   
   #state_abbr = c("dc","as","gu","mp","vi","pr","hi","ak","ct","me","ma","nh","ri","vt","nj","ny","de","md","pa","va","wv","al","fl","ga","ky","ms","nc","sc","tn","il","in","mi","mn","oh","wi","ar","la","nm","ok","tx","ia","ks","mo","ne","co","mt","nd","sd","ut","wy","az","ca","nv","id","or","wa")
   
@@ -502,8 +500,7 @@ profvis({
   
   
   
-  
-## plot histogram of User ID  ----
+  ## plot histogram of User ID  ----
   user_activity <- function(datatable,tag){#datatable has to be in the form of a data.table; preferentially with key already set to "userID"
     setkey(datatable,"userID")
     user_ac <- datatable[,.N,by=.(userID)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each user in the column userID; .() is a shorthand for "list"
@@ -629,14 +626,50 @@ plot_hourly_activity <- function(datatable,tag,explore) {
   
   ##transforming system time to calendar time----
   datatable[,time1:=as.POSIXct(datatable[,time],origin="1970-01-01",tz="UTC")] #transforming time from system time to calendar time UTC
-  date_converter2B <- function(datatable){
-    zones <- datatable[,.N,by=.(timezone)] #extracting timezones
-    for (x in zones$timezone) #looping through each timezone
-    {
-      #converts times for tweets sent in respective timezone
-      datatable[timezone==x,time2:=as.POSIXct(datatable[timezone==x,time],origin="1970-01-01",tz=x)]
-    }
+  time_zones <- datatable[,timezone]
+  date_converter1 <- function(time_and_zone){
+    as.POSIXct(as.numeric(time_and_zone[1]),origin="1970-01-01",tz=time_and_zone[2])
   }
+  
+  date_converter2 <- function(time_and_zone){
+    as.character(as.POSIXct(as.numeric(time_and_zone[1]),origin="1970-01-01",tz=time_and_zone[2]),format="%Y-%m-%d %H:%M:%S %Z")
+  }
+  date_converter3 <- function(time_and_zone){
+    format(as.numeric(time_and_zone[1]),format="%Y-%m-%d %H:%M:%S %Z",origin="1970-01-01",tz=time_and_zone[2])
+  }
+  
+  date_converter1(c(user322[1,time],user322[1,timezone]))
+  date_converter2(c(user322[1,time],user322[1,timezone]))
+  date_converter3(c(user322[1,time],user322[1,timezone]))
+  
+  lapply()
+  test <- matrix(c(user322[,time],user322[,timezone]),length(user322[,time]),2)
+  test2 <- data.table(matrix(c(datatable[,time],datatable[,timezone]),
+                             length(datatable[,time]),2))
+  test_result <- apply(test,1,date_converter2)
+  test_result2 <- apply(test2,1,date_converter2)
+  
+  user322[,time2:=NA]
+  for (x in 1:length(user322[,timezone]))
+  {
+    user322[x,time3:=as.POSIXct(user322[x,time],origin="1970-01-01",tz=user322[x,timezone])]
+  }
+  
+  datatable[,time2:=NA]
+  for (x in 1:length(datatable[,timezone]))
+  {
+    datatable[x,time2:=as.POSIXct(datatable[x,time],origin="1970-01-01",tz=datatable[x,timezone])]
+  }
+  
+  
+  as.P
+  b <- lapply(user322[,timezone],date_converter,user322[,time])
+  
+  b <- lapply(user322[,timezone],as.POSIXct,origin="1970-01-01",x=user322[,time])
+  b <- apply(user322[,timezone],1,as.POSIXct,origin="1970-01-01",x=user322[,time])
+  
+  a <- lapply(datatable[,timezone],as.POSIXct,origin="1970-01-01",x=datatable[,time])
+  b <- lapply(user322[,timezone],as.POSIXlt,origin="1970-01-01",x=user322[,time])
   
   datatable[,time2:=as.POSIXct(datatable[,time],origin="1970-01-01",tz=rep("America/Los_Angeles",4049302))]
   datatable[,hour:=hour(datatable[,time1])+minute(datatable[,time1])/60] #extracting hour and minute information and savint at as decimal hours
