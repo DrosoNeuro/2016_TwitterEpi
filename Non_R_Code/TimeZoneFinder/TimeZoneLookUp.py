@@ -6,20 +6,23 @@
 from tzwhere import tzwhere
 import feather
 import pandas as pd
+
 root_path = "/home/drosoneuro/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/ExploratoryAnalysis"
 
 tz = tzwhere.tzwhere(shapely=True, forceTZ=True) #initialising tzwhere >
 #forceTZ gives result even if spatial data is not exactly within predefined timezones, but close
 #shapely takes longer for initialisation, but is overall faster for big data sets
 tz.tzNameAt(40.7271, -73.98, forceTZ=True)
-import_path = root_path+"/temporary/to_export.feather"
-export_path = root_path+"/temporary/to_import.feather"
+import_path = root_path+"/temporary/to_export2.feather"
+export_path = root_path+"/temporary/to_import2.feather"
 spatial_data = feather.read_dataframe(import_path) #reading longitude and latitude; spatial_data is a pandas.data.frame: http://pandas.pydata.org/pandas-docs/stable/dsintro.html#indexing-selection
+spatial_data.size
+
 #info from data exported from R
-time_zone = [] #initiatlising list
+time_zones = [] #initiatlising list
 for i in range(0,len(spatial_data)):
     temp_tz = tz.tzNameAt(spatial_data.ix[i,"latitude"],spatial_data.ix[i,"longitude"]) #the order has to be tz.tzNameAt(latitude, longitude)
-    time_zone.append(temp_tz)
+    time_zones.append(temp_tz)
 
-time_zones = pd.DataFrame(time_zone)
-feather.write_dataframe(time_zone,export_path)
+time_zones = pd.DataFrame(time_zones)
+feather.write_dataframe(time_zones,export_path)
