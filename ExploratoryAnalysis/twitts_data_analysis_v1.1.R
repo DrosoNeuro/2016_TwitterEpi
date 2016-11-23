@@ -33,6 +33,184 @@ profvis({
   root_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/ExploratoryAnalysis" # defining root_path containing all relevant documents
   script_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/Non_R_Code"
   
+# # # LOADING and MERGING DATA FRAMES based on .csv-files  -----------------
+#   setwd(root_path) # setting WD
+#   #function to make  selection of datatable based on pre_set coordinates
+#   #loading files from sick patients
+#   #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
+#   #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   temp = list.files(pattern="*.csv") #read names of all .csv files
+#   #creates names from csv-files in folder;
+#   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+#   
+#   #loading df into environment
+#   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv) #"fread" reads in the data from csv
+#   
+#   #create a list of all the datatables
+#   sick_list <- lapply(attr(names,"names"),get)
+#   
+#   #combine into a single datatable
+#   sick_df <- do.call("rbind",sick_list)
+#   
+#   remove(list = attr(names,"names"))#removing single df to save RAM
+#   remove(sick_list)#removing sick_list to save RAM
+#   
+#   col_names <- c('userID','longitude','latitude','time','sick','state')
+#   colnames(sick_df) <- col_names
+#   setkeyv(sick_df,col_names)
+#   alarm()
+#   
+#   #loading data from healthy Twitter users
+#   #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   temp = list.files(pattern="*.csv") #read names of all .csv files
+#   
+#   #creates names from csv-files in folder;
+#   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+#   
+#   #loading df into environment
+#   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
+#   
+#   #create a list of all the datatables
+#   healthy_list <- lapply(attr(names,"names"),get)
+#   
+#   #combine into a single datatable
+#   healthy_df <- do.call("rbind",healthy_list)
+#   
+#   remove(list = attr(names,"names"))#removing single df to save RAM
+#   remove(healthy_list)#removing sick_list to save RAM
+#   remove(list= c("names","temp"))
+#   
+#   colnames(healthy_df) <- col_names
+#   setkeyv(healthy_df, col_names) #sets key to column "userID"
+#   remove(col_names)
+#   alarm()
+#   
+#   setwd(root_path) # set WD back
+#   
+#   save.image(file="Twitter_datatables.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
+#   #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
+#   #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
+#   #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
+#   #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
+#   
+  
+  
+  
+# # LOADING and MERGING DATA FRAMES based on .feather-files  -----------------
+  setwd(root_path) # setting WD
+  #function to make  selection of datatable based on pre_set coordinates
+  #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
+  
+  #loading files from all patients
+  setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset") # temporarily set WD to folder with files from healthy Twitter users
+  temp = list.files(pattern="*.feather") #read names of all .feather files
+  
+  #creates names from feather-files in folder;
+  names <- setNames(temp, make.names(gsub("*.feather$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  
+  #loading df into environment
+  list2env(lapply(names,read_feather), envir = .GlobalEnv) #"read_feather" reads in the data from feather_files
+  
+  #create a list of all the datatables
+  data_list <- lapply(attr(names,"names"),get)
+  
+  #combine into a single datatable
+  #Implement automated stepwise binding! e.g. by using length(data_list)%10 to calculate number of iterations
+  df <- do.call("rbind",data_list[1:10])
+  df <- data.table(df)
+  remove(list = attr(names[1:10],"names"))#removing single df to save RAM
+  gc() 
+  
+  df1 <- do.call("rbind",data_list[11:20])
+  df1 <- data.table(df)
+  remove(list = attr(names[11:20],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  df2 <- do.call("rbind",data_list[21:30])
+  df2 <- data.table(df)
+  remove(list = attr(names[21:30],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  df3 <- do.call("rbind",data_list[31:39])
+  df3 <- data.table(df)
+  remove(list = attr(names[31:39],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  remove(data_list)#removing data_list to save RAM
+  gc() #to remove memory
+  
+  df <- rbind(df,df1,df2,df3)
+  rm(df1,df2,df3)
+  gc()
+  
+  col_names <- c('userID','longitude','latitude','time','sick','state')
+  colnames(df) <- col_names
+  setkeyv(df,col_names)
+  remove(list= c("names","temp","root_path","col_names","script_path"))
+  alarm()
+  
+  ##loading all files from "sick" users
+  # #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # temp = list.files(pattern="*.feather") #read names of all .feather files
+  # #creates names from csv-files in folder;
+  # names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  # 
+  # #loading df into environment
+  # list2env(lapply(names,read_feather), envir = .GlobalEnv) #"read_feather" reads in the data from csv
+  # 
+  # #create a list of all the datatables
+  # sick_list <- lapply(attr(names,"names"),get)
+  # 
+  # #combine into a single datatable
+  # sick_df <- do.call("rbind",sick_list)
+  # 
+  # remove(list = attr(names,"names"))#removing single df to save RAM
+  # remove(sick_list)#removing sick_list to save RAM
+  # 
+  # col_names <- c('userID','longitude','latitude','time','sick','state')
+  # colnames(sick_df) <- col_names
+  # setkeyv(sick_df,col_names)
+  # alarm()
+  
+  # #loading data from healthy Twitter users
+  # #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # temp = list.files(pattern="*.csv") #read names of all .csv files
+  # 
+  # #creates names from csv-files in folder;
+  # names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  # 
+  # #loading df into environment
+  # list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
+  # 
+  # #create a list of all the datatables
+  # healthy_list <- lapply(attr(names,"names"),get)
+  # 
+  # #combine into a single datatable
+  # healthy_df <- do.call("rbind",healthy_list)
+  # 
+  # remove(list = attr(names,"names"))#removing single df to save RAM
+  # remove(healthy_list)#removing sick_list to save RAM
+  # remove(list= c("names","temp"))
+  # 
+  # colnames(healthy_df) <- col_names
+  # setkeyv(healthy_df, col_names) #sets key to column "userID"
+  # remove(col_names)
+  # alarm()
+  
+  setwd(root_path) # set WD back
+  
+  save.image(file="Twitter_datatables2.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
+  #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
+  #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
+  #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
+  #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
+  
+  
+
 ###general functions needed for plotting etc. -------------
   # Multiple plot function
   #http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
@@ -81,8 +259,7 @@ profvis({
   }
   
   #function to pause the execution of another function until key is pressed
-  readkey <- function()
-  {
+  readkey <- function(){
     cat ("Press [enter] to continue")
     line <- readline()
   }
@@ -90,72 +267,12 @@ profvis({
   
   # # NB!! the BEST WAY TO CHOOSE THE BIN IS probably ***** "FD" *****:
   # # http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram-for-n-where-n-ranges-from-30
-  # 
-
-# # LOADING and MERGING DATA FRAMES  -----------------
-  setwd(root_path) # setting WD
-  #function to make  selection of datatable based on pre_set coordinates
-  #loading files from sick patients
-  #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
-  setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
-  temp = list.files(pattern="*.csv") #read names of all .csv files
-  #creates names from csv-files in folder;
-  names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
-  
-  #loading df into environment
-  list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv) #"fread" reads in the data from csv
-  
-  #create a list of all the datatables
-  sick_list <- lapply(attr(names,"names"),get)
-  
-  #combine into a single datatable
-  sick_df <- do.call("rbind",sick_list)
-  
-  remove(list = attr(names,"names"))#removing single df to save RAM
-  remove(sick_list)#removing sick_list to save RAM
-  
-  col_names <- c('userID','longitude','latitude','time','sick','state')
-  colnames(sick_df) <- col_names
-  setkeyv(sick_df,col_names)
-  alarm()
-  
-  #loading data from healthy Twitter users
-  setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
-  temp = list.files(pattern="*.csv") #read names of all .csv files
-  
-  #creates names from csv-files in folder;
-  names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
-  
-  #loading df into environment
-  list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
-  
-  #create a list of all the datatables
-  healthy_list <- lapply(attr(names,"names"),get)
-  
-  #combine into a single datatable
-  healthy_df <- do.call("rbind",healthy_list)
-  
-  remove(list = attr(names,"names"))#removing single df to save RAM
-  remove(healthy_list)#removing sick_list to save RAM
-  remove(list= c("names","temp"))
-  
-  colnames(healthy_df) <- col_names
-  setkeyv(healthy_df, col_names) #sets key to column "userID"
-  remove(col_names)
-  alarm()
-  
-  setwd(root_path) # set WD back
-  
-  save.image(file="Twitter_datatables.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
-  #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
-  #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
-  #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
-  #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
-  
+  #   
+    
 # EXPLORATORY DATA ANALYSIS ------
   #if the code above has been executed once, you can uncomment it and start directly from here  
   setwd(root_path) # set WD back
-  load(file="Twitter_datatables.RData") #use if you decided to export the whole working space
+  load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
   # sick_df <- read_feather("sick_df.feather") #potential alternative for exporting working space. is considerably faster, but would need some additional tweaking
   # sick_df <- sick_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
   # healthy_df <- read_feather("healthy_df.feather")})
@@ -167,8 +284,7 @@ profvis({
   #   
   
   #funtion to make selection of datatable based on coordinate (lon_west,lon_est,lat_south,lat_north)
-  coord_selection  <- function(datatable,coord_selec) 
-  {
+  coord_selection  <- function(datatable,coord_selec) {
     selec <- datatable[datatable[,longitude >=coord_selec[1] & longitude <= coord_selec[2] & latitude >= coord_selec[3] & latitude <=coord_selec[4]],]
     
     #selec <- datatable[which(datatable[,"longitude",]>=coord_selec[1] & datatable[,"longitude"] <= coord_selec[2] & datatable[,"latitude"] >= coord_selec[3] & datatable[,"latitude"] <= coord_selec[4]),] #old way to do it with dataframes
@@ -183,10 +299,13 @@ profvis({
   }
   
   coord_USA <- c(-125,-66,25,50) #select only tweets from mainland USA
+  df <- coord_selection(df,coord_USA)
   sick_df <- coord_selection(sick_df, coord_USA)
   healthy_df <- coord_selection(healthy_df,coord_USA)
+  gc()
   
-  
+  #function to explore basic characteristics of dataset
+  #still needs to be adapted to "all" tweets!
   explore_data <- function(datatable,sickness_state){ #"sickness_state" takes values "sick" or "healthy" and signifies the state that the users represented in the dataste *should* be in
     all_users<-unique(datatable[,userID]) #unique returns a vector, data frame or array like x but with duplicate elements/rows removed; in this case = unique return of user_ID
     num_users <- length(all_users)
@@ -221,6 +340,12 @@ profvis({
   }
   
   #get preliminary info from datatables
+  explore_df <- explore_data(df,"sick")
+  str(explore_df)
+  explore_df <- list(explore_df$false_label) #prune list to save memory
+  names(explore_df) <- "false_label"
+  gc
+  
   explore_sick <- explore_data(sick_df,"sick")
   str(explore_sick)
   explore_sick <- list(explore_sick$false_label) #prune list to save memory
@@ -346,7 +471,7 @@ profvis({
   
   
 #tweets on maps using hexbin plots----
-  
+  #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
   plot_location_hexbin <- function(datatable,explore,tag)  #function print spatial distribution of sick tweets
   {
     ###set-up###
@@ -377,12 +502,15 @@ profvis({
     my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,IDs=T)
     
     temp <- continent[continent[,sick]==1,]
+    gc()
     my.bins[[2]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
     temp <- continent[continent[,sick]==0,]
+    gc()
     my.bins[[3]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
     temp <- continent[which(continent[,userID] %in% explore$false_label),]
+    gc()
     my.bins[[4]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     remove(continent) #to save memory
     gc() #garbage collection
@@ -415,6 +543,7 @@ profvis({
     remove(list=c("my.bins"))
   }  
   
+  plot_location_hexbin(df,explore_df,"all_tweets")
   plot_location_hexbin(sick_df,explore_sick,"sick_df")
   plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
   

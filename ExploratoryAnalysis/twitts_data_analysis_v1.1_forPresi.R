@@ -33,8 +33,185 @@ profvis({
   root_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/ExploratoryAnalysis" # defining root_path containing all relevant documents
   script_path <- "~/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/Non_R_Code"
   
-  ###general functions needed for plotting etc. -------------
+# # # LOADING and MERGING DATA FRAMES based on .csv-files  -----------------
+#   setwd(root_path) # setting WD
+#   #function to make  selection of datatable based on pre_set coordinates
+#   #loading files from sick patients
+#   #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
+#   #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   temp = list.files(pattern="*.csv") #read names of all .csv files
+#   #creates names from csv-files in folder;
+#   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+#   
+#   #loading df into environment
+#   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv) #"fread" reads in the data from csv
+#   
+#   #create a list of all the datatables
+#   sick_list <- lapply(attr(names,"names"),get)
+#   
+#   #combine into a single datatable
+#   sick_df <- do.call("rbind",sick_list)
+#   
+#   remove(list = attr(names,"names"))#removing single df to save RAM
+#   remove(sick_list)#removing sick_list to save RAM
+#   
+#   col_names <- c('userID','longitude','latitude','time','sick','state')
+#   colnames(sick_df) <- col_names
+#   setkeyv(sick_df,col_names)
+#   alarm()
+#   
+#   #loading data from healthy Twitter users
+#   #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+#   temp = list.files(pattern="*.csv") #read names of all .csv files
+#   
+#   #creates names from csv-files in folder;
+#   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+#   
+#   #loading df into environment
+#   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
+#   
+#   #create a list of all the datatables
+#   healthy_list <- lapply(attr(names,"names"),get)
+#   
+#   #combine into a single datatable
+#   healthy_df <- do.call("rbind",healthy_list)
+#   
+#   remove(list = attr(names,"names"))#removing single df to save RAM
+#   remove(healthy_list)#removing sick_list to save RAM
+#   remove(list= c("names","temp"))
+#   
+#   colnames(healthy_df) <- col_names
+#   setkeyv(healthy_df, col_names) #sets key to column "userID"
+#   remove(col_names)
+#   alarm()
+#   
+#   setwd(root_path) # set WD back
+#   
+#   save.image(file="Twitter_datatables.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
+#   #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
+#   #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
+#   #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
+#   #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
+#   
   
+  
+  
+# # LOADING and MERGING DATA FRAMES based on .feather-files  -----------------
+  setwd(root_path) # setting WD
+  #function to make  selection of datatable based on pre_set coordinates
+  #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
+  
+  #loading files from all patients
+  setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset") # temporarily set WD to folder with files from healthy Twitter users
+  temp = list.files(pattern="*.feather") #read names of all .feather files
+  
+  #creates names from feather-files in folder;
+  names <- setNames(temp, make.names(gsub("*.feather$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  
+  #loading df into environment
+  list2env(lapply(names,read_feather), envir = .GlobalEnv) #"read_feather" reads in the data from feather_files
+  
+  #create a list of all the datatables
+  data_list <- lapply(attr(names,"names"),get)
+  
+  #combine into a single datatable
+  #Implement automated stepwise binding! e.g. by using length(data_list)%10 to calculate number of iterations
+  df <- do.call("rbind",data_list[1:10])
+  df <- data.table(df)
+  remove(list = attr(names[1:10],"names"))#removing single df to save RAM
+  gc() 
+  
+  df1 <- do.call("rbind",data_list[11:20])
+  df1 <- data.table(df)
+  remove(list = attr(names[11:20],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  df2 <- do.call("rbind",data_list[21:30])
+  df2 <- data.table(df)
+  remove(list = attr(names[21:30],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  df3 <- do.call("rbind",data_list[31:39])
+  df3 <- data.table(df)
+  remove(list = attr(names[31:39],"names"))#removing single df to save RAM
+  gc() #to remove memory
+  
+  remove(data_list)#removing data_list to save RAM
+  gc() #to remove memory
+  
+  df <- rbind(df,df1,df2,df3)
+  rm(df1,df2,df3)
+  gc()
+  
+  col_names <- c('userID','longitude','latitude','time','sick','state')
+  colnames(df) <- col_names
+  setkeyv(df,col_names)
+  remove(list= c("names","temp","root_path","col_names","script_path"))
+  alarm()
+  
+  ##loading all files from "sick" users
+  # #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # temp = list.files(pattern="*.feather") #read names of all .feather files
+  # #creates names from csv-files in folder;
+  # names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  # 
+  # #loading df into environment
+  # list2env(lapply(names,read_feather), envir = .GlobalEnv) #"read_feather" reads in the data from csv
+  # 
+  # #create a list of all the datatables
+  # sick_list <- lapply(attr(names,"names"),get)
+  # 
+  # #combine into a single datatable
+  # sick_df <- do.call("rbind",sick_list)
+  # 
+  # remove(list = attr(names,"names"))#removing single df to save RAM
+  # remove(sick_list)#removing sick_list to save RAM
+  # 
+  # col_names <- c('userID','longitude','latitude','time','sick','state')
+  # colnames(sick_df) <- col_names
+  # setkeyv(sick_df,col_names)
+  # alarm()
+  
+  # #loading data from healthy Twitter users
+  # #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
+  # temp = list.files(pattern="*.csv") #read names of all .csv files
+  # 
+  # #creates names from csv-files in folder;
+  # names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
+  # 
+  # #loading df into environment
+  # list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
+  # 
+  # #create a list of all the datatables
+  # healthy_list <- lapply(attr(names,"names"),get)
+  # 
+  # #combine into a single datatable
+  # healthy_df <- do.call("rbind",healthy_list)
+  # 
+  # remove(list = attr(names,"names"))#removing single df to save RAM
+  # remove(healthy_list)#removing sick_list to save RAM
+  # remove(list= c("names","temp"))
+  # 
+  # colnames(healthy_df) <- col_names
+  # setkeyv(healthy_df, col_names) #sets key to column "userID"
+  # remove(col_names)
+  # alarm()
+  
+  setwd(root_path) # set WD back
+  
+  save.image(file="Twitter_datatables2.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
+  #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
+  #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
+  #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
+  #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
+  
+  
+
+###general functions needed for plotting etc. -------------
   # Multiple plot function
   #http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
   # ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
@@ -81,79 +258,21 @@ profvis({
     }
   }
   
+  #function to pause the execution of another function until key is pressed
+  readkey <- function(){
+    cat ("Press [enter] to continue")
+    line <- readline()
+  }
+  
   
   # # NB!! the BEST WAY TO CHOOSE THE BIN IS probably ***** "FD" *****:
   # # http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram-for-n-where-n-ranges-from-30
-  # 
-  
-  # # LOADING and MERGING DATA FRAMES  -----------------
-  # 
-  #   setwd(root_path) # setting WD
-  #   #function to make  selection of datatable based on pre_set coordinates
-  #         
-  #   #loading files from sick patients
-  #   #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
-  #   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
-  #     
-  #   temp = list.files(pattern="*.csv") #read names of all .csv files
-  # 
-  #   #creates names from csv-files in folder;
-  #   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
   #   
-  #   #loading df into environment
-  #   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv) #"fread" reads in the data from csv
-  #   
-  #   #create a list of all the datatables
-  #   sick_list <- lapply(attr(names,"names"),get)
-  # 
-  #   #combine into a single datatable
-  #   sick_df <- do.call("rbind",sick_list)
-  # 
-  #   remove(list = attr(names,"names"))#removing single df to save RAM
-  #   remove(sick_list)#removing sick_list to save RAM
-  #   
-  #   col_names <- c('userID','longitude','latitude','time','sick','state')
-  #   colnames(sick_df) <- col_names
-  #   setkeyv(sick_df,col_names)
-  #   alarm()
-  # 
-  #   #loading data from healthy Twitter users
-  #   setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/one_hundred_csv") # temporarily set WD to folder with files from healthy Twitter users
-  #   temp = list.files(pattern="*.csv") #read names of all .csv files
-  # 
-  #   #creates names from csv-files in folder;
-  #   names <- setNames(temp, make.names(gsub("*.csv$", "", temp))) #gsub uses regex to replace the specified patterns within a name
-  # 
-  #   #loading df into environment
-  #   list2env(lapply(names,fread, header=FALSE), envir = .GlobalEnv)
-  # 
-  #   #create a list of all the datatables
-  #   healthy_list <- lapply(attr(names,"names"),get)
-  #   
-  #   #combine into a single datatable
-  #   healthy_df <- do.call("rbind",healthy_list)
-  # 
-  #   remove(list = attr(names,"names"))#removing single df to save RAM
-  #   remove(healthy_list)#removing sick_list to save RAM
-  #   remove(list= c("names","temp"))
-  #   
-  #   colnames(healthy_df) <- col_names
-  #   setkeyv(healthy_df, col_names) #sets key to column "userID"
-  #   remove(col_names)
-  #   alarm()
-  # 
-  #   setwd(root_path) # set WD back
-  # 
-  #   save.image(file="Twitter_datatables.RData") #saving loaded datatable to prevent loading it from the excel-files the next time
-  #   #fwrite(healthy_df,"healthy_df.csv") #fwrite needs developmental package of "data.table" for now (as of 2016.09.16)
-  #   #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
-  #   #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
-  #   #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
-  
-  # EXPLORATORY DATA ANALYSIS ------
+    
+# EXPLORATORY DATA ANALYSIS ------
   #if the code above has been executed once, you can uncomment it and start directly from here  
   setwd(root_path) # set WD back
-  load(file="Twitter_datatables.RData") #use if you decided to export the whole working space
+  load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
   # sick_df <- read_feather("sick_df.feather") #potential alternative for exporting working space. is considerably faster, but would need some additional tweaking
   # sick_df <- sick_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
   # healthy_df <- read_feather("healthy_df.feather")})
@@ -165,8 +284,7 @@ profvis({
   #   
   
   #funtion to make selection of datatable based on coordinate (lon_west,lon_est,lat_south,lat_north)
-  coord_selection  <- function(datatable,coord_selec) 
-  {
+  coord_selection  <- function(datatable,coord_selec) {
     selec <- datatable[datatable[,longitude >=coord_selec[1] & longitude <= coord_selec[2] & latitude >= coord_selec[3] & latitude <=coord_selec[4]],]
     
     #selec <- datatable[which(datatable[,"longitude",]>=coord_selec[1] & datatable[,"longitude"] <= coord_selec[2] & datatable[,"latitude"] >= coord_selec[3] & datatable[,"latitude"] <= coord_selec[4]),] #old way to do it with dataframes
@@ -181,10 +299,13 @@ profvis({
   }
   
   coord_USA <- c(-125,-66,25,50) #select only tweets from mainland USA
+  df <- coord_selection(df,coord_USA)
   sick_df <- coord_selection(sick_df, coord_USA)
   healthy_df <- coord_selection(healthy_df,coord_USA)
+  gc()
   
-  
+  #function to explore basic characteristics of dataset
+  #still needs to be adapted to "all" tweets!
   explore_data <- function(datatable,sickness_state){ #"sickness_state" takes values "sick" or "healthy" and signifies the state that the users represented in the dataste *should* be in
     all_users<-unique(datatable[,userID]) #unique returns a vector, data frame or array like x but with duplicate elements/rows removed; in this case = unique return of user_ID
     num_users <- length(all_users)
@@ -219,6 +340,12 @@ profvis({
   }
   
   #get preliminary info from datatables
+  explore_df <- explore_data(df,"sick")
+  str(explore_df)
+  explore_df <- list(explore_df$false_label) #prune list to save memory
+  names(explore_df) <- "false_label"
+  gc()
+  
   explore_sick <- explore_data(sick_df,"sick")
   str(explore_sick)
   explore_sick <- list(explore_sick$false_label) #prune list to save memory
@@ -231,9 +358,9 @@ profvis({
   
   
   
-  # ---------------- here we analyse the data `in space' ------------
+# ---------------- here we analyse the data `in space' ------------
   
-  # # tweets on maps using scatterplots----
+# # tweets on maps using scatterplots----
   # 
   #     plot_location <- function(datatable,explore,tag)
   #     {
@@ -342,8 +469,9 @@ profvis({
   #     plot_location(healthy_df,explore_healthy,"healthy_df")
   #  
   
-  #tweets on maps using hexbin plots----
   
+#tweets on maps using hexbin plots----
+  #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
   plot_location_hexbin <- function(datatable,explore,tag)  #function print spatial distribution of sick tweets
   {
     ###set-up###
@@ -358,7 +486,8 @@ profvis({
     xbins = 100
     
     #create titles for each map
-    img_names <- c("alltweets_cont","sicktweets_cont","healthytweets_cont","mislabelled_cont","alltweets_local", "sicktweets_local", "healthytweets_local","mislabelledtweets_local")
+    #img_names <- c("alltweets_cont","sicktweets_cont","healthytweets_cont","mislabelled_cont","alltweets_local", "sicktweets_local", "healthytweets_local","mislabelledtweets_local")
+    img_names <- c("alltweets_cont","sicktweets_cont","healthytweets_cont","alltweets_local", "sicktweets_local", "healthytweets_local")
     filenames <- paste(img_names,tag,sep="_")
     
     #     #create a list to store plot; only needed if you want to record plot with recordPlot()
@@ -366,7 +495,7 @@ profvis({
     #     my.plots <- vector(num.plots, mode='list')
     
     #create a list to store hexbins
-    num.plots <- 8
+    num.plots <- 6
     my.bins <- vector(num.plots,mode="list")
     
     # create hexbins for continent data
@@ -374,28 +503,31 @@ profvis({
     my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,IDs=T)
     
     temp <- continent[continent[,sick]==1,]
+    gc()
     my.bins[[2]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
     temp <- continent[continent[,sick]==0,]
+    gc()
     my.bins[[3]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
-    temp <- continent[which(continent[,userID] %in% explore$false_label),]
-    my.bins[[4]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
+    # temp <- continent[which(continent[,userID] %in% explore$false_label),]
+    # gc()
+    # my.bins[[4]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     remove(continent) #to save memory
     gc() #garbage collection
     
     # create hexbins for local data
     local <- coord_selection(datatable,coord_local)
-    my.bins[[5]] <- hexbin(local$longitude,local$latitude,xbins=xbins,IDs=T)
+    my.bins[[4]] <- hexbin(local$longitude,local$latitude,xbins=xbins,IDs=T)
     
     temp <- local[local[,sick]==1,]
-    my.bins[[6]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
+    my.bins[[5]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
     temp <- local[local[,sick]==0,]
-    my.bins[[7]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
+    my.bins[[6]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     
-    temp <- local[which(local[,userID] %in% explore$false_label),]
-    my.bins[[8]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
+    # temp <- local[which(local[,userID] %in% explore$false_label),]
+    # my.bins[[8]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T)
     remove(local) #to save memory
     gc() #garbage collection    
     
@@ -412,10 +544,12 @@ profvis({
     remove(list=c("my.bins"))
   }  
   
+  plot_location_hexbin(df,explore_df,"all_tweets")
   plot_location_hexbin(sick_df,explore_sick,"sick_df")
   plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
   
-  #  histogram of longitude and latitude ----
+  
+#  histogram of longitude and latitude ----
   
   hist_coord <- function(datatable, tag,explore){
     
@@ -461,15 +595,16 @@ profvis({
     dev.off()
   }
   
+  hist_coord(df,"all_tweets",explore_df)
   hist_coord(sick_df, "sick_df",explore_sick)
   hist_coord(healthy_df,"healthy_df",explore_healthy)
   
   
   
-  ### ---------------- here we analyse the user/state activity ------------
+### ---------------- here we analyse the user/state activity ------------
   
   
-  ##hist of US states activity ----
+##hist of US states activity ----
   
   #state_abbr = c("dc","as","gu","mp","vi","pr","hi","ak","ct","me","ma","nh","ri","vt","nj","ny","de","md","pa","va","wv","al","fl","ga","ky","ms","nc","sc","tn","il","in","mi","mn","oh","wi","ar","la","nm","ok","tx","ia","ks","mo","ne","co","mt","nd","sd","ut","wy","az","ca","nv","id","or","wa")
   
@@ -495,26 +630,28 @@ profvis({
   
   hist_states(sick_df, "sick_df")
   hist_states(healthy_df,"healthy_df")
+
   
-  
-  
-  
-  
-  ## plot histogram of User ID  ----
+## plot histogram of User ID  ----
   user_activity <- function(datatable,tag){#datatable has to be in the form of a data.table; preferentially with key already set to "userID"
     setkey(datatable,"userID")
-    user_ac <- datatable[,.N,by=.(userID)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each user in the column userID; .() is a shorthand for "list"
+    user_ac_sick <- datatable[sick==1,.N,by=.(userID)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each user in the column userID; .() is a shorthand for "list"
+    user_ac_healthy <- datatable[sick==0,.N,by=.(userID)]
     
     filenames <- paste0("plots/","user_activity_",tag,".pdf")
     pdf(file=filenames,width=20)
     #create histogram & density plot using raw counts
-    activity_plot <- ggplot(data =  user_ac, aes(x = user_ac[,N]))+ 
-      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
+    activity_plot <- ggplot(data =  user_ac_sick, aes(x = user_ac_healthy[,N]))+ scale_x_continuous(limits=c(0,200))+
+      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag)) +
+      xlab('numb. of tweets') + ylab("proportion of users")   # Overlay with transparent density plot
+    activity_plot <- ggplot(data =  user_ac_healthy, aes(x = user_ac_healthy[,N]))+ scale_x_continuous(limits=c(0,200))+
+      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag)) +
       xlab('numb. of tweets') + ylab("proportion of users")   # Overlay with transparent density plot
     print(activity_plot)
     dev.off()
     
   }
+  user_activity(df,"all_tweets")
   user_activity(sick_df,"sick_df")
   user_activity(healthy_df,"healthy_df")
   
@@ -561,43 +698,50 @@ plot_daily_activity<-function(datatable,tag,explore) {
   healthy_tweets <- list()
   healthy_tweets[[1]] <- ts_plotter(dates_healthy,"healthy tweets")
   healthy_tweets[2:3] <- hist_plotter(dates_healthy,"healthy tweets")
-  
-  #mislabelled tweets across time
-  dates_mislabelled <- datatable[userID %in% explore$false_label,.N,by=.(date)]
-  #this plots *all* the tweets from the users that had one or more mislabelled tweets!
-  #if I wanted to just plot the mislabelled tweets themselves, I'd need to add "& sick==1" or "& sick ==0" for the sick_df and healthy_df, respectively
-  mis_tweets <- list()
-  mis_tweets[[1]] <- ts_plotter(dates_mislabelled,"mislabelled tweets")
-  mis_tweets[2:3] <- hist_plotter(dates_mislabelled,"mislabelled tweets")
+  # 
+  # #mislabelled tweets across time
+  # dates_mislabelled <- datatable[userID %in% explore$false_label,.N,by=.(date)]
+  # #this plots *all* the tweets from the users that had one or more mislabelled tweets!
+  # #if I wanted to just plot the mislabelled tweets themselves, I'd need to add "& sick==1" or "& sick ==0" for the sick_df and healthy_df, respectively
+  # mis_tweets <- list()
+  # mis_tweets[[1]] <- ts_plotter(dates_mislabelled,"mislabelled tweets")
+  # mis_tweets[2:3] <- hist_plotter(dates_mislabelled,"mislabelled tweets")
   
   #adding plots to pdf
   
   filenames <- paste0("plots/","tweets_per_day_",tag,".pdf")
   pdf(file=filenames,width=20)
-  multiplot(all_tweets[[1]],sick_tweets[[1]],healthy_tweets[[1]],mis_tweets[[1]],cols=1) #plotting tweets per day over whole time series
-  multiplot(all_tweets[[2]],sick_tweets[[2]],healthy_tweets[[2]],mis_tweets[[2]],all_tweets[[3]],sick_tweets[[3]],healthy_tweets[[3]],mis_tweets[[3]],cols=2) #plotting histograms of no. of tweets per day
+  #multiplot(all_tweets[[1]],sick_tweets[[1]],healthy_tweets[[1]],mis_tweets[[1]],cols=1) #plotting tweets per day over whole time series
+  #multiplot(all_tweets[[2]],sick_tweets[[2]],healthy_tweets[[2]],mis_tweets[[2]],all_tweets[[3]],sick_tweets[[3]],healthy_tweets[[3]],mis_tweets[[3]],cols=2) #plotting histograms of no. of tweets per day
+  multiplot(all_tweets[[1]],sick_tweets[[1]],healthy_tweets[[1]],cols=1) #plotting tweets per day over whole time series
+  multiplot(all_tweets[[2]],sick_tweets[[2]],healthy_tweets[[2]],all_tweets[[3]],sick_tweets[[3]],healthy_tweets[[3]],cols=2) #plotting histograms of no. of tweets per day
   dev.off()
   
 }
 
+plot_daily_activity(df,"all_tweets",explore_df)
 plot_daily_activity(sick_df,"sick_df",explore_sick)
 plot_daily_activiy(healthy_df,"healthy_df",explore_healthy)
 
 #function to plot number of tweets per hour during a single day (i.e. taken )
+##still needs some tinkering and cleaning up! (especially when it comes to automating the plotting)
 plot_hourly_activity <- function(datatable,tag,explore) {
   setkey(datatable,"userID")
   datatable <- datatable[time!=0,] #removing all entries which don't have a system time
   
   #getting information on time zones that tweets where sent in; for an overlook over timezone lookup, see: http://stackoverflow.com/questions/16086962/how-to-get-a-time-zone-from-a-location-using-latitude-and-longitude-coordinates
-  to_export <- copy(datatable)
-  to_export2 <- to_export[userID==322,.(latitude,longitude)]
-  write_feather(to_export,"temporary/to_export.feather") #save data in feather.file for export to python
+  write_feather(datatable,"temporary/to_export.feather") #save data in feather.file for export to python
   
-  system2("bash",paste0(script_path,"/TimeZoneFinder/test.sh"))
+  #calling python bash file in order to exectue python-based TimeZoneLookUp
+  #not yet fixed, so it just pauses and gives you the opportunity to call the python script
+  #system2("bash",paste0(script_path,"/TimeZoneFinder/TimeZoneLookUp.sh")) 
+  #system(paste0("bash ",paste0(script_path, "/TimeZoneFinder/TimeZoneLookUp.sh")))
+  gc()
+  readkey()
   
   to_import <- read_feather("temporary/to_import.feather") #imports processed dataset with timezones back into R
   to_import <- data.table(to_import)
-  #file.remove(c("temporary/to_export.feather","temporary/to_import.feather")) #removing .feather files
+  file.remove(c("temporary/to_export.feather","temporary/to_import.feather")) #removing .feather files
   
   datatable[,timezone:=to_import] #add timezones to datatable
   
@@ -624,112 +768,79 @@ plot_hourly_activity <- function(datatable,tag,explore) {
     #removing all remaining NAs
     datatable <- datatable[!is.na(timezone),] 
   
-  ##transforming system time to calendar time----
+  ##transforming system time to calendar time
   datatable[,time1:=as.POSIXct(datatable[,time],origin="1970-01-01",tz="UTC")] #transforming time from system time to calendar time UTC
-  time_zones <- datatable[,timezone]
-  date_converter1 <- function(time_and_zone){
-    as.POSIXct(as.numeric(time_and_zone[1]),origin="1970-01-01",tz=time_and_zone[2])
+  date_converter <- function(datatable){
+    zones <- datatable[,.N,by=.(timezone)] #extracting timezones
+    for (x in zones$timezone) #looping through each timezone
+    {
+      #converts times for tweets sent in respective timezone
+      datatable[timezone==x,time2:=as.POSIXct(datatable[timezone==x,time],origin="1970-01-01",tz=x)]
+    }
   }
   
-  date_converter2 <- function(time_and_zone){
-    as.character(as.POSIXct(as.numeric(time_and_zone[1]),origin="1970-01-01",tz=time_and_zone[2]),format="%Y-%m-%d %H:%M:%S %Z")
-  }
-  date_converter3 <- function(time_and_zone){
-    format(as.numeric(time_and_zone[1]),format="%Y-%m-%d %H:%M:%S %Z",origin="1970-01-01",tz=time_and_zone[2])
-  }
+  date_converter(datatable)
   
-  date_converter1(c(user322[1,time],user322[1,timezone]))
-  date_converter2(c(user322[1,time],user322[1,timezone]))
-  date_converter3(c(user322[1,time],user322[1,timezone]))
+  #extracting hour and minute information and saving at as decimal hours
+  datatable[,hour1:=hour(datatable[,time1])+round(minute(datatable[,time1])/60,2)] #from UTC time
+  datatable[,hour2:=hour(datatable[,time2])+round(minute(datatable[,time2])/60,2)] #from local timezone
   
-  lapply()
-  test <- matrix(c(user322[,time],user322[,timezone]),length(user322[,time]),2)
-  test2 <- data.table(matrix(c(datatable[,time],datatable[,timezone]),
-                             length(datatable[,time]),2))
-  test_result <- apply(test,1,date_converter2)
-  test_result2 <- apply(test2,1,date_converter2)
+  hours1 <- datatable[,.N,by=.(hour1)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each time-stamp in the column "hour1"; .() is a shorthand for "list"
+  hours2 <- datatable[,.N,by=.(hour2)] 
   
-  user322[,time2:=NA]
-  for (x in 1:length(user322[,timezone]))
-  {
-    user322[x,time3:=as.POSIXct(user322[x,time],origin="1970-01-01",tz=user322[x,timezone])]
+  #function to plot number of tweets per hour over time (at this stage only for the hour2 cases)
+  ts_plotter1 <- function(hours,title="Tweets") {
+    p <- ggplot(data=hours, aes(x=hour1,y=N)) +geom_bar(stat="identity") +
+      scale_x_continuous(limits=c(0,24)) +   
+      ylab("Frequency") + xlab("hours of the day")+ggtitle(paste0(title,"_",tag))
   }
   
-  datatable[,time2:=NA]
-  for (x in 1:length(datatable[,timezone]))
-  {
-    datatable[x,time2:=as.POSIXct(datatable[x,time],origin="1970-01-01",tz=datatable[x,timezone])]
+  ts_plotter2 <- function(hours,title="Tweets") {
+    p <- ggplot(data=hours, aes(x=hour2,y=N)) +geom_bar(stat="identity") +
+      scale_x_continuous(limits=c(0,24)) +   
+      ylab("Frequency") + xlab("hours of the day")+ggtitle(paste0(title,"_",tag))
   }
-  
-  
-  as.P
-  b <- lapply(user322[,timezone],date_converter,user322[,time])
-  
-  b <- lapply(user322[,timezone],as.POSIXct,origin="1970-01-01",x=user322[,time])
-  b <- apply(user322[,timezone],1,as.POSIXct,origin="1970-01-01",x=user322[,time])
-  
-  a <- lapply(datatable[,timezone],as.POSIXct,origin="1970-01-01",x=datatable[,time])
-  b <- lapply(user322[,timezone],as.POSIXlt,origin="1970-01-01",x=user322[,time])
-  
-  datatable[,time2:=as.POSIXct(datatable[,time],origin="1970-01-01",tz=rep("America/Los_Angeles",4049302))]
-  datatable[,hour:=hour(datatable[,time1])+minute(datatable[,time1])/60] #extracting hour and minute information and savint at as decimal hours
-  
-  
-  
-  
-  lapply(datatable[,time],time_zone_converter,datatable[,longitude],datatable[,latitude])
-  
-  datatable[,date:=as.Date(time,format="%Y-%m-%d")] #stripping exact time information
-  dates <- datatable[,.N,by=.(date)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each time-stamp in the column "time"; .() is a shorthand for "list"
-  
-  #function to plot number of tweets per day over time
-  ts_plotter <- function(dates,title="Tweets") {
-    p <- ggplot(dates, aes(x=date,y=N)) +geom_bar(stat="identity") +
-      scale_x_date(date_breaks="6 month",labels=date_format("%Y-%b"),limits=c(min(datatable[,date]),max(datatable[,date]))) + ylab("Frequency") + xlab("Year and Month")+ggtitle(paste0(title,"_",tag))
-  }
-  
-  #function to plot histogram of number of tweets per day
-  hist_plotter <- function(dates,title="Tweets"){
-    counts <- ggplot(data=dates,aes(x=dates[,N])) + geom_histogram(colour="black",fill="white",binwidth=1) + ggtitle(paste0(title,"_counts_",tag))+ xlab('numb. of tweets') + ylab("number of days")
-    dens <- ggplot(data =  dates, aes(x = dates[,N])) + geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=20) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0(title,"_density_",tag))+ xlab('numb. of tweets') + ylab("proportion of all days")
-    return(list(counts,dens))
-  }
-  
   #all tweets across time
   all_tweets <- list()
-  all_tweets[[1]] <- ts_plotter(dates,"All tweets") #create plot with number of tweets per day over whole time period
-  all_tweets[2:3]<- hist_plotter(dates,"All tweets")
+  all_tweets[[1]] <- ts_plotter1(hours1,"All tweets") #create plot with number of tweets per day over whole time period
+  all_tweets[[2]]<- ts_plotter2(hours2,"All tweets")
   
   #sick across time
-  dates_sick <- datatable[sick==1,.N,by=.(date)] #creating a table of the number of tweets per day that are labelled as "sick"
+  hours1_sick <- datatable[sick==1,.N,by=.(hour1)] #creating a table of the number of tweets per hour that are labelled as "sick"
+  hours2_sick <- datatable[sick==1,.N,by=.(hour2)] #creating a table of the number of tweets per hour that are labelled as "sick"
   sick_tweets <- list()
-  sick_tweets[[1]] <- ts_plotter(dates_sick,"Sick tweets")
-  sick_tweets[2:3] <- hist_plotter(dates_sick,"Sick tweets")
+  sick_tweets[[1]] <- ts_plotter1(hours1_sick,"Sick tweets")
+  sick_tweets[[2]] <- ts_plotter2(hours2_sick,"Sick tweets")
   
   #healthy across time
-  dates_healthy <- datatable[sick==0,.N,by=.(date)] #creating table with no of healthy tweets per day
+  hours1_healthy <- datatable[sick==0,.N,by=.(hour1)] #creating table with no of healthy tweets per hour
+  hours2_healthy <- datatable[sick==0,.N,by=.(hour2)]
   healthy_tweets <- list()
-  healthy_tweets[[1]] <- ts_plotter(dates_healthy,"healthy tweets")
-  healthy_tweets[2:3] <- hist_plotter(dates_healthy,"healthy tweets")
+  healthy_tweets[[1]] <- ts_plotter1(hours1_healthy,"healthy tweets")
+  healthy_tweets[[2]] <- ts_plotter2(hours2_healthy,"healthy tweets")
   
   #mislabelled tweets across time
-  dates_mislabelled <- datatable[userID %in% explore$false_label,.N,by=.(date)]
+  hours1_mislabelled <- datatable[userID %in% explore$false_label,.N,by=.(hour1)]
+  hours2_mislabelled <- datatable[userID %in% explore$false_label,.N,by=.(hour2)]
   #this plots *all* the tweets from the users that had one or more mislabelled tweets!
   #if I wanted to just plot the mislabelled tweets themselves, I'd need to add "& sick==1" or "& sick ==0" for the sick_df and healthy_df, respectively
   mis_tweets <- list()
-  mis_tweets[[1]] <- ts_plotter(dates_mislabelled,"mislabelled tweets")
-  mis_tweets[2:3] <- hist_plotter(dates_mislabelled,"mislabelled tweets")
+  mis_tweets[[1]] <- ts_plotter1(hours1_mislabelled,"mislabelled tweets")
+  mis_tweets[[2]] <- ts_plotter2(hours2_mislabelled,"mislabelled tweets")
   
   #adding plots to pdf
-  
-  filenames <- paste0("plots/","tweets_per_day_",tag,".pdf")
+  filenames <- paste0("plots/","tweets_per_hour_",tag,".pdf")
   pdf(file=filenames,width=20)
-  multiplot(all_tweets[[1]],sick_tweets[[1]],healthy_tweets[[1]],mis_tweets[[1]],cols=1) #plotting tweets per day over whole time series
-  multiplot(all_tweets[[2]],sick_tweets[[2]],healthy_tweets[[2]],mis_tweets[[2]],all_tweets[[3]],sick_tweets[[3]],healthy_tweets[[3]],mis_tweets[[3]],cols=2) #plotting histograms of no. of tweets per day
+  multiplot(all_tweets[[1]],sick_tweets[[1]],healthy_tweets[[1]],mis_tweets[[1]],cols=1) #plotting tweets per hour1 over whole time series
+  multiplot(all_tweets[[2]],sick_tweets[[2]],healthy_tweets[[2]],mis_tweets[[2]],cols=1) #plotting tweets per hour2 over whole time series
   dev.off()
-  
 }
 
+plot_hourly_activity(df,"all_tweets",explore_df)
+plot_hourly_activity(sick_df,"sick_df",explore_sick)
+plot_hourly_activity(healthy_df,"healthy_df",explore_healthy)
+
+#current_state
 
 # relative plotSTILL NEEDS TO BE IMPLEMENTED FOR ALL PLOTS ETCRELATIVE VISUALISATION -------
 
