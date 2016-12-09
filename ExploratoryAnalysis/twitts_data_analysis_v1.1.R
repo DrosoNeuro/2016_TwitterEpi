@@ -272,6 +272,7 @@ profvis({
   # sick_df <- sick_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
   # healthy_df <- read_feather("healthy_df.feather")})
   # healthy_df <- healthy_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
+  df_label <- "random"
   
   title_plot<-"All tweets from " #generic title plot used in some functions
   # to_analyse <- "healthy_df"
@@ -295,8 +296,8 @@ profvis({
   
   coord_USA <- c(-125,-66,25,50) #select only tweets from mainland USA
   df <- coord_selection(df,coord_USA)
-  sick_df <- coord_selection(sick_df, coord_USA)
-  healthy_df <- coord_selection(healthy_df,coord_USA)
+  #sick_df <- coord_selection(sick_df, coord_USA)
+  #healthy_df <- coord_selection(healthy_df,coord_USA)
   gc()
   
   #function to explore basic characteristics of dataset
