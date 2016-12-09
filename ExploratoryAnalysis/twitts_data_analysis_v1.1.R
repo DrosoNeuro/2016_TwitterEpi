@@ -104,8 +104,9 @@ profvis({
   #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
   
   #loading files from all patients
-  setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset") # temporarily set WD to folder with files from healthy Twitter users
+  try(setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset"), stop("no directory found")) # temporarily set WD to folder with files from healthy Twitter users
   temp = list.files(pattern="*.feather") #read names of all .feather files
+  if (length(temp) == 0) {stop("no feather files found")}
   
   #creates names from feather-files in folder;
   names <- setNames(temp, make.names(gsub("*.feather$", "", temp))) #gsub uses regex to replace the specified patterns within a name
@@ -118,39 +119,33 @@ profvis({
   
   #combine into a single datatable
   #Implement automated stepwise binding! e.g. by using length(data_list)%10 to calculate number of iterations
-  df <- do.call("rbind",data_list[1:10])
-  df <- data.table(df)
-  remove(list = attr(names[1:10],"names"))#removing single df to save RAM
-  gc() 
-  
-  df1 <- do.call("rbind",data_list[11:20])
-  df1 <- data.table(df)
-  remove(list = attr(names[11:20],"names"))#removing single df to save RAM
-  gc() #to remove memory
-  
-  df2 <- do.call("rbind",data_list[21:30])
-  df2 <- data.table(df)
-  remove(list = attr(names[21:30],"names"))#removing single df to save RAM
-  gc() #to remove memory
-  
-  df3 <- do.call("rbind",data_list[31:39])
-  df3 <- data.table(df)
-  remove(list = attr(names[31:39],"names"))#removing single df to save RAM
-  gc() #to remove memory
-  
-  remove(data_list)#removing data_list to save RAM
-  gc() #to remove memory
-  
-  df <- rbind(df,df1,df2,df3)
-  rm(df1,df2,df3)
-  gc()
-  
+  iter <- length(data_list)%/%5
+  remainder <- length(data_list)%%5
+  for (i in 0:iter){
+    if (i==0){
+    df <- do.call("rbind",tail(data_list,remainder))
+    df <- data.table(df)
+    remove(list = attr(tail(names,remainder),"names"))#removing single df to save RAM
+    gc()
+    }
+    else{
+      start = 1+(i-1)*5
+      end = 5+(i-1)*5
+      df_temp <- do.call("rbind",data_list[start:end])
+      df_temp <- data.table(df)
+      remove(list = attr(names[start:end],"names"))#removing single df to save RAM
+      gc()
+      df <- rbind(df,df_temp)
+      remove(df_temp)
+      gc()
+    }
+  }
+
   col_names <- c('userID','longitude','latitude','time','sick','state')
   colnames(df) <- col_names
   setkeyv(df,col_names)
-  remove(list= c("names","temp","root_path","col_names","script_path"))
-  alarm()
-  
+  rm(list=setdiff(ls(), c("df","root_path","script_path"))) #removes all files except for df
+
   ##loading all files from "sick" users
   # #setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
   # setwd("C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweets_from_todd/csv_files/sick_csv") # temporarily set WD to folder with files from healthy Twitter users
@@ -272,7 +267,7 @@ profvis({
 # EXPLORATORY DATA ANALYSIS ------
   #if the code above has been executed once, you can uncomment it and start directly from here  
   setwd(root_path) # set WD back
-  load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
+  df <- load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
   # sick_df <- read_feather("sick_df.feather") #potential alternative for exporting working space. is considerably faster, but would need some additional tweaking
   # sick_df <- sick_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
   # healthy_df <- read_feather("healthy_df.feather")})
@@ -344,7 +339,7 @@ profvis({
   str(explore_df)
   explore_df <- list(explore_df$false_label) #prune list to save memory
   names(explore_df) <- "false_label"
-  gc
+  gc()
   
   explore_sick <- explore_data(sick_df,"sick")
   str(explore_sick)
