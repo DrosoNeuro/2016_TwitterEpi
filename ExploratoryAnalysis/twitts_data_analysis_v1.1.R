@@ -267,7 +267,7 @@ profvis({
 # EXPLORATORY DATA ANALYSIS ------
   #if the code above has been executed once, you can uncomment it and start directly from here  
   setwd(root_path) # set WD back
-  df <- load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
+  load(file="Twitter_datatables2.RData") #use if you decided to export the whole working space
   # sick_df <- read_feather("sick_df.feather") #potential alternative for exporting working space. is considerably faster, but would need some additional tweaking
   # sick_df <- sick_df[,userID:=as.integer64(userID)] #transform to integer64 for readability
   # healthy_df <- read_feather("healthy_df.feather")})
@@ -329,6 +329,11 @@ profvis({
       false_label <- sick_users
       num_false_label <- num_sick_users
     }
+    #dirty hack in order to get code running for random subsets (i.e. without sick/healthy classification) > needs to be updated for final version
+    else{
+      false_label <- sick_users
+      num_false_label <- num_sick_users
+    }
     
     out <- list(all_users,num_users,sick_position,num_sick_tweets,sick_users,num_sick_users,healthy_position,num_healthy_tweets,healthy_users,num_healthy_users,false_label,num_false_label)
     names(out) <- c("all_users","num_users", "sick_position","num_sick_tweets","sick_users","num_sick_users","healthy_position", "num_healthy_tweets", "healthy_users","num_healthy_users","false_label","num_false_label")
@@ -336,21 +341,22 @@ profvis({
   }
   
   #get preliminary info from datatables
-  explore_df <- explore_data(df,"sick")
+  explore_df <- explore_data(df,df_label)
   str(explore_df)
   explore_df <- list(explore_df$false_label) #prune list to save memory
   names(explore_df) <- "false_label"
   gc()
   
-  explore_sick <- explore_data(sick_df,"sick")
-  str(explore_sick)
-  explore_sick <- list(explore_sick$false_label) #prune list to save memory
-  names(explore_sick) <- "false_label"
-  
-  explore_healthy <- explore_data(healthy_df,"healthy")
-  str(explore_healthy)
-  explore_healthy <- list(explore_healthy$false_label) #reduce size of list to save memory
-  names(explore_healthy) <- "false_label"
+  #commented out for the moment > will be needed if we can distinguish between sick & healthy datasets
+  # explore_sick <- explore_data(sick_df,"sick")
+  # str(explore_sick)
+  # explore_sick <- list(explore_sick$false_label) #prune list to save memory
+  # names(explore_sick) <- "false_label"
+  # 
+  # explore_healthy <- explore_data(healthy_df,"healthy")
+  # str(explore_healthy)
+  # explore_healthy <- list(explore_healthy$false_label) #reduce size of list to save memory
+  # names(explore_healthy) <- "false_label"
   
   
   
@@ -539,14 +545,14 @@ profvis({
     remove(list=c("my.bins"))
   }  
   
-  plot_location_hexbin(df,explore_df,"all_tweets")
-  plot_location_hexbin(sick_df,explore_sick,"sick_df")
-  plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
+  plot_location_hexbin(df,explore_df,df_label)
+  # plot_location_hexbin(sick_df,explore_sick,"sick_df")
+  # plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
   
   
 #  histogram of longitude and latitude ----
   
-  hist_coord <- function(datatable, tag,explore){
+  hist_coord <- function(datatable,tag,explore){
     
     #create filenames#
     filenames <- c("all_tweets","all_tweets","sicktweets","sicktweets","healthytweets","healthytweets","mislabelled","mislabelled")
@@ -610,6 +616,7 @@ profvis({
   
   #function that takes datatable and plot histogram of tweet activity with regard to state and vice versa
   hist_states <- function(datatable,tag,title_plot = "All tweets from "){
+    setkey(datatable,"state")
     num_states<-length(unique(datatable[,state]))
     states_activity<-  datatable[,.N,by=.(state)]
     colnames(states_activity) <- c("state","freq")
@@ -621,32 +628,36 @@ profvis({
     barplot(as.array(states_activity$freq),names.arg=states_activity$state,ylab="num. of tweets",xlab = "states",main=paste0(title_plot,tag,' States activity'))
     dev.off()
   }
+  hist_states(df, df_label)
   
-  hist_states(sick_df, "sick_df")
-  hist_states(healthy_df,"healthy_df")
-  
-  
-  
-  
+  # hist_states(sick_df, "sick_df")
+  # hist_states(healthy_df,"healthy_df")
   
   
 ## plot histogram of User ID  ----
   user_activity <- function(datatable,tag){#datatable has to be in the form of a data.table; preferentially with key already set to "userID"
     setkey(datatable,"userID")
     user_ac <- datatable[,.N,by=.(userID)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each user in the column userID; .() is a shorthand for "list"
+    #user_ac[,N:=log10(N)]
+    user_ac[,N:=N-1]
+    #user_ac[,N:=N**(1/15)]
+    #Freedman-Diaconis rule to calculate optimal bin-width http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram
+    bw <- 2*IQR(user_ac$N)/(length(user_ac$N)**(1/3))
     
+    brx <- pretty(range(user_ac$N), n = nclass.Sturges(user_ac$N),min.n = 1) #http://stackoverflow.com/questions/25146544/r-emulate-the-default-behavior-of-hist-with-ggplot2-for-bin-width
     filenames <- paste0("plots/","user_activity_",tag,".pdf")
     pdf(file=filenames,width=20)
     #create histogram & density plot using raw counts
     activity_plot <- ggplot(data =  user_ac, aes(x = user_ac[,N]))+ 
       geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
-      xlab('numb. of tweets') + ylab("proportion of users")   # Overlay with transparent density plot
+      xlab('numb. of tweets') + ylab("proportion of users") + scale_x_continuous(limits=c(0,50),expand=c(0,0))  # Overlay with transparent density plot
     print(activity_plot)
     dev.off()
-    
+    #note to me: find out how to set x-Axes to zero
   }
-  user_activity(sick_df,"sick_df")
-  user_activity(healthy_df,"healthy_df")
+  # user_activity(sick_df,"sick_df")
+  # user_activity(healthy_df,"healthy_df")
+  user_activity(df,df_label)
   
 }) #end of profvis
 
