@@ -348,10 +348,10 @@ profvis({
   gc()
   
   #commented out for the moment > will be needed if we can distinguish between sick & healthy datasets
-  # explore_sick <- explore_data(sick_df,"sick")
-  # str(explore_sick)
-  # explore_sick <- list(explore_sick$false_label) #prune list to save memory
-  # names(explore_sick) <- "false_label"
+  #explore_sick <- explore_data(sick_df,"sick")
+  #str(explore_sick)
+  #explore_sick <- list(explore_sick$false_label) #prune list to save memory
+  #names(explore_sick) <- "false_label"
   # 
   # explore_healthy <- explore_data(healthy_df,"healthy")
   # str(explore_healthy)
@@ -595,7 +595,7 @@ profvis({
     }
     dev.off()
   }
-  
+  hist_coord(df,df_label,explore_df)
   hist_coord(sick_df, "sick_df",explore_sick)
   hist_coord(healthy_df,"healthy_df",explore_healthy)
   
@@ -630,7 +630,7 @@ profvis({
   }
   hist_states(df, df_label)
   
-  # hist_states(sick_df, "sick_df")
+  hist_states(sick_df, "sick_df")
   # hist_states(healthy_df,"healthy_df")
   
   
