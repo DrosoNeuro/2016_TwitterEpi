@@ -19,8 +19,10 @@ spatial_data = feather.read_dataframe(import_path) #reading longitude and latitu
 spatial_data.size
 
 #info from data exported from R
-time_zones = [] #initiatlising list
-for i in range(0,len(spatial_data)):
+time_zones = [] #initialising list
+loops = len(spatial_data)
+for i in range(0,loops):
+    print(str(i)+"/"+str(loops)) #to show user how far time_zone lookup has progressed
     temp_tz = tz.tzNameAt(spatial_data.ix[i,"latitude"],spatial_data.ix[i,"longitude"]) #the order has to be tz.tzNameAt(latitude, longitude)
     time_zones.append(temp_tz)
 

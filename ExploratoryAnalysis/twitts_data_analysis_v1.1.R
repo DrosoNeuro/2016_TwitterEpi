@@ -104,10 +104,11 @@ profvis({
   #see http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r for explanation about reading several csv-files at once
   
   #loading files from all patients
-  try(setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset"), stop("no directory found")) # temporarily set WD to folder with files from healthy Twitter users
+  #try(setwd("/media/drosoneuro/E230270C3026E6EF/tweet_ratings/all_tweets/parsed/subset"), stop("no directory found")) # temporarily set WD to folder with files from healthy Twitter users
+  try(setwd("/home/drosoneuro/Dropbox/UZH_Master/Masterarbeit/TwitterData/tweet_ratings/all_tweets/"), stop("no directory found")) 
   temp = list.files(pattern="*.feather") #read names of all .feather files
-  if (length(temp) == 0) {stop("no feather files found")}
-  
+  ifelse(length(temp) == 0, "no feather files found",{
+
   #creates names from feather-files in folder;
   names <- setNames(temp, make.names(gsub("*.feather$", "", temp))) #gsub uses regex to replace the specified patterns within a name
   
@@ -132,7 +133,7 @@ profvis({
       start = 1+(i-1)*5
       end = 5+(i-1)*5
       df_temp <- do.call("rbind",data_list[start:end])
-      df_temp <- data.table(df)
+      df_temp <- data.table(df_temp)
       remove(list = attr(names[start:end],"names"))#removing single df to save RAM
       gc()
       df <- rbind(df,df_temp)
@@ -203,7 +204,7 @@ profvis({
   #fwrite(sick_df,"sick_df.csv") #doesn't work yet!!! and isn't faster than simple export of data with feather!
   #write_feather(sick_df, "sick_df.feather") #faster than save.image, bute uses more disk space (but shouldn't be used for long-term storage)
   #write_feather(healthy_df,"healthy_df.feather") #faster than save.image, but uses more disk space
-  
+  }) #end of ifelse statement
   
 
 ###general functions needed for plotting etc. -------------
@@ -596,8 +597,8 @@ profvis({
     dev.off()
   }
   hist_coord(df,df_label,explore_df)
-  hist_coord(sick_df, "sick_df",explore_sick)
-  hist_coord(healthy_df,"healthy_df",explore_healthy)
+  # hist_coord(sick_df, "sick_df",explore_sick)
+  # hist_coord(healthy_df,"healthy_df",explore_healthy)
   
   
   
@@ -649,7 +650,7 @@ profvis({
     pdf(file=filenames,width=20)
     #create histogram & density plot using raw counts
     activity_plot <- ggplot(data =  user_ac, aes(x = user_ac[,N]))+ 
-      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
+      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
       xlab('numb. of tweets') + ylab("proportion of users") + scale_x_continuous(limits=c(0,50),expand=c(0,0))  # Overlay with transparent density plot
     print(activity_plot)
     dev.off()
@@ -681,8 +682,8 @@ plot_daily_activity<-function(datatable,tag,explore) {
   
   #function to plot histogram of number of tweets per day
   hist_plotter <- function(dates,title="Tweets"){
-    counts <- ggplot(data=dates,aes(x=dates[,N])) + geom_histogram(colour="black",fill="white",binwidth=1) + ggtitle(paste0(title,"_counts_",tag))+ xlab('numb. of tweets') + ylab("number of days")
-    dens <- ggplot(data =  dates, aes(x = dates[,N])) + geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=20) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0(title,"_density_",tag))+ xlab('numb. of tweets') + ylab("proportion of all days")
+    counts <- ggplot(data=dates,aes(x=dates[,N])) + geom_histogram(colour="black",fill="white",binwidth=1,boundary=0) + ggtitle(paste0(title,"_counts_",tag))+ xlab('numb. of tweets') + ylab("number of days")
+    dens <- ggplot(data =  dates, aes(x = dates[,N])) + geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=20,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0(title,"_density_",tag))+ xlab('numb. of tweets') + ylab("proportion of all days")
     return(list(counts,dens))
   }
   
@@ -721,8 +722,9 @@ plot_daily_activity<-function(datatable,tag,explore) {
   
 }
 
-plot_daily_activity(sick_df,"sick_df",explore_sick)
-plot_daily_activiy(healthy_df,"healthy_df",explore_healthy)
+plot_daily_activity(df,df_label,explore_df)
+# plot_daily_activity(sick_df,"sick_df",explore_sick)
+# plot_daily_activiy(healthy_df,"healthy_df",explore_healthy)
 
 #function to plot number of tweets per hour during a single day (i.e. taken )
 ##still needs some tinkering and cleaning up! (especially when it comes to automating the plotting)
@@ -743,7 +745,7 @@ plot_hourly_activity <- function(datatable,tag,explore) {
   
   to_import <- read_feather("temporary/to_import.feather") #imports processed dataset with timezones back into R
   to_import <- data.table(to_import)
-  file.remove(c("temporary/to_export.feather","temporary/to_import.feather")) #removing .feather files
+  #file.remove(c("temporary/to_export.feather","temporary/to_import.feather")) #removing .feather files
   
   datatable[,timezone:=to_import] #add timezones to datatable
   
@@ -838,8 +840,10 @@ plot_hourly_activity <- function(datatable,tag,explore) {
   dev.off()
 }
 
-plot_hourly_activity(sick_df,"sick_df",explore_sick)
-plot_hourly_activity(healthy_df,"healthy_df",explore_healthy)
+plot_hourly_activity(df,df_label,explore_df)
+
+# plot_hourly_activity(sick_df,"sick_df",explore_sick)
+# plot_hourly_activity(healthy_df,"healthy_df",explore_healthy)
 
 #current_state
 
