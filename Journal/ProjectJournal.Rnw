@@ -8,7 +8,7 @@
 \usepackage[margin=10pt]{caption}
 \usepackage[margin=10pt]{subcaption}
 \title{How reliable is Twitter for influenza surveillance?}
-\author{Servan Grüninger}
+\author{Servan Gr?ninger}
 \begin{document}
 %\SweaveOpts{concordance=TRUE}
 <<setup, include=FALSE, cache=FALSE>>=
@@ -29,15 +29,15 @@ standard_path <- "C:/Users/DrosoNeuro/Dropbox/UZH_Master/Masterarbeit/Journal"
 \section{Administrative Information}
 \label{sec:admin}
 \begin{description}
-\item [General] Reinhard Furrer (RF) \& Marcel Salathé (MS) will jointly supervise project. RH  will be primary supervisor regarding statistical questions; MS will be primary supervisor regarding machine learning questions.
+\item [General] Reinhard Furrer (RF) \& Marcel Salath? (MS) will jointly supervise project. RH  will be primary supervisor regarding statistical questions; MS will be primary supervisor regarding machine learning questions.
 \item [EPFL] Sharada Mohanty (SM) \& Gianrocco Lazzari (GL) are PhD students in MS' group with knowledge in data management. They act as first contact persons regarding data management and processing question.
 \item [UZH] Reinhard Furrer will assign a PhD student who acts as first contact person for statistical questions arising during project.
 \item [Abbreviations]
 \begin{itemize}
 \item []
 \item Reinhard Furrer = RF
-\item Marcel Salathé = MS
-\item Servan Grüninger = SG
+\item Marcel Salath? = MS
+\item Servan Gr?ninger = SG
 \item Sharada Mohanty = SM
 \item Gianrocco Lazzari = GL
 \end{itemize}
@@ -95,11 +95,20 @@ Finished: 2016.03.20
 \section{Updates \& Meetings}
 \label{sec:updates}
 
+\subsection{2017.01.13 - Weekly progress report (New!)}
+\label{subsec:2017.01.13}
+
+\subsubsection{Exploratory Analysis of Twitter Data}
+Things working, but which need improvement for exploratory analysis \& descriptive statistiscs
+\begin{description}
+\item [Timezone lookup] In order to get an accurate picture of when tweets were sent we need to take into account the respective timezones. Hence, I implemented a timezone converter which uses the geospatial information to lookup the respective timezone the tweet was sent in and converts the UTC time to the time in the respective timezone. However, the lookup takes very long (CPU is the limiting factor here). So either I find a way to lookup the timezone times directly (maybe they were recorded in the raw data) or I find a faster way to lookup the timezones
+
+\end{description}
+
 \subsection{2016.07.20 - Progress Report}
 \label{subsec:2016.07.20}
 
 \subsubsection{Exploratory Analysis of Twitter Data}
-
 
 I used GL's summary and script for a first analysis of the data see ("Masterarbeit/TwitterData/tweets\_from\_todd" for script and summary
 
