@@ -59,6 +59,11 @@ profvis({
   #explore basic characteristics of dataset
   df_summary <- data_summary(df)
   
+  #plotting mosaic
+  #mosaic(dis_table , pop=F,varnames=F)
+  doubledecker(df_summary$dis_table,pop=F,varnames=F)
+  labeling_cells(text = format(df_summary$dis_table,scientific=T), margin=0)(df_summary$dis_table)
+  
   #get preliminary info from datatables
   explore_df <- explore_data(df,df_label)
   str(explore_df)
