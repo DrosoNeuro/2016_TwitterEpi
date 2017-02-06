@@ -17,7 +17,6 @@ profvis({
   library("scales") # for function alpha()
   library("compiler")  # to speed up the computations!
   library("plyr")
-  library("hexbin") #for hexoganal binning
   library("rgeos") #for creating maps
   library("png") #for reading png files
   library("grid") #for arranging png files
@@ -59,11 +58,9 @@ profvis({
   #explore basic characteristics of dataset
   df_summary <- data_summary(df)
   
-  #plotting mosaic
-  #mosaic(dis_table , pop=F,varnames=F)
-  doubledecker(df_summary$dis_table,pop=F,varnames=F)
-  labeling_cells(text = format(df_summary$dis_table,scientific=T), margin=0)(df_summary$dis_table)
-  
+  #plotting mosaic plots
+  double_decker_plus(df_summary$dis_table,"sick","plots/")
+ 
   #get preliminary info from datatables
   explore_df <- explore_data(df,df_label)
   str(explore_df)
@@ -71,22 +68,10 @@ profvis({
   names(explore_df) <- "false_label"
   gc()
   
-  #commented out for the moment > will be needed if we can distinguish between sick & healthy datasets
-  #explore_sick <- explore_data(sick_df,"sick")
-  #str(explore_sick)
-  #explore_sick <- list(explore_sick$false_label) #prune list to save memory
-  #names(explore_sick) <- "false_label"
-  # 
-  # explore_healthy <- explore_data(healthy_df,"healthy")
-  # str(explore_healthy)
-  # explore_healthy <- list(explore_healthy$false_label) #reduce size of list to save memory
-  # names(explore_healthy) <- "false_label"
-  
-  
-  
+
 # ---------------- here we analyse the data `in space' ------------
   
-# # tweets on maps using scatterplots----
+# # tweets on maps using scatterplots---- #deprecated > check v1.1 for running version -----
   # 
   #     plot_location <- function(datatable,explore,tag)
   #     {
@@ -195,6 +180,7 @@ profvis({
   #     plot_location(healthy_df,explore_healthy,"healthy_df")
   #  
   
+   #
   
 #tweets on maps using hexbin plots----
   #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
@@ -274,8 +260,9 @@ profvis({
   # plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
   
   
-#  histogram of longitude and latitude ----
   
+#  histogram of longitude and latitude ----
+  coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast
   hist_coord <- function(datatable,tag,explore){
     
     #create filenames#

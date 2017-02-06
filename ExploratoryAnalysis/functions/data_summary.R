@@ -1,8 +1,5 @@
-#function to explore basic characteristics of dataset
+#function to explore basic statistical characteristics of dataset
 #datatable must contain paramaters: "userID", "sick"
-#"sickness_state" takes values "sick" or "healthy" and signifies the state that the users represented in the dataste *should* be in
-library(ggplot2)
-library("vcd")
 data_summary <- function(datatable){
     options(scipen=0,digits=3) #transforms numbers into scientific format as soon as they are longer than 5-4=1
     num_all_tweets <- length(datatable[,userID])
