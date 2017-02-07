@@ -37,36 +37,61 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
   
   # create hexbins for continent data
   continent <- coord_selection(datatable,coord_cont)[[1]]
-  d <- ggplot(continent,aes(longitude,latitude))
-  a <- d + stat_binhex()
-  d + geom_hex()
-  
   world <- map_data("world", "USA",exact="T",xlim=xbnds,ylim=ybnds)
   data(us.cities)
   us.cities <- data.table(us.cities)
   colnames(us.cities)[4:5] <- c("latitude","longitude")
   us.cities <- coord_selection(us.cities,coord_cont)[[1]]
   us.cities <- us.cities[pop >2e5,]
-  gg <- ggplot(continent,aes(longitude,latitude))
-  gg <- gg + geom_map(data=world, map=world,
-                      aes(x=long, y=lat, map_id=region),
-                      color="white", fill="#7f7f7f", size=0.05, alpha=1/4)
-  gg <- gg + stat_bin_hex(binwidth=c(shape*0.5,0.5))
-  gg <- gg + geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
-  
-  gg <- gg+ stat_binhex(continent,aes(longitude,latitude))
-  my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,
-                         xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
-  
+  my.bins[[1]] <- ggplot(continent,aes(longitude,latitude)) +  
+    geom_map(data=world, map=world,
+             aes(x=long, y=lat, map_id=region),
+             color="white", fill="#7f7f7f", size=0.05, alpha=1/2)+                 
+     stat_bin_hex(binwidth=c(shape*0.5,0.5)) +
+     geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
+  tot <- as.data.table(ggplot_build(my.bins[[1]])$data[[2]]) #extracts count data of each hexbin
+  coord_tot <- round(tot[,.(x,y)],2)
+  coord_tot <- split(coord_tot, seq(nrow(coord_tot))) #split into list of (lon,lat)-tuples for comparison
+  #my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,
+  #                         xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
+
   temp <- continent[continent[,sick]==1,]
   gc()
-  my.bins[[2]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
-                         xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
+  #my.bins[[2]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
+  #                       xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
+  my.bins[[2]] <- ggplot(temp,aes(longitude,latitude)) +  
+    geom_map(data=world, map=world,
+             aes(x=long, y=lat, map_id=region),
+             color="white", fill="#7f7f7f", size=0.05, alpha=1/2)+                 
+    stat_bin_hex(binwidth=c(shape*0.5,0.5)) +
+    geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
+  sick <- as.data.table(ggplot_build(my.bins[[2]])$data[[2]])
+  coord_sick <- round(sick[,.(x,y)],2)
+  coord_sick <- split(coord_sick, seq(nrow(coord_sick)))
+  ind_sick <- coord_sick %in% coord_tot
+  ind_tot <- coord_tot %in% coord_sick
+  
+  
+  coord_tot <- 
+  
+  ind_sick <- pairlist(round(sick$x,2),round(sick$y,2)) %in% c(round(tot$x,2),round(tot$y,2))
+  ind_tot <- c(round(tot$x,2),round(tot$y,2)) %in% c(round(sick$x,2),round(sick$y,2))
+  latsick <- round(sick$y,2) %in% round(tot$y,2)
+  lontot <- round(tot$x,2) %in% round(sick$x,2)
+  lattot <- round(tot$y,2) %in% round(sick$y,2)
+  indtot <- lattot&&lontot
+  xy.list <- split(xy.df, seq(nrow(xy.df)))
+  which(outer(round(tot)))
+  a <- which( outer(sick$x, tot$x, "%in%") & 
+           outer(sick$y, tot$y, "%in%"), 
+         arr.ind=TRUE)
+  
   #ratio of sick tweets to total tweets
   my.bins[[3]] <- my.bins[[2]]
   index1 <- my.bins[[2]]@cell %in% my.bins[[1]]@cell
   index2 <- my.bins[[1]]@cell %in% my.bins[[2]]@cell
-  my.bins[[3]]@count <- my.bins[[2]]@count[index1] / my.bins[[1]]@count[index2]*100
+  my.bins[[3]]@count <- my.bins[[2]]@count[index1] / my.bins[[1]]@count[index2]
+  a <- hcell2xy(my.bins[[3]])
   
   temp <- continent[continent[,sick]==0,]
   gc()
