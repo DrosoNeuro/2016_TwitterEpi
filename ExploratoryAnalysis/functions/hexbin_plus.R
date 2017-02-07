@@ -2,6 +2,7 @@
 #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
 #coord_local is by default set on the East Coast; syntax is c(lon_west,lon_est,lat_south,lat_north)
 #
+library("plotrix")
 library("hexbin") #for hexagonal binning
 library("ggplot2") #the ggplot2 way: http://docs.ggplot2.org/0.9.3.1/stat_binhex.html
 hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #function print spatial distribution of sick tweets
@@ -50,7 +51,7 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
      stat_bin_hex(binwidth=c(shape*0.5,0.5)) +
      geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
   tot <- as.data.table(ggplot_build(my.bins[[1]])$data[[2]]) #extracts count data of each hexbin
-  coord_tot <- round(tot[,.(x,y)],2)
+  coord_tot <- round(tot[,.(x,y)],4)
   coord_tot <- split(coord_tot, seq(nrow(coord_tot))) #split into list of (lon,lat)-tuples for comparison
   #my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,
   #                         xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
@@ -66,28 +67,54 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
     stat_bin_hex(binwidth=c(shape*0.5,0.5)) +
     geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
   sick <- as.data.table(ggplot_build(my.bins[[2]])$data[[2]])
-  coord_sick <- round(sick[,.(x,y)],2)
+  coord_sick <- round(sick[,.(x,y)],4)
   coord_sick <- split(coord_sick, seq(nrow(coord_sick)))
   ind_sick <- coord_sick %in% coord_tot
+  if (!all(ind_sick)){
+    stop("sick population is not a subset of total population")
+  }
   ind_tot <- coord_tot %in% coord_sick
   
-  
-  coord_tot <- 
-  
-  ind_sick <- pairlist(round(sick$x,2),round(sick$y,2)) %in% c(round(tot$x,2),round(tot$y,2))
-  ind_tot <- c(round(tot$x,2),round(tot$y,2)) %in% c(round(sick$x,2),round(sick$y,2))
-  latsick <- round(sick$y,2) %in% round(tot$y,2)
-  lontot <- round(tot$x,2) %in% round(sick$x,2)
-  lattot <- round(tot$y,2) %in% round(sick$y,2)
-  indtot <- lattot&&lontot
-  xy.list <- split(xy.df, seq(nrow(xy.df)))
-  which(outer(round(tot)))
-  a <- which( outer(sick$x, tot$x, "%in%") & 
-           outer(sick$y, tot$y, "%in%"), 
-         arr.ind=TRUE)
-  
   #ratio of sick tweets to total tweets
-  my.bins[[3]] <- my.bins[[2]]
+  my.bins[[3]] <- ggplot(temp,aes(longitude,latitude)) +
+    stat_bin_hex(binwidth=c(shape*0.5,0.5)) 
+  
+  my.bins[[3]] <- ggplot_build(my.bins[[3]])
+  my.bins[[3]] <- my.bins[[3]][1:2]
+  temp1 <- ggplot_build(my.bins[[2]])$data[[2]]
+  temp1$count <- sick$count[ind_sick]/tot$count[ind_tot]*1000 #calculating promille
+  x <- temp1$x
+  rep()
+  test <- function(dataframe)
+  {
+    row <- as.vector(dataframe)
+    x <- as.matrix(rep(row[1],row[3]),row[3],1)
+    y <- as.matrix(rep(row[2],row[3]),row[3],1)
+    dat <- cbind(x,y)
+  }
+  x <- apply(temp1[c(1,2),c(2,3,5)],1,test)
+  
+  df <- data.frame(a=1:2, b=letters[1:2]) 
+  df[rep(seq_len(nrow(df)), each=c(2,3)),]
+  x <- sapply(temp1$x,rep,each=temp1$count)
+  cols <- color.scale(temp$count)
+  temp$colour <- cols
+  my.bins[[3]]$data[[1]] <- temp
+  
+  my.
+  cols <- color.scale(temp$count)
+  a <- ggplot(temp,aes(x,y)) +  
+    geom_map(data=world, map=world,
+             aes(x=long, y=lat, map_id=region),
+             color="white", fill="#7f7f7f", size=0.05, alpha=1/2)+                 
+    stat_bin_hex(binwidth=c(shape*0.5,0.5))
+  a <- ggplot_build(a)
+  a$data[[2]]$colour <- cols
+  +
+    geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
+  
+  
+  my.bins[[3]]$data[[2]]$count <- 
   index1 <- my.bins[[2]]@cell %in% my.bins[[1]]@cell
   index2 <- my.bins[[1]]@cell %in% my.bins[[2]]@cell
   my.bins[[3]]@count <- my.bins[[2]]@count[index1] / my.bins[[1]]@count[index2]
