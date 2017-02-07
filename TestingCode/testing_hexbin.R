@@ -113,3 +113,67 @@ popViewport()
 
 #copy device output to pdf
 dev.copy2pdf(file="hexgrid.pdf")
+
+## testing special hexbin functions
+x <- rnorm(10000)
+y <- rnorm(10000)
+plot(x,y, pch=".")
+hbin <- hexbin(x,y)
+str(xys <- hcell2xy(hbin))
+points(xys, cex=1.5, col=2) ; title("hcell2xy( hexbin(..) )", col.main=2)
+
+## hcell2xyInt
+x<-rnorm(10000)
+y<-rnorm(10000)
+hbin<-hexbin(x,y,xbins=10)
+ijInt<-hcell2xyInt(hbin)
+
+## hexList
+xx<-rnorm(100)
+yy<-rnorm(100)
+x <- runif(100)
+y <- runif(100)
+xbnds <- c(-3.5,3.5)
+ybnds <- c(-3.5,3.5)
+fixx <- xbnds
+fixy <- ybnds
+unzoom <- 1.08
+
+hbin <- hexbin(xx,yy,xbins=5,xbnds=xbnds,ybnds=ybnds)
+hbin2 <- hexbin(x,y,xbins=5,xbnds=xbnds,ybnds=ybnds)
+bin1 <- list(bin1 = hbin, bin2 = hbin2)
+bin1 <- as(bin1, "hexbinList")
+bin1@hbins[[1]]@cell
+bin1@hbins[[2]]@cell
+tmph.xy <- lapply(bin1@hbins, hcell2xy, check.erosion = TRUE)
+eroded <- unlist(lapply(bin1@hbins, is, "erodebin"))
+shape <- bin1@Shape
+xbins <- bin1@Xbins
+bin1@hbins[[1]]@cell
+bin1@hbins[[2]]@cell
+
+bnds <- hexbin:::make.bnds(bin1@hbins, tmph.xy, xbnds = fixx, ybnds = fixy)
+
+ratiox <- diff(bnds$nxbnds)/diff(bnds$xbnds)
+ratioy <- diff(bnds$nybnds)/diff(bnds$ybnds)
+ratio <- max(ratioy, ratiox)
+nxbnds <- mean(bnds$nxbnds) + c(-1, 1) * (unzoom * ratio * 
+                                            diff(bnds$xbnds))/2
+nybnds <- mean(bnds$nybnds) + c(-1, 1) * (unzoom * ratio * 
+                                            diff(bnds$ybnds))/2
+hvp <- hexViewport(bin1@hbins[[1]], xbnds = nxbnds, ybnds = nybnds, 
+                   newpage = TRUE)
+
+dx <- (0.5 * diff(bin1@Xbnds))/xbins
+dy <- (0.5 * diff(bin1@Ybnds))/(xbins * shape * sqrt(3))
+hexC <- hexcoords(dx = dx, dy = dy)
+
+cell.stat <- hexbin:::all.intersect(bin1@hbins)
+cell.stat.n <- apply(cell.stat, 1, sum)
+i.depth <- max(cell.stat.n)
+diff.cols <- vector(mode = "list", length = i.depth)
+levcells <- which(cell.stat.n == 1)
+whichbin <- apply(cell.stat[levcells, ], 1, which)
+nfcol <- length(NULL)
+nhb <- bin1@n
+nbcol <- nhb - nfcol

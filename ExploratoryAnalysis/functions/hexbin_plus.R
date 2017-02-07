@@ -2,7 +2,8 @@
 #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
 #coord_local is by default set on the East Coast; syntax is c(lon_west,lon_est,lat_south,lat_north)
 #
-library("hexbin") #for hexoganal binning
+library("hexbin") #for hexagonal binning
+library("ggplot2") #the ggplot2 way: http://docs.ggplot2.org/0.9.3.1/stat_binhex.html
 hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #function print spatial distribution of sick tweets
 {
   ###set-up###
@@ -36,6 +37,24 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
   
   # create hexbins for continent data
   continent <- coord_selection(datatable,coord_cont)[[1]]
+  d <- ggplot(continent,aes(longitude,latitude))
+  a <- d + stat_binhex()
+  d + geom_hex()
+  
+  world <- map_data("world", "USA",exact="T",xlim=xbnds,ylim=ybnds)
+  data(us.cities)
+  us.cities <- data.table(us.cities)
+  colnames(us.cities)[4:5] <- c("latitude","longitude")
+  us.cities <- coord_selection(us.cities,coord_cont)[[1]]
+  us.cities <- us.cities[pop >2e5,]
+  gg <- ggplot(continent,aes(longitude,latitude))
+  gg <- gg + geom_map(data=world, map=world,
+                      aes(x=long, y=lat, map_id=region),
+                      color="white", fill="#7f7f7f", size=0.05, alpha=1/4)
+  gg <- gg + stat_bin_hex(binwidth=c(shape*0.5,0.5))
+  gg <- gg + geom_point(data=us.cities,aes(x=longitude,y=latitude),size=1,color="orange")
+  
+  gg <- gg+ stat_binhex(continent,aes(longitude,latitude))
   my.bins[[1]] <- hexbin(continent$longitude,continent$latitude,xbins=xbins,
                          xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
   
@@ -45,11 +64,13 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
                          xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
   #ratio of sick tweets to total tweets
   my.bins[[3]] <- my.bins[[2]]
-  my.bins[[3]]@count <- my.bins[[2]]@count / my.bins[[1]]@count 
+  index1 <- my.bins[[2]]@cell %in% my.bins[[1]]@cell
+  index2 <- my.bins[[1]]@cell %in% my.bins[[2]]@cell
+  my.bins[[3]]@count <- my.bins[[2]]@count[index1] / my.bins[[1]]@count[index2]*100
   
   temp <- continent[continent[,sick]==0,]
   gc()
-  my.bins[[4]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,IDs=T,shape=shape)
+  my.bins[[4]] <- hexbin(temp$longitude,temp$latitude,xbins=xbins,xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
   
   #ratio of healthy tweets to total tweets
   my.bins[[5]] <- my.bins[[4]]
@@ -89,13 +110,11 @@ hexbin_plot <- function(datatable,explore,tag,coord_local = c(-80,-66,38,43))  #
   for (i in 1:num.plots)
   {
     my.bins[[i]]@count <- log(my.bins[[i]]@count)#log-transforming counts in order to improve readability
-    gplot.hexbin(my.bins[[i]],style="colorscale",pen=0,border= 'white', minarea = 0.01, maxarea = 1,colramp=cr,legend=1.5,mincnt=0, xlab="longitude",ylab="latitude",main=filenames[i],colorcut=seq(0,1,length=10))
+    gplot.hexbin(my.bins[[i]],style="colorscale",border= 'white',colramp=cr,mincnt=0, xlab="longitude",ylab="latitude",main=filenames[i],colorcut=seq(0,1,length=10),legend=0)
   }
   graphics.off()
   remove(list=c("my.bins"))
 }  
 
-plot_location_hexbin(df,explore_df,df_label)
-# plot_location_hexbin(sick_df,explore_sick,"sick_df")
-# plot_location_hexbin(healthy_df,explore_healthy,"healthy_df")
+
 

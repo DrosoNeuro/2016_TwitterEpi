@@ -1,0 +1,3 @@
+library(rworldmap)
+newmap <- getMap(resolution = "low")
+plot(newmap, xlim = c(-20, 59), ylim = c(35, 71), asp = 1)
