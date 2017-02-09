@@ -68,7 +68,7 @@ profvis({
   names(explore_df) <- "false_label"
   gc()
   
-
+  hexbin_plus(df,tag="sick",path="plots/")
 # ---------------- here we analyse the data `in space' ------------
   
 # # tweets on maps using scatterplots---- #deprecated > check v1.1 for running version -----
