@@ -12,8 +12,8 @@ profvis({
   library("ggplot2")
   library('ggdendro')
   # library("TSclust")
-  library("ggmap") #used to plot maps
-  library("maps")
+  #library("ggmap") #used to plot maps
+  #library("maps") #used to plot maps
   library("scales") # for function alpha()
   library("compiler")  # to speed up the computations!
   library("plyr")

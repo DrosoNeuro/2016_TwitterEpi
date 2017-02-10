@@ -3,7 +3,7 @@
 #coord_local is by default set on the East Coast; syntax is c(lon_west,lon_est,lat_south,lat_north)
 
 library("ggplot2") #the ggplot2 way: http://docs.ggplot2.org/0.9.3.1/stat_binhex.html
-hexbin_plus <- function(datatable,tag,coord= c(-125,-66,25,50),path="")  #function print spatial distribution of sick tweets
+ggplot_hexbin_plus <- function(datatable,tag,coord= c(-125,-66,25,50),path="")  #function print spatial distribution of sick tweets
 {
   ###set-up###
   #datatable <- datatable[,.(userID,longitude,latitude,sick)] #prune datatable to make it smaller > doesn't help to free up memory > actually *uses* memory

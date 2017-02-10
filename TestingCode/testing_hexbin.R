@@ -177,3 +177,17 @@ whichbin <- apply(cell.stat[levcells, ], 1, which)
 nfcol <- length(NULL)
 nhb <- bin1@n
 nbcol <- nhb - nfcol
+
+#baseball data (plotting hexbinplots on map)
+#https://baseballwithr.wordpress.com/2014/06/06/creating-hexbin-plots/
+
+require(openWAR)
+data(openWAR2013)
+data("MLBAM2013")
+playerNames <- unique(openWAR2013$Name)
+playerNames[grep("Gomez", playerNames)]
+gomezId = unique(subset(openWAR2013, Name == "Gomez, C")$playerId)
+gomez = subset(openWAR2013, playerId == gomezId)
+require(mosaic)
+head(sort(tally(~event, data=subset(gomez, fielderId == playerId)), decreasing=TRUE))
+
