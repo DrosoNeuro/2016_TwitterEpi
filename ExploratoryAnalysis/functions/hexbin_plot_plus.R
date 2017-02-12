@@ -1,11 +1,12 @@
 #tweets on maps using hexbin plots
 #memory can be an issue; read for freeing up RAM http://www.yourownlinux.com/2013/10/how-to-free-up-release-unused-cached-memory-in-linux.html
-#coord_local is by default set on the East Coast; syntax is c(lon_west,lon_est,lat_south,lat_north)
-#
+#coord is by default set on the US mainland; syntax is c(lon_west,lon_est,lat_south,lat_north)
+#xbins is the number of bins to be use on the x-axis
+
 library("hexbin") #for hexagonal binning
 library("grid")
 
-hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path="")  #function print spatial distribution of sick tweets
+hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path="",xbins=1000)  #function print spatial distribution of sick tweets
 {
   ###helper functions###----
   #function to extract indices of overlapping bins
@@ -36,7 +37,7 @@ hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path=
       rel_bin@xcm <- rel_bin@xcm[inds[[1]]]
       rel_bin@ycm <- rel_bin@ycm[inds[[1]]]
     }
-    rel_bin@count <- hexbin1@count[inds[[1]]] / hexbin2@count[inds[[2]]]
+    rel_bin@count <- hexbin1@count[inds[[1]]] / hexbin2@count[inds[[2]]]*1000
     return(rel_bin)
   }
   
@@ -87,16 +88,13 @@ hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path=
   xbnds <- coord[1:2]
   ybnds <- coord[3:4]
   #set the colors, number intervals, interval location
-  cr <- colorRampPalette(c("orange","red"))
+  cr <- colorRampPalette(c("yellow","red"))
   
   #minimal population for cities to be displayed
-  minpop <- 5e5
+  minpop <- 3e5
   
   #extract geodatan needed for plotting
   geodata <- geo_data(coord,minpop)
-  
-  #number of bins to be use
-  xbins = 2000
   
   #define shape of hexbins: ywidth/xwidth
   shape = diff(ybnds)/diff(xbnds)
@@ -106,7 +104,7 @@ hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path=
   #relative tweets: sick divided by all, healthy divided by all
   #time dependent tweets
   img_names <- c("alltweets_cont","sicktweets_cont","healthytweets_cont","mislabelled_cont","alltweets_local", "sicktweets_local", "healthytweets_local","mislabelledtweets_local")
-  filenames <- paste(img_names,tag,sep="_")
+  filenames <- paste(img_names,tag,xbins,sep="_")
  
   #create a list to store hexbins
   num.plots <- 6
@@ -139,13 +137,12 @@ hexbin_plot_plus <- function(datatable,explore,tag,coord=c(-125,-66,25,50),path=
   #ratio of sick tweets to healthy tweets
   my.bins[[6]] <- rel_hexbin(my.bins[[2]],my.bins[[4]])
   
-  pdf(paste0(path,'HexbinPlots_',tag,'.pdf'), onefile=TRUE)
+  pdf(paste0(path,'HexbinPlots_',tag,xbins,'.pdf'), onefile=TRUE)
   for (i in 1:num.plots)
   {
-    #my.bins[[i]]@count <- log(my.bins[[i]]@count)#log-transforming counts in order to improve readability
-    
     #gplot.hexbin(my.bins[[i]],style="colorscale",border= 'white',colramp=cr,mincnt=0, xlab="longitude",ylab="latitude",main=filenames[i],colorcut=seq(0,1,length=10),legend=0)
     grid.newpage()
+    my.bins[[i]]@count <- log(my.bins[[i]]@count)#log-transforming counts in order to improve readability 
     hexbin_plot(my.bins[[i]],geodata)
   }
   graphics.off()

@@ -134,3 +134,64 @@ grid.points(unit(world.cities$longitude,"native"),unit(world.cities$latitude,"na
 grid.polygon(unit(lake$x,"native"),unit(lake$y,"native"),
            gp=gpar(col="blue",fill="blue",alpha=0.5))
 popViewport()
+
+
+##create barplot with legend
+barData <- matrix(sample(1:4, 16, replace = TRUE), ncol = 4)
+boxColours <- 1:4
+bp <- function(barData) {
+    nbars <- dim(barData)[2]
+      nmeasures <- dim(barData)[1]
+        barTotals <- rbind(rep(0, nbars), apply(barData, 2, cumsum))
+          barYscale <- c(0, max(barTotals)*1.05)
+            pushViewport(plotViewport(c(5, 4, 4, 1),
+                                        yscale = barYscale,
+                                        layout = grid.layout(1, nbars)))
+            grid.rect()
+            grid.yaxis()
+            for (i in 1:nbars) {
+                pushViewport(viewport(layout.pos.col = i, yscale = barYscale))
+                grid.rect(x = rep(0.5, nmeasures),
+                            y = unit(barTotals[1:nmeasures, i], "native"),
+                            height = unit(diff(barTotals[,i]), "native"),
+                      width = 0.8, just = "bottom", gp = gpar(fill = boxColours))
+              popViewport()}
+              popViewport()
+}
+
+legLabels <- c("Group A", "Group B", "Group C", "Something Longer")
+boxSize <- unit(0.5, "inches")
+
+leg <- function(legLabels) {
+    nlabels <- length(legLabels)
+      pushViewport(viewport(layout = grid.layout(nlabels, 1)))
+      for (i in 1:nlabels) {
+          pushViewport(viewport(layout.pos.row = i))
+          grid.rect(width = boxSize, height = boxSize, just = "bottom",
+                      gp = gpar(fill = boxColours[i]))
+          grid.text(legLabels[i], y = unit(0.5, "npc") - unit(1, "lines"))
+          popViewport()
+      }
+      popViewport()
+}
+
+grid.rect(gp = gpar(lty = "dashed"))
+legend.width <- max(unit(rep(1, length(legLabels)),
+                 "strwidth", as.list(legLabels)) +
+                  unit(2, "lines"),
+                unit(0.5, "inches") + unit(2, "lines"))
+pushViewport(viewport(layout = grid.layout(1, 2,
+           widths = unit.c(unit(1,"null"), legend.width))))
+grid.rect(gp = gpar(lty = "dashed"))
+pushViewport(viewport(layout.pos.col = 1))
+bp(barData)
+upViewport(2)
+
+pushViewport(viewport(layout.pos.col = 2))
+grid.rect(gp = gpar(lty = "dashed",col="red"))
+pushViewport(plotViewport(c(5, 0, 4, 0)))
+leg(legLabels)
+popViewport(3)
+
+
+grid.show.layout(grid.layout(1, 2, widths = unit.c(unit(1,"null"), legend.width)))
