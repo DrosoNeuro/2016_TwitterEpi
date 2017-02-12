@@ -184,15 +184,15 @@ profvis({
   
 
   #using hexbinplot
-  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=1000)
-  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=500)
-  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=300)
-  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=100)
+  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=1000,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=500,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=300,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_continent",path="plots/",xbins=100,log_scale=TRUE)
 
-  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=1000)
-  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=500)
-  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=300)
-  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=100)
+  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=1000,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=500,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=300,log_scale=TRUE)
+  hexbin_plot_plus(df,tag="sick_EastCoast",coord = c(-80,-66,38,43),path="plots/",xbins=100,log_scale=TRUE)
   
   #  histogram of longitude and latitude ----
   coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast

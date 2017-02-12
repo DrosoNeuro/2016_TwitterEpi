@@ -185,7 +185,7 @@ pushViewport(viewport(layout = grid.layout(1, 2,
 grid.rect(gp = gpar(lty = "dashed"))
 pushViewport(viewport(layout.pos.col = 1))
 bp(barData)
-upViewport(2)
+upViewport()
 
 pushViewport(viewport(layout.pos.col = 2))
 grid.rect(gp = gpar(lty = "dashed",col="red"))
