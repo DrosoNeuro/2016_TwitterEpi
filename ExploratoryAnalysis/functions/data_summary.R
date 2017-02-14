@@ -54,12 +54,14 @@ data_summary <- function(datatable){
                 healthy_position,num_healthy_tweets,healthy_users,num_healthy_users,
                 only_sick_position,only_sick,num_only_sick_users,
                 only_healthy_position, only_healthy,num_only_healthy_users,
+                both_position,both,num_both,
                 dis_table,prop_all,prop_sick,prop_healthy)
     names(out) <- c("num_all_tweets","all_users","num_all_users", 
                     "sick_position","num_sick_tweets","sick_users","num_sick_users",
                     "healthy_position", "num_healthy_tweets", "healthy_users","num_healthy_users",
                     "only_sick_position","only_sick","num_only_sick_users",
                     "only_healthy_position", "only_healthy","num_only_health_users",
+                    "both_position","both","num_both",
                     "dis_table","prop_all","prop_sick","prop_healthy")
     return(out)
   }
