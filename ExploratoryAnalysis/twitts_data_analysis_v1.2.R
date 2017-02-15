@@ -188,7 +188,7 @@ profvis({
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=1000,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=500,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=300,log_scale=TRUE)
-  hexbin_plot_plus(df,summary=df_summary,tag=tag,path="plots/",xbins=100,log_scale=TRUE)
+  hexbin_plot_plus_new(df,summary=df_summary,tag=tag,path="plots/",xbins=100,log_scale=TRUE)
 
   tag <- "sick_df_East Coast"
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=1000,log_scale=TRUE)
