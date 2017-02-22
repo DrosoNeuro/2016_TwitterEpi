@@ -72,15 +72,12 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     leg_scale <- seq(0,1,0.5)
     if (relative){
       if(log_scale){
-        leg_labels <- leg_scale*1000
-        leg_labels <- rev(format_scientific(leg_labels,n=4))
-        leg_pos <- round(exp(leg_scale*log(nlabels)),0)
-        min_max <- c(max(leg_data),min(leg_data))
-        min_max_pos <- round(exp((min_max/1000)*log(nlabels)),0)
-        #dirty hack, needs to be improved
-        if(min_max_pos[1]>50){min_max_pos[1] <- 50}
-        min_max <- format_scientific(min_max,n=4)
-
+        quntl <- quantile(leg_data)
+        l_quntl <- log(quntl)
+        if(l_quntl[1]<1){l_quntl[1]<-1}
+        quntl_pos <- nlabels-(round(l_quntl/log(1000)*50,0)-1)
+        #if(quntl_pos[1]>50){quntl_pos[1] <- 50}
+        quntl <- format_scientific(quntl,n=4)
       }
       else{
         leg_labels <- leg_scale*1000
@@ -90,16 +87,22 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
         min_max_pos <- ifelse(min_max[2]==0,c(round(min_max[1]/1000*50,0),1),round(min_max/1000*50,0))
         min_max <- format_scientific(min_max,n=4)
       }
-      for (i in  1:length(leg_labels)){
-        pushViewport(viewport(layout.pos.row = leg_pos[i]))
-        grid.text(leg_labels[i])
+      # for (i in  1:length(leg_labels)){
+      #   pushViewport(viewport(layout.pos.row = leg_pos[i]))
+      #   grid.text(leg_labels[i])
+      #   popViewport()
+      # }
+      for (i in  1:length(quntl)){
+        pushViewport(viewport(layout.pos.row = quntl_pos[i]))
+        grid.text(quntl[i])
         popViewport()
       }
-      for (i in 1:2){
-        pushViewport(viewport(layout.pos.row = min_max_pos[i]))
-        grid.text(min_max[i],gp=gpar(col="red"))
-        popViewport()
-      }
+      
+      # for (i in 1:2){
+      #   pushViewport(viewport(layout.pos.row = min_max_pos[i]))
+      #   grid.text(min_max[i],gp=gpar(col="red"))
+      #   popViewport()
+      # }
     }
     else{
     if(log_scale){
@@ -121,8 +124,6 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     }
     popViewport(4)
   }
-
-  #set the colors, number intervals, interval location
 
   #function to plot hexbins
   hexbin_plot <- function(hexbin1,geodata,main_title="",leg_title,log_scale=FALSE,
@@ -207,12 +208,18 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
   
   #function to create customised colourrampfunction that takes per mille values and transfers them to colours on a scale [0,1]
   #define colorRamp
-  def_colRamp <- function(hexbin1){
+  def_colRamp <- function(hexbin1,log_scale=TRUE){
     lower <- min(hexbin1@count)
     upper <- max(hexbin1@count)
     cr_rel <- function(n){
       cr <- colour_ramp(c("yellow","red"))
-      rescaled <- seq(lower/1000,upper/1000,length=n) 
+      if(log_scale){
+        rescaled <- seq(log(lower)/log(1000),log(upper)/log(1000),length=n)
+      } else {rescaled <- seq(lower/1000,upper/1000,length=n)}
+      #rescaling makes sure that all per mille maps are directly comparable. 
+      #I.e. the colour ranges from yellow to red for all maps, where yellow = 0 & red = 1000. However, if data set contains only values
+      #from e.g. 500 to 1000, only these colours will be used (e.g. orange to red); normally, colour_ramp would rescale the color set s.t.
+      #the values from 500 to 1000 range from *yellow* to *red*, i.e. use the whole colour range
       cols <- unlist(lapply(rescaled,cr))
       return(cols)
     }
