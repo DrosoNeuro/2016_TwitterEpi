@@ -9,7 +9,7 @@
 library("hexbin") #for hexagonal binning
 library("grid")
 #add explore compatibility
-hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50),path="",
+hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50),path="",
                              xbins=100,log_scale=FALSE)  #function print spatial distribution of sick tweets
 {
   ###helper functions###----
@@ -46,7 +46,7 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
   }
  
   #function to plot legends
-  leg <- function(leg_data,leg_title="",log_scale=FALSE,cr=colorRampPalette(c("yellow","red")),relative=FALSE){
+  leg <- function(leg_data,leg_title="",log_scale=FALSE,cr=colorRampPalette(c("yellow","red")),permille=FALSE){
     pushViewport(viewport(x=0.25,y=0.8,width=1,height=0.2))
     grid.text(leg_title,gp=gpar(lwd=3,fontsize=15))
     popViewport()
@@ -70,7 +70,7 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
     pushViewport(vp_grid)
     
     leg_scale <- seq(0,1,0.5)
-    if (relative){
+    if (permille){
       if(log_scale){
         leg_labels <- leg_scale*1000
         leg_labels <- rev(format_scientific(leg_labels,n=4))
@@ -126,7 +126,7 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
 
   #function to plot hexbins
   hexbin_plot <- function(hexbin1,geodata,main_title="",leg_title,log_scale=FALSE,
-                          cr=colorRampPalette(c("yellow","red")),relative=FALSE){
+                          cr=colorRampPalette(c("yellow","red")),xbnds,ybnds,permille=FALSE){
   
     if (main_title!=""){
       heights <- unit.c(unit(0.05,"npc"),unit(0.95,"npc"))
@@ -144,16 +144,17 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
     
     #plot legend
     pushViewport(viewport(layout.pos.col=2))
+    if (log_scale){
+      leg_data <- log(hexbin1@count)
+    }
     leg_data <- hexbin1@count
-    leg(leg_data,leg_title,log_scale,relative=relative)
+    leg(leg_data,leg_title,log_scale,permille=permille)
     popViewport()
     
     #plot map & hexbin
     pushViewport(viewport(layout.pos.col=1))
     width <- 4
     height <- 2
-    xbnds <- hexbin1@xbnds
-    ybnds <- hexbin1@ybnds
     xrange <- range(xbnds)+ width/2*c(-1,0.2)
     yrange <- range(ybnds) + height/2*c(-1,0.2)
     vp <- viewport(x=0.5,y=0.5,width=0.9,height=0.85,
@@ -179,11 +180,11 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
   
   #multplot function
   mult_hexbin_plot <- function(hx_ls,geodata,log_scale=FALSE){
-    for (i in 1:length(hx_ls))
+    for (i in 1:length(hx_ls$bins))
     {
       grid.newpage()
-      hexbin_plot(hx_ls[[i]]$hbin,geodata=geodata,main_title=hx_ls[[i]]$main_title,leg_title=hx_ls[[i]]$leg_title,
-                  log_scale=log_scale,cr=hx_ls[[i]]$colramp,relative=hx_ls[[i]]$relative)
+      hexbin_plot(hx_ls$bins[[i]],geodata=geodata,main_title=hx_ls$main_titles[i],leg_title=hx_ls$leg_titles[i],
+                  log_scale=log_scale,cr=hx_ls$colramps[[i]],xbnds=hx_ls$xbnds,ybnds=hx_ls$ybnds,permille=hx_ls$permilles[[i]])
     }
   }
   #create independent datasets > then create function to calculate relative values
@@ -219,31 +220,31 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
     return(cr_rel)
   }
 
-  plotter <- function(datatable,coord=coord,type=c(1,2,3),subset_tag="full set",sub_set=FALSE,log_scale=FALSE){
-    if(is.vector(sub_set)&&is.integer(sub_set)){
-      hx_ls_ref <- create_hexbins(datatable,coord,type=c(1),subset_tag)
-      datatable <- datatable[sub_set,]
-      hx_ls <- create_hexbins(datatable,coord,type,subset_tag)
-      hx_rel_ls <- create_rel_hexbins(hx_ls,type,ref_set=hx_ls_ref,subset_tag)
-    }
-    else{
-    hx_ls <- create_hexbins(datatable,coord,type,subset_tag)
-    hx_rel_ls <- create_rel_hexbins(hx_ls,type,subset_tag=subset_tag)
-    }
-    mult_hexbin_plot(hx_ls,geodata,log_scale)
-    mult_hexbin_plot(hx_rel_ls,geodata,log_scale)
-  }
-
-  #function to create hexbins
-  #takes a datatable and an array containing numbers from 1 to 3 which encodes the plots that shall be printed:
+  #function to create and plot hexbins
+  #takes a datatable and an array containing numbers from 1 to 6 which encodes the plots that shall be printed:
   # 1: all tweets
   # 2: sick tweets
-  # 3: healthy tweets
-  create_hexbins <- function(datatable,coord,type=seq(1,3),subset_tag=""){
-    if(range(type)[1] < 1 || range(type)[2]>3){
-      stop("plot indices have to be between 1 and 3")
+  # 3: sick tweets / all tweets
+  # 4: healthy tweets
+  # 5: healthy tweets / all tweets
+  # 6: sick tweets / healthy tweets
+  create_hexbins <- function(datatable,coord,plots=seq(1,3),ref_set=FALSE,subset_tag=""){
+    if(range(plots)[1] < 1 || range(plots)[2]>6){
+      stop("plot indices have to be between 1 and 6")
     }
-  
+    if ((3 %in% plots) && sum(c(1,2) %in% plots)<2){
+      stop("cannot calculate ratio of sick to total tweets without
+           absolute counts of sick and total tweets")
+    }
+    if ((5 %in% plots) && sum(c(1,4) %in% plots)<2){
+      stop("cannot calculate ratio of healthy to total tweets without
+           absolute counts of healthy and total tweets")
+    }
+    if ((6 %in% plots) && sum(c(2,4) %in% plots)<2){
+      stop("cannot calculate ratio of sick to healthy tweets without
+           absolute counts of sick and healthy tweets")
+    }
+    
     #define bounds
     xbnds <- coord[1:2]
     ybnds <- coord[3:4]
@@ -252,116 +253,83 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
     shape = diff(ybnds)/diff(xbnds)
     
     #define number of hexbins
-    n <- length(type)
-    hx_ls <- vector(n,mode="list")
+    num.plots <- length(plots)
+    my.bins <- vector(num.plots,mode="list")
+    colramps <- vector(num.plots,mode="list")
+    permilles <- vector(num.plots,mode="list")
     index <- 1
     #create titles for each map
-    img_names <- c("all tweets","sick tweets","healthy tweets")
+    img_names <- c("all tweets","sick tweets","ratio sick/total", "healthy tweets",
+                   "ratio healthy/total","ratio sick/healthy")
     main_titles <- paste(subset_tag,img_names,tag,sep=" | ")
-    main_titles <- main_titles[type]
+    main_titles <- main_titles[plots]
     cts <- "counts"
-    leg_titles <- c(cts,cts,cts)
-    leg_titles <- leg_titles[type]
+    pmil <- "per mille"
+    leg_titles <- c(cts,cts,pmil,cts,pmil,pmil)
+    leg_titles <- leg_titles[plots]
     
-    df_tot <- coord_selection(datatable,coord)[[1]]
     #for all tweets
-    if (1 %in% type){
-      names(hx_ls)[index] <- "tot"
-      hbin <- hexbin(df_tot$longitude,df_tot$latitude,xbins=xbins,
+    if (1 %in% plots){
+      sub_set <- coord_selection(datatable,coord)[[1]]
+      names(my.bins)[index] <- "tot"
+      my.bins$tot <- hexbin(sub_set$longitude,sub_set$latitude,xbins=xbins,
                             xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
-      colramp <- colorRampPalette(c("yellow","red"))
-      hx_ls$tot <- list(hbin=hbin,colramp=colramp,relative=FALSE,
-                          main_title=main_titles[index],leg_title=leg_titles[index])
+      colramps[[index]] <- colorRampPalette(c("yellow","red"))
+      permilles[[index]] <- FALSE
       index <- index +1
     }
     #sick tweets
-    if (2 %in% type){
-      temp <- df_tot[df_tot[,sick]==1,]
+    if (2 %in% plots){
+      temp <- sub_set[sub_set[,sick]==1,]
       gc()
-      names(hx_ls)[index] <- "sick"
-      hbin <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
+      names(my.bins)[index] <- "sick"
+      my.bins$sick <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
                              xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
-      colramp <- colorRampPalette(c("yellow","red"))
-      hx_ls$sick <- list(hbin=hbin,colramp=colramp,relative=FALSE,
-                          main_title=main_titles[index],leg_title=leg_titles[index])
+      colramps[[index]] <- colorRampPalette(c("yellow","red"))
+      permilles[[index]] <- FALSE
+      index <- index +1
+    }
+    #ratio of sick tweets to total tweets
+    if (3 %in% plots){
+      names(my.bins)[index] <- "sick_tot"
+      my.bins$sick_tot <- rel_hexbin(my.bins$sick,my.bins$tot)
+      colramps[[index]] <- def_colRamp(my.bins[[index]])
+      permilles[[index]] <- TRUE
       index <- index +1
     }
     #healthy tweets
-    if (3 %in% type){
-      temp <- df_tot[df_tot[,sick]==0,]
+    if (4 %in% plots){
+      temp <- sub_set[sub_set[,sick]==0,]
       gc()
-      names(hx_ls)[index] <- "healthy"
-      hbin <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
+      names(my.bins)[index] <- "healthy"
+      my.bins$healthy <- hexbin(temp$longitude,temp$latitude,xbins=xbins,
                                 xbnds = xbnds, ybnds = ybnds,IDs=T,shape=shape)
-      colramp <- colorRampPalette(c("yellow","red"))
-      hx_ls$healthy <- list(hbin=hbin,colramp=colramp,relative=FALSE,
-                           main_title=main_titles[index],leg_title=leg_titles[index])
+      colramps[[index]] <- colorRampPalette(c("yellow","red"))
+      permilles[[index]] <- FALSE
       index <- index +1
     }
-    return(hx_ls)
-    }
-  
-  #function to create relative
-  #takes a hexbin_list (hx_ls) created by "create hexbin"
-  create_rel_hexbins <- function(hx_ls,type=c(1,2,3),ref_set=FALSE,subset_tag=""){
-    if (is.list(ref_set)){
-      tot <- ref_set[[1]]$hbin
-    }
-    else{
-      tot <- hx_ls[[1]]$hbin
-    }
-    
-    sick <- hx_ls$sick$hbin
-    healthy <- hx_ls$healthy$hbin
-
-    #define bounds
-    xbnds <- hx_ls[[1]]$hbin@xbnds
-    ybnds <- hx_ls[[1]]$hbin@ybnds
-    
-    #define shape of hexbins: ywidth/xwidth
-    shape = hx_ls[[1]]$hbin@shape
-    
-    #define number of hexbins
-    n <- length(type)
-    hx_rel_ls <- vector(n,mode="list")
-    index <- 1
-    #create titles for each map
-    img_names <- c("ratio tot/tot","ratio sick/total",
-                   "ratio healthy/total")
-    main_titles <- paste(subset_tag,img_names,tag,sep=" | ")
-    main_titles <- main_titles[type]
-    pmil <- "per mille"
-    leg_titles <- c(pmil,pmil,pmil)
-    leg_titles <- leg_titles[type]
-    
-    #for sick to total tweets
-    if (1 %in% type){
-      names(hx_rel_ls)[index] <- "tot_tot"
-      hbin <- rel_hexbin(tot,tot)
-      colramp <- def_colRamp(hbin)
-      hx_rel_ls$tot_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-                                 main_title=main_titles[index],leg_title=leg_titles[index])
+    #ratio of healthy tweets to total tweets
+    if (5 %in% plots){
+      names(my.bins)[index] <- "healthy_tot"
+      my.bins$healthy_tot <- rel_hexbin(my.bins$healthy,my.bins$tot)
+      colramps[[index]] <- def_colRamp(my.bins[[index]])
+      permilles[[index]] <- TRUE
       index <- index +1
     }
-    if (2 %in% type){
-      names(hx_rel_ls)[index] <- "sick_tot"
-      hbin <- rel_hexbin(sick,tot)
-      colramp <- def_colRamp(hbin)
-      hx_rel_ls$sick_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-                                 main_title=main_titles[index],leg_title=leg_titles[index])
-      index <- index +1
+    
+    # #ratio of sick tweets to healthy tweets
+    # if (6 %in% plots){
+    #   #ratio of sick tweets to healthy tweets
+    #   names(my.bins)[index] <- "sick_healthy"
+    #   my.bins$sick_healthy <- rel_hexbin(my.bins$sick,my.bins$healthy)
+    #   colramps[[index]] <- def_colRamp(my.bins[[index]])
+    #   permilles[[index]] <- TRUE
+    #   index <- index +1
+    # }
+    # 
+    return(list(bins=my.bins,main_titles=main_titles,leg_titles=leg_titles,
+                colramps=colramps,permilles=permilles,shape=shape,xbnds=xbnds,ybnds=ybnds))
     }
-    if (3 %in% type){
-    #healthy to total tweets
-      names(hx_rel_ls)[index] <- "healthy_tot"
-      hbin <- rel_hexbin(healthy,tot)
-      colramp <- def_colRamp(hbin)
-      hx_rel_ls$healthy_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-                                 main_title=main_titles[index],leg_title=leg_titles[index])
-      index <- index +1
-    }
-      return(hx_rel_ls)
-}
     
   ###set-up###----
   datatable <- datatable[,.(userID,longitude,latitude,sick)] #prune datatable to make it smaller 
@@ -376,11 +344,11 @@ hexbin_plot_plus_new <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25
   ##create hexbins for sub_set data----
 
   pdf(paste0(path,'HexbinPlots_',tag,xbins,'.pdf'), onefile=TRUE,width=12,height=7)
-  plotter(datatable,coord=coord,subset_tag="full set",log_scale=log_scale)
+  create_hexbins(datatable,coord=coord,plots=seq(1,6),subset_tag="full set")
   if (is.list(summary)){
-    plotter(datatable,coord=coord,subset_tag="sick & healthy users",sub_set=summary$both_position,log_scale=log_scale)
-    plotter(datatable,coord=coord,subset_tag="sick only users",type=2,sub_set=summary$only_sick_position,log_scale=log_scale)
-    plotter(datatable,coord=coord,subset_tag="healthy only users",type=3,sub_set=summary$only_healthy_position,log_scale=log_scale)
+    create_hexbins(datatable[summary$both_position,],coord=coord,plots=seq(1,6),subset_tag="sick & healthy users")
+    create_hexbins(datatable[summary$only_sick_position,],coord=coord,plots=c(1,2,3),subset_tag="sick only users")
+    create_hexbins(datatable[summary$only_healthy_position,],coord=coord,plots=c(1,4,5),subset_tag="healthy only users")
   }
   graphics.off()
 }  

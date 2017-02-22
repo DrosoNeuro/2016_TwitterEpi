@@ -6,8 +6,8 @@
 #included analysis of healthy datatables as well
 
 # PACKAGES ----------------------------------------------------------------
-library("profvis")
-profvis({
+#library("profvis")
+#profvis({
   library("gridExtra") #for saving png files in a specific order into pdf
   library("ggplot2")
   library('ggdendro')
@@ -46,8 +46,6 @@ profvis({
   load(file="datasets/sick_tweets.RData")
   
 # EXPLORATORY DATA ANALYSIS ------
-  df_label <- "sick" #or healthy, depending on dataset
-  
   #select only tweets from mainland USA
   coord_USA <- c(-125,-66,25,50)
   selec_coords <- coord_selection(df,coord_USA)
@@ -61,129 +59,11 @@ profvis({
   #plotting mosaic plots
   double_decker_plus(df_summary$dis_table,"sick","plots/")
  
-  #get preliminary info from datatables
-  explore_df <- explore_data(df,df_label)
-  
-  str(explore_df)
-  explore_df <- list(explore_df$false_label) #prune list to save memory
-  names(explore_df) <- "false_label"
-  gc()
-  
+
 # ---------------- here we analyse the data `in space' ------------
   
 # # tweets on maps using scatterplots---- #deprecated > check v1.1 for running version -----
-  # 
-  #     plot_location <- function(datatable,explore,tag)
-  #     {
-  #       dir.create("img_tmp") #create new directory to story images
-  #       setwd(paste0(root_path,"/img_tmp"))
-  #       ###set-up###
-  #       #function print spatial distribution of sick tweets
-  #       print_map <- function(my_map, my_title, my_coord, colo="red",pt_size=0.5){
-  #         ggmap(my_map)+ggtitle(my_title) + geom_point(aes_string(my_coord[,"longitude"],my_coord[,"latitude"]),color=colo,data=my_coord,alpha=.3,size=pt_size)
-  #       }
-  #       
-  #       #prune datatable to save memory
-  #       datatable <- datatable[,c(1:3,5)]
-  #       
-  #       #define pt-size
-  #       pt_size_USA <- 1.5
-  #       pt_size_local <- 7.5
-  #       
-  #       #create names for each map
-  #       img_names <- c("sicktweets","sicktweets_local","healthytweets","healthytweets_local","mislabelledtweets","mislabelledtweets_local")
-  #       
-  #       filenames <- paste(img_names,tag,sep="_")
-  #       filenames <- paste(filenames,"png",sep=".")
-  #       
-  #       #define size of each image (in inchex)
-  #       img_size <- 20
-  #       
-  #       ###create maps with tweets for the whole continent###
-  #       my_ggmap<-get_map(location = "Kansas",zoom = 3,source = "google", maptype = "terrain",color = 'bw') # my_ggmap<- map_data('world'); downloading map with focus on Kansas, zoom = 3 (continent)
-  #       
-  #       ##print all tweets labelled as "sick" in the whole USA##
-  #       tot_sick <- datatable[datatable[,"sick"]==1,] #subset of all tweets labelled as "sick"
-  #       
-  #       #png(filename=filenames[1],width=2000,height=2000) #open pdf to save images
-  #       p <- print_map(my_ggmap,my_title="Sick tweets",my_coord=tot_sick,colo="red",pt_size=pt_size_USA)
-  #       p <- print
-  #       ggsave(file=filenames[1],width=img_size,height=img_size)
-  #       #dev.off() #close pdf
-  #       
-  #       remove(list=c("p","tot_sick")) #remove map created and datatable to save memory
-  #       
-  #       ##print all tweets labelled as "healthy" in the whole USA##
-  #       tot_healthy <- datatable[datatable[,"sick"]==0,]
-  #       
-  #       p <- print_map(my_ggmap,my_title="Healthy tweets",my_coord=tot_healthy,colo="blue",pt_size=pt_size_USA)
-  #       ggsave(file=filenames[3],width=img_size,height=img_size)
-  #       
-  #       remove(list=c("p","tot_healthy")) #remove map created and datatable to save memory
-  #       
-  #       ##print all tweets mislabelled in the whole USA##
-  #       tot_mislabelled <- datatable[which(datatable[,"userID"] %in% explore$false_label),] #gets all tweets from those users who are in the wrong category ("sick" users in the "healthy" datatable or "healthy" users in the "sick" data set)
-  #       p <- print_map(my_ggmap,my_title="Mislabelled Tweets",my_coord=tot_mislabelled,col="deeppink",pt_size=pt_size_USA)
-  #       ggsave(file=filenames[5],width=img_size,height=img_size)
-  #       
-  #       remove(list=c("p","tot_mislabelled","my_ggmap")) #remove map created and datatable to save memory; also remove ggmap of USA since it won't be used afterwards
-  #       
-  #       ###create local maps with tweets###
-  #       #create google-map for a certain region
-  #       my_ggmap_local <- get_map(location = "NewYork", zoom= 8, source="google",maptype = "terrain",color = "bw")#local map
-  #       coord_local <- as.numeric(attr(my_ggmap_local,"bb"))#get coordinates of map
-  #       coord_local <- c(coord_local[2],coord_local[4],coord_local[1],coord_local[3]) #reorder coordinates to make it work for function coord_selection      
-  #           
-  #       local_selection <- coord_selection2(datatable,coord_local) #select only those values which are within the local map region
-  #       
-  #       local_index <- local_selection[[2]]
-  #       local_selection <- local_selection[[1]]
-  #       remove(datatable) #to save memory
-  #             
-  #       ##print all tweets labelled as "sick" in the selected region##
-  #       local_sick <- local_selection[local_selection[,"sick"]==1,] #get all local tweets labelled as "sick"
-  #       #png(filename=filenames[2],width=2000,height=2000) 
-  #       p <- print_map(my_ggmap_local,my_title = "Sick tweets", local_sick,"red",pt_size=pt_size_local)
-  #       ggsave(file=filenames[2],width=img_size,height=img_size)
-  #       #dev.off() #close pdf
-  #       
-  #       remove(list=c("p","local_sick")) #remove map created and datatable to save memory;
-  #       
-  #       ##print all tweets labelled as "healthy" in the selected region##
-  #       local_healthy <- local_selection[local_selection[,"sick"]==0,]
-  #           
-  #       p <-print_map(my_ggmap_local,my_title="Healthy tweets",local_healthy,colo="blue",pt_size=pt_size_local)
-  #       ggsave(file=filenames[4],width=img_size,height=img_size)
-  #       
-  #       remove(list=c("p","local_healthy")) #remove map created and datatable to save memory
-  #       
-  #       #print all tweets labelled as "healthy" in the selected region##
-  #       local_mislabelled <- local_selection[which(local_selection[,"userID"] %in% explore$false_label[local_index]),]
-  #       
-  #       p <- print_map(my_ggmap_local,"Mislabelled Tweets",my_coord=local_mislabelled,col="deeppink",pt_size=pt_size_local)
-  #       ggsave(file=filenames[6],width=img_size,height=img_size)
-  #       
-  #       remove(list=c("p","local_mislabelled","my_ggmap_local")) #remove map created and datatable to save memory; also delete local google-map
-  #       
-  #       #reading all created images
-  #       plots <- lapply(ll <- list.files(patt='.*[.]png'),function(x){
-  #         img <- as.raster(readPNG(x))
-  #         grid::rasterGrob(img, interpolate = FALSE)
-  #       })
-  #       #changing wd to root_path and saving images in single pdf
-  #       setwd(paste0(root_path))
-  #       ggsave(paste0("/plots/","scatterplots_",tag,".pdf"), marrangeGrob(grobs=plots, nrow=1, ncol=1))
-  #       unlink("img_tmp",recursive=T) #delete directory with png-images
-  #     }  
-  #  
-  #     plot_location(sick_df,explore_sick,"sick_df")
-  #     plot_location(healthy_df,explore_healthy,"healthy_df")
-  #  
-  
-   #
-  
-
-  #using hexbinplot
+  #using hexbinplot----
   tag <- "sick_df_continent "
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=1000,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=500,log_scale=TRUE)
@@ -304,7 +184,8 @@ profvis({
   # user_activity(healthy_df,"healthy_df")
   user_activity(df,df_label)
   
-}) #end of profvis
+
+  #}) #end of profvis
 
 # ---------------- here we analyse the data `in time' ------------
 
