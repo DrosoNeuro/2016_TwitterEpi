@@ -1,0 +1,251 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classification;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Vector;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class naiveBayesClassifier implements classifier{
+    
+    //from wikipedia's list of emoticons
+    public static String happy[] = {":-)",":)",":o)",":]",":3",":c)",":>","=]","8)","=)",":}",":^)"," :っ)"};
+    public static String sad[] = {">:[",":-(",":(",":-c",":c",":-<",":っC",":<",":-[",":[",":{"};
+    
+    
+    public static String cleanString(String text)
+    {
+        text = " "+text.toUpperCase()+" ";
+        
+        for(String s:happy)
+            text = text.replace(s, " HAPPYFACE ");
+        
+        for(String s:sad)
+            text = text.replace(s, " SADFACE ");
+        
+        //url replacement would be nice
+        
+        text = text.replace(".", " ");
+        text = text.replace(",", " ");
+        text = text.replace(";", " ");
+        text = text.replace(":", " ");
+        text = text.replace("(", " ");
+        text = text.replace(")", " ");
+        text = text.replace("-", " ");
+        text = text.replace("[", " ");
+        text = text.replace("]", " ");
+        text = text.replace("!", " ");
+        text = text.replace("@", " ");
+        text = text.replace("#", " ");
+        text = text.replace("$", " ");
+        text = text.replace("%", " ");
+        text = text.replace("^", " ");
+        text = text.replace("&", " ");
+        text = text.replace("*", " ");
+        text = text.replace("\\"," ");        
+        text = text.replace("/", " ");
+        text = text.replace("?", " ");
+        text = text.replace("~", " ");
+        text = text.replace("`", " ");
+        text = text.replace("_", " ");
+        text = text.replace("+", " ");
+        text = text.replace("=", " ");
+        text = text.replace("<", " ");
+        text = text.replace(">", " ");
+        text = text.replace("{", " ");
+        text = text.replace("}", " ");
+        
+        text = text.replaceAll("[0-9][0-9]*", " NUMBER ");
+        
+        while(text.contains("  "))
+            text = text.replace("  ", " ");
+        
+        return text;
+    }
+    
+    public static String[] uniqueVector(String text)
+    {
+        HashSet<String> h = new HashSet();
+        for(String s:text.split(" "))
+            if(!s.equals(""))
+                h.add(s);
+        return h.toArray(new String[0]);
+    }
+    
+    public naiveBayesClassifier(Vector<String> positiveTrain,Vector<String> negativeTrain, int max)
+    {
+        train(positiveTrain,negativeTrain,max);
+    }
+    
+    private void train(Vector<String> positiveTrain,Vector<String> negativeTrain, int topWords)
+    {
+        HashMap<String,Integer> wordCounts = new HashMap();
+        HashMap<String,Integer> positiveWCounts = new HashMap();
+        for(String st:negativeTrain)
+            for(String s: uniqueVector(cleanString(st)))
+            {
+                int ct = wordCounts.containsKey(s)?wordCounts.get(s)+1:1;
+                wordCounts.put(s, ct);
+                positiveWCounts.put(s,0);
+            }
+        for(String st:positiveTrain)
+            for(String s: uniqueVector(cleanString(st)))
+            {
+                int ct = wordCounts.containsKey(s)?wordCounts.get(s)+1:1;
+                wordCounts.put(s, ct);
+                ct = positiveWCounts.containsKey(s)?positiveWCounts.get(s)+1:1;
+                positiveWCounts.put(s, ct);
+            }
+        
+        HashSet<String> topStrings = new HashSet();
+        positiveWCounts.put("", 1);
+        wordCounts.put("", 1);
+        keys = new String[topWords];
+        for(int ct=0;ct<topWords;ct++)
+        {
+            int max = -1;
+            String best = "";
+            
+            for(String s:wordCounts.keySet())
+            {
+                if(topStrings.contains(s))
+                    continue;
+                if(wordCounts.get(s) > max)
+                {
+                    best = s;
+                    max = wordCounts.get(s);
+                }
+            }
+            topStrings.add(best);
+            keys[ct] = best;
+            //System.out.println(best+","+max);
+        }
+        
+        //keys = topStrings.toArray(new String[0]);
+        count = positiveTrain.size()+negativeTrain.size()+1;
+        positive = positiveTrain.size()+1;
+       // System.out.println(count+","+positive);
+        positiveCount = new int[topWords];
+        totalCount = new int[topWords];
+        
+        for(int i=0;i<topWords;i++)
+        {
+            positiveCount[i] = positiveWCounts.get(keys[i])+1;
+            totalCount[i] = wordCounts.get(keys[i])+1;
+          //  System.out.println(keys[i]+","+positiveCount[i]+","+totalCount[i]);
+        }
+        
+        
+    }
+    
+    public naiveBayesClassifier(File filter, int max, double cut) throws IOException
+    {
+        this(filter,max);
+        this.cut=cut;
+    }
+    
+    public naiveBayesClassifier(File filter,int max) throws FileNotFoundException, IOException {
+        Vector<String> positiveTrain = new Vector<String>();
+        Vector<String> negativeTrain = new Vector<String>();
+
+        File f = filter;
+     //   filtername = filter.toString();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        while (true) {
+            String text = in.readLine();
+            if (text == null) {
+                break;
+            }
+            text = text.toUpperCase();
+            int value = Integer.parseInt(in.readLine());
+
+            
+
+            if (value == 0) {
+                negativeTrain.add(text);
+            } else {
+                positiveTrain.add(text);
+            }
+
+        }
+        train(positiveTrain,negativeTrain,max);
+        
+    }
+
+    public static void main(String args[]) throws Exception
+    {
+      //  System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),5).getProbability(" HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        //System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),25).getProbability(" HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),50).getProbability(" HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),500).getProbability(" HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),1000).getProbability("HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        
+        
+      //  System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),5).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        //System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),25).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),50).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),500).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),1000).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+    }
+    
+    String keys[];
+    int totalCount[],positiveCount[],count,positive;
+
+    @Override
+    public double getValue(String input) throws Exception {
+        return cut>0?(getProbability(input)>cut?1:0):getProbability(input);
+    }
+
+    @Override
+    public double getProbability(String input) throws Exception {
+        double pp=0,pn=0;
+        
+        //these are to store the counts for (a/b)/(c/d), just doing the divisions immediatly has rounding weirdnesses
+        input = cleanString(input);
+        for(int ct=0;ct<keys.length;ct++)
+        {
+            if(input.contains(keys[ct]))
+            {
+                pp+= Math.log(1.0*positiveCount[ct]/positive);
+               // System.out.println(keys[ct]+","+Math.log(1.0*positiveCount[ct]/positive)+","+(1.0*positiveCount[ct]/positive));
+            }
+            else
+                pp+= Math.log(1.0*(positive-positiveCount[ct])/positive);
+        }
+       // System.out.println(positive+","+count);
+        pp+= Math.log(1.0*positive/count);
+        
+        for(int ct=0;ct<keys.length;ct++)
+        {
+            if(input.contains(keys[ct]))
+            {
+                
+                pn+= Math.log(1.0*((totalCount[ct]-positiveCount[ct]))/(count-positive));
+            }
+            else
+                pn+= Math.log((count-positive-(1.0*totalCount[ct]-positiveCount[ct]))/(count-positive));
+        }
+        pn+= Math.log((1.0*count-positive)/count);
+        
+        //System.out.println("\t"+pp+","+pn);
+        
+        
+        
+        return 1.0/(1+Math.exp(pn-pp));
+    }
+    public double cut = .5;
+    
+}

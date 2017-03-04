@@ -1,0 +1,530 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package twitter;
+
+import java.awt.geom.Point2D;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.text.DateFormatter;
+import toddSon.JSonObject;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class tweet {
+    public String tweet_id;
+    
+    private String getElement(String input, String key)
+    {
+        return getElement(input, key, "\"", 1, false);
+    }
+    
+    private String getElement(String input, String key, boolean last)
+    {
+        return getElement(input, key, "\"", 1, last);
+    }
+    
+    private String getElement(String input, String key, String breakStr, int skip, boolean last)
+    {
+        StringTokenizer st = new StringTokenizer(input, breakStr);
+        String result = "";
+        while(st.hasMoreTokens())
+        {
+            if(st.nextToken().equalsIgnoreCase(key))
+            {
+                for(int ct=0;ct<skip;ct++)
+                    st.nextToken();
+                result = st.nextToken();
+                if(!last)
+                    return result;
+            }
+        }
+        return result;
+    }
+    
+    public static String preprocess(String input)
+    {
+        return input.replace("\\\"", "''").replace("\\/", "/");
+    }
+    
+    private void initDummy(String input)
+    {
+        int total = 0;
+        String full = "";
+        for(int ct=0;ct<input.length();ct++)
+        {
+            total++;
+            full+=input.charAt(ct);
+            
+            if(Math.random()<.1)
+                full="";
+        }
+        user = new user();
+    }
+    
+    private void initDataMining(String input)
+    {
+       tweetId = (new StringTokenizer(input,"|")).nextToken();
+       input = input.substring(tweetId.length()+2); //remove leading tweet id | and {
+       input = input.substring(0, input.length()-1); //remove the trailing }
+       
+       JSonObject full = new JSonObject(input);
+       JSonObject coordinates = null;
+       JSonObject retweet = null;
+       tweetId = full.get("id_str");
+       
+       if(full.contains("coordinates")&&!full.get("coordinates").equals("null"))
+            coordinates = new JSonObject(full.get("coordinates"));
+       
+       if(full.contains("retweeted_status")&&!full.get("retweeted_status").equals("null"))
+           retweet = new JSonObject(full.get("retweeted_status"));
+       
+       
+           
+       if(full.contains("place") && !full.get("place").equals("null"))
+       {
+            JSonObject place = new JSonObject(full.get("place"));
+            place_type = place.get("place_type");
+            area_name = place.get("name");
+            country_code = place.get("country_code");
+            area_full_name = place.get("full_name");
+            country = place.get("country");
+            place_type = place.get("place_type");
+            coordinates = new JSonObject(place.get("bounding_box"));
+       }
+       
+           
+           
+       JSonObject entities = new JSonObject(full.get("entities"));
+       
+       {
+           Pattern p;
+           String part = entities.get("user_mentions");
+                
+                p = Pattern.compile("\"id_str\":\"[0-9]+\"");
+                
+                Matcher m = p.matcher(part);
+                
+                int total = 0;
+                while(m.find())
+                    total++;
+                
+                
+                mentionId = new String[total];
+                
+           //     System.out.println(total);
+         //       System.out.println(m.groupCount());
+                m.reset();
+                for(int ct=0;ct<mentionId.length;ct++)
+                {
+                    m.find();
+                    String s = m.group().substring(10);
+           //         System.out.println(s);
+                    mentionId[ct] = s.replaceAll("\"", "");
+                }
+       }
+       
+       text = replaceToUnicode(full.get("text"));
+       
+       
+       tweet_id = full.get("id");
+       
+       user = new user(full.get("user"));
+       
+       if(!full.get("created_at").equals("null"))
+       {
+            String Time = full.get("created_at");
+        
+            
+            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+            try {
+                time = formatter.parse(Time).getTime();
+            } catch (ParseException ex) {
+                //Logger.getLogger(tweet.class.getName()).log(Level.SEVERE, null, ex);
+                time = 0;
+            }
+            
+       }
+       
+       if(retweet!=null) //this is the origin tweet
+       {
+
+                       
+                       retweeted_ID = retweet.get("id_str");
+               retweeted_user = new user(retweet.get("user"));
+               String Time = retweet.get("created_at");
+        
+            
+            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+            try {
+                retweeted_time = formatter.parse(Time).getTime()+"";
+            } catch (ParseException ex) {
+                Logger.getLogger(tweet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }
+       
+       if(coordinates != null)
+       {
+           String coords = "";
+           if(coordinates.get("type").equals("Polygon"))
+           {
+               coords = coordinates.get("coordinates");
+           }
+           else if(coordinates.get("type").equals("Point"))
+           {
+               coords = "[["+coordinates.get("coordinates")+','+coordinates.get("coordinates")+','+coordinates.get("coordinates")+','+coordinates.get("coordinates")+"]]";
+           }
+           else if(coordinates.get("type").equals("null"))
+           {
+               loc = null; return;
+           }
+           else
+           {
+               System.err.println("unknown coordinate type: "+ coordinates.get("type"));
+               System.err.println(input+"\n\n\n"+coordinates+"\n\n\n\n\n");
+           }
+           StringTokenizer st = new StringTokenizer(coords.replaceAll("\\[*\\]*",""), ",");
+           
+           boundingbox = new Point2D.Double.Double[2];
+           boundingbox[0] = new Point2D.Double.Double(999999, 999999);
+           boundingbox[1] = new Point2D.Double.Double(-999999, -999999);
+           
+           for(int ct=0;ct<4;ct++)
+           {
+               double x = Double.parseDouble(st.nextToken());
+               double y = Double.parseDouble(st.nextToken());
+               
+               if(x < boundingbox[0].x)
+                   boundingbox[0].x = x;
+               if(x > boundingbox[1].x)
+                   boundingbox[1].x = x;
+               
+               if(y < boundingbox[0].y)
+                   boundingbox[0].y = y;
+               if(y > boundingbox[1].y)
+                   boundingbox[1].y = y;
+           }
+           
+           loc = new Point2D.Double.Double((boundingbox[0].x+boundingbox[1].x)/2, (boundingbox[0].y+boundingbox[1].y)/2);
+       }
+      // else
+        //   System.err.println(input+"\n\n\n ------- \n"+full+"\n\n\n");
+    }
+    
+    public tweet(String input, int type)
+    {
+        switch(type)
+        {
+            case DATAMINING_TWEET:
+                initDataMining(input);
+                break;
+            
+            case DUMMY_TWEET:
+                initDummy(input);
+                break;
+                        
+            case TWITTER4J_TWEET:
+        try {
+            initT4J(input);
+        } catch (IOException ex) {
+            Logger.getLogger(tweet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                break;
+        }
+    }
+    
+    public tweet(String input, int type, String file)
+    {
+        this(input,type);
+        this.file = file;
+    }
+    
+    public tweet(String input) throws ParseException
+    {
+        input = preprocess(input);
+        
+        retweeted = getElement(input,"retweeted").equals("false");
+        
+        tweetId = (new StringTokenizer(input,"|")).nextToken();
+        
+        area_name = getElement(input, "name");
+        country = getElement(input,"country");
+        area_full_name = getElement(input,"full_name");
+        place_type = getElement(input, "place_type");
+        country_code = getElement(input, "country_code");
+        
+        if(input.contains("\"type\":\"Polygon\",\"coordinates\""))
+        {
+            
+            String geo_full = getElement(input, "bounding_box","\"", 3, false);
+            if(geo_full.equals("Polygon"))
+                geo_full = getElement(input, "bounding_box", "\"", 6, false);
+            
+            geo_full = geo_full.replaceAll("[\\[\\]\\}:]", "");
+        
+            StringTokenizer st = new StringTokenizer(geo_full, ",");
+            
+            String points[] = new String[2];
+            boundingbox = new Point2D.Double[2];
+            points[0] = st.nextToken()+','+st.nextToken();
+            st.nextToken();
+            st.nextToken();
+            points[1] = st.nextToken()+','+st.nextToken();
+            
+            for(int ct=0;ct<2;ct++)
+            {
+                st = new StringTokenizer(points[ct],",");
+                boundingbox[ct] = new Point2D.Double.Double(Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken()));
+            }
+            
+            loc = new Point2D.Double.Double((boundingbox[0].x+boundingbox[1].x)/2, (boundingbox[0].y+boundingbox[1].y)/2);
+        }
+        else if(input.contains("\"type\":\"Point\",\"coordinates\""))
+        {
+            String geo_full = getElement(input, "coordinates", "\"}", 0, false);
+            if(geo_full.equals(":{"))
+                geo_full = getElement(input, "coordinates", "\"}", 6, false);
+           // System.err.println(geo_full);
+            geo_full = geo_full.replaceAll("[\\{\\}\\[:\\]]", "");
+            
+            StringTokenizer st = new StringTokenizer(geo_full, ",");
+            loc = new Point2D.Double.Double(Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken()));
+           // System.err.println(loc.x+","+loc.y);
+        }else if(input.contains("\"bounding_box\":{\"coordinates\":[[["))
+        {
+            String geo_full = getElement(input, "bounding_box","\"", 2, false);
+            
+            geo_full = geo_full.replaceAll("[\\[\\]\\}:]", "");
+        
+            StringTokenizer st = new StringTokenizer(geo_full, ",");
+            
+            String points[] = new String[2];
+            boundingbox = new Point2D.Double[2];
+            points[0] = st.nextToken()+','+st.nextToken();
+            st.nextToken();
+            st.nextToken();
+            points[1] = st.nextToken()+','+st.nextToken();
+            
+            for(int ct=0;ct<2;ct++)
+            {
+                st = new StringTokenizer(points[ct],",");
+                boundingbox[ct] = new Point2D.Double.Double(Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken()));
+            }
+            
+            loc = new Point2D.Double.Double((boundingbox[0].x+boundingbox[1].x)/2, (boundingbox[0].y+boundingbox[1].y)/2);
+        }
+        
+        
+        friendCount = Integer.parseInt(getElement(input, "friends_count", "\":,", 0, false).replaceAll("\\}",""));
+        
+        {
+            String Time = getElement(input, "created_at", "\"", 1, true);
+        
+            
+            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+            time = formatter.parse(Time).getTime();
+            
+        }
+        
+        text = replaceToUnicode(getElement(input, "text", "\"", 1, true));
+        screen_name = getElement(input, "screen_name");
+       // name = getElement(input, "name", true); does not work
+        tweet_id = getElement(input, "id_str");
+        
+        {
+            Pattern p = Pattern.compile("\"user_mentions\":\\[\\{.*\\}\\]\\}");
+            Matcher m = p.matcher(input);
+            
+            if(m.find())
+            {
+                String part = m.group();
+             //   System.out.println(part);
+                
+                p = Pattern.compile("\"id_str\":\"[0-9]+\"");
+                
+                m = p.matcher(part);
+                
+                int total = 0;
+                while(m.find())
+                    total++;
+                
+                
+                mentionId = new String[total];
+                
+           //     System.out.println(total);
+         //       System.out.println(m.groupCount());
+                m.reset();
+                for(int ct=0;ct<mentionId.length;ct++)
+                {
+                    m.find();
+                    String s = m.group().substring(10);
+           //         System.out.println(s);
+                    mentionId[ct] = s.replaceAll("\"", "");
+                }
+            }
+            else
+                mentionId = new String[0];
+        }
+    }
+    
+    public tweet(String uid, String text, Point2D.Double loc, long time)
+    {
+        user_id = uid;
+        this.text = text;
+        this.loc = loc;
+        this.time = time;
+    }
+    
+    public String toString()
+    {
+        String s =  tweetId+"\n"+area_name+" "+ country+" : "+ area_full_name + " " 
+                + country_code + "  " + place_type + "\n"+
+                (boundingbox == null? loc.x+","+loc.y:boundingbox[0].x+","
+                +boundingbox[0].y+"  "+boundingbox[1].x+","+boundingbox[1].y)
+        
+                +"\n\n"
+                +"\n\nTime "+time+" : ''"+text+"''\n"
+                + user +"\n\nMentioned: ";
+        
+        for(String st : mentionId)
+            s = s+st+",";
+        
+        return s;
+    }
+    
+    
+    //place
+    public Point2D.Double loc = null;
+    public Point2D.Double boundingbox[];
+    public String area_name, country, area_full_name, place_type, country_code;
+    
+    //user
+    public boolean is_translator, geo_enabled, retweeted;
+    public String time_zone, description;
+    public int friendCount, followerCount;
+    public long signUp;
+    public String user_id;
+    public String name, screen_name, language;    
+    //user
+    
+    public String retweeted_ID, retweeted_time;
+    
+    public long time;
+    public String tweetId;    
+    
+    public String text;
+    public String mentionId[];
+    public user user, retweeted_user;
+    public String file;
+    
+    public static final int DATAMINING_TWEET = 0, DUMMY_TWEET = 1, TWITTER4J_TWEET = 2;
+    
+    public static String replaceToUnicode(String s)
+    {
+        String part = "";
+        if(!s.contains("\\u"))
+            return s;
+        
+        String sp[] = s.split("\\\\u");
+        part+=sp[0];
+        try{
+        for(int ct=1;ct<sp.length;ct++)
+        {
+            int number = Integer.parseInt(sp[ct].substring(0, 4),16);
+            part+=(char)(number) + sp[ct].substring(4);
+        }
+        }
+        catch(Exception e) //sometimes we'll have weird issues with formatting, best to just return the un-edited tweet
+        {
+            return s;
+        }
+        return part;
+    }
+    
+    public static void main(String args[]) throws ParseException
+    {
+        /*tweet t = new tweet("20110306020002240|{\"place\":{\"country_code\":\"US\",\"url\":\"http:\\/\\/api.twitter.com\\/1\\/geo\\/id\\/94ec6a27a67398a7.json\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-117.16620012,33.11324703],[-117.16008804,33.11324703],[-117.16008804,33.12409698],[-117.16620012,33.12409698]]]},\"name\":\"Village O\",\"country\":\"United States\",\"attributes\":{},\"id\":\"94ec6a27a67398a7\",\"full_name\":\"Village O, San Marcos\",\"place_type\":\"neighborhood\"},\"user\":{\"is_translator\":false,\"show_all_inline_media\":false,\"geo_enabled\":true,\"profile_use_background_image\":true,\"listed_count\":3,\"profile_background_color\":\"1A1B1F\",\"url\":null,\"following\":null,\"verified\":false,\"profile_background_image_url\":\"http:\\/\\/a1.twimg.com\\/profile_background_images\\/131462852\\/0000009A00003A0000900000_111.png\",\"contributors_enabled\":false,\"statuses_count\":1531,\"time_zone\":\"Pacific Time (US & Canada)\",\"favourites_count\":2,\"friends_count\":85,\"profile_text_color\":\"666666\",\"profile_sidebar_fill_color\":\"252429\",\"description\":\"I love zombies....and penguins. That is all.\",\"id_str\":\"14377065\",\"profile_background_tile\":true,\"followers_count\":37,\"created_at\":\"Sun Apr 13 19:11:47 +0000 2008\",\"protected\":false,\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/1150343423\\/636x460design_01_normal.jpg\",\"follow_request_sent\":null,\"profile_link_color\":\"2FC2EF\",\"location\":\"San Diego, California\",\"name\":\"Sar\",\"notifications\":null,\"profile_sidebar_border_color\":\"181A1E\",\"screen_name\":\"sarbar\",\"id\":14377065,\"lang\":\"en\",\"utc_offset\":-28800},\"favorited\":false,\"coordinates\":null,\"text\":\"@papagdh Not all at ONCE obviously. :P\",\"in_reply_to_screen_name\":\"papagdh\",\"in_reply_to_user_id\":42070993,\"in_reply_to_status_id\":44290362231107585,\"in_reply_to_status_id_str\":\"44290362231107585\",\"source\":\"web\",\"contributors\":null,\"retweeted\":false,\"in_reply_to_user_id_str\":\"42070993\",\"id_str\":\"44291126252941313\",\"retweet_count\":0,\"created_at\":\"Sun Mar 06 07:00:02 +0000 2011\",\"geo\":null,\"id\":44291126252941313,\"entities\":{\"hashtags\":[],\"urls\":[],\"user_mentions\":[{\"indices\":[0,8],\"id_str\":\"42070993\",\"name\":\"Greg Hill\",\"screen_name\":\"papagdh\",\"id\":42070993}]},\"truncated\":false}", DATAMINING_TWEET);
+       
+        
+        for(int ct=0;ct<10000;ct++)
+            t = new tweet("20110306020002240|{\"place\":{\"country_code\":\"US\",\"url\":\"http:\\/\\/api.twitter.com\\/1\\/geo\\/id\\/94ec6a27a67398a7.json\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-117.16620012,33.11324703],[-117.16008804,33.11324703],[-117.16008804,33.12409698],[-117.16620012,33.12409698]]]},\"name\":\"Village O\",\"country\":\"United States\",\"attributes\":{},\"id\":\"94ec6a27a67398a7\",\"full_name\":\"Village O, San Marcos\",\"place_type\":\"neighborhood\"},\"user\":{\"is_translator\":false,\"show_all_inline_media\":false,\"geo_enabled\":true,\"profile_use_background_image\":true,\"listed_count\":3,\"profile_background_color\":\"1A1B1F\",\"url\":null,\"following\":null,\"verified\":false,\"profile_background_image_url\":\"http:\\/\\/a1.twimg.com\\/profile_background_images\\/131462852\\/0000009A00003A0000900000_111.png\",\"contributors_enabled\":false,\"statuses_count\":1531,\"time_zone\":\"Pacific Time (US & Canada)\",\"favourites_count\":2,\"friends_count\":85,\"profile_text_color\":\"666666\",\"profile_sidebar_fill_color\":\"252429\",\"description\":\"I love zombies....and penguins. That is all.\",\"id_str\":\"14377065\",\"profile_background_tile\":true,\"followers_count\":37,\"created_at\":\"Sun Apr 13 19:11:47 +0000 2008\",\"protected\":false,\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/1150343423\\/636x460design_01_normal.jpg\",\"follow_request_sent\":null,\"profile_link_color\":\"2FC2EF\",\"location\":\"San Diego, California\",\"name\":\"Sar\",\"notifications\":null,\"profile_sidebar_border_color\":\"181A1E\",\"screen_name\":\"sarbar\",\"id\":14377065,\"lang\":\"en\",\"utc_offset\":-28800},\"favorited\":false,\"coordinates\":null,\"text\":\"@papagdh Not all at ONCE obviously. :P\",\"in_reply_to_screen_name\":\"papagdh\",\"in_reply_to_user_id\":42070993,\"in_reply_to_status_id\":44290362231107585,\"in_reply_to_status_id_str\":\"44290362231107585\",\"source\":\"web\",\"contributors\":null,\"retweeted\":false,\"in_reply_to_user_id_str\":\"42070993\",\"id_str\":\"44291126252941313\",\"retweet_count\":0,\"created_at\":\"Sun Mar 06 07:00:02 +0000 2011\",\"geo\":null,\"id\":44291126252941313,\"entities\":{\"hashtags\":[],\"urls\":[],\"user_mentions\":[{\"indices\":[0,8],\"id_str\":\"42070993\",\"name\":\"Greg Hill\",\"screen_name\":\"papagdh\",\"id\":42070993}]},\"truncated\":false}", DATAMINING_TWEET);
+       
+        
+        System.out.println(t.boundingbox[0].x);*/
+        
+        long t = System.currentTimeMillis();
+        for(int ct=0;ct<100000;ct++)
+            replaceToUnicode("Hi \\u0057\\u006F\\u0072\\u006c\\u0064");
+        
+        System.out.println(System.currentTimeMillis() - t);
+        System.out.println(replaceToUnicode("Hi \\u0057\\u006F\\u0072\\u006c\\u0064 \n \\u4e2d \\uc2e0\\uc885 AI\\ub85c 5\\uba85 \\uc0ac\\ub9dd\\u00b7\ube44\ub458\uae30 \uc0d8\ud50c\uc11c \uccab \uac80\ucd9c\u2025\u4e2d \uc7a5\uc464\uc131\uc5d0\uc11c \uc5b4\uc81c \uac00\uae08\ub958 \uc218\uc1a1\uc5c5 \uc885\uc0ac\uc790 \ub450 \uba85 \uc2e0\uc885 AI\ud655\uc815 \uc9c4\ub2e8 \ubc1b\uace0 \uc228\uc9c0\uba70 \uc0ac\ub9dd\uc790 5\uba85\uc73c\ub85c \ub298\uc5b4\ub098\ub294 \ub4f1 \ube44\ub458\uae30 \uc0d8"));
+    
+        tweet tw = new tweet("StatusJSONImpl{createdAt=Tue Jul 02 17:29:08 EDT 2013, id=352177142966124546, text='@SarrrMelissa gimmeeee some', source='<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>', isTruncated=false, inReplyToStatusId=352176581306888192, inReplyToUserId=224441788, isFavorited=false, inReplyToScreenName='SarrrMelissa', geoLocation=null, place=null, retweetCount=0, isPossiblySensitive=false, contributorsIDs=[J@10df3c1c, retweetedStatus=null, userMentionEntities=[UserMentionEntityJSONImpl{name='Sara Heiden', screenName='SarrrMelissa', id=224441788}], urlEntities=[], hashtagEntities=[], mediaEntities=[], currentUserRetweetId=-1, user=UserJSONImpl{id=385797705, name='Marie Sheridan', screenName='OhMarieeee', location='New York', description='Penn State University', isContributorsEnabled=false, profileImageUrl='http://a0.twimg.com/profile_images/3660373385/86e078c868a180b50792966dc4a3af6e_normal.jpeg', profileImageUrlHttps='https://si0.twimg.com/profile_images/3660373385/86e078c868a180b50792966dc4a3af6e_normal.jpeg', url='null', isProtected=false, followersCount=201, status=null, profileBackgroundColor='000000', profileTextColor='000000', profileLinkColor='1D87F0', profileSidebarFillColor='99DE59', profileSidebarBorderColor='FFFFFF', profileUseBackgroundImage=true, showAllInlineMedia=false, friendsCount=252, createdAt=Thu Oct 06 00:27:43 EDT 2011, favouritesCount=676, utcOffset=-18000, timeZone='Quito', profileBackgroundImageUrl='http://a0.twimg.com/profile_background_images/445030995/paisley-blue-white-design.jpg', profileBackgroundImageUrlHttps='https://si0.twimg.com/profile_background_images/445030995/paisley-blue-white-design.jpg', profileBackgroundTiled=true, lang='en', statusesCount=1620, isGeoEnabled=false, isVerified=false, translator=false, listedCount=1, isFollowRequestSent=false}}", TWITTER4J_TWEET);
+    
+        System.out.println(tw.text);
+        System.out.println(tw.time);
+        System.out.println(tw.user.name);
+        System.out.println(tw.user.screen_name);
+        System.out.println(tw.user.description);
+    
+    
+    }
+
+    /**
+     * This function's a bit of a hack, because twitter4j doesn't escape their quotes
+     * finds the first instance of key in json. Then it finds the next key (in a predefined 
+     * set of keys) in the json, then returns what's between them
+     * @param json
+     * @param key
+     * @return 
+     */
+    private String getValueFromKey(String json, String key) throws java.lang.StringIndexOutOfBoundsException
+    {
+        //TODO: find all of these keys!
+        String keys[] = new String[]{"createdAt=",", id=",", text='",", favouritesCount=",", source='",", geoLocation=",", user=UserJSONImpl{"};               
+       int start = json.indexOf(key)+key.length();
+       int next = json.length();
+        for(String nextKey:keys)
+        {
+            int location = json.indexOf(nextKey);
+            if(location > start && location < next)
+                next = location;
+        }
+        String result =  json.substring(start,next);
+        if(result.charAt(result.length()-1)=='\'')
+            result = result.substring(0, result.length()-1);
+        
+        return result;
+    }
+    
+    private void initT4J(String input) throws IOException {
+        //System.out.println(getValueFromKey(input,", user=UserJSONImpl{"));
+        user = new user_parser.user(getValueFromKey(input,", user=UserJSONImpl{"));
+        //time = getValueFromKey(input,", createdAt=");
+        //System.out.println(getValueFromKey(input,", createdAt="));
+        text = getValueFromKey(input,", text='");
+        tweetId=tweet_id = getValueFromKey(input,", id=");
+        String Time = getValueFromKey(input,", createdAt=");
+        
+            
+            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+        try {
+            time = formatter.parse(Time).getTime();
+        } catch (ParseException ex) {
+            Logger.getLogger(tweet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        //System.out.println(time);
+    }
+}

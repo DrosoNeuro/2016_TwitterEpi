@@ -1,0 +1,59 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class tweetToScreen implements twitterprocess{
+
+    @Override
+    public void consume(tweet t) {
+        if(counter>1000)
+            System.exit(0);
+        System.out.println(t.text);
+        System.out.println(0);
+        counter++;
+    }
+
+    @Override
+    public String end() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    int counter=0;
+
+    @Override
+    public String buttonMenu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toolTip() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}

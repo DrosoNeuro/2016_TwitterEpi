@@ -1,0 +1,75 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package analysis;
+
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class compareCoefGammaL1O {
+    public static void main(String args[]) throws IOException
+    {
+       File input = null; //the location of the data, or null if random sine waves
+        
+        double features[][];
+        
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(null);
+        input = jfc.getSelectedFile();
+ if(input == null)
+        {
+            features = svmStuff.generateDataSin(7500);
+            
+        }
+        else
+            features = svmStuff.getData(0,input);
+       
+        for(int g = -50; g < 50; g++)
+        {
+            for(int n = 0; n < 10; n++){
+                
+                svmStuff.coef = n;
+                svmStuff.gammamod = Math.pow(2,g);
+        
+        double predictions[] = new double[svmStuff.cdc.length];
+
+        for(int ct=0;ct<svmStuff.cdc.length;ct++)
+        {
+            predictions[ct] = svmStuff.get(features,ct,svmStuff.getSVMR(features,(svmStuff.cdc.length),ct));
+        }
+        
+        double mx, my;
+       mx=my=0;
+       
+       for(int ct=0;ct<predictions.length;ct++)
+       {
+           mx+=svmStuff.cdc[ct];
+           my+=predictions[ct];
+       }
+       
+       mx/=predictions.length;
+       my/=predictions.length;
+       
+       double top, dleft, dright;
+       top=dleft=dright=0;
+       
+       for(int ct=0;ct<predictions.length;ct++)
+       {
+           top+=(svmStuff.cdc[ct]-mx)*(predictions[ct]-my);
+           dleft += Math.pow(svmStuff.cdc[ct]-mx,2);
+           dright += Math.pow(predictions[ct]-my,2);
+       }
+       
+       double r = top / Math.sqrt(dleft*dright);
+       
+       System.out.println(g+","+n+","+r);
+       
+        }}
+    }
+}

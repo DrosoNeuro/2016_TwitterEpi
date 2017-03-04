@@ -1,0 +1,206 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser;
+
+import java.awt.Point;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * All of the settings for a job
+ * @author toddbodnar
+ */
+public class job {
+    public job()
+    {
+        this("User Parser Job");
+    }
+    public job(String name)
+    {
+        panel = new main_panel();
+        this.name = name;
+        files = new File[0];
+    }
+    
+    /**
+     * Gives the job control over the gui
+     * @param p 
+     */
+    public void attachGUI(main_panel p)
+    {
+        panel = p;
+        
+        //panel.jButton1.setEnabled(false);
+        
+        panel.jProgressBar1.setValue(0);
+        panel.jProgressBar1.setMaximum(Math.max(1, files.length));
+    }
+    
+    /**
+     * Set the files the job is going to process
+     * @param files 
+     */
+    public void setUserFiles(File files[])
+    {
+        this.files = files;
+        panel.jProgressBar1.setMaximum(Math.max(1, files.length));
+    }
+    
+    /**
+     * As with setUserFiles, but instead give it a directory and it'll recursivly get the files in it
+     * @param directory 
+     */
+    public void setDataDirectory(File directory)
+    {
+        filePullLocked = true;
+        new Thread(new getDirectoryThread(directory)).start();
+    }
+    
+    
+    /**
+     * Directory transferal is done in a separate thread
+     */
+    private class getDirectoryThread implements Runnable {
+
+        public getDirectoryThread(File directory) {
+            dir = directory;
+        }
+        private File dir;
+
+        @Override
+        public void run() {
+            LinkedList<File> fi = getDirectory(dir);
+            File files_temp[] = new File[fi.size()];
+            for (int ct = 0; ct < files_temp.length; ct++) {
+                files_temp[ct] = fi.get(ct);
+                //System.out.println(files[ct]);
+            }
+            alert = "";
+            updateText();
+            setUserFiles(files_temp);
+            filePullLocked = false;
+            System.out.println("done here");
+        }
+
+        private LinkedList<File> getDirectory(File directory) {
+            File files[] = directory.listFiles();
+            LinkedList<File> filesList = new LinkedList<File>();
+            for (File f : files) {
+                if (f.isHidden()) {
+                    continue;
+                }
+                if (f.isDirectory()) {
+                    filesList.addAll(getDirectory(f));
+
+                } else {
+                    filesList.add(f);
+                }
+            }
+            alert = "Scanning " + directory.getName();
+            updateText();
+            
+            return filesList;
+        }
+    }
+    
+    
+    
+    /**
+     * Returns the next file on the list to the job handler, updates gui if necessary
+     * @return the next file to process, or null if finished
+     */
+    public File getNextFile()
+    {
+        while(filePullLocked)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(job.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        fileIterator++;
+        if(fileIterator >= files.length)
+            return null;
+        
+        panel.jProgressBar1.setValue(fileIterator);
+        return files[fileIterator-1];
+    }
+    
+    public Point getProgress()
+    {
+        return new Point(fileIterator, files.length);
+    }
+    
+    
+    /**
+     * Adds a userProcess to the job's list of processes
+     * @param p the userProcess to add
+     */
+    public void attachProcess(userProcess p)
+    {
+        processes.add(p);
+        updateText();
+    }
+    
+    /**
+     * Message from the job handler to finish processing the tasks / close output, etc.
+     * @return Any messages the processes want to return
+     */
+    public String end()
+    {
+        String result = "";
+        for(userProcess p : processes)
+            result+=p.end();
+        
+        
+        panel.jButton1.setEnabled(true);
+        alert = "Job Completed:\n"+result;
+        updateText();
+        return result;
+    }
+    
+    public void updateText()
+    {
+        String text = "Processes:\n";
+        for(userProcess p: processes)
+        {
+            text+=p.toString()+"\n";
+        }
+        text+="\n\n"+alert;
+        panel.jTextArea1.setText(text);
+    }
+    
+    /**
+     * 
+     * @param u 
+     */
+    public void process(user u)
+    {
+        while(filePullLocked)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(job.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        for(userProcess p : processes)
+            p.process(u);
+    }
+    
+    LinkedList<userProcess> processes = new LinkedList<userProcess>();
+    File files[];
+    int fileIterator = 0;
+    main_panel panel;
+    String name;
+    String alert = "";
+    boolean filePullLocked = false;
+    
+}

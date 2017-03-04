@@ -1,0 +1,150 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.awt.Color;
+import java.io.*;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.tweet;
+
+/**
+ * Pulls user info such as colors and background url from tweets and saves them
+ * to a file
+ * 
+ * It would be a good idea to run the file through sort -u before doing any
+ * analysis to remove duplicates
+ * 
+ * @author toddbodnar
+ */
+public class colorGrabber implements twitterprocess{
+
+    public colorGrabber(File out) throws IOException
+    {
+        users = new TreeSet<String>();
+        
+        output = out;
+        output.delete();
+        o = new OutputStreamWriter(new FileOutputStream(output, true));
+        o.write("user_id\tname\tscreen_name\tlink_color\tborder_color\tfill_color\ttext_color\tuses_background_image\tlink_hue\tlink_sat\tlink_brightness\tborder_hue\tborder_sat\tborder_brightness\tfill_hue\tfill_sat\tfill_brightness\ttext_hue\ttext_sat\ttext_brightness\tURL\n");
+    }
+    
+    public void consume(tweet t) {
+        if(bailed)
+            return;
+        
+        try{
+            if(t.user.profile_sidebar_fill_color.equalsIgnoreCase("C0DEED") && (!t.user.profile_use_background_image))
+                return;
+            
+            if(users.contains(t.user.id_str))
+                return;
+            
+            users.add(t.user.id_str);
+            
+            if(users.size() == BAIL_SIZE)
+            {
+                bailed = true;
+                System.out.println("colorGrabber: Hit "+BAIL_SIZE+" users, not recording anymore.");
+            }
+            
+            String s = t.user.id_str+"\t";
+            s+=t.user.name+"\t";
+            s+=t.user.screen_name+"\t";
+            s+=t.user.profile_link_color+"\t";
+            s+=t.user.profile_sidebar_border_color+"\t";
+            s+=t.user.profile_sidebar_fill_color+"\t";
+            s+=t.user.profile_text_color+"\t";
+            s+=t.user.profile_use_background_image+"\t";
+            s+=getHSV(t.user.profile_link_color)+"\t";
+            s+=getHSV(t.user.profile_sidebar_border_color)+"\t";
+            s+=getHSV(t.user.profile_sidebar_fill_color)+"\t";
+            s+=getHSV(t.user.profile_text_color)+"\t";
+            s+=(t.user.profile_image_url == null? "null" : '"'+t.user.profile_image_url+'"');
+            
+            o.write(s+"\n");
+        }
+        catch(Exception e){System.err.println(e.toString()); e.printStackTrace();errors++;}
+    }
+
+    private String getHSV(String color)
+    {
+        if(color.equals(""))
+            return "-1\t-1\t-1";
+            
+         Color c = new Color(Integer.parseInt(color,16));
+         float vals[] = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), null);
+         return vals[0]+"\t"+vals[1]+"\t"+vals[2];
+    }
+    
+    
+    @Override
+    public String end() {
+        int count = users.size();
+        users.clear();
+        try {
+            o.flush();
+            o.close();
+        } catch (IOException ex) {
+            Logger.getLogger(colorGrabber.class.getName()).log(Level.SEVERE, null, ex);
+            return "colorGrabber: Saving Error \""+ex.getMessage();
+        }
+        long length = output.length();
+        long bytes, kb, mb;
+        
+        bytes = length%1024;
+        length /=1024;
+        
+        kb = length%1024;
+        length /=1024;
+        
+        mb = length;
+        
+        return "colorGrabber: errors:"+errors+"\nUsers: "+count+(bailed? "\nHit the limit of users to collect":"")+"\nOutput size: "+mb+" mb "+kb+" kb "+bytes+" bytes";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    
+    /**
+     * Keeps a list of users already recorded, to reduce duplicates
+     */
+    TreeSet <String> users;
+    
+    int errors;
+    File output;
+    OutputStreamWriter o;
+    
+    int BAIL_SIZE = 1000000; //if we've already collected 1 million users, don't store anymore in colorGrabber!
+    boolean bailed = false;
+
+    @Override
+    public String buttonMenu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toolTip() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}

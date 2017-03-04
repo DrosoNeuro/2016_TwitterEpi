@@ -1,0 +1,108 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ * Counts the number of users on twitter for each week
+ * @author toddbodnar
+ */
+public class usersbyweek implements twitterprocess{
+    public usersbyweek()
+    {
+        
+    }
+    public usersbyweek(String saveFile)
+    {
+        this.saveFile = saveFile;
+        users = new HashSet[500];
+        for(int i=0;i<500;i++)
+            users[i]=new HashSet();
+    }
+    @Override
+    public void consume(tweet t) {
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(t.time);
+            
+            
+            
+            int spot = (c.get(Calendar.YEAR)-2011)*53 + c.get(Calendar.WEEK_OF_YEAR);
+            
+            users[spot].add(t.user.id_str);
+    }
+
+    @Override
+    public String end() {
+        System.out.println("\n\n\n\n\nUsers per week:");
+        
+        PrintStream out = null;
+        try {
+            out = new PrintStream(new FileOutputStream(new File(saveFile)));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(usersbyweek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0;i<500;i++)
+            out.println(i+","+users[i].size());
+      //  System.out.println("\n\n\n\n");
+        out.close();
+        long avg = 0;
+        int nonzero = 0;
+        for(Set s:users){
+            avg+=s.size();
+            if(s.size()>0)
+                nonzero++;
+        }
+        
+        return "found an average of "+avg/nonzero+" users in "+nonzero+" weeks";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    Set users[];
+    String saveFile;
+
+    @Override
+    public String buttonMenu() {
+        return "Users per week";
+    }
+    
+    public String toString()
+    {
+        return "Users per week save to "+saveFile;
+    }
+
+    @Override
+    public twitterprocess clone() {
+        return new usersbyweek(JOptionPane.showInputDialog("Output file name?"));
+    }
+
+    @Override
+    public String toolTip() {
+        return "Counts the number of users per week";
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        return new usersbyweek(in);
+    }
+
+    @Override
+    public String save() {
+        return saveFile;
+    }
+}

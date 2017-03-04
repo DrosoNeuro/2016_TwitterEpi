@@ -1,0 +1,67 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user_parser.user;
+import user_parser.userProcess;
+
+/**
+ * Prints out user info for users that have been rated by turkers, to be used 
+ * for ML
+ * @author toddbodnar
+ */
+public class makeUserTypeEvaluate implements user_parser.userProcess{
+    public makeUserTypeEvaluate(boolean b)
+    {
+        
+    }
+    public makeUserTypeEvaluate()
+    {
+     
+    }
+
+    @Override
+    public String getName() {
+        return "Get User Type Unlabled";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Prints the User's feature vector";
+    }
+
+    @Override
+    public void process(user u) {
+        
+        
+        
+        if(!u.language.equals("en"))
+            return;
+        
+        String cleanText = u.description.replace("\"", " ").replace("\'", " ").replace(",", " ").replace("%", " ").toLowerCase();
+        String topLevel = "other";
+        if(u.topLevelDomain.equalsIgnoreCase("com") || u.topLevelDomain.equalsIgnoreCase("null"))
+            topLevel = u.topLevelDomain.toLowerCase();
+        System.out.println(u.id+","+cleanText+","+u.favourites_count+","+u.followers_count+","+u.friends_count+","+u.isContributorsEnabled+","+u.isVerified+","+u.listed_count+","+u.status_count+","+topLevel);
+        
+    }
+
+    @Override
+    public String end() {
+        return "Done";
+    }
+   
+    @Override
+    public userProcess clone() {
+        return new makeUserTypeEvaluate();
+    }
+}

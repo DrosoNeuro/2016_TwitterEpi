@@ -1,0 +1,163 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.PropertiesCredentials;
+import com.amazonaws.services.dynamodb.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodb.model.AttributeValue;
+import com.amazonaws.services.dynamodb.model.PutItemRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class dynamoFill implements twitterprocess{
+
+    public static final int THROUGHPUT = 320;
+    AmazonDynamoDBClient client;
+    pusher p;
+    public dynamoFill() 
+    {
+        try {
+            AWSCredentials credentials;
+            credentials = new PropertiesCredentials(
+    new File("/Users/toddbodnar/Downloads/aws-java-sdk-1.3.26/samples/AwsConsoleApp/AwsCredentials.properties"));
+            client = new AmazonDynamoDBClient(credentials);
+            p = new pusher(client);
+             new Thread(p).start();
+        } catch (Exception ex) {
+            Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
+    private class pusher implements Runnable
+    {
+        public pusher(AmazonDynamoDBClient cl)
+        {
+            client = cl;
+            buffer = new ArrayBlockingQueue<PutItemRequest>(100);
+            System.out.println(buffer);
+        }
+        @Override
+        public void run() {
+            while(!done || !buffer.isEmpty())
+            {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(buffer.isEmpty())
+                    continue;
+                try {
+                    client.putItem(buffer.take());
+                    Thread.sleep(1000 / THROUGHPUT + 5);
+                } catch (Exception ex) {
+                    Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        public void end()
+        {
+            done = true;
+        }
+        
+        public void add(PutItemRequest r)
+        {
+            try
+            {
+            buffer.add(r);
+            }
+            catch(Exception e){try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            // Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, e);
+            add(r);
+            };
+        }
+        BlockingQueue<PutItemRequest>buffer;
+        AmazonDynamoDBClient client;
+        boolean done = false;
+    }
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
+        String shortLocation = Math.round(t.loc.x*10)+"#"+Math.round(t.loc.y*10);
+        item.put("long#lat", new AttributeValue().withS(shortLocation));
+        item.put("unixtime", new AttributeValue().withN(t.time+""));
+        item.put("text", new AttributeValue().withS(t.text));
+        item.put("long_full", new AttributeValue().withN(t.loc.x+""));
+        item.put("lat_full", new AttributeValue().withN(t.loc.y+""));
+        
+         PutItemRequest forumRequest = new PutItemRequest().withTableName("geospatial_test").withItem(item);
+        
+          p.add(forumRequest);
+    }
+
+    @Override
+    public String end() {
+        p.end();
+        return "Done";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Add to DynamoDB";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        try {
+            return new dynamoFill();
+        } catch (Exception ex) {
+            Logger.getLogger(dynamoFill.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toolTip() {
+        return "Push Tweets to an Amazon DynamoDB";
+    }
+    
+    public static void main(String args[]) throws Exception, TwitterMessage
+    {
+        new dynamoFill().consume(new tweet("20110306020002240|{\"place\":{\"country_code\":\"US\",\"url\":\"http:\\/\\/api.twitter.com\\/1\\/geo\\/id\\/94ec6a27a67398a7.json\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-117.16620012,33.11324703],[-117.16008804,33.11324703],[-117.16008804,33.12409698],[-117.16620012,33.12409698]]]},\"name\":\"Village O\",\"country\":\"United States\",\"attributes\":{},\"id\":\"94ec6a27a67398a7\",\"full_name\":\"Village O, San Marcos\",\"place_type\":\"neighborhood\"},\"user\":{\"is_translator\":false,\"show_all_inline_media\":false,\"geo_enabled\":true,\"profile_use_background_image\":true,\"listed_count\":3,\"profile_background_color\":\"1A1B1F\",\"url\":null,\"following\":null,\"verified\":false,\"profile_background_image_url\":\"http:\\/\\/a1.twimg.com\\/profile_background_images\\/131462852\\/0000009A00003A0000900000_111.png\",\"contributors_enabled\":false,\"statuses_count\":1531,\"time_zone\":\"Pacific Time (US & Canada)\",\"favourites_count\":2,\"friends_count\":85,\"profile_text_color\":\"666666\",\"profile_sidebar_fill_color\":\"252429\",\"description\":\"I love zombies....and penguins. That is all.\",\"id_str\":\"14377065\",\"profile_background_tile\":true,\"followers_count\":37,\"created_at\":\"Sun Apr 13 19:11:47 +0000 2008\",\"protected\":false,\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/1150343423\\/636x460design_01_normal.jpg\",\"follow_request_sent\":null,\"profile_link_color\":\"2FC2EF\",\"location\":\"San Diego, California\",\"name\":\"Sar\",\"notifications\":null,\"profile_sidebar_border_color\":\"181A1E\",\"screen_name\":\"sarbar\",\"id\":14377065,\"lang\":\"en\",\"utc_offset\":-28800},\"favorited\":false,\"coordinates\":null,\"text\":\"@papagdh Not all at ONCE obviously. :P\",\"in_reply_to_screen_name\":\"papagdh\",\"in_reply_to_user_id\":42070993,\"in_reply_to_status_id\":44290362231107585,\"in_reply_to_status_id_str\":\"44290362231107585\",\"source\":\"web\",\"contributors\":null,\"retweeted\":false,\"in_reply_to_user_id_str\":\"42070993\",\"id_str\":\"44291126252941313\",\"retweet_count\":0,\"created_at\":\"Sun Mar 06 07:00:02 +0000 2011\",\"geo\":null,\"id\":44291126252941313,\"entities\":{\"hashtags\":[],\"urls\":[],\"user_mentions\":[{\"indices\":[0,8],\"id_str\":\"42070993\",\"name\":\"Greg Hill\",\"screen_name\":\"papagdh\",\"id\":42070993}]},\"truncated\":false}", tweet.DATAMINING_TWEET));
+    }
+}

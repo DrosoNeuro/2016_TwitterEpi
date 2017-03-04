@@ -1,0 +1,227 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package experiments;
+
+
+import cells.seir;
+import cells.sir;
+import cells.unit;
+import java.util.Vector;
+import javax.swing.JFrame;
+import topologies.boundedGrid;
+import topologies.map;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class distanceStudies {
+    public static void main(String args[])
+    {
+        /*
+         * 
+         * here we are trying to find P(get sick | someone is sick within distance x of you)
+         * for various values of x
+         * 
+         * also try P(get sick | no one sick within distance)
+         *          
+         * slightly more difficult problem:
+         *          P(get sick | i sick people within distance)
+         */
+        
+        
+        //for(int ct=0;ct<100;ct++)
+         int totaltime = 500;
+        int width=50;
+        int countsi[][][]=new int[width/2][totaltime][(width*width/2)+10]; // count of individuals that get sick in [dist][time][J]
+        int counts[][][]=new int[width/2][totaltime][width*width/2+10]; //count of individuals that are S in [dist][time][J]
+        double base[]=new double[totaltime]; //base line at [Time]
+        int totalM[]=new int[totaltime];
+        
+        
+        for(int i=0;i<width/2;i++)
+            for(int j=0;j<100;j++)
+                for(int k=0;k<counts[0][0].length;k++)
+                {
+                    countsi[i][j][k]=0;
+                    counts[i][j][k]=0;
+                    base[i]=0;
+                    totalM[i]=-1;
+                }
+        
+        //for (int realDistance = 1; realDistance < 10; realDistance +=3)
+        for(int ctfsf=0;ctfsf<1;ctfsf++)
+        {
+            int realDistance = 11;
+            //for(int attemptedDistance = 1; attemptedDistance < 100; attemptedDistance +=5)
+            {
+                //int attemptedDistance = 1;
+                int TP,FP,FN,TN;
+                
+                
+                TP=FP=FN=TN=0;
+                        
+                map world = new boundedGrid(100,100);
+                world.fillAll(new sir(.01f/realDistance/realDistance*0 + 0.0001f,.01f,world,realDistance));
+                
+                Vector<unit> units = world.getAllUnits();
+                
+                JFrame f = new JFrame("");
+                f.setSize(6,6);
+                f.add(new topologies.mapPanel(world));
+                f.setVisible(true);
+                
+                int sick = 0;
+                for(unit u: units)
+                {
+                    if(Math.random() < 0.001)
+                    {
+                        ((seir)u).infect();
+                        sick++;
+                    }
+                }
+                int timeNearSick=0;
+                int timeNotNearSick = 0;
+                int timeGetSick=0;
+                int timeNearSickAll =0;
+                int timeRandomSick = 0;
+                
+                boolean good = true;
+                double value = 0;
+                for(int t=0;t<totaltime && good;t++)
+                {
+                    for(unit u: units)
+                        u.doStuff();
+                    
+                    double current = 0;
+                    double totals = 0;
+                    for(unit u: units)
+                    {
+                        if(Math.random() > 0.1)
+                            continue;
+                        if(((seir)u).current == seir.state.S)
+                            totals++;
+                        
+                        if(((seir)u).current == seir.state.S && ((seir)u).next == sir.state.I)
+                            current++;
+                    }
+                    
+                    double baseline = current / totals;
+                    
+                    if(totals==0)
+                        baseline=0;
+                    
+                    base[t]=baseline;
+                    
+                    int getsick=0;
+                    int notsick=0;
+                
+                    if (baseline > 0) {
+                        for (int M = 1; M < width/2; M += 1) {
+                            for (unit u : units) {
+                                if (((seir) u).current != seir.state.S) {
+                                    continue;
+                                }
+                                
+                                if(Math.random() > 0.1)
+                                    continue;
+
+                                int j=0;
+
+                                Vector<unit> near = world.getNear(u.getLocation(), M);
+
+                                totalM[M]=near.size();
+
+
+                                boolean nearsick = false;
+                                int totalSickNear = 0;
+                                for (unit n : near) {
+                                    if(Math.random() > 0.1)
+                                        continue;
+                                    if (((seir) n).current == sir.state.I) {
+                                        nearsick = true;
+                                        timeNearSickAll++;
+                                        totalSickNear++;
+                                        j++;
+                                    }
+                                }
+
+                               
+                                counts[M][t][j]++;
+                                
+                                if (((seir) u).next == seir.state.I) {
+                                    countsi[M][t][j]++;
+                                } else {
+                                    notsick++;
+                                }
+
+                            }
+                        }
+                    }
+                    
+                    f.repaint();
+                    
+                    for(unit u: units)
+                        u.update();
+                    
+                    
+                }
+                
+                for(int m=1;m<countsi.length;m++)
+                {
+                    if(totalM[m]<1) //if never filled in
+                        continue;
+                    
+                    double B=0;
+                    int nonzero=0;
+                    for (int t = 0; t < totaltime; t++) {
+                        double temp = 0;
+                        
+                        if(base[t]==0)
+                            continue;
+                        
+                        nonzero++;
+                        
+                        for (int j = 1; j < counts[0][0].length; j++) {
+                            if(counts[m][t][j]>0)
+                                temp += countsi[m][t][j]*1.0/j/counts[m][t][j];
+                        }
+                        
+                        B+=totalM[m]/base[t]*temp/totalM[m];
+                    }
+                    System.out.println(m+","+B/nonzero);
+                }
+                
+                f.setVisible(false);
+                f.dispose();
+                
+                
+                
+                   /*
+                int totalsick = 0;
+                
+                for(unit u: units)
+                {
+                    if(((seir)u).current!=seir.state.S)
+                        totalsick++;
+                }
+                
+                double fscore = 2.0 * TP / (2.0*TP + FN + FP);
+                //System.out.println(realDistance+","+attemptedDistance+","+timeNearSick+","+timeGetSick+","+timeNearSickAll+","+(1.0*timeGetSick/timeNearSick)+","+(1.0*timeGetSick/timeNearSickAll)+","+(1.0*timeRandomSick/timeNotNearSick)+","+totalsick);
+                System.out.println(attemptedDistance+","+fscore+","+TP+","+FP+","+FN+","+TN);
+                
+                for(int ct=0;ct<200;ct++)
+                {
+                    if(total[ct]==0)
+                        System.out.println(ct+","+-1);
+                    else
+                        System.out.println(ct+","+(1.0*counts[ct]/total[ct])+","+counts[ct]+","+total[ct]);
+                }*/
+                
+                
+                    }
+        }
+    }
+}

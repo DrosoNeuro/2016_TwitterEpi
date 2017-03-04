@@ -1,0 +1,155 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tests;
+
+import weka.classifiers.functions.SMOreg;
+import weka.core.*;
+
+/**
+ * Follows the methodology of journal.pone.0019467 but with random data instead of tweets
+ * @author toddbodnar
+ */
+public class randomData {
+    
+    // generates "random" data, which is a set of sin curves of various wavelengths
+    public static double[][] generateDataSin(int features)
+    {
+        int weeks = cdc.length;
+        double results[][] = new double[weeks][features];
+        for(int feature=0;feature<features;feature++)
+        {
+            double scalex, start;
+            
+            scalex = (Math.random()-.5)*weeks*2;
+            start = Math.random()*weeks;
+            
+            for(int week=0;week<weeks;week++)
+            {
+                results[week][feature] = (Math.sin((week-start)/scalex)+1)/2;
+                //results[week][feature] = Math.random();
+                //results[week][feature] = week;
+            }
+        }
+        
+        return results;
+    }
+    
+    public static double[][] generateDataRandom(int features)
+    {
+        
+        int weeks = cdc.length;
+        double results[][] = new double[weeks][features];
+        for(int feature=0;feature<features;feature++)
+        {
+            double scalex, start;
+            
+            scalex = (Math.random()-.5)*weeks*2;
+            start = Math.random()*weeks;
+            
+            for(int week=0;week<weeks;week++)
+            {
+                //results[week][feature] = (Math.sin((week-start)/scalex)+1)/2;
+                results[week][feature] = Math.random();
+                //results[week][feature] = week;
+            }
+        }
+        
+        return results;
+    }
+    
+    // gets the estimate for the specified week using the rest of the weeks for training
+    public static double get(int week, double input[][]) throws Exception
+    {
+        SMOreg classifier = new SMOreg();
+        
+        FastVector fv = new FastVector(input[0].length+1);
+        Attribute text = new Attribute("text", (FastVector) null);
+        Attribute features[] = new Attribute[input[0].length];
+        for(int i=0;i<features.length;i++)
+        {
+            features[i] = new Attribute("feature_"+i);
+            fv.addElement(features[i]);
+        }
+        Attribute value = new Attribute("weightedpercent");
+        
+        
+        
+        fv.addElement(value);
+        
+        Instances dataset = new Instances("value",fv,input.length-2);
+        
+        for(int wk=0;wk<input.length/2;wk++)
+        {
+            if(wk==week)
+                continue;
+            
+            Instance i = new Instance(input[0].length+1);
+            i.setDataset(dataset);
+            
+            for(int j=0;j<features.length;j++)
+                i.setValue(features[j],input[wk][j]);
+            
+            i.setValue(value, cdc[wk]);
+            
+            dataset.add(i);
+        }
+        
+        dataset.setClass(value);
+        classifier.setFilterType(new SelectedTag(SMOreg.FILTER_NORMALIZE,SMOreg.TAGS_FILTER));
+        classifier.setKernel( new weka.classifiers.functions.supportVector.PolyKernel(dataset, 1, 5, true) );
+        
+        classifier.buildClassifier(dataset);
+        
+        Instance test = new Instance(input[0].length+1);
+        test.setDataset(dataset);
+        
+        for(int j=0;j<features.length;j++)
+                test.setValue(features[j],input[week][j]);
+            
+        test.setValue(value, cdc[week]);
+            
+        return classifier.classifyInstance(test);
+            
+        
+    }
+    public static double work(double inputvector[][]) throws Exception
+    {
+        //double[][] inputvector = generateData(cdc.length,vectorsize);
+        //System.out.println("Input:");
+        for(int week=0;week<cdc.length;week++)
+        {
+         //   for(int feature=0;feature<inputvector[0].length;feature++)
+           //     System.out.print(inputvector[week][feature]+",");
+            
+            //System.out.println();
+        }
+        
+        //System.out.println("\n\n\n");
+        double error = 0;
+        for(int week=0;week<cdc.length;week++)
+        {
+            double val = get(week,inputvector);
+            System.out.println(cdc[week]+","+val);
+            error+= Math.abs(cdc[week]-val);
+        }
+        
+        //System.out.println("\n\n\n Average Error: "+error/cdc.length);
+        //System.out.println(error/cdc.length);
+        return error/cdc.length;
+    }
+    
+    public static void main (String args[]) throws Exception
+    {
+        int size[] = {1,2,4,8,16,32,64,128};
+        size =new int[]{10};
+        for(int s:size)
+        {
+            System.out.println(s+",waves,"+work(generateDataSin(s)));
+         //   System.out.println(s+",random,"+work(generateDataRandom(s)));
+        }
+    }
+    
+    static double cdc[] = {7.028,7.688,7.514,6.615,5.194,4.041,3.517,2.731,2.471,2.332,2.577,2.563,1.881,1.848,1.857,1.945,2.064,2.073,1.899,1.937,1.907,1.874,1.749,1.545,1.501,1.218,1.166,1.063,1.078,1.058,1.047,0.95};
+}

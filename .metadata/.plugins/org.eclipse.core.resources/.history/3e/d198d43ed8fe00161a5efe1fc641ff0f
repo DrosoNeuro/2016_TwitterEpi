@@ -1,0 +1,465 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import classification.naiveBayesClassifier;
+import classification.perceptron;
+import crowdbreaks_location.crowd_point;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tools.getStateFromCoord;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class crowdbreaks_tweets_to_raw_long_lat  implements twitterprocess{
+
+    public crowdbreaks_tweets_to_raw_long_lat()
+    {
+        points = null;/* new crowd_point[crowd_point.width][crowd_point.height];
+        for(int i=0;i<crowd_point.width;i++)
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j] = new crowd_point(i,j,14,keywords);
+        
+        for(int i=0;i<crowd_point.width;i++)
+        {
+            for(int j=1;j<crowd_point.height;j++)
+                points[i][j].setUp(points[i][j-1]);
+        }
+        
+        for(int i=1;i<crowd_point.width;i++)
+        {
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j].setLeft(points[i-1][j]);
+        }*/
+        
+        startTime = System.currentTimeMillis();
+    }
+    SimpleDateFormat formater=new SimpleDateFormat("yyyy-MM-dd");
+    long startTime;
+    
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        if (points == null) {
+            classifiers = new classification.classifier[classifier_names.length];
+            try {
+               
+    
+                
+                classifiers[0] = new classification.wekaClassifier(new File("flu_dataset.csv"));
+                
+                //naiveBayesClassifier nb = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.25);
+                classifiers[1] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.25);
+                classifiers[2] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.5);
+                classifiers[3] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.75);
+                classifiers[4] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,-1);
+                classifiers[5] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.1);
+                classifiers[6] = new naiveBayesClassifier(new File("flu_dataset.csv"),500,.9);
+                
+                classifiers[7] = new perceptron(new File("flu_dataset.csv"),500,.25);
+                classifiers[8] = new perceptron(new File("flu_dataset.csv"),500,.5);
+                classifiers[9] = new perceptron(new File("flu_dataset.csv"),500,.75);
+                classifiers[10] = new perceptron(new File("flu_dataset.csv"),500,-1);
+                classifiers[11] = new perceptron(new File("flu_dataset.csv"),500,.1);
+                classifiers[12] = new perceptron(new File("flu_dataset.csv"),500,.9);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(crowdbreaks_tweets_to_raw_long_lat.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(crowdbreaks_tweets_to_raw_long_lat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String allWords[] = new String[keywords.length+classifier_names.length];
+            for(int i=0;i<keywords.length;i++)
+                allWords[i] = keywords[i];
+            
+            for(int i=0;i<classifiers.length;i++)
+                allWords[i+keywords.length] = classifier_names[i];
+            
+            points = new crowd_point[crowd_point.width][crowd_point.height];
+            for (int i = 0; i < crowd_point.width; i++) {
+                for (int j = 0; j < crowd_point.height; j++) {
+                    points[i][j] = new crowd_point(i, j, 14, allWords);
+                }
+            }
+
+            for (int i = 0; i < crowd_point.width; i++) {
+                for (int j = 1; j < crowd_point.height; j++) {
+                    points[i][j].setUp(points[i][j - 1]);
+                }
+            }
+
+            for (int i = 1; i < crowd_point.width; i++) {
+                for (int j = 0; j < crowd_point.height; j++) {
+                    points[i][j].setLeft(points[i - 1][j]);
+                }
+            }
+            
+            states = new crowd_point[getStateFromCoord.getNumberOfPlaces()];
+            for(int ct=0;ct<states.length;ct++) {
+                states[ct] = new crowd_point(0,0,14,allWords);
+            }
+        }
+        try {
+            if(t.loc == null)
+                return;
+            java.util.Date time=new java.util.Date(t.time);
+            
+            int day = time.getDate();
+            int month = time.getMonth()+1;
+            int year = time.getYear()+1900;
+            
+    long d1=formater.parse(year+"-"+month+"-"+day).getTime();
+    
+      
+            day =   (int) ((d1-startTime)/(1000*60*60*24) +14);
+            
+            if(day<0 || day>=14)
+                return;
+            
+            
+            int keycount=0;
+            int stateid = getStateFromCoord.idFromCoords(t.loc.x, t.loc.y);
+                    
+            for(int i=0;i<keywords.length;i++)
+            {
+                if(t.text.toUpperCase().contains(keywords[i].toUpperCase()))
+                {
+                    keycount++;
+                    int x = (int)(t.loc.x)+180;
+                    
+                    int y = (int)(t.loc.y)+90;
+                    try{
+                    points[x][y].increment(day, i);
+                    }catch(Exception e)
+                    {
+                        System.err.println(e);
+                        System.err.println(x+","+y);
+                    }
+                    //int stateid = getStateFromCoord.idFromCoords(t.loc.x, t.loc.y);
+                    if(stateid>=0)
+                        states[stateid].increment(day,i);
+                }
+            }
+            
+            for (int i = 0; i < classifiers.length; i++) {
+                try {
+                    double score = classifiers[i].getValue(t.text.toUpperCase());
+                    
+                        int x = (int) (t.loc.x) + 180;
+
+                        int y = (int) (t.loc.y) + 90;
+                        try {
+                            points[x][y].increment(day, i+keywords.length, score);
+                        } catch (Exception e) {
+                            System.err.println(e);
+                            System.err.println(x + "," + y);
+                        }
+                        //int stateid = getStateFromCoord.idFromCoords(t.loc.x, t.loc.y);
+                        if (stateid >= 0) {
+                            states[stateid].increment(day, i+keywords.length,score);
+                        }
+
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(crowdbreaks_tweets_to_raw_long_lat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+           // if(keycount==0)
+             //   System.err.println(t.text);
+        } catch (ParseException ex) {
+            Logger.getLogger(crowdbreaks_tweets_to_raw_long_lat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    @Override
+    public String end() {
+        System.out.println("Integrating");
+        for(int i=0;i<crowd_point.width;i++)
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j].integrate();
+        
+        System.out.println("Saving");
+        
+        for(int i=0;i<crowd_point.width;i++)
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j].save();
+        
+        System.out.println("Saving States");
+        for(int i=0;i<states.length;i++)
+                states[i].save("state_"+getStateFromCoord.abbrevFromId(i).toUpperCase()+".dat");
+        
+        System.out.println("Done");
+        return "";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return false;
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Integrate Data";
+    }
+
+    public twitterprocess clone() {
+        return this;
+    }
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        startTime = System.currentTimeMillis();
+        return this;
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toolTip() {
+        return "Part of the CrowdBreaks Initiative";
+    }
+    
+    
+    
+    public crowd_point[][] points;
+    public crowd_point[] states;
+    
+    public String classifier_names[] = {"FluWekaNB","FluNB25","FluNB50","FluNB75","FluNBSum","FluNB10","FluPer90","FluPer25","FluPer50","FluPer75","FluPerSum","FluPer10","FluPer90"};
+    public classification.classifier classifiers[];
+    
+    public static String keywords[] = {        "influenza",
+        "Flu",
+        "adenovirus",
+        "h1n1",
+        "h3n2",
+        "h5n1",
+        "ah1n1",
+       "Gastroenteritis",
+        "stomach flu",
+        "gastroenteritides",
+        "gastroenterities",
+        "food poisoning",
+        "campylobacter",
+        "colitis",
+        "gastroenterocolitis",
+        "gastrointestinal disorder",
+        "gastrointestinal disease",
+        "sick to stomach",
+        "upset stomach",
+        "vomit",
+        "diarrhea and vomiting",
+        "vomiting",
+        "vomitting",
+        "diarrhea and cramp",
+        "diarrheas",
+        "diarrhoea",
+        "norovirus",
+        "rotavirus",
+        "gastritis",
+        "stomach bug",
+        "stomach virus",
+        "intestinal illness",
+        "intestinal sickness",
+        "Measles",
+        "measle",
+        "morbilliform rash",
+        "rubeola",
+        "morbilli",
+        "Koplik spots",
+        "Coryza",
+        "Pneumonia",
+        "pneum",
+        "pneumococcal",
+        "bronchopneumonia",
+       "pneumocystis",
+        "lung infection",
+        "chest infection",
+        "walking pneumonia",
+        "Tuberculosis",
+        "TB",
+        "tuberculose",
+        "tuberculoses",
+        "tuberculosi",
+        "MDR TB",
+        "XDR TB",
+        "TDR TB ",
+        "BCG vaccine",
+        "BCG vaccination",
+        "Potts disease",
+        "tuberculosys",
+        "tuberculous",
+        "consumption",
+        "Koch's disease",
+        "phthisis",
+        "Mantoux test",
+        "Pertussis",
+        "pertuss",
+        "whooping cough",
+        "pertusses",
+        "bordetella",
+        "whoop",
+        "whooping",
+        "whoops",
+        "bordetellosis",
+        "croup",
+        "paroxysmal cough",
+        "Varicella",
+        "chicken pox",
+        "chickenpox",
+        "herpes zoster",
+        "herpes virus 3",
+        "herpesvirus 3",
+        "varicella zoster",
+        "varicellovirus",
+        "herpes varicella",
+        "shingles",
+        "zoster",
+        "VZV",
+        "Meningitis",
+        "meningiti",
+        "meningitide",
+        "meningitides",
+        "brain infection",
+        "neisseria meningitidis",
+        "meningities",
+        "encephalitis",
+        "Hib",
+        "lymphocytic choriomeningitis",
+        "LCMV",
+        "choriomeningitis",
+        "LCM",
+        "meningococcal",
+        "mollarets",
+        "meningitys",
+        "meningococcus",
+        "meningoencephalitis",
+        "encephalities",
+        "tick borne disease",
+        "tick virus",
+        "tick fever",
+        "tick paralysis",
+        "babesiosis",
+        "ehrlichiosis",
+        "lyme disease",
+        "Rocky Mountain Spotted Fever",
+        "RMSF",
+        "Anaplasmosis",
+        "rickettsiosis",
+        "STARI",
+        "Southern Tick-Associated Rash Illness",
+        "TBRF",
+        "Tickborne Relapsing Fever",
+        "tularemia",
+        "relapsing fever",
+        "Cholera",
+        "vibrio cholera",
+        "choleragen",
+        "choleras",
+        "Dengue",
+        "dengue fever",
+        "dengue haemorrhagic fever",
+        "dengue hemorrhagic fever",
+        "dengue virus",
+        "Common Cold",
+        "Cold",
+        "colds",
+        "respiratory tract infection",
+        "rhinovirus",
+        "nasopharyngitis",
+        "rhinopharyngitis",
+        "runny nose",
+        "pharyngitis",
+        "sinusitis",
+        "nasal congestion",
+        "URI",
+        "upper respiratory infection",
+        "HRV",
+        "coronavirus",
+        "URTI",
+        "Sexually Transmitted Disease",
+        "STD",
+        "chlamydia",
+        "psitacci",
+        "the clap",
+        "trachomatis",
+        "gonorrhea",
+        "herpes",
+        "HIV",
+        "AIDS",
+        "Human Papillomavirus",
+        "HPV",
+        "Pelvic Inflammatory Disease",
+        "PID",
+        "Syphilis",
+        "Trichomoniasis",
+        "Bacterial Vaginosis",
+        "BV",
+        "Public Lice",
+        "Public Crabs",
+        "herp",
+        "trich",
+        "Hepatitis",
+        "drip",
+        "personal problem",
+        "nature problem",
+        "urinary infection",
+        "kidney infection",
+        "discharge",
+        "Legionella",
+        "Pontiac Fever",
+        "Legionnaires Disease",
+        "legionellosis",
+        "Malaria",
+        "Plasmodium",
+        "blackwater fever",
+        "falciparum",
+        "biduoterian fever",
+        "mosquito borne disease",
+        "West Nile Virus",
+        "WNV",
+        "mosquito virus",
+        "west nile encephalitis",
+        "west nile fever",
+       "west nile",
+        "equine encephalitis",
+        "EEE",
+        "la crosse encephalitis",
+        "japanese encephalitis",
+        "st. louis encephalitis",
+        "WEE",
+        "anthrax",
+        "Diphtheria",
+        "Mumps",
+        "acute viral parotitis",
+        "epidemic partotitis",
+        "Polio",
+        "poliomyelitis",
+        "infantile paralysis",
+        "poliovirus",
+       "Rabies",
+        "lyssa",
+        "Smallpox",
+        "Variola",
+        "Tetanus",
+        "Lockjaw",
+        "Typhoid",
+        "Enteric Fever",
+        "Typhoid Fever",
+        "Salmonelle typhi",  
+        "Yellow Fever",
+        "Yellow Jack",
+        "Black Vomit"};
+}

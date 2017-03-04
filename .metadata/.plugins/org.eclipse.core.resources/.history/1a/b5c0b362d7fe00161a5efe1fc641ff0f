@@ -1,0 +1,13 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+/**
+ * Something that tweets are piped through before sent to another twitter process.
+ * @author toddbodnar
+ */
+public interface tweetfilter extends twitterprocess{
+    public tweetfilter clone(twitterprocess next)  ;
+}

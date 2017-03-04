@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/aws/aws-sdk-java.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "1.8.0"]
+	remote = origin
+	merge = refs/heads/1.8.0

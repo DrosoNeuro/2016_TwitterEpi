@@ -1,0 +1,185 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import classification.classifier;
+import java.io.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import org.tartarus.snowball.ext.englishStemmer;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class keywordFrequencies implements twitterprocess{
+    public keywordFrequencies(String inp, String Out)
+    {
+        infile = inp;
+        outfile = Out;
+        
+        try {
+            stem = new englishStemmer();
+            keywords = new HashMap<String,Integer>();
+            
+            BufferedReader in = new BufferedReader(new FileReader(new File(inp)));
+            int keys = 0;
+            String key = in.readLine();
+            while(key!=null)
+            {
+                keywords.put(key, keys);
+                keys++;
+                key = in.readLine();
+            }
+            count = new int[700][keys];
+            for(int i=0;i<700;i++)
+               for(int j=0;j<keys;j++)
+                    count[i][j]=0;
+            System.out.println(keys);
+        }  catch (Exception ex) {
+            Logger.getLogger(keywordFrequencies.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(-1);
+        }
+    }
+    
+    public keywordFrequencies()
+    {
+       // this("../frequentKeywords",null);
+    }
+    //Note, this should first go through keyword_filter
+    @Override
+    public void consume(tweet t) {
+        Date d = new Date(t.time);
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        int index = c.get(Calendar.DAY_OF_YEAR) + 365 * (c.get(Calendar.YEAR)-2011);
+        
+        String text = " "+t.text.toUpperCase()+" ";
+        text = text.replace(".", " ");
+        text = text.replace(",", " ");
+        text = text.replace(";", " ");
+        text = text.replace(":", " ");
+        text = text.replace("(", " ");
+        text = text.replace(")", " ");
+        text = text.replace("-", " ");
+        text = text.replace("[", " ");
+        text = text.replace("]", " ");
+        text = text.replace("!", " ");
+        text = text.replace("@", " ");
+        text = text.replace("#", " ");
+        text = text.replace("$", " ");
+        text = text.replace("%", " ");
+        text = text.replace("^", " ");
+        text = text.replace("&", " ");
+        text = text.replace("*", " ");
+        text = text.replace("\\", " ");        
+        text = text.replace("/", " ");
+        text = text.replace("?", " ");
+        text = text.replace("~", " ");
+        text = text.replace("`", " ");
+        text = text.replace("_", " ");
+        text = text.replace("+", " ");
+        text = text.replace("=", " ");
+        text = text.replace("<", " ");
+        text = text.replace(">", " ");
+        text = text.replace("{", " ");
+        text = text.replace("}", " ");
+        
+        for(String s : text.split("\\ "))
+        {
+            
+            stem.setCurrent(s);
+            stem.stem();
+         
+            
+            String stemmed = stem.getCurrent().toUpperCase();
+            if(!keywords.containsKey(stemmed))
+                continue;
+            
+            int location = keywords.get(stemmed);
+            count[index][location]++;
+        }
+    }
+
+    @Override
+    public String end() {
+        try{
+        PrintStream out =  new PrintStream(new FileOutputStream(new File(outfile)));
+            
+       
+          
+        double total=0;
+        for(int i=0;i<count.length;i++)
+        {
+            
+            
+            for(int j=0;j<count[0].length;j++)
+            {
+                total+=count[i][j];
+                out.print(count[i][j]+",");
+            }
+            out.println();
+        }
+        out.close();
+        return total+" words counted.";
+        }catch(Exception e){return " error";}
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    classifier classify;
+    int count[][];
+    englishStemmer stem;
+    Map<String,Integer> keywords;
+    String infile,outfile;
+    
+    public static void main(String args[])
+    {
+        new keywordFrequencies();
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Keyword Frequencies";
+    }
+    
+    public String toolTip()
+    {
+        return "Finds the number of times each keywords appears per day";
+    }
+
+    public String toString()
+    {
+        return "Frequencies of "+infile+" saved to "+outfile;
+    }
+    @Override
+    public twitterprocess clone() {
+        JFileChooser jfc = new JFileChooser();
+        String in,out;
+        jfc.showOpenDialog(null);
+        in = jfc.getSelectedFile().toString();
+        jfc.showSaveDialog(null);
+        out = jfc.getSelectedFile().toString();
+        return new keywordFrequencies(in,out);
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        return new keywordFrequencies(in.split(",")[0],in.split(",")[1]);
+    }
+
+    @Override
+    public String save() {
+        return infile+","+outfile;
+    }
+}

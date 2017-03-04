@@ -1,0 +1,15 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser;
+
+import java.io.File;
+
+/**
+ * Global settings
+ * @author toddbodnar
+ */
+public class settings {
+    public static File dataDirectory = new File("/Users/toddbodnar/Dropbox/code/superStalker/dist/data/");
+}

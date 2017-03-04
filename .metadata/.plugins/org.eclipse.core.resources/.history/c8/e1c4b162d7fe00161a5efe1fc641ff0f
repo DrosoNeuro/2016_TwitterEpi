@@ -1,0 +1,149 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tools;
+
+import java.awt.geom.Point2D;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class locationTable {
+    public locationTable() throws FileNotFoundException, ClassNotFoundException, SQLException
+    {
+        queries = 0;
+        o = new OutputStreamWriter(new FileOutputStream("locationdump.csv",true));
+        
+        Class.forName("org.gjt.mm.mysql.Driver");
+        
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/localtweets", "root","");
+        addLocation = connection.prepareStatement("INSERT INTO locations (longitude,latitude,cid) VALUES(?,?,?)");
+        addCounty = connection.prepareStatement("INSERT INTO counties (name,state) VALUES(?,?)");
+        getCounty = connection.prepareStatement("SELECT cid FROM counties where name = ? AND state = ?");
+        
+        errors = 0;
+        toProcess = new LinkedList<Point2D>();
+    }
+    
+    public void run()
+    {
+        while(!toProcess.isEmpty())
+        {
+            try{
+            Point2D loc = toProcess.poll();
+            
+            String data[] = coord_to_county.query(loc.getX(), loc.getY());
+            queries++;
+            
+            int cid = -1;
+            
+            getCounty.setString(1, data[2]);
+            getCounty.setString(2, data[1]);
+            
+            ResultSet counties = getCounty.executeQuery();
+            if(counties.first())
+            {
+                cid = counties.getInt("cid");
+            }
+            else
+            {
+                addCounty.setString(1, data[2]);
+                addCounty.setString(2, data[1]);
+                addCounty.execute();
+                
+                counties = getCounty.executeQuery();
+                counties.first();
+                cid = counties.getInt("cid");
+            }
+            
+            addLocation.setDouble(1, loc.getX());
+            addLocation.setDouble(2, loc.getY());
+            addLocation.setInt(3, cid);
+            
+            addLocation.execute();
+            
+            for(int ct=0;ct<data.length;ct++)
+                o.write(data[ct]+";");
+            o.write("\n");
+            
+            if(queries > 500000)
+            {
+                System.err.println("Error: Used up all queries!!!");
+                return;
+            }
+            
+            }catch(Exception e){errors++;System.err.println(e);}
+        }
+    }
+    
+    public void done() throws IOException, SQLException
+    {
+        o.close();
+        connection.close();
+    }
+    
+    public static void main(String args[]) throws Exception
+    {
+        locationTable t = new locationTable();
+        System.out.println("Command: "+args[0]);
+        if(args[0].equals("simple"))
+            t.toProcess.add(new Point2D.Double.Double(-77.035974,38.898717));
+        
+        if(args[0].equals("init1"))
+        {
+            for(double lon = -124.47; lon <= -66.56; lon+= (124.77 - 66.56)/200)
+                for(double lat = 25.482; lat <= 49.3843; lat+= (49.3843 - 25.482)/200)
+                    t.toProcess.add(new Point2D.Double.Double(lon, lat));
+        }
+        
+        if(args[0].equals("init1.5"))
+        {
+            for(double lon = -90; lon <= -66.56; lon+= (124.77 - 66.56)/200)
+                for(double lat = 25.482; lat <= 49.3843; lat+= (49.3843 - 25.482)/200)
+                    t.toProcess.add(new Point2D.Double.Double(lon, lat));
+        }
+        
+        if(args[0].equals("init2"))
+        {
+            for(double lon = -124.47+(124.77-66.56)/400; lon <= -66.56; lon+= (124.77 - 66.56)/200)
+                for(double lat = 25.482; lat <= 49.3843; lat+= (49.3843 - 25.482)/200)
+                    t.toProcess.add(new Point2D.Double.Double(lon, lat));
+        }
+        
+        if(args[0].equals("init3"))
+        {
+            for(double lon = -124.47+(124.77-66.56)/400; lon <= -66.56; lon+= (124.77 - 66.56)/200)
+                for(double lat = 25.482+(49.3843-25.482)/400; lat <= 49.3843; lat+= (49.3843 - 25.482)/200)
+                    t.toProcess.add(new Point2D.Double.Double(lon, lat));
+        }
+        
+        if(args[0].equals("init4"))
+        {
+            for(double lon = -124.47; lon <= -66.56; lon+= (124.77 - 66.56)/200)
+                for(double lat = 25.482+(49.3843-25.482)/400; lat <= 49.3843; lat+= (49.3843 - 25.482)/200)
+                    t.toProcess.add(new Point2D.Double.Double(lon, lat));
+        }
+        
+        t.run();
+        t.done();
+        
+        System.out.println("Finished: "+t.queries+" queries "+t.errors+" errors");
+    }
+    long queries;
+    OutputStreamWriter o;
+    private Connection connection;
+    private PreparedStatement addLocation, addCounty, getCounty;
+    private int errors = 0;
+    Queue<Point2D> toProcess;
+    
+}

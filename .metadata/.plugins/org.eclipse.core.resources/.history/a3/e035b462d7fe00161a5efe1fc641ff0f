@@ -1,0 +1,224 @@
+package classification;
+
+import java.io.*;
+import java.util.Vector;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.LibSVM;
+import weka.classifiers.meta.FilteredClassifier;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.filters.unsupervised.attribute.StringToWordVector;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author toddbodnar
+ */
+
+
+public interface classifier {
+    
+    public  double getValue(String input) throws Exception;
+    
+    public  double getProbability(String input) throws Exception;
+   
+   
+    /*public static void main(String args[]) throws   FileNotFoundException, IOException, Exception
+    {
+        Vector<String> positiveTrain = new Vector<String>();
+        Vector<String> negativeTrain = new Vector<String>();
+        Vector<String> positiveTest = new Vector<String>();
+        Vector<String> negativeTest = new Vector<String>();
+        
+        File f = new File("/Users/toddbodnar/Dropbox/code/netbeans projects/twitter parser/dataset_flu.csv");
+        
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        while(true)
+        {
+            String text = in.readLine();
+            if(text == null)
+                break;
+            text = text.toUpperCase();
+            String inputline = in.readLine();
+            System.out.println(inputline+";"+text.replace(";", ":"));
+            //System.out.println(text);
+            //System.out.println(inputline);
+            int value = Integer.parseInt(inputline);
+            
+            if(negativeTrain.contains(text)||positiveTrain.contains(text)||negativeTest.contains(text)||positiveTest.contains(text))
+                continue;
+            
+            if(Math.random()<.8)
+            {
+            if(value == 0)
+                negativeTrain.add(text);
+            else
+                positiveTrain.add(text);
+            }
+            else
+            {
+                if(value == 0)
+                negativeTest.add(text);
+            else
+                positiveTest.add(text);
+            }
+        }
+        
+        classifier test = new classifier(positiveTrain,negativeTrain);
+        //System.out.println(test.classifier);
+        System.out.println("\n\n\n");
+        double correct =0;
+        for(String s:positiveTrain)
+        {
+            double prob = test.getProbability(s);
+            //System.out.println(prob);
+            if(prob>.5)
+                correct++;
+        }
+        System.out.println("Positive Train:" + correct+"/"+positiveTrain.size()+" = "+(1.0*correct/positiveTrain.size()));
+        
+        correct =0;
+        for(String s:negativeTrain)
+        {
+           double prob = test.getProbability(s);
+            //System.out.println(prob);
+            if(prob<.5)
+                correct++;
+        }
+        System.out.println("Negative Train:" + correct+"/"+negativeTrain.size()+" = "+(1.0*correct/negativeTrain.size()));
+        
+         correct =0;
+        for(String s:positiveTest)
+        {
+           double prob = test.getProbability(s);
+           // System.out.println(prob);
+            if(prob>.5)
+                correct++;
+        }
+        System.out.println("Positive Tests:" + correct+"/"+positiveTest.size()+" = "+(1.0*correct/positiveTest.size()));
+        
+        correct =0;
+        for(String s:negativeTest)
+        {
+           double prob = test.getProbability(s);
+            //System.out.println(prob);
+            if(prob<.5)
+                correct++;
+        }
+        System.out.println("Negative Tests:" + correct+"/"+negativeTest.size()+" = "+(1.0*correct/negativeTest.size()));
+        
+        
+        System.out.println("\n\nLeave One Out");
+        Vector<String> positive = new Vector<String>();
+        positive.addAll(positiveTest);
+        positive.addAll(positiveTrain);
+        
+        Vector<String> negative = new Vector<String>();
+        negative.addAll(negativeTest);
+        negative.addAll(negativeTrain);
+        
+        correct = 0;
+        
+        for(String s:positive)
+        {
+            Vector<String> subset = (Vector<String>) positive.clone();
+            subset.remove(s);
+            
+            if( new classifier(subset,negative).getProbability(s) > .5)
+                correct++;
+            
+        }
+        System.out.println("Positive L1O:"+correct+"/"+positive.size()+" = "+1.0*correct/positive.size());
+        
+        
+        correct = 0;
+        
+        for(String s:negative)
+        {
+            Vector<String> subset = (Vector<String>) negative.clone();
+            subset.remove(s);
+            
+            if( new classifier(positive,subset).getProbability(s) <= .5)
+                correct++;
+            
+        }
+        System.out.println("Negative L1O:"+correct+"/"+negative.size()+" = "+1.0*correct/negative.size());
+        
+        System.out.println("\n\nCutoff,#Correct");
+        classifier cla = new classifier(positive,negative);
+        for(double cut = 0; cut<=1.0001;cut+=.01)
+        {
+            correct = 0;
+            for(String s: positive)
+                if(cla.getProbability(s)>cut)
+                    correct+=1.0f/positive.size();
+            
+            
+            for(String s: negative)
+                if(cla.getProbability(s)<=cut)
+                    correct+=1.0f/negative.size();
+            
+            System.out.println(cut+","+correct);
+        }
+        
+        System.out.print("Bagging");
+        
+        int bagcount = 100;
+        int bagsize = 50;
+        int accuracy[] = new int[bagcount];
+        
+        
+        for(int ct=0;ct<bagcount;ct++)
+        {
+            Vector<String> positivesub = new Vector<String>();
+            Vector<String> negativesub = new Vector<String>();
+            
+            for(int i=0;i<bagsize;i++)
+            {
+                positivesub.add(positive.get((int)(Math.random()*positive.size())));
+                negativesub.add(negative.get((int)(Math.random()*negative.size())));
+            }
+            
+            classifier c = new classifier(positivesub,negativesub);
+            
+            
+            correct = 0;
+        
+            for (String s : positivesub) {
+                Vector<String> subset = (Vector<String>) positivesub.clone();
+                subset.remove(s);
+
+                if (new classifier(subset, negativesub).getProbability(s) > .5) {
+                    correct++;
+                }
+
+            }
+            
+            for (String s : negativesub) {
+                Vector<String> subset = (Vector<String>) negativesub.clone();
+                subset.remove(s);
+
+                if (new classifier(positivesub,subset).getProbability(s) <= .5) {
+                    correct++;
+                }
+
+            }
+            accuracy[ct] = (int)correct;
+            System.out.println(correct);
+        }
+        System.out.println();
+      
+        
+        
+    }
+    double cut = .50;
+     weka.classifiers.Classifier classifier;
+     public String filtername;*/
+}

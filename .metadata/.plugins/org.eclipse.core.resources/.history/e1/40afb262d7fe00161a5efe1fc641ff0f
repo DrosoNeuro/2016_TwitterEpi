@@ -1,0 +1,150 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package longURL;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class longURL {
+    private static Connection connect = null;
+    private static long lastQuery = 0;
+    private static final long pauseLength = 1000;
+
+    private static void setupConnection()
+    {
+        try {
+                    Class.forName("org.gjt.mm.mysql.Driver");
+                    connect = DriverManager.getConnection("jdbc:mysql://localhost:8889/longURL", "root", "root");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex){
+                    Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+                    connect = null;
+                }
+    }
+    
+    public static String getStatistics()
+    {
+        
+        String result = "A URL expander with caching.\n\n";
+        if (connect == null) {
+            setupConnection();
+        }
+        if (connect == null) {
+            return result + "Could not connect to SQL server, program will still work, but without caching.";
+        }
+
+        long total = -1;
+        try {    
+            ResultSet r = connect.createStatement().executeQuery("select count(*) from urls where 1");
+            if(r.first())
+                total = r.getLong("count(*)");
+        } catch (SQLException ex) {
+            Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result + total +" URLS stored";
+    }
+    public static String query(String u) 
+    {
+        if(!(u.contains("http://t.co/")||u.contains("https://t.co/")))
+            return u;
+        try {
+            if(connect==null)
+            {
+                setupConnection();
+            }
+            
+            if(connect==null) //if setting up the connection failed, assume no SQL and just look it up
+                return getLongURL(u);
+            
+            ResultSet r = connect.createStatement().executeQuery("SELECT * from urls WHERE source like'"+u+"'");
+            if(r.first())
+                return r.getString("target");
+            
+            String result = getLongURL(u);
+            connect.createStatement().execute("insert into urls (source,target) VALUES('"+u+"','"+result+"')");
+            return result;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "null";
+    }
+    
+    
+    /**
+     * From http://blog.nihed.com/2012/06/convert-short-long-url-java/
+     * (with a few mods: null-->null and waiting time)
+     * @param shortUrl
+     * @return
+     */
+    private static String getLongURL(String shortUrl) {
+        if(shortUrl.equals("null"))
+            return "null";
+        if(lastQuery+pauseLength > System.currentTimeMillis())
+        {
+            try {
+                Thread.sleep(lastQuery+pauseLength-System.currentTimeMillis());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        lastQuery = System.currentTimeMillis();
+        String result = shortUrl;
+        String header;
+        try{
+            do {
+                URL url = new URL(result);
+                HttpURLConnection.setFollowRedirects(false);
+                URLConnection conn = url.openConnection();
+                header = conn.getHeaderField(null);
+                //System.out.println(result+","+header);
+                String location = conn.getHeaderField("location");
+                if (location != null) {
+                    if(location.equals(result))
+                        break;
+                    result = location;
+                }
+            } while (header.contains("301"));
+ 
+        return result;
+        }catch(MalformedURLException ex)
+        {
+            Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+           // return "null";
+        }
+        catch(IOException ex)
+        {
+            Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+          //  return "null";
+        }
+        catch(Exception ex)
+        {
+            System.err.println(shortUrl);
+             Logger.getLogger(longURL.class.getName()).log(Level.SEVERE, null, ex);
+          //  return "null";
+        }
+        return result;
+    }
+    
+    public static void main(String args[])
+    {
+        System.out.println("https://bitly.com/QtQET goes to "+query("https://bitly.com/QtQET"));
+    }
+}

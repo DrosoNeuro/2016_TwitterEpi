@@ -1,0 +1,23 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class TwitterMessage extends Throwable{
+    public TwitterMessage()
+    {
+         super();
+    }
+    
+    public TwitterMessage(String s)
+    {
+        super("Twitter Exception: "+s);
+    }
+    
+    String error;
+}

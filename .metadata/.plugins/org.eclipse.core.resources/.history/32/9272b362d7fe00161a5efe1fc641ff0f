@@ -1,0 +1,132 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import Map.earthFull;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class mapProcess implements twitterprocess{
+    public mapProcess(Point2D.Double[] box, boolean visual, int width, String name, float exp) throws IOException
+    {
+        double w = box[0].getX() - box[1].getX();
+        double h = box[0].getY() - box[1].getY();
+        
+        int height = (int)Math.abs(1.0*width*h/w);
+        
+        map = new earthFull(width,height,Color.BLACK,box);
+        this.name = name;
+        exposure = exp;
+        errors = 0;
+        bbox = box;
+        Width = width;
+    }
+    
+    public mapProcess()
+    {
+        
+    }
+    @Override
+    public void consume(tweet t) {
+        try{
+        map.addPoint(new Color(1.0f,1.0f,1.0f,exposure), t.loc);
+        }catch(Exception e){errors++;System.err.println(e);e.printStackTrace();System.err.println(t.text);}
+    }
+
+    @Override
+    public String end() {
+        System.out.println("Saving");
+        try
+        {
+            BufferedImage img = new BufferedImage(map.getDimensions().width, map.getDimensions().height, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = img.getGraphics();
+            map.draw(g);
+            ImageIO.write(img, "png", new File(name+".png"));
+            System.out.println("Done");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Save Error: "+e);
+            return name+" saving error:  "+e.toString();
+        }
+        
+       
+        
+        return name+":    "+errors+" error(s)";
+    }
+    
+    public boolean quitAtEnd()
+    {
+        return true;
+    }
+    private earthFull map;
+    private String name = "map";
+    private float exposure;
+    private int errors;
+
+    @Override
+    public String buttonMenu() {
+        return "Map Writter";
+    }
+    
+    public String toolTip()
+    {
+        return "Draws maps of tweets";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        Point2D.Double ul = new Point2D.Double(Double.parseDouble(JOptionPane.showInputDialog("X1")), Double.parseDouble(JOptionPane.showInputDialog("Y1")));
+        Point2D.Double dr = new Point2D.Double(Double.parseDouble(JOptionPane.showInputDialog("X2")), Double.parseDouble(JOptionPane.showInputDialog("Y2")));
+        
+        Point2D.Double box[] = {ul,dr};
+        
+        int width = Integer.parseInt(JOptionPane.showInputDialog("Width (px)"));
+        String name = JOptionPane.showInputDialog("File Name");
+        try {
+            return new mapProcess(box,false,width,name,.1f);
+        } catch (IOException ex) {
+            Logger.getLogger(mapProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    Point2D.Double bbox[];
+    int Width;
+
+    @Override
+    public twitterprocess load(String in) {
+        String sin[] = in.split(",");
+        Point2D.Double ul = new Point2D.Double(Double.parseDouble(sin[0]),Double.parseDouble(sin[1]));
+        Point2D.Double dr = new Point2D.Double(Double.parseDouble(sin[2]),Double.parseDouble(sin[3]));
+        
+        Point2D.Double box[] = {ul,dr};
+        try {
+            return new mapProcess(box,false,Integer.parseInt(sin[4]),sin[5],Float.parseFloat(sin[6]));
+        } catch (IOException ex) {
+            Logger.getLogger(mapProcess.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+
+    @Override
+    public String save() {
+        return bbox[0].x+","+bbox[0].y+","+bbox[1].x+","+bbox[1].y+","+Width+","+name+","+exposure;
+    }
+}

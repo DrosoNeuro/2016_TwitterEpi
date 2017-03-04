@@ -1,0 +1,88 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class countFilter implements tweetfilter{
+
+    public countFilter(int max, twitterprocess n)
+    {
+        
+        next = n;
+        cutoff = max;
+        ct=1;
+    }
+    @Override
+    public void consume(tweet t){
+        if(ct>cutoff)
+        {
+           // throw new TwitterMessage("Count Filter: Finished requested number of tweets");
+            
+        }
+        ct++;
+        try {
+            next.consume(t);
+        } catch (TwitterMessage ex) {
+            Logger.getLogger(countFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public String end() {
+        return next.end();
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Tweet Count Limit";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        twitterprocess next = gui.JobFileIO.load(in.split(":")[1]);
+        return new countFilter(Integer.parseInt(in.split(":")[0]),next);
+    }
+
+    @Override
+    public String save() {
+        return cutoff+":"+next.buttonMenu()+";"+next.save();
+    }
+
+    @Override
+    public String toolTip() {
+        return "Quits after n tweets have been processed";
+    }
+    
+    public String toString()
+    {
+        return "Stop after "+cutoff+" tweets -> "+next;
+    }
+    int cutoff,ct;
+    twitterprocess next;
+
+
+    @Override
+    public tweetfilter clone(twitterprocess next) {
+        return new countFilter(Integer.parseInt(JOptionPane.showInputDialog("How many tweets to process?")),next);
+    }
+}

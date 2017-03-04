@@ -1,0 +1,128 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+import gui.JobFileIO;
+
+/**
+ * Replaces the tweet's text with n-grams of the text's words
+ * @author toddbodnar
+ */
+public class nGramRefactor implements tweetfilter{
+    public nGramRefactor(twitterprocess next, int maxN)
+    {
+        this.next=next;
+        n=maxN;
+    }
+    @Override
+    public tweetfilter clone(twitterprocess next) {
+        return new nGramRefactor(next,Integer.parseInt(JOptionPane.showInputDialog("Max N?")));
+    }
+
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        String words[] = t.text.replaceAll("[^a-zA-Z]+", " ").split("[^a-zA-Z]");
+        StringBuilder sb = new StringBuilder();
+        for(int N=1;N<=n;N++)
+        {
+            for(int j=0;j<words.length-N+1;j++)
+            {
+                sb.append(" ");
+                for(int i=0;i<N;i++)
+                {
+                    sb.append(words[j+i]);
+                    if(i<N-1) {
+                        sb.append("é");
+                    }
+                }
+            }
+        }
+        
+        t.text = sb.toString();
+        next.consume(t);
+    }
+
+    @Override
+    public String end() {
+        return n+"Gram:\n"+next.end();
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return next.quitAtEnd();
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "nGram";
+    }
+
+    public String toString()
+    {
+        return n+"-Gram -> "+next.toString();
+    }
+
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+         int first = in.indexOf(":");
+         System.out.println(in);
+         System.out.println(in.substring(first+1));
+         System.out.println(in.substring(0,first));
+        return new nGramRefactor(JobFileIO.load(in.substring(first+1)),Integer.parseInt(in.substring(0, first)));
+
+       // return new nGramRefactor(JobFileIO.load(in.split(":")[1]),Integer.parseInt(in.split(":")[0]));
+    }
+
+    @Override
+    public String save() {
+        return n+":"+next.buttonMenu()+";"+next.save();
+    }
+
+    @Override
+    public String toolTip() {
+        return "Replaces the tweet's text with the keywords and combinations of length up to n";
+    }
+    
+    
+     public twitterprocess clone() {
+        
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+     
+     
+    int n;
+    twitterprocess next;
+    
+    public static void main(String args[])
+    {
+        int n=5;
+        String text = "this is a  test!";
+     
+        
+        String words[] = text.replaceAll("[^a-zA-Z]+", " ").split("[^a-zA-Z]");
+        
+        StringBuilder sb = new StringBuilder();
+        for(int N=1;N<=n;N++)
+        {
+            for(int j=0;j<words.length-N+1;j++)
+            {
+                sb.append(" ");
+                for(int i=0;i<N;i++)
+                {
+                    sb.append(words[j+i]);
+                    if(i<N-1) {
+                        sb.append("é");
+                    }
+                }
+            }
+        }
+        
+        System.out.println(sb.toString());
+    }
+}

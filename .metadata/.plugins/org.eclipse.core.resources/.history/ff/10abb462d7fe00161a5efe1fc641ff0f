@@ -1,0 +1,51 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package agenttracking;
+
+import java.io.*;
+import java.util.*;
+import javax.swing.JFileChooser;
+
+/**
+ * Counts the number of unique individuals with "sick" tweets each week
+ * @author toddbodnar
+ */
+public class countsick {
+    public static void main(String args[]) throws FileNotFoundException, IOException
+    {
+        JFileChooser jfc = new JFileChooser();
+        Set users[] = new HashSet[500];
+        for(int i=0;i<500;i++)
+            users[i]=new HashSet();
+        
+        jfc.showOpenDialog(null);
+        
+        BufferedReader in = new BufferedReader(new FileReader(jfc.getSelectedFile()));
+        
+        String s = in.readLine();
+        
+        while(s != null)
+        {
+            //http://stackoverflow.com/questions/3299972/difference-in-days-between-two-dates-in-java
+
+
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(Long.parseLong(s.split(",")[1]));
+
+            
+            
+            String uid = s.split(",")[0];
+            
+            int spot = (c.get(Calendar.YEAR)-2010)*52 + c.get(Calendar.WEEK_OF_YEAR);
+            
+            users[spot].add(uid);
+            
+            s = in.readLine();
+        }
+        
+        for(int i=0;i<500;i++)
+            System.out.println(i+","+users[i].size());
+    }
+}

@@ -1,0 +1,110 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classification;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Vector;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class l1oTest {
+    public static void main(String args[]) throws IOException, Exception
+    {
+        Vector<String> positiveTrain = new Vector<String>();
+        Vector<String> negativeTrain = new Vector<String>();
+        Vector<String> positiveTest = new Vector<String>();
+        Vector<String> negativeTest = new Vector<String>();
+        
+        File f = new File("/Users/toddbodnar/Dropbox/code/netbeans projects/twitter parser/dataset_flu.csv");
+        
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        while(true)
+        {
+            String text = in.readLine();
+            if(text == null)
+                break;
+            text = text.toUpperCase();
+            String inputline = in.readLine();
+            System.out.println(inputline+";"+text.replace(";", ":"));
+            //System.out.println(text);
+            //System.out.println(inputline);
+            int value = Integer.parseInt(inputline);
+            
+            if(negativeTrain.contains(text)||positiveTrain.contains(text)||negativeTest.contains(text)||positiveTest.contains(text))
+                continue;
+            
+            //if(Math.random()<.8)
+            {
+            if(value == 0)
+                negativeTrain.add(text);
+            else
+                positiveTrain.add(text);
+            }
+          
+        }
+        
+        //int length = 500;
+        double cut = .5;
+        //double cut = .5;{{
+        //for(int length : new int[]{1,25,50,100,500,1000}){
+        for(int length : new int[]{500}){
+        //for(int length = 0; length < 1500; length+=100){
+        //    {for(double cut=0.05;cut<1.5;cut+=.05){
+        //System.out.println("\n\nLeave One Out");
+        { Vector<String> positive = positiveTrain;
+         
+        Vector<String> negative = negativeTrain;
+        
+        for(String s:positive) System.out.println(s);
+        for(String s:negative) System.out.println(s);
+        System.out.println("Flu\tNoFlu\n------------------");
+        int correct = 0;
+        int goodsub =0;
+        for(String s:positive)
+        {
+            Vector<String> subset = (Vector<String>) positive.clone();
+            subset.remove(s);
+            
+            
+         //   System.out.println(new naiveBayesClassifier(subset,negative,length).getProbability(s));
+            if( new wekaClassifier(subset,negative).getProbability(s) > cut)
+            {    correct++;
+                goodsub++;
+             //   System.out.println(1);
+                
+            }
+            //else
+             //   System.out.println(0);
+            //System.out.print("1");
+        }
+        System.out.println(goodsub+"\t"+(positiveTrain.size()-goodsub)+"\t\tAcutally Flu");
+        //System.out.println("Done with postivie");
+        goodsub=0;
+        for(String s:negative)
+        {
+            Vector<String> subset = (Vector<String>) negative.clone();
+            subset.remove(s);
+            
+          //  System.out.println( new naiveBayesClassifier(positive,subset,length).getProbability(s));
+            if( new wekaClassifier(positive,subset).getProbability(s) <= cut)
+            {   correct++;
+                goodsub++;
+                //System.out.println(0);
+            }
+              // else
+            //    System.out.println(1);
+            //System.out.print(".");
+        }
+        System.out.println((negativeTrain.size()-goodsub)+"\t"+goodsub+"\t\tNot Flu\n\n");
+        System.out.println(cut+","+length+","+correct*1.0/(negative.size()+positive.size()));
+    }
+    }}
+}

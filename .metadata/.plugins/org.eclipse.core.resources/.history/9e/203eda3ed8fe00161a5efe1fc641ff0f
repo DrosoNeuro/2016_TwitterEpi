@@ -1,0 +1,1371 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classification;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.user;
+import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.functions.LibSVM;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.functions.supportVector.PolyKernel;
+import weka.classifiers.functions.supportVector.RBFKernel;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+
+/**
+ * Classifies users based on their profile
+ * @author toddbodnar
+ */
+public class userClassifierBinary {
+    public userClassifierBinary(File pcas, File training)
+    {
+        if(pcas==null||training==null)
+            return;
+        
+        loadPCA(pcas);
+        
+        
+        FastVector fv = new FastVector(8+1+pcaCount);
+        FastVector types = new FastVector(2);
+        FastVector domains = new FastVector(3);
+        FastVector trueFalse = new FastVector(2);
+        types.addElement("personal");
+        types.addElement("other");
+        
+        domains.addElement("other");
+        domains.addElement("com");
+        domains.addElement("null");
+        
+        trueFalse.addElement("true");
+        trueFalse.addElement("false");
+        
+        Attribute PCAs[] = new Attribute[pcaCount];
+        for(int ct=0;ct<pcaCount;ct++)
+        {
+            PCAs[ct] = new Attribute("pca_"+ct);
+            fv.addElement(PCAs[ct]);
+        }
+        
+        Attribute favourites = new Attribute("favourites");
+        Attribute followers= new Attribute("followers");
+        Attribute friends= new Attribute("friends");
+        Attribute isContribute= new Attribute("isContribute",trueFalse);
+        Attribute isVerified= new Attribute("isVerified",trueFalse);
+        Attribute listed= new Attribute("listed");
+        Attribute statusCount= new Attribute("statusCount");
+        Attribute domain = new Attribute("domain", domains);
+        
+        Attribute value = new Attribute("type", types);
+        
+        fv.addElement(favourites);
+        fv.addElement(followers);
+        fv.addElement(friends);
+        fv.addElement(isContribute);
+        fv.addElement(isVerified);
+        fv.addElement(listed);
+        fv.addElement(statusCount);
+        fv.addElement(domain);
+        fv.addElement(value);
+        
+        
+        Instances dataset = new Instances("value",fv,1);
+        Instance ins = null;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(training));
+            String line;
+            
+            br.readLine();
+           
+            while ((line = br.readLine()) != null) {
+                Instance i = new Instance(8+1+pcaCount);
+                i.setDataset(dataset);
+                String split[] = line.split(",");
+               // System.err.println(line);
+                if(split[0].equals("personal account"))
+                    i.setValue(value, "personal");
+                else
+                    i.setValue(value, "other");
+                
+                i.setValue(favourites,Math.log(1+Double.parseDouble(split[2])));
+                i.setValue(followers,Math.log(1+Double.parseDouble(split[3])));
+                i.setValue(friends,Math.log(1+Double.parseDouble(split[4])));
+                i.setValue(isContribute,(split[5]));
+                i.setValue(isVerified,(split[6]));
+                i.setValue(listed,Math.log(1+Double.parseDouble(split[7])));
+                i.setValue(statusCount,Math.log(1+Double.parseDouble(split[8])));
+                i.setValue(domain,split[9].toLowerCase());
+                
+                double values[] = stringToDouble(split[1]);
+                for(int ct=0;ct<pcaCount;ct++)
+                    i.setValue(PCAs[ct], values[ct]);
+                
+                if(ins==null)
+                ins = i;
+                dataset.add(i);
+            }
+            
+            
+            
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(userClassifierBinary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        dataset.setClass(value);
+        
+        //LibSVM svm = new LibSVM();
+        SMO svm = new SMO();
+        svm.setC(1);
+        svm.setEpsilon(1.0E-12);
+        svm.setNumFolds(-1);
+        svm.setRandomSeed(1);
+        svm.setToleranceParameter(0.001);
+        RBFKernel k = new RBFKernel();
+        k.setGamma(.01);
+        //svm.setKernel(k);
+        svm.setKernel(new PolyKernel());
+        
+       classifier = svm;
+       svm.setDebug(false);
+       classifier.setDebug(false);
+       //classifier;
+        try {
+            classifier.buildClassifier(dataset);
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierBinary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Evaluation eval;
+        try {
+            eval = new Evaluation(dataset);
+            eval.crossValidateModel(svm, dataset, 10, new java.util.Random());
+            System.out.println(pcaCount+","+eval.correct());
+            
+            System.out.println(eval.toSummaryString("Title!",true)); //(~0.869 correct when pcaCount=75)
+            System.out.println("\n\n"+eval.confusionMatrix()[0][0]+","+eval.confusionMatrix()[0][1]);
+            System.out.println(eval.confusionMatrix()[1][0]+","+eval.confusionMatrix()[1][1]);
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierBinary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+
+    public userClassifierBinary()
+    {
+        this(new File("PCAs"),new File("/Users/toddbodnar/Documents/amazon turk ratings.csv"));
+    }
+    
+    
+    /**
+     * Performs PCA to the string
+     * @param theString
+     * @return 
+     */
+    public double[] stringToDouble(String theString)
+    {
+        double result[] = new double[pcaCount];
+        for(int ct=0;ct<pcaCount;ct++)
+            result[ct]=0;
+        
+        theString = theString.toLowerCase().replaceAll("[\\ .,;:\\'\\\"\\(\\)?!]", "_ _");
+        theString = "_ _"+theString+"_ _";
+        //System.out.println(theString);
+        for(int i=0;i<keywords.length;i++)
+        {
+            double weight = -means[i];
+            if(theString.contains("_ _"+keywords[i]+"_ _"))
+                weight+=1;
+            
+            for(int j=0;j<pcaCount;j++)
+            {
+               result[j]+=weight*PCA_weights[i][j];
+            }
+        }
+        
+     //   System.out.println(result[50]);
+        
+        return result;
+    }
+    
+    public String getType(user u) {
+        FastVector fv = new FastVector(8 + 1 + pcaCount);
+        FastVector types = new FastVector(2);
+        FastVector domains = new FastVector(3);
+        FastVector trueFalse = new FastVector(2);
+        types.addElement("personal");
+        types.addElement("other");
+
+        domains.addElement("other");
+        domains.addElement("com");
+        domains.addElement("null");
+
+        trueFalse.addElement("true");
+        trueFalse.addElement("false");
+
+        Attribute PCAs[] = new Attribute[pcaCount];
+        for (int ct = 0; ct < pcaCount; ct++) {
+            PCAs[ct] = new Attribute("pca_" + ct);
+            fv.addElement(PCAs[ct]);
+        }
+
+        Attribute favourites = new Attribute("favourites");
+        Attribute followers = new Attribute("followers");
+        Attribute friends = new Attribute("friends");
+        Attribute isContribute = new Attribute("isContribute", trueFalse);
+        Attribute isVerified = new Attribute("isVerified", trueFalse);
+        Attribute listed = new Attribute("listed");
+        Attribute statusCount = new Attribute("statusCount");
+        Attribute domain = new Attribute("domain", domains);
+
+        Attribute value = new Attribute("type", types);
+
+        fv.addElement(favourites);
+        fv.addElement(followers);
+        fv.addElement(friends);
+        fv.addElement(isContribute);
+        fv.addElement(isVerified);
+        fv.addElement(listed);
+        fv.addElement(statusCount);
+        fv.addElement(domain);
+        fv.addElement(value);
+
+
+        Instances dataset = new Instances("value", fv, 1);
+
+        Instance i = new Instance(8 + 1 + pcaCount);
+        i.setDataset(dataset);
+
+        i.setValue(value, "other");
+
+        i.setValue(favourites, Math.log(1 + u.favourites_count));
+        i.setValue(followers, Math.log(1 + u.followers_count));
+        i.setValue(friends, Math.log(1 + u.friends_count));
+        i.setValue(isContribute, ("false"));
+        i.setValue(isVerified, ("false"));
+        i.setValue(listed, Math.log(1 + u.listed_count));
+        i.setValue(statusCount, Math.log(1 + u.status_count));
+        String top = "other";
+
+        if (u.topLevelDomain.equalsIgnoreCase("null") || u.topLevelDomain.equalsIgnoreCase("com")) {
+            top = u.topLevelDomain.toLowerCase();
+        }
+        i.setValue(domain, top);
+
+        double values[] = stringToDouble(u.description);
+        for (int ct = 0; ct < pcaCount; ct++) {
+            i.setValue(PCAs[ct], values[ct]);
+        }
+
+        dataset.add(i);
+
+        dataset.setClass(value);
+        i.setClassMissing();
+        try {
+            return classifier.classifyInstance(i) + "";
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierBinary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "null";
+    }
+
+    public boolean isInMainCategory(twitter.user u) {
+        return getType(u).equals("1.0");
+    }
+
+    public static void main(String args[]) {
+        int total = 0;
+    //    int values[] = {1,5,10,25,50,75,100};
+      //  for (int val : values) {
+        //    for(int ct=0;ct<10;ct++){
+          //  pcaCount = val;
+            total += new userClassifierBinary().hashCode();
+       //     }
+        //}
+        //System.out.println(new userClassifier().stringToDouble("#health is important!")[0]);
+    }
+    
+      protected void loadPCA(File pcas) {
+        PCA_weights = new double[keywords.length][pcaCount];
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(pcas));
+            String line;
+            int keyword=0;
+            while ((line = br.readLine()) != null) {
+                String split[] = line.split(",");
+                for(int ct=0;ct<pcaCount;ct++)
+                    PCA_weights[keyword][ct] = Double.parseDouble(split[ct+1]);
+                
+                keyword++;
+            }
+            
+            
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(userClassifierBinary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    static double PCA_weights[][];
+    weka.classifiers.Classifier classifier;
+    static int pcaCount=75;
+    ////////////begin generated code/////////////////////////////////////////
+    //generated by R's prcomp function
+    static final String keywords[] = {"#health","#news","#publichealth","#socialmedia","&","+","-","--","/","//","//bit","//t","//www","1","10","100","12","13","15","17","18","19","2","20","2010","2011","2012","2013","24","24/7","3","30","4","5","50","6","=","@","^^","a","about","account","across","act","active","activist","addict","addicted","adventures","advice","advisor","advocate","affairs","aficionado","africa","african","after","again","against","age","agency","aid","air","aku","akun","al","alerts","all","allah","alone","also","alternative","alum","always","am","amateur","ambassador","america","american","an","anak","analysis","analyst","anchor","and","animal","animals","another","any","anyone","anything","apple","are","around","art","articles","artist","arts","as","asia","asian","ask","aspiring","associate","associated","association","astronomy","at","atheist","au","australia","australian","author","aviation","avid","awesome","b","baby","back","bad","based","bbc","be","beautiful","beauty","because","become","been","beer","before","beijing","being","believe","believer","believes","berita","best","better","between","beyond","big","bio","biologist","biology","biomedical","bird","bit","black","blog","blogger","blogging","blogs","bloomberg","board","book","books","bookworm","born","boy","break","breaking","bring","bringing","brings","british","broadcasting","brother","bureau","business","but","by","c","ca","california","call","can","canada","canadian","cancer","cant","care","cat","cats","center","centre","ceo","certified","champion","change","channel","check","chicago","chief","child","children","china","chinese","christ","christian","citizen","city","clinical","cnn","co","co-founder","coffee","college","columnist","com","come","comments","communication","communications","communicator","community","company","comprehensive","computer","con","conflict","conservative","consultant","contact","content","contributor","control","conversation","cooking","cool","corporate","correspondent","could","council","countries","country","cover","coverage","covering","crazy","created","creative","creator","crisis","cultural","culture","current","currently","cyclist","d","da","dad","daily","dan","dancer","dari","data","daughter","day","days","de","death","dedicated","del","deliver","department","desde","design","designer","development","developments","di","die","digital","director","disaster","disasters","disease","diseases","do","doctor","does","doesn","dog","dogs","doing","don","done","down","dr","dream","dreamer","du","e","earth","east","easy","eat","economic","economics","economist","economy","editor","education","educator","el","else","em","email","emergency","emerging","employer","en","endorsement","endorsements","energy","engineer","english","english-language","enjoy","enough","entertainment","enthusiast","entrepreneur","environment","environmental","epidemiology","es","especially","et","etc","eu","european","events","ever","every","everyday","everyone","everything","evil","ex","executive","experience","expert","express","expressed","extraordinaire","f","facebook","family","fan","fanatic","farm","fashion","fast","father","fc","fear","features","feed","feeds","feel","fellow","feminist","fight","film","finance","financial","find","first","fitness","flu","fm","focus","follow","followers","following","food","foodie","football","for","foreign","forever","forget","former","formerly","foundation","founder","fox","free","freedom","freelance","french","friend","friends","from","fuck","full","fun","funny","future","gadgets","gamer","gaming","geek","general","get","girl","give","global","globe","go","god","going","good","got","government","grad","graduate","great","green","group","guardian","guide","guru","guy","happy","hard","harvard","has","have","he","head","headlines","health","healthcare","healthy","hear","heart","heaven","help","helping","her","here","het","hi","high","him","his","history","hk","home","hong","hope","hospital","host","how","http","https","human","husband","i","id","ideas","if","ig","im","important","improve","in","independent","india","indonesia","industry","infection","infections","infectious","influenza","info","inform","information","informed","innovation","instagram","institute","intelligence","interest","interested","interesting","interests","intern","international","internet","into","investor","is","island","issues","it","its","j","japan","jesus","join","journal","journalism","journalist","journey","junkie","just","justice","keep","kids","kind","know","knowledge","kong","l","la","lab","language","largest","latest","laugh","law","le","leader","leading","learn","learning","lecturer","left","les","let","liberal","liberty","librarian","library","life","lifestyle","light","like","likes","line","link","links","literature","little","live","lives","living","ll","lo","local","london","long","look","looking","lord","los","lot","love","lover","loves","loving","m","made","magazine","mail","make","makes","making","malaysia","malaysian","man","management","manager","managing","many","market","marketing","markets","married","master","may","maybe","md","me","mean","med","media","medical","medicine","meet","member","men","mention","mi","microbiology","middle","military","mind","mine","mission","mit","mobile","molecular","mom","money","more","morning","most","mostly","mother","movie","movies","mr","much","multimedia","mundo","music","musician","muslim","my","myself","más","música","n","na","name","nation","national","nations","nature","necessarily","need","nerd","network","networks","never","new","news","newspaper","night","no","north","not","nothing","noticias","now","null","nurse","nursing","nutrition","nyc","o","occasional","och","of","off","office","officer","official","oficial","often","oh","old","on","one","online","only","open","opinion","opinions","optimist","or","ordinary","org","other","our","out","over","own","owner","p","pacific","page","pakistan","pandemic","para","parenting","paris","part","part-time","party","passion","passionate","patients","peace","people","periodista","person","personal","pharmacist","phd","philippines","photographer","photography","photos","physician","physics","place","planet","planner","planning","play","player","please","plus","point","policy","political","politics","popular","por","portal","positive","post","posts","power","pr","preparedness","president","press","prevention","private","producer","product","prof","profession","professional","professionals","professor","programmer","project","promoting","proud","provide","provides","providing","public","puerto","quality","que","questions","r","radio","random","re","read","reader","reading","real","really","red","regional","registered","related","relations","religion","reporter","reports","republic","research","researcher","resident","resources","response","retired","retweets","reuters","right","rights","risk","rock","rss","rt","rts","run","runner","running","russia","s","sabah","safety","same","say","saya","scholar","school","science","sciences","scientific","scientist","se","sea","security","see","senior","sense","servant","service","services","shall","shanghai","share","sharing","show","si","side","simple","since","singapore","single","site","sleep","small","smart","smile","so","soccer","social","society","software","solutions","some","someone","something","sometimes","son","soon","source","sources","south","southern","soy","space","spanish","speak","speaker","special","specialist","specialized","specializing","sport","sports","staff","stand","star","start","state","station","stay","still","stop","stories","story","strategic","strategy","street","strong","student","studying","stuff","support","supporter","surveillance","system","systems","t","taiwan","take","talk","talking","tea","teacher","team","tech","technologies","technology","tempo","tennis","thai","thailand","than","thank","that","the","their","them","then","there","these","they","thing","things","think","this","those","though","thoughts","three","through","time","times","tips","to","today","todo","too","top","topics","toronto","trade","training","travel","traveler","traveling","traveller","travelling","trends","true","trust","trusted","truth","try","trying","tv","tweet","tweeting","tweets","twitter","u","uk","un","und","unique","united","university","up","updated","updates","ur","urban","us","usa","use","user","vaccines","very","vet","veteran","veterinary","vida","video","videos","vietnam","views","visit","voice","vp","w/","wall","wannabe","want","war","was","washington","watch","watching","water","way","we","weather","web","website","weird","welcome","well","wellness","what","when","where","which","while","who","why","wife","will","winner","with","without","woman","women","work","working","works","world","would","write","writer","writing","wrong","www","x","y","yang","yea","year","years","york","you","young","your","|","||","~","©","à","é","جامعة","و","–","”","•","≠","☺","♡","♥","✉","❤"};
+    static final double means[] = {0.0029585798816568
+,0.00266272189349112
+,0.00236686390532544
+,0.00177514792899408
+,0.114792899408284
+,0.00502958579881657
+,0.0423076923076923
+,0.00384615384615385
+,0.0118343195266272
+,0.00207100591715976
+,0.00118343195266272
+,0.0582840236686391
+,0.00207100591715976
+,0.00562130177514793
+,0.00384615384615385
+,0.00177514792899408
+,0.00325443786982249
+,0.00236686390532544
+,0.00355029585798817
+,0.00236686390532544
+,0.00325443786982249
+,0.00236686390532544
+,0.00650887573964497
+,0.0029585798816568
+,0.00236686390532544
+,0.00266272189349112
+,0.00266272189349112
+,0.00355029585798817
+,0.00384615384615385
+,0.0029585798816568
+,0.00710059171597633
+,0.00266272189349112
+,0.00384615384615385
+,0.00207100591715976
+,0.00207100591715976
+,0.00207100591715976
+,0.0029585798816568
+,0.00917159763313609
+,0.00177514792899408
+,0.145562130177515
+,0.0331360946745562
+,0.0124260355029586
+,0.00207100591715976
+,0.00177514792899408
+,0.00207100591715976
+,0.00414201183431953
+,0.00562130177514793
+,0.00207100591715976
+,0.00207100591715976
+,0.0029585798816568
+,0.00177514792899408
+,0.00325443786982249
+,0.00710059171597633
+,0.00177514792899408
+,0.00414201183431953
+,0.00177514792899408
+,0.00207100591715976
+,0.0014792899408284
+,0.00207100591715976
+,0.00177514792899408
+,0.00443786982248521
+,0.00118343195266272
+,0.00177514792899408
+,0.00118343195266272
+,0.0014792899408284
+,0.0029585798816568
+,0.00236686390532544
+,0.0343195266272189
+,0.00443786982248521
+,0.00177514792899408
+,0.0118343195266272
+,0.00207100591715976
+,0.00325443786982249
+,0.00946745562130178
+,0.0198224852071006
+,0.00266272189349112
+,0.00177514792899408
+,0.00443786982248521
+,0.00798816568047337
+,0.0245562130177515
+,0.0014792899408284
+,0.00621301775147929
+,0.00473372781065089
+,0.00177514792899408
+,0.253846153846154
+,0.00414201183431953
+,0.0029585798816568
+,0.00266272189349112
+,0.00384615384615385
+,0.00177514792899408
+,0.00355029585798817
+,0.00236686390532544
+,0.0559171597633136
+,0.00769230769230769
+,0.00650887573964497
+,0.00266272189349112
+,0.00414201183431953
+,0.00207100591715976
+,0.0142011834319527
+,0.0103550295857988
+,0.00266272189349112
+,0.0029585798816568
+,0.00384615384615385
+,0.00207100591715976
+,0.00177514792899408
+,0.00355029585798817
+,0.00177514792899408
+,0.056508875739645
+,0.00207100591715976
+,0.00177514792899408
+,0.00236686390532544
+,0.0014792899408284
+,0.0142011834319527
+,0.00177514792899408
+,0.00443786982248521
+,0.00177514792899408
+,0.0029585798816568
+,0.00207100591715976
+,0.00857988165680473
+,0.00414201183431953
+,0.00562130177514793
+,0.00384615384615385
+,0.0307692307692308
+,0.00236686390532544
+,0.00266272189349112
+,0.00325443786982249
+,0.00355029585798817
+,0.0029585798816568
+,0.00236686390532544
+,0.00266272189349112
+,0.00769230769230769
+,0.00414201183431953
+,0.00473372781065089
+,0.00266272189349112
+,0.00177514792899408
+,0.00414201183431953
+,0.00946745562130178
+,0.00591715976331361
+,0.00236686390532544
+,0.00207100591715976
+,0.00857988165680473
+,0.00207100591715976
+,0.0029585798816568
+,0.00236686390532544
+,0.0014792899408284
+,0.00266272189349112
+,0.00266272189349112
+,0.00325443786982249
+,0.00650887573964497
+,0.0130177514792899
+,0.00177514792899408
+,0.00236686390532544
+,0.00207100591715976
+,0.00443786982248521
+,0.00710059171597633
+,0.00621301775147929
+,0.00177514792899408
+,0.00562130177514793
+,0.00325443786982249
+,0.0014792899408284
+,0.014792899408284
+,0.00177514792899408
+,0.00207100591715976
+,0.00207100591715976
+,0.00414201183431953
+,0.00177514792899408
+,0.00207100591715976
+,0.00236686390532544
+,0.0192307692307692
+,0.0159763313609467
+,0.0313609467455621
+,0.00384615384615385
+,0.00177514792899408
+,0.00177514792899408
+,0.00207100591715976
+,0.0162721893491124
+,0.00384615384615385
+,0.00414201183431953
+,0.00177514792899408
+,0.00177514792899408
+,0.00739644970414201
+,0.00236686390532544
+,0.00207100591715976
+,0.00414201183431953
+,0.00207100591715976
+,0.00414201183431953
+,0.00177514792899408
+,0.00236686390532544
+,0.00562130177514793
+,0.00414201183431953
+,0.00266272189349112
+,0.00177514792899408
+,0.00532544378698225
+,0.0029585798816568
+,0.00177514792899408
+,0.0263313609467456
+,0.00650887573964497
+,0.0014792899408284
+,0.0029585798816568
+,0.00236686390532544
+,0.00473372781065089
+,0.0029585798816568
+,0.0029585798816568
+,0.00384615384615385
+,0.00236686390532544
+,0.00502958579881657
+,0.00384615384615385
+,0.00177514792899408
+,0.0174556213017751
+,0.00266272189349112
+,0.00325443786982249
+,0.00266272189349112
+,0.00532544378698225
+,0.00207100591715976
+,0.00769230769230769
+,0.00207100591715976
+,0.00266272189349112
+,0.00443786982248521
+,0.00384615384615385
+,0.00177514792899408
+,0.00207100591715976
+,0.00828402366863905
+,0.00207100591715976
+,0.00325443786982249
+,0.00266272189349112
+,0.00355029585798817
+,0.00177514792899408
+,0.00207100591715976
+,0.0029585798816568
+,0.0029585798816568
+,0.00976331360946746
+,0.00177514792899408
+,0.00177514792899408
+,0.00207100591715976
+,0.00414201183431953
+,0.00266272189349112
+,0.00177514792899408
+,0.00414201183431953
+,0.00266272189349112
+,0.00177514792899408
+,0.00266272189349112
+,0.00236686390532544
+,0.00355029585798817
+,0.0014792899408284
+,0.00562130177514793
+,0.00680473372781065
+,0.00502958579881657
+,0.00177514792899408
+,0.00769230769230769
+,0.00384615384615385
+,0.00355029585798817
+,0.0106508875739645
+,0.00680473372781065
+,0.0029585798816568
+,0.0014792899408284
+,0.00266272189349112
+,0.00236686390532544
+,0.00739644970414201
+,0.00177514792899408
+,0.0257396449704142
+,0.00207100591715976
+,0.00266272189349112
+,0.00384615384615385
+,0.0014792899408284
+,0.00177514792899408
+,0.00207100591715976
+,0.00502958579881657
+,0.00355029585798817
+,0.00798816568047337
+,0.00177514792899408
+,0.00473372781065089
+,0.00355029585798817
+,0.00857988165680473
+,0.00946745562130178
+,0.00414201183431953
+,0.00177514792899408
+,0.00828402366863905
+,0.00769230769230769
+,0.0150887573964497
+,0.0106508875739645
+,0.00236686390532544
+,0.00177514792899408
+,0.00236686390532544
+,0.00236686390532544
+,0.0029585798816568
+,0.0112426035502959
+,0.00177514792899408
+,0.00177514792899408
+,0.00355029585798817
+,0.00355029585798817
+,0.0029585798816568
+,0.00355029585798817
+,0.00769230769230769
+,0.0029585798816568
+,0.00236686390532544
+,0.0029585798816568
+,0.00325443786982249
+,0.00236686390532544
+,0.00384615384615385
+,0.0029585798816568
+,0.00177514792899408
+,0.0245562130177515
+,0.00502958579881657
+,0.00177514792899408
+,0.00473372781065089
+,0.00236686390532544
+,0.00236686390532544
+,0.00384615384615385
+,0.00502958579881657
+,0.00502958579881657
+,0.00236686390532544
+,0.0183431952662722
+,0.0100591715976331
+,0.00976331360946746
+,0.00266272189349112
+,0.00384615384615385
+,0.00769230769230769
+,0.00177514792899408
+,0.00414201183431953
+,0.00177514792899408
+,0.00384615384615385
+,0.0127218934911243
+,0.00621301775147929
+,0.0029585798816568
+,0.0029585798816568
+,0.00177514792899408
+,0.00414201183431953
+,0.00207100591715976
+,0.00473372781065089
+,0.00443786982248521
+,0.00207100591715976
+,0.00207100591715976
+,0.00680473372781065
+,0.00266272189349112
+,0.00621301775147929
+,0.00207100591715976
+,0.00207100591715976
+,0.00798816568047337
+,0.00207100591715976
+,0.0014792899408284
+,0.00355029585798817
+,0.0029585798816568
+,0.00384615384615385
+,0.00207100591715976
+,0.00502958579881657
+,0.00177514792899408
+,0.00177514792899408
+,0.00591715976331361
+,0.00828402366863905
+,0.0177514792899408
+,0.00207100591715976
+,0.00207100591715976
+,0.00266272189349112
+,0.00207100591715976
+,0.00473372781065089
+,0.00118343195266272
+,0.00177514792899408
+,0.0029585798816568
+,0.00710059171597633
+,0.00177514792899408
+,0.00325443786982249
+,0.00384615384615385
+,0.00177514792899408
+,0.00207100591715976
+,0.00355029585798817
+,0.0029585798816568
+,0.00384615384615385
+,0.00502958579881657
+,0.00680473372781065
+,0.00325443786982249
+,0.00325443786982249
+,0.00177514792899408
+,0.00325443786982249
+,0.0254437869822485
+,0.00177514792899408
+,0.00266272189349112
+,0.0124260355029586
+,0.00355029585798817
+,0.00236686390532544
+,0.121005917159763
+,0.00857988165680473
+,0.00355029585798817
+,0.00325443786982249
+,0.00917159763313609
+,0.00207100591715976
+,0.00266272189349112
+,0.00355029585798817
+,0.00177514792899408
+,0.0109467455621302
+,0.0029585798816568
+,0.00532544378698225
+,0.00207100591715976
+,0.00325443786982249
+,0.00355029585798817
+,0.0523668639053254
+,0.00207100591715976
+,0.00266272189349112
+,0.00443786982248521
+,0.00207100591715976
+,0.00502958579881657
+,0.00177514792899408
+,0.00384615384615385
+,0.00207100591715976
+,0.00710059171597633
+,0.00325443786982249
+,0.0118343195266272
+,0.00769230769230769
+,0.00266272189349112
+,0.0218934911242604
+,0.0029585798816568
+,0.00473372781065089
+,0.00946745562130178
+,0.00355029585798817
+,0.0115384615384615
+,0.00177514792899408
+,0.00502958579881657
+,0.00443786982248521
+,0.00384615384615385
+,0.00266272189349112
+,0.0014792899408284
+,0.00562130177514793
+,0.00207100591715976
+,0.0029585798816568
+,0.00207100591715976
+,0.00591715976331361
+,0.00502958579881657
+,0.00355029585798817
+,0.00177514792899408
+,0.00650887573964497
+,0.0118343195266272
+,0.00266272189349112
+,0.00473372781065089
+,0.00355029585798817
+,0.0568047337278107
+,0.00502958579881657
+,0.00266272189349112
+,0.0014792899408284
+,0.00532544378698225
+,0.00207100591715976
+,0.00355029585798817
+,0.00355029585798817
+,0.00325443786982249
+,0.0115384615384615
+,0.00118343195266272
+,0.00266272189349112
+,0.00325443786982249
+,0.00177514792899408
+,0.00266272189349112
+,0.00591715976331361
+,0.00207100591715976
+,0.0029585798816568
+,0.00621301775147929
+,0.00325443786982249
+,0.00177514792899408
+,0.00177514792899408
+,0.00650887573964497
+,0.0594674556213018
+,0.00384615384615385
+,0.0118343195266272
+,0.00562130177514793
+,0.110059171597633
+,0.00177514792899408
+,0.00266272189349112
+,0.0106508875739645
+,0.00473372781065089
+,0.00207100591715976
+,0.00177514792899408
+,0.00236686390532544
+,0.148224852071006
+,0.00355029585798817
+,0.00177514792899408
+,0.00710059171597633
+,0.00207100591715976
+,0.00177514792899408
+,0.00266272189349112
+,0.00857988165680473
+,0.00236686390532544
+,0.00739644970414201
+,0.00177514792899408
+,0.0144970414201183
+,0.00177514792899408
+,0.00325443786982249
+,0.0109467455621302
+,0.00355029585798817
+,0.00207100591715976
+,0.00473372781065089
+,0.00798816568047337
+,0.00473372781065089
+,0.00266272189349112
+,0.00177514792899408
+,0.0150887573964497
+,0.00532544378698225
+,0.00739644970414201
+,0.00236686390532544
+,0.0754437869822485
+,0.00177514792899408
+,0.00739644970414201
+,0.0301775147928994
+,0.00532544378698225
+,0.00236686390532544
+,0.00473372781065089
+,0.0029585798816568
+,0.00443786982248521
+,0.00502958579881657
+,0.00532544378698225
+,0.0174556213017751
+,0.00207100591715976
+,0.00562130177514793
+,0.0192307692307692
+,0.00207100591715976
+,0.00414201183431953
+,0.00177514792899408
+,0.00177514792899408
+,0.0118343195266272
+,0.0029585798816568
+,0.00680473372781065
+,0.00591715976331361
+,0.0130177514792899
+,0.00177514792899408
+,0.00236686390532544
+,0.00325443786982249
+,0.0180473372781065
+,0.00177514792899408
+,0.00177514792899408
+,0.00236686390532544
+,0.00266272189349112
+,0.00384615384615385
+,0.00266272189349112
+,0.0029585798816568
+,0.00177514792899408
+,0.00325443786982249
+,0.00118343195266272
+,0.00384615384615385
+,0.00414201183431953
+,0.00207100591715976
+,0.00177514792899408
+,0.0014792899408284
+,0.0292899408284024
+,0.0029585798816568
+,0.00207100591715976
+,0.0144970414201183
+,0.00414201183431953
+,0.0029585798816568
+,0.00207100591715976
+,0.00355029585798817
+,0.00177514792899408
+,0.00384615384615385
+,0.0118343195266272
+,0.00266272189349112
+,0.00887573964497041
+,0.00710059171597633
+,0.0014792899408284
+,0.00650887573964497
+,0.00325443786982249
+,0.00355029585798817
+,0.00177514792899408
+,0.00355029585798817
+,0.00177514792899408
+,0.00384615384615385
+,0.00177514792899408
+,0.0313609467455621
+,0.0162721893491124
+,0.00562130177514793
+,0.00236686390532544
+,0.0357988165680473
+,0.00236686390532544
+,0.00473372781065089
+,0.00207100591715976
+,0.00680473372781065
+,0.00355029585798817
+,0.00384615384615385
+,0.00532544378698225
+,0.00177514792899408
+,0.00739644970414201
+,0.00946745562130178
+,0.00384615384615385
+,0.00473372781065089
+,0.00443786982248521
+,0.00473372781065089
+,0.00680473372781065
+,0.00355029585798817
+,0.0029585798816568
+,0.00236686390532544
+,0.00384615384615385
+,0.00266272189349112
+,0.00266272189349112
+,0.0402366863905325
+,0.00207100591715976
+,0.00236686390532544
+,0.0242603550295858
+,0.0218934911242604
+,0.0121301775147929
+,0.00266272189349112
+,0.00621301775147929
+,0.00207100591715976
+,0.00236686390532544
+,0.00414201183431953
+,0.00266272189349112
+,0.00266272189349112
+,0.00236686390532544
+,0.00473372781065089
+,0.00739644970414201
+,0.00236686390532544
+,0.00177514792899408
+,0.00236686390532544
+,0.00207100591715976
+,0.00562130177514793
+,0.00177514792899408
+,0.0150887573964497
+,0.00266272189349112
+,0.00828402366863905
+,0.0029585798816568
+,0.00443786982248521
+,0.00355029585798817
+,0.0029585798816568
+,0.00207100591715976
+,0.00443786982248521
+,0.00177514792899408
+,0.00266272189349112
+,0.0189349112426036
+,0.00236686390532544
+,0.00177514792899408
+,0.0804733727810651
+,0.0029585798816568
+,0.00207100591715976
+,0.0014792899408284
+,0.00532544378698225
+,0.000887573964497041
+,0.00266272189349112
+,0.00177514792899408
+,0.00798816568047337
+,0.00236686390532544
+,0.0029585798816568
+,0.00207100591715976
+,0.0029585798816568
+,0.00325443786982249
+,0.00502958579881657
+,0.00177514792899408
+,0.00828402366863905
+,0.0162721893491124
+,0.10887573964497
+,0.00650887573964497
+,0.00236686390532544
+,0.0118343195266272
+,0.00325443786982249
+,0.0446745562130178
+,0.00266272189349112
+,0.00384615384615385
+,0.0103550295857988
+,0.0881656804733728
+,0.00236686390532544
+,0.0014792899408284
+,0.00207100591715976
+,0.00177514792899408
+,0.00355029585798817
+,0.0029585798816568
+,0.00118343195266272
+,0.181656804733728
+,0.00207100591715976
+,0.00236686390532544
+,0.0029585798816568
+,0.0189349112426036
+,0.00266272189349112
+,0.00177514792899408
+,0.00207100591715976
+,0.00502958579881657
+,0.0618343195266272
+,0.013905325443787
+,0.0109467455621302
+,0.00857988165680473
+,0.00266272189349112
+,0.00325443786982249
+,0.0130177514792899
+,0.00207100591715976
+,0.0130177514792899
+,0.0029585798816568
+,0.00266272189349112
+,0.0180473372781065
+,0.0168639053254438
+,0.00917159763313609
+,0.00384615384615385
+,0.0313609467455621
+,0.00384615384615385
+,0.00177514792899408
+,0.0014792899408284
+,0.00414201183431953
+,0.00177514792899408
+,0.00236686390532544
+,0.00384615384615385
+,0.00177514792899408
+,0.00207100591715976
+,0.00384615384615385
+,0.00177514792899408
+,0.00177514792899408
+,0.00502958579881657
+,0.00562130177514793
+,0.00177514792899408
+,0.00325443786982249
+,0.0144970414201183
+,0.00266272189349112
+,0.00591715976331361
+,0.00680473372781065
+,0.00236686390532544
+,0.00621301775147929
+,0.00207100591715976
+,0.00798816568047337
+,0.00680473372781065
+,0.00207100591715976
+,0.00414201183431953
+,0.00236686390532544
+,0.00384615384615385
+,0.00266272189349112
+,0.00177514792899408
+,0.00236686390532544
+,0.00236686390532544
+,0.0029585798816568
+,0.00443786982248521
+,0.00177514792899408
+,0.00236686390532544
+,0.0118343195266272
+,0.00650887573964497
+,0.0153846153846154
+,0.00177514792899408
+,0.00236686390532544
+,0.00384615384615385
+,0.00236686390532544
+,0.00355029585798817
+,0.00236686390532544
+,0.00177514792899408
+,0.0029585798816568
+,0.00236686390532544
+,0.00414201183431953
+,0.00502958579881657
+,0.00325443786982249
+,0.00207100591715976
+,0.00355029585798817
+,0.00177514792899408
+,0.0029585798816568
+,0.00177514792899408
+,0.00976331360946746
+,0.00266272189349112
+,0.00502958579881657
+,0.00236686390532544
+,0.00207100591715976
+,0.00266272189349112
+,0.00680473372781065
+,0.0029585798816568
+,0.0029585798816568
+,0.00355029585798817
+,0.0236686390532544
+,0.00177514792899408
+,0.0029585798816568
+,0.00650887573964497
+,0.00236686390532544
+,0.00177514792899408
+,0.00828402366863905
+,0.00443786982248521
+,0.00502958579881657
+,0.00562130177514793
+,0.00443786982248521
+,0.00266272189349112
+,0.00443786982248521
+,0.00177514792899408
+,0.00443786982248521
+,0.00355029585798817
+,0.00207100591715976
+,0.00236686390532544
+,0.0029585798816568
+,0.00266272189349112
+,0.0109467455621302
+,0.00236686390532544
+,0.0014792899408284
+,0.013905325443787
+,0.00798816568047337
+,0.00177514792899408
+,0.0029585798816568
+,0.00207100591715976
+,0.00236686390532544
+,0.00532544378698225
+,0.00384615384615385
+,0.00355029585798817
+,0.00739644970414201
+,0.00236686390532544
+,0.00236686390532544
+,0.00207100591715976
+,0.00680473372781065
+,0.00917159763313609
+,0.00266272189349112
+,0.00325443786982249
+,0.00384615384615385
+,0.00177514792899408
+,0.0642011834319527
+,0.0014792899408284
+,0.00355029585798817
+,0.00177514792899408
+,0.00236686390532544
+,0.00177514792899408
+,0.00118343195266272
+,0.00710059171597633
+,0.0298816568047337
+,0.00266272189349112
+,0.00207100591715976
+,0.00798816568047337
+,0.00414201183431953
+,0.00236686390532544
+,0.00591715976331361
+,0.00680473372781065
+,0.00591715976331361
+,0.00266272189349112
+,0.00177514792899408
+,0.00710059171597633
+,0.00384615384615385
+,0.00118343195266272
+,0.00266272189349112
+,0.00414201183431953
+,0.00236686390532544
+,0.0029585798816568
+,0.00177514792899408
+,0.00355029585798817
+,0.00266272189349112
+,0.00591715976331361
+,0.00443786982248521
+,0.0029585798816568
+,0.00562130177514793
+,0.0029585798816568
+,0.0029585798816568
+,0.00177514792899408
+,0.00236686390532544
+,0.00857988165680473
+,0.00207100591715976
+,0.0227810650887574
+,0.00443786982248521
+,0.00266272189349112
+,0.00177514792899408
+,0.00473372781065089
+,0.00177514792899408
+,0.0029585798816568
+,0.00325443786982249
+,0.00236686390532544
+,0.00236686390532544
+,0.00355029585798817
+,0.0029585798816568
+,0.00414201183431953
+,0.00177514792899408
+,0.00207100591715976
+,0.00177514792899408
+,0.00207100591715976
+,0.0014792899408284
+,0.00207100591715976
+,0.00355029585798817
+,0.00443786982248521
+,0.00177514792899408
+,0.00207100591715976
+,0.00177514792899408
+,0.00710059171597633
+,0.00236686390532544
+,0.00177514792899408
+,0.00236686390532544
+,0.00266272189349112
+,0.00532544378698225
+,0.00207100591715976
+,0.0029585798816568
+,0.00443786982248521
+,0.00414201183431953
+,0.00828402366863905
+,0.0029585798816568
+,0.00177514792899408
+,0.00236686390532544
+,0.00207100591715976
+,0.00266272189349112
+,0.0210059171597633
+,0.00207100591715976
+,0.00384615384615385
+,0.00266272189349112
+,0.00177514792899408
+,0.00177514792899408
+,0.0029585798816568
+,0.0029585798816568
+,0.021301775147929
+,0.00207100591715976
+,0.00355029585798817
+,0.00266272189349112
+,0.00177514792899408
+,0.00177514792899408
+,0.00443786982248521
+,0.00591715976331361
+,0.00798816568047337
+,0.00236686390532544
+,0.0115384615384615
+,0.000887573964497041
+,0.00177514792899408
+,0.0029585798816568
+,0.00355029585798817
+,0.00443786982248521
+,0.00207100591715976
+,0.0254437869822485
+,0.221597633136095
+,0.00325443786982249
+,0.00621301775147929
+,0.00325443786982249
+,0.00532544378698225
+,0.00236686390532544
+,0.00502958579881657
+,0.00236686390532544
+,0.0103550295857988
+,0.00443786982248521
+,0.014792899408284
+,0.00355029585798817
+,0.00177514792899408
+,0.00236686390532544
+,0.0014792899408284
+,0.00414201183431953
+,0.0136094674556213
+,0.00857988165680473
+,0.00591715976331361
+,0.119526627218935
+,0.00591715976331361
+,0.00236686390532544
+,0.00680473372781065
+,0.00621301775147929
+,0.00177514792899408
+,0.00177514792899408
+,0.00236686390532544
+,0.00266272189349112
+,0.0112426035502959
+,0.00443786982248521
+,0.00207100591715976
+,0.00177514792899408
+,0.00177514792899408
+,0.00236686390532544
+,0.00177514792899408
+,0.00207100591715976
+,0.00177514792899408
+,0.00473372781065089
+,0.00473372781065089
+,0.00443786982248521
+,0.0100591715976331
+,0.0103550295857988
+,0.00650887573964497
+,0.0236686390532544
+,0.0304733727810651
+,0.00798816568047337
+,0.00591715976331361
+,0.00621301775147929
+,0.00177514792899408
+,0.00177514792899408
+,0.0029585798816568
+,0.0144970414201183
+,0.00946745562130178
+,0.00207100591715976
+,0.00798816568047337
+,0.0014792899408284
+,0.00177514792899408
+,0.0189349112426036
+,0.00355029585798817
+,0.0029585798816568
+,0.00207100591715976
+,0.0014792899408284
+,0.0029585798816568
+,0.00207100591715976
+,0.00266272189349112
+,0.00325443786982249
+,0.00177514792899408
+,0.00207100591715976
+,0.00207100591715976
+,0.00177514792899408
+,0.0210059171597633
+,0.00325443786982249
+,0.00355029585798817
+,0.00177514792899408
+,0.00207100591715976
+,0.0014792899408284
+,0.00414201183431953
+,0.00443786982248521
+,0.00207100591715976
+,0.00355029585798817
+,0.00266272189349112
+,0.00266272189349112
+,0.00207100591715976
+,0.00177514792899408
+,0.00384615384615385
+,0.0263313609467456
+,0.0029585798816568
+,0.00650887573964497
+,0.00473372781065089
+,0.00207100591715976
+,0.00384615384615385
+,0.00384615384615385
+,0.00177514792899408
+,0.0162721893491124
+,0.00680473372781065
+,0.00325443786982249
+,0.00207100591715976
+,0.00177514792899408
+,0.0192307692307692
+,0.00266272189349112
+,0.00443786982248521
+,0.0156804733727811
+,0.00177514792899408
+,0.0470414201183432
+,0.00236686390532544
+,0.00266272189349112
+,0.0029585798816568
+,0.0109467455621302
+,0.00946745562130178
+,0.00325443786982249
+,0.0381656804733728
+,0.00177514792899408
+,0.00502958579881657
+,0.0248520710059172
+,0.0029585798816568
+,0.00207100591715976
+,0.00355029585798817
+,0.0014792899408284
+,0.0156804733727811
+,0.00443786982248521
+,0.00029585798816568
+,0.00236686390532544
+,0.00828402366863905
+,0.00355029585798817
+,0.0571005917159763
+,0.00591715976331361
+,0.0257396449704142
+,0.0428994082840237
+,0.00325443786982249
+,0.00532544378698225
+,0.00236686390532544
+,0.00177514792899408
+,0.00177514792899408
+,0.4828049982974100
+,0.4828049982974100
+,0.00177514792899408
+,0.00177514792899408
+,0.00384615384615385
+,0.00532544378698225
+,0.00207100591715976
+,0.00384615384615385
+,0.0109467455621302
+,0.000887573964497041
+,0.00207100591715976};
+
+  
+
+
+}

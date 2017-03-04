@@ -1,0 +1,198 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ * 
+ */
+
+//This site may be useful http://how-to-spell.net/meningitis
+package user_interface;
+
+import javax.swing.JOptionPane;
+import twitter.tweet;
+import gui.JobFileIO;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class keyword_filter implements tweetfilter{
+
+    public keyword_filter(twitterprocess next, String keys)
+    {
+        keywords = null;
+        type = keys;
+        this.next = next;
+        total = 0;
+        filtered = 0;
+        keys = keys.toUpperCase();
+        
+        /*switch(keys.toUpperCase())
+        {
+            case "FLU": 
+                keywords = flu;
+                break;
+            case "WEATHER":
+                keywords = weather;
+                break;
+            case "POLITICAL":
+                keywords = political;
+                break;
+        }*/
+        
+        //jvm 6.0 compatability
+        if(keys.equals("FLU"))
+            keywords = flu;
+        
+        if(keys.equals("WEATHER"))
+            keywords = weather;
+        
+        if(keys.equals("ZOMBIE"))
+            keywords = zombie;
+        
+        if(keys.equals("AVENGERS"))
+            keywords = avengers;
+        
+        if(keys.equals("OBAMA"))
+            keywords = obama;
+        
+        if(keys.equals("CONTAGION"))
+            keywords = contagion;
+        
+        if(keys.equals("STARWARS"))
+            keywords = starwars;
+        
+        if(keys.equals("TWILIGHT"))
+            keywords = twilight;
+        
+        if(keys.equals("MINIFLU"))
+            keywords = miniflu;
+        
+        if(keys.equals("MENIG"))
+            keywords = menigitis;
+        
+        if(keys.equals("H7N9"))
+            keywords = new String[]{"H7N9"};
+        
+        if(keys.equals("NULL"))
+            keywords = new String[]{};
+        
+       // if(keywords == null)
+         //   throw new TwitterMessage("Keywords \""+keys+"\" not found");
+    }
+    public keyword_filter(twitterprocess next)
+    {
+        this(next,"flu");
+    }
+    public void consume(tweet t) throws TwitterMessage {
+        total++;
+        String text = " "+t.text.toUpperCase()+" ";
+        text = text.replace(".", " ");
+        text = text.replace(",", " ");
+        text = text.replace(";", " ");
+        text = text.replace(":", " ");
+        text = text.replace("(", " ");
+        text = text.replace(")", " ");
+        text = text.replace("-", " ");
+        text = text.replace("[", " ");
+        text = text.replace("]", " ");
+        text = text.replace("!", " ");
+        text = text.replace("@", " ");
+        text = text.replace("#", " ");
+        text = text.replace("$", " ");
+        text = text.replace("%", " ");
+        text = text.replace("^", " ");
+        text = text.replace("&", " ");
+        text = text.replace("*", " ");
+        text = text.replace("\\", " ");        
+        text = text.replace("/", " ");
+        text = text.replace("?", " ");
+        text = text.replace("~", " ");
+        text = text.replace("`", " ");
+        text = text.replace("_", " ");
+        text = text.replace("+", " ");
+        text = text.replace("=", " ");
+        text = text.replace("<", " ");
+        text = text.replace(">", " ");
+        text = text.replace("{", " ");
+        text = text.replace("}", " ");
+        text = text.replace("'", " ");
+        text = text.replace("\"", " ");
+        
+        for(String key:keywords)
+        {
+            if(text.contains(" "+key+" "))
+            {
+                filtered++;
+                next.consume(t);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public String end() {
+        return "Keyword filter: \n\nSelected "+filtered+"/"+total+" = "+(1.0*filtered/total)+" tweets\n"+next.end();
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return next.quitAtEnd();
+    }
+    twitterprocess next;
+    long total,filtered;
+    
+    public String type,nextProcess;  
+    //public String[] keywords = {"SICK","HEADACHE","FLU","COUGH","FEVER","COUGHING","SORE THROAT","CHILLS","INFLUENZA","H5N1","SWINE FLU","SORETHROAT","H1N1","FLU SHOT","SWINEFLU","H3N2","FLUSHOT","H1N2","ILL","ILLNESS", "COUGHED"};
+    public String[] flu = {"SICK","HEADACHE","FLU","COUGH","FEVER","COUGHING","SORE THROAT","CHILLS","INFLUENZA","H5N1","SWINE FLU","SORETHROAT","H1N1","FLU SHOT","SWINEFLU","H3N2","FLUSHOT","H1N2","ILLNESS", "COUGHED", "H7N9"};
+    public String[] weather = {"HOT","COLD","WEATHER","RAIN","SUN","SNOW","STORM","HURRICANE","WIND","CLOUD","WARM"};
+    public String[] political = {};
+    public String[] miniflu = {"FLU","SWINE","INFLUENZA","VACCINE","TAMIFLU","OSELTAMIVIR","ZANAMIVIR","RELENZA","AMANTADINE","RIMANTADINE","PNEUMONIA","H1N1","SYMPTOM","SYNDROME","ILLNESS"};
+    public String[] zombie = {"ZOMBIE","ZOMBIES","UNDEAD","ZED"};
+    public String[] avengers = {"IRON","HULK","THOR","AVENGERS","STARK","MARVEL","IRONMAN","SHIELD"};
+    public String[] obama = {"OBAMA","PRESIDENT","BARACK","OBAMACARE","WHITEHOUSE"};
+    public String[] contagion = {"CONTAGION","CONTAGIONMOVIE"};
+    public String[] starwars = {"STARWARS","R2D2","KOTOR","LIGHTSABER","SKYWALKER","STARKILLER","ANIKIN","WOOKIEE","C3P0","C3PO"};
+    public String[] twilight = {"TWILIGHT","BELLA","TEAMJACOB","TEAMEDWARD","VAMPIRE","VAMPIRES"};
+    public String[] menigitis = {"MENINGITIS","AMERIDOSE","NECC","FUNGAL","MENIGITIS","NENENGITIS","MENEGITIS","MENNINGITIS","MENINGITES","MENINGITUS","MENANGITIS","MENINIGITIS","MINIGITIS","MENNIGITIS","MENENGITUS","MENNINGITAS","MENINGITAS","MENINGITOUS","MENINMGITISI","MENINGITIDIS"}; //(misspellings included)
+    public String[] keywords = null;
+
+    @Override
+    public String buttonMenu() {
+        return "Keyword Filter";
+    }
+    
+    public String toString()
+    {
+        return "Filter "+type+" -> "+next;
+    }
+
+    @Override
+    public twitterprocess clone() {
+        
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public String toolTip()
+    {
+        return "Filters based on a set of keywords";
+    }
+
+    public tweetfilter clone(twitterprocess next){
+        
+        String k = JOptionPane.showInputDialog("Which filter? (flu,weather,zombie,menig)");
+        keyword_filter f = new keyword_filter(next,k);
+
+        f.type = k;
+        return f;
+    }
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        return new keyword_filter(JobFileIO.load(in.split(":")[1]),in.split(":")[0]);
+    }
+
+    @Override
+    public String save() {
+        return type+":"+next.buttonMenu()+";"+next.save();
+    }
+}

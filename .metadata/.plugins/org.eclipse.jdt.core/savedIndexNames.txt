@@ -1,0 +1,2 @@
+INDEX VERSION 1.129+/home/drosoneuro/Dropbox/UZH_Master/Masterarbeit/TwitterEpi/.metadata/.plugins/org.eclipse.jdt.core
+501989877.index

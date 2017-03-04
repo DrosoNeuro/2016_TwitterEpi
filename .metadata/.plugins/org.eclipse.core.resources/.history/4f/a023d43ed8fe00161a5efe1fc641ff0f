@@ -1,0 +1,133 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import classification.classifier;
+import classification.wekaClassifier;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class classify_filter implements tweetfilter{
+    public classify_filter(twitterprocess next, File filter)
+    {
+        this.next = next;
+        total = 0;
+        filtered = 0;
+        classified=0;
+        try {
+            classify = new wekaClassifier(filter);
+        }  catch (Exception ex) {
+            Logger.getLogger(classify_filter.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(-7);
+        }
+        
+    }
+
+        public void consume(tweet t) throws TwitterMessage {
+        total++;
+        String text = " "+t.text.toUpperCase()+" ";
+        text = text.replace(".", " ");
+        text = text.replace(",", " ");
+        text = text.replace(";", " ");
+        text = text.replace(":", " ");
+        text = text.replace("(", " ");
+        text = text.replace(")", " ");
+        text = text.replace("-", " ");
+        text = text.replace("[", " ");
+        text = text.replace("]", " ");
+        text = text.replace("!", " ");
+        text = text.replace("@", " ");
+        text = text.replace("#", " ");
+        text = text.replace("$", " ");
+        text = text.replace("%", " ");
+        text = text.replace("^", " ");
+        text = text.replace("&", " ");
+        text = text.replace("*", " ");
+        text = text.replace("\\", " ");        
+        text = text.replace("/", " ");
+        text = text.replace("?", " ");
+        text = text.replace("~", " ");
+        text = text.replace("`", " ");
+        text = text.replace("_", " ");
+        text = text.replace("+", " ");
+        text = text.replace("=", " ");
+        text = text.replace("<", " ");
+        text = text.replace(">", " ");
+        text = text.replace("{", " ");
+        text = text.replace("}", " ");
+        
+        for(String key:keywords)
+        {
+            if(text.contains(" "+key+" "))
+            {
+                filtered++;
+                try {
+                    if(classify.getProbability(t.text)>=.5)
+                    {
+                        classified++;
+                        next.consume(t);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(classify_filter.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    public String end() {
+        return "Classify filter: \nFiltered "+filtered+"/"+total+" = "+(1.0*filtered/total)+" tweets\nPositive "+classified+"/"+filtered+" = "+(1.0*classified/filtered)+"\n"+next.end();
+    }
+    
+    public String toolTip()
+    {
+        return "Filters tweets to only those that have been positivly classified";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return next.quitAtEnd();
+    }
+    twitterprocess next;
+    classifier classify;
+    long total,filtered,classified;
+    
+    //public String[] keywords = {"SICK","HEADACHE","FLU","COUGH","FEVER","COUGHING","SORE THROAT","CHILLS","INFLUENZA","H5N1","SWINE FLU","SORETHROAT","H1N1","FLU SHOT","SWINEFLU","H3N2","FLUSHOT","H1N2","ILL","ILLNESS", "COUGHED"};
+    public String[] keywords = {"SICK","HEADACHE","FLU","COUGH","FEVER","COUGHING","SORE THROAT","CHILLS","INFLUENZA","H5N1","SWINE FLU","SORETHROAT","H1N1","FLU SHOT","SWINEFLU","H3N2","FLUSHOT","H1N2","ILLNESS", "COUGHED"};
+
+    @Override
+    public tweetfilter clone(twitterprocess next) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String buttonMenu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+}

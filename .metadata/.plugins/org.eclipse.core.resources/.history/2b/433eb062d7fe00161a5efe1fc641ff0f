@@ -1,0 +1,41 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import user_parser.user;
+import user_parser.userProcess;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class printDiscription implements userProcess{
+
+    @Override
+    public String getName() {
+        return "printDescription";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Prints the user's description to stdout";
+    }
+
+    @Override
+    public void process(user u) {
+        System.out.println(u.description);
+    }
+
+    @Override
+    public String end() {
+        return "";
+    }
+
+    @Override
+    public userProcess clone() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}

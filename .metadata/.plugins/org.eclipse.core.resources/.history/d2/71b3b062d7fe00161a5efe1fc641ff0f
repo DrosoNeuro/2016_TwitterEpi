@@ -1,0 +1,105 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import toddSon.JSonObject;
+
+/**
+ * Reverse of twitter4j's user's toString() function
+ * @author toddbodnar
+ */
+public class user extends twitter.user{
+    
+    
+    /**
+     * This function's a bit of a hack, because twitter4j doesn't escape their quotes
+     * finds the first instance of key in json. Then it finds the next key (in a predefined 
+     * set of keys) in the json, then returns what's between them
+     * @param json
+     * @param key
+     * @return 
+     */
+    private String getValueFromKey(String json, String key) throws java.lang.StringIndexOutOfBoundsException
+    {
+        //TODO: find all of these keys!
+        String keys[] = new String[]{", isProtected=",", lang=",", isFollowRequestSent=",", utcOffset=",", listedCount=",", name='",", isGeoEnabled=",", createdAt",", status=",", id=",", location='", ", description='",", followersCount=",", friendsCount=",", statusesCount=",", favouritesCount=" ,", isVerified=",", screenName='",", isContributorsEnabled="};
+                
+       int start = json.indexOf(key)+key.length();
+       int next = json.length();
+        for(String nextKey:keys)
+        {
+            int location = json.indexOf(nextKey);
+            if(location > start && location < next)
+                next = location;
+        }
+        String result =  json.substring(start,next);
+        if(result.charAt(result.length()-1)=='\'')
+            result = result.substring(0, result.length()-1);
+        
+        return result;
+    }
+    public user(String json) throws IOException,java.lang.StringIndexOutOfBoundsException
+    {
+        if(json == null)
+            throw new IOException();
+        name = getValueFromKey(json," name='");
+        screen_name = getValueFromKey(json, ", screenName='");
+        
+        
+        description = getValueFromKey(json, ", description='");
+        
+        super.id_str = (getValueFromKey(json,"id="));
+        id = id_str;
+        location = getValueFromKey(json, "location='");
+        
+       
+        followers_count = (int) Long.parseLong(getValueFromKey(json, ", followersCount="));
+        friends_count = (int) Long.parseLong(getValueFromKey(json, ", friendsCount="));
+       // System.out.println(getValueFromKey(json, ", statusesCount="));
+        try{
+        super.status_count = (int) Long.parseLong(getValueFromKey(json, ", statusesCount="));
+        super.favourites_count = (int) Long.parseLong(getValueFromKey(json, ", favouritesCount="));
+        
+        listed_count = (int) Long.parseLong(getValueFromKey(json, ", listedCount="));
+        
+        isVerified = Boolean.parseBoolean(getValueFromKey(json, ", isVerified="));
+        isContributorsEnabled = Boolean.parseBoolean(getValueFromKey(json, ", isContributorsEnabled="));
+        
+        lang = getValueFromKey(json, ", lang='");
+        language = lang;
+        }catch(Exception e){status_count=-1;}
+        url = getValueFromKey(json, ", url='");
+        //System.out.println(url);
+        url = longURL.longURL.query(url);
+        
+        topLevelDomain = "null";
+        
+        try
+        {
+            URL u = new URL(url);
+            String hosts[] = u.getHost().split("\\.");
+           // System.out.println(hosts.length);
+            topLevelDomain = hosts[hosts.length-1];
+        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+   // public String description,name,id,location,screen_name,language, url, topLevelDomain;
+    //public long followersCount, friendsCount, statusesCount, favouritesCount, listedCount;
+    public boolean isContributorsEnabled, isVerified;
+     public    String language,id;
+        
+    public static void main(String args[]) throws IOException
+    {
+        user u = new user("UserJSONImpl{id=71305694, name='(´･ω･`) ', screenName='___kao', location='Lille, Paris, France', description='_____ La passion de glandage, l'horreur du partage._____ PlanetSide 2 - Deimos Corp. // Retlz99', isContributorsEnabled=false, profileImageUrl='http://a0.twimg.com/profile_images/3604049045/959a0fa113cab9ca220230084c578a43_normal.png', profileImageUrlHttps='https://twimg0-a.akamaihd.net/profile_images/3604049045/959a0fa113cab9ca220230084c578a43_normal.png', url='http://battleangelalita.tumblr.com/', isProtected=false, followersCount=159, status=StatusJSONImpl{createdAt=Tue May 07 13:55:50 EDT 2013, id=331829742565212161, text='@Emiryon quoi donc? :o', source='web', isTruncated=false, inReplyToStatusId=331827908639354880, inReplyToUserId=57320282, isFavorited=false, inReplyToScreenName='Emiryon', geoLocation=null, place=null, retweetCount=0, isPossiblySensitive=false, contributorsIDs=[J@166355f1, retweetedStatus=null, userMentionEntities=[UserMentionEntityJSONImpl{name='VII', screenName='Emiryon', id=57320282}], urlEntities=[], hashtagEntities=[], mediaEntities=[], currentUserRetweetId=-1, user=null}, profileBackgroundColor='242929', profileTextColor='FFFFFF', profileLinkColor='0084B4', profileSidebarFillColor='2B2A2B', profileSidebarBorderColor='000000', profileUseBackgroundImage=true, showAllInlineMedia=false, friendsCount=140, createdAt=Thu Sep 03 13:15:08 EDT 2009, favouritesCount=141, utcOffset=3600, timeZone='Paris', profileBackgroundImageUrl='http://a0.twimg.com/profile_background_images/289567060/battle_angel_by_zhoupeng-d31gb4m1.jpg', profileBackgroundImageUrlHttps='https://twimg0-a.akamaihd.net/profile_background_images/289567060/battle_angel_by_zhoupeng-d31gb4m1.jpg', profileBackgroundTiled=true, lang='fr', statusesCount=12476, isGeoEnabled=true, isVerified=false, translator=false, listedCount=10, isFollowRequestSent=false}");
+        //user u = new user("\"name\": \"Twitter API\",\"profile_sidebar_fill_color\": \"DDEEF6\",\"profile_background_tile\": false,\"profile_sidebar_border_color\": \"C0DEED\",\"profile_image_url\": \"http://a0.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_normal.png\",\"location\": \"San Francisco, CA\",\"created_at\": \"Wed May 23 06:01:13 +0000 2007\",\"follow_request_sent\": false,\"id_str\": \"6253282\",\"profile_link_color\": \"0084B4\", \"is_translator\": false,\"default_profile\": true,\"favourites_count\": 24,\"contributors_enabled\": true,\"url\": \"http://dev.twitter.com\",\"profile_image_url_https\": \"https://si0.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_normal.png\",\"utc_offset\": -28800,\"id\": 6253282,\"profile_use_background_image\": true,\"listed_count\": 10713,\"profile_text_color\": \"333333\", \"lang\": \"en\", \"followers_count\": 1198334,\"protected\": false,\"profile_background_image_url_https\": \"https://si0.twimg.com/images/themes/theme1/bg.png\",\"geo_enabled\": true,\"description\": \"The Real Twitter API. I tweet about API changes, service issues and happily answer questions about Twitter and our API. Don't get an answer? It's on my website.\",\"profile_background_color\": \"C0DEED\", \"verified\": true, \"notifications\": false, \"time_zone\": \"Pacific Time (US & Canada)\",\"statuses_count\": 3331, \"status\": {\"coordinates\": null,\"created_at\": \"Fri Aug 24 16:15:49 +0000 2012\",\"favorited\": false, \"truncated\": false,\"id_str\": \"239033279343382529\",\"in_reply_to_user_id_str\": \"134727529\",\"text\": \"@gregclermont no, there is not. ^TS\",\"contributors\": null,\"retweet_count\": 0,\"id\": 239033279343382529, \"in_reply_to_status_id_str\": \"238933943146131456\", \"geo\": null, \"retweeted\": false, \"in_reply_to_user_id\": 134727529,\"place\": null,\"source\": \"<a href=\\\"http://sites.google.com/site/yorufukurou/\\\" rel=\\\"nofollow\\\">YoruFukurou</a>\", \"in_reply_to_screen_name\": \"gregclermont\",\"in_reply_to_status_id\": 238933943146131456 }, \"profile_background_image_url\": \"http://a0.twimg.com/images/themes/theme1/bg.png\",\"default_profile_image\": false,\"friends_count\": 31,\"screen_name\": \"twitterapi\",\"following\": true,\"show_all_inline_media\": false");
+        System.out.println(u.id+","+u.name+","+u.url+","+u.topLevelDomain+","+u.description+","+u.location+","+u.followers_count+","+u.friends_count+","+u.status_count);
+    }
+}

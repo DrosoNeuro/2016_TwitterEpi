@@ -1,0 +1,47 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import user_interface.TwitterMessage;
+import user_interface.twitterprocess;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class addProcess extends JMenuItem{
+    public addProcess(twitterprocess t, List<twitterprocess> processes,JTextArea user)
+    {
+        super.setText(t.buttonMenu());
+        super.setToolTipText(t.toolTip());
+        prototype = t;
+        data = user;
+        process = processes;
+        super.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twitterprocess proc;
+                try {
+                    proc = prototype.clone();
+                    process.add(proc);
+                    data.setText(data.getText()+"\n"+proc.toString());
+                } catch (TwitterMessage ex) {
+                    Logger.getLogger(addProcess.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                }
+                
+            }
+        });
+    }
+    private twitterprocess prototype;
+    private List<twitterprocess> process;
+    private JTextArea data;
+}

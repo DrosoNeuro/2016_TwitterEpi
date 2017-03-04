@@ -1,0 +1,33 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser;
+
+import javax.swing.JFrame;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class testRun {
+    public static void main(String args[])
+    {
+        job j = new job("Test Job");
+        j.attachProcess(new user_parser.processors.makeUserTypeTrainingData());
+        //j.attachProcess(new user_parser.processors.makeRetweetCountTrainingData());
+        
+        
+        //settings.dataDirectory
+        JFrame jf = new JFrame();
+        main_panel p = new main_panel();
+        j.attachGUI(p);
+        jf.add(p);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setVisible(true);
+        j.setDataDirectory(settings.dataDirectory);
+        jobHandler.process(j, p);
+    }
+}
+
+

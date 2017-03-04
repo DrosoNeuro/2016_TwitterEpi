@@ -1,0 +1,48 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser;
+
+/**
+ * Like twitterProcess, MORE DESCRIPTION HERE
+ * @author toddbodnar
+ */
+public interface userProcess {
+    
+    /**
+     * The name of the process, what's called in the script / displayed in the menu
+     * @return 
+     */
+    public String getName();
+    
+    /**
+     * Hover text for gui
+     * @return 
+     */
+    public String getDescription();
+    
+    /**
+     * description of the job, used for scripting
+     * @return 
+     */
+    public String toString();
+    
+    /**
+     * Process a user
+     * @param u 
+     */
+    public void process(user u);
+    
+    /**
+     * Finish up
+     * @return any messages to return
+     */
+    public String end();
+    
+    /**
+     * Duplicates the process, but with new, user inputed settings
+     * @return 
+     */
+    public userProcess clone();
+}

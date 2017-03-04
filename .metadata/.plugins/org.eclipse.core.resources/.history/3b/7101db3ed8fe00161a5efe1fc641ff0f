@@ -1,0 +1,111 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package analysis;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import libsvm.svm;
+import libsvm.svm_model;
+import libsvm.svm_node;
+import libsvm.svm_parameter;
+import libsvm.svm_print_interface;
+import libsvm.svm_problem;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.functions.SMOreg;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.SelectedTag;
+
+/**
+ * Based off of data from week 1..n, what do we predict for week n+k?
+ * Where k = 1,2...
+ * 
+ * 
+ * data is from random sine waves, keyword frequencies as described in Signorini et al
+ * or keyword frequencies as described by Signorini, but from zombie tweets
+ * 
+ * @author toddbodnar
+ */
+public class svmLeaveOneOut {
+    
+
+    
+    
+    public static void main(String args[]) throws Exception
+    {
+        int dayOfFirstWeek = -1; //how far do we skip until we get to the data that we want to compare to
+        int k = 0; //how many days do we look ahead?
+        boolean bagging = false; //do we do a run of bootstrap aggregation?
+        File input = null; //the location of the data, or null if random sine waves
+        int repeats = 100;
+        repeats = 1;
+        
+        svmStuff.coef = 9;
+        svmStuff.gammamod = 1;
+        
+        double features[][];
+        for(int i =0;i<cdc.length;i++)
+            cdc[i] = cdc[i]*1;
+        
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(null);
+        input = jfc.getSelectedFile();
+        for(int i=0;i<repeats;i++){
+            
+        if(input == null)
+        {
+            features = svmStuff.generateDataSin(7500);
+            
+        }
+        else
+            features = svmStuff.getData(dayOfFirstWeek,input);
+        
+        System.out.println();
+        for(int ct=0;ct<38;ct++)
+        {
+            for(int ct2=0;ct2<50;ct2++){
+        //    System.out.print(features[ct][ct2]+",");
+            }
+          //  System.out.println(-1);
+           // System.out.print(features[(int)((Math.random()*100000)%features.length)][(int)((Math.random()*100000)%features[0].length)]+",");
+        }
+        System.out.println();
+        for(int ct=k;ct<cdc.length-k;ct++)
+        {
+            predictions[ct+k] = svmStuff.get(features,ct+k,svmStuff.getSVMR(features,ct*0+(cdc.length),ct));
+            if(repeats < 2)
+                System.out.println(ct+","+predictions[ct]+","+cdc[ct+k]);
+        }
+        
+        
+        if(repeats > 1)
+        {
+            System.out.print("lines(c(");
+            for(int ct=0;ct<predictions.length;ct++)
+            {
+                System.out.print(predictions[ct]);
+                if(ct<predictions.length-1)
+                    System.out.print(",");
+            }
+            System.out.println("), col = rgb(0,0,0,alpha=1))");
+        }
+        }
+    }
+    
+        
+    static double cdc[] = {1.135,1.174,1.266,1.277,1.419,1.391,1.446,1.555,1.319,1.471,1.647,1.844,2.132,1.753,1.553,1.636,1.760,1.953,1.917,2.128,2.249,2.240,2.205,2.436,1.977,1.863,1.696,1.546,1.392,1.321,1.462,1.404,1.279,1.252,1.311,1.176,1.120,1.209,1.026};
+static double predictions[] = new double[cdc.length];
+    
+    static final int totals[] = {881766,914740,906950,859007,768081,764855,819715,882353,919832,854002,898799,855957,851509,915486,927684,926805,946726,907809,849483,861142,961402,947508,938582,951662,971634,927704,883103,940490,909808,935392,993001,978062,942046,957810,1101146,1025499,1009700,1030416,996701,990366,959864,1073574,1024826,1029687,1086685,1039224,968064,982153,1122044,1083717,1087653,1136750,1101422,1023706,1124478,1175111,1158810,1155257,1092410,1126613,1047696,1068052,1209785,1170273,1150632,1137297,1147185,1064224,1084308,1168601,1127441,1119536,1052928,1106918,1025385,1016064,1115118,1115438,1120184,1172142,1175698,1130175,1132018,1046127,1021260,1189583,1219983,1267615,1269934,1171028,1208996,1314223,1273850,1008857,1231688,1171226,1200080,1299170,1290390,1191107,1197243,1191422,1158488,821247,1080562,1306722,1275007,1278192,1255265,1170184,1225134,1317433,1295366,1271657,1276185,1241247,1169752,1154803,1287637,1254166,1249972,1234250,1216757,1160697,1187844,1467245,1229217,1269675,1296313,1242351,1185705,1233009,1493596,1268553,1208483,1263427,1283061,1231871,1263373,1321571,1396733,1368005,1343087,1323734,1249213,1265238,1407247,1341161,1303046,1361250,1348270,1262402,1264425,1388029,1308016,1279422,1290083,1282037,1245031,1110162,1300728,1291238,1344342,1335772,1328165,1289976,1262126,1338399,1343864,1324487,1272976,1336831,1274348,1276874,1381901,1337874,1315928,1354265,1323470,1301182,1295592,619386,1050592,1301781,1298281,1283210,1273568,1254831,1290746,1307827,1333965,1326611,1326644,1268211,1232651,1334228,1290625,1280305,1287397,1254261,1185553,1190595,1307544,1282554,1288171,1307643,1284836,1168868,1168521,1249041,1261459,1140217,1208639,1222730,1159987,1159450,1277961,1188222,1206347,1282989,1253389,1208969,1151181,1206443,1235347,1239341,1241314,1226318,1163150,1177862,1290026,1266566,1251633,1276194,1238785,1233598,1209897,1241319,1332411};
+
+}

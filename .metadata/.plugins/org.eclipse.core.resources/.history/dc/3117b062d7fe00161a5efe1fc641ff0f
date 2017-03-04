@@ -1,0 +1,96 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import classification.userClassifierBinary;
+import classification.userClassifierMultiple;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user_parser.user;
+import user_parser.userProcess;
+
+/**
+ * Prints out user info for users that have been rated by turkers, to be used 
+ * for ML
+ * @author toddbodnar
+ */
+public class classifyUsers implements user_parser.userProcess{
+    userClassifierBinary classifierBinary,classifierMulti;
+    public classifyUsers(boolean b)
+    {
+        
+    }
+    public classifyUsers()
+    {
+        try {
+            classifierBinary = new userClassifierBinary();
+            classifierMulti = new userClassifierMultiple();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            
+            c = DriverManager.getConnection("jdbc:mysql://localhost:8889/h7n9Tweets", "root", "root");
+           
+            s = c.prepareStatement("insert into users (userId,userTypeBinary,userTypeMultiple,language,domainType,favourites,friends,followers,tweets,screenName,description) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            System.out.println("userId,userTypeBinary,userTypeMultiple,language,domainType,favourites,friends,followers,tweets,screenName,description");
+        } catch (Exception ex) {
+            Logger.getLogger(classifyUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    Connection c;
+    PreparedStatement s;
+    @Override
+    public String getName() {
+        return "Classify Users";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Prints the User's classification";
+    }
+
+    @Override
+    public void process(user u) {
+       
+            //   if(!u.language.equals("en"))
+              //     return;
+               
+               System.out.println(u.id+","+classifierBinary.getType(u)+","+classifierMulti.getType(u)+","+u.language+","+u.topLevelDomain+","+u.favourites_count+","+u.friends_count+","+u.followers_count+","+u.status_count+","+u.screen_name+","+u.description.replace(",", " "));
+         try {
+               
+               s.setLong(1,Long.parseLong(u.id));
+               s.setInt(2, (int)Double.parseDouble(classifierBinary.getType(u)));
+               s.setInt(3, (int)Double.parseDouble(classifierMulti.getType(u)));
+               s.setString(4,u.language);
+               s.setString(5, u.topLevelDomain);
+               s.setInt(6, u.favourites_count);
+               s.setInt(7, u.friends_count);
+               s.setInt(8, u.followers_count);
+               s.setInt(9, u.status_count);
+               s.setString(10, u.screen_name);
+               s.setString(11, u.description);
+               
+              s.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(classifyUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+
+    @Override
+    public String end() {
+        return "Done";
+    }
+   
+    @Override
+    public userProcess clone() {
+        return new classifyUsers();
+    }
+}

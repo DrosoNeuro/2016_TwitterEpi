@@ -1,0 +1,106 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user_parser.user;
+import user_parser.userProcess;
+
+/**
+ * Prints out user info for users that have been rated by turkers, to be used 
+ * for ML
+ * @author toddbodnar
+ */
+public class makeUserTypeTrainingData implements user_parser.userProcess{
+    public makeUserTypeTrainingData(boolean b)
+    {
+        
+    }
+    public makeUserTypeTrainingData()
+    {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                Class.forName("org.gjt.mm.mysql.Driver");
+            
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:8889/turkUserCat", "root", "root");
+           
+            ResultSet result = connection.createStatement().executeQuery("SELECT * from data where NOT missmatch and NOT result='Foreign Language'");// where NOT result like '%For%' AND !missmatch");
+
+            result.first();
+            
+            HashMap<String,String> map = new HashMap<String, String>();
+            
+            do
+            {
+                map.put(result.getString("user_id"), result.getString("result"));
+               // System.out.println(result.getString("user_id")+","+ mapping.get(result.getString("user_id")));
+            }while(result.next());
+            mapping = map;
+            } catch (SQLException ex) {
+                Logger.getLogger(makeUserTypeTrainingData.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(makeUserTypeTrainingData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             //   System.out.println(mapping.size());
+            System.out.println("Type, Description, Favourites, Followers, Friends, isContributors, isVerified, listedCount, statusesCount, domainType");
+            
+            }
+        }).start();
+    }
+
+    @Override
+    public String getName() {
+        return "Get User Type";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Prints the User's type (as rated by turkers) and their feature vector";
+    }
+
+    @Override
+    public void process(user u) {
+        while(mapping == null)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(makeUserTypeTrainingData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        //System.out.println(u.id);
+        
+        if(!mapping.containsKey(u.id))
+            return;
+        
+       // if(!u.language.equals("en"))
+         //   return;
+        
+        String cleanText = u.description.replace("\"", " ").replace("\'", " ").replace(",", " ").replace("%", " ");
+        System.out.println(mapping.get(u.id)+","+cleanText+","+u.favourites_count+","+u.followers_count+","+u.friends_count+","+u.isContributorsEnabled+","+u.isVerified+","+u.listed_count+","+u.status_count+","+u.topLevelDomain);
+        
+    }
+
+    @Override
+    public String end() {
+        return "Done";
+    }
+    HashMap<String,String> mapping = null;
+
+    @Override
+    public userProcess clone() {
+        return new makeUserTypeTrainingData();
+    }
+}

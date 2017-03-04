@@ -67,11 +67,8 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
   #define colorRamp
   def_colRamp <- function(hexbin1,root=1){
     scale <- (c(1,1000)-1)**(1/root)
-    dat <- (c(200,1000)-1)**(1/root)
-    dat <- 1/max(scale)*dat
-    lower <- (min(hexbin1@count)-1)**(1/root)
-    upper <- (max(hexbin1@count)-1)**(1/root)
-
+    lower <- ((min(hexbin1@count)-1)**(1/root))/max(scale)
+    upper <- ((max(hexbin1@count)-1)**(1/root))/max(scale)
     cr_rel <- function(n){
       cr <- colour_ramp(c("yellow","red"))
       rescaled <- seq(lower,upper,length=n)
@@ -82,7 +79,13 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
       cols <- unlist(lapply(rescaled,cr))
       return(cols)
     }
-    return(cr_rel)
+    cr_ref <- function(n){
+      cr <- colour_ramp(c("yellow","red"))
+      rescaled <- seq(0,1,length=n)
+      cols <- unlist(lapply(rescaled,cr))
+      return(cols)
+    }
+    return(list(cr_rel,cr_ref))
   }
  
   #function to create hexbins
@@ -195,9 +198,6 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     if (1 %in% type){
       names(hx_rel_ls)[index] <- "tot_tot"
       hbin <- rel_hexbin(tot,tot)
-      #colramp <- def_colRamp(hbin)
-      # hx_rel_ls$tot_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-      #                           main_title=main_titles[index],leg_title=leg_titles[index])
       hx_rel_ls$tot_tot <- list(hbin=hbin,relative=TRUE,
                                 main_title=main_titles[index],leg_title=leg_titles[index])
       index <- index +1
@@ -205,9 +205,6 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     if (2 %in% type){
       names(hx_rel_ls)[index] <- "sick_tot"
       hbin <- rel_hexbin(sick,tot)
-      #colramp <- def_colRamp(hbin)
-      # hx_rel_ls$sick_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-      #                            main_title=main_titles[index],leg_title=leg_titles[index])
       hx_rel_ls$sick_tot <- list(hbin=hbin,relative=TRUE,
                                  main_title=main_titles[index],leg_title=leg_titles[index])
       index <- index +1
@@ -216,9 +213,6 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
       #healthy to total tweets
       names(hx_rel_ls)[index] <- "healthy_tot"
       hbin <- rel_hexbin(healthy,tot)
-      #colramp <- def_colRamp(hbin)
-      # hx_rel_ls$healthy_tot <- list(hbin=hbin,colramp=colramp,relative=TRUE,
-      #                               main_title=main_titles[index],leg_title=leg_titles[index])
       hx_rel_ls$healthy_tot <- list(hbin=hbin,relative=TRUE,
                                     main_title=main_titles[index],leg_title=leg_titles[index])
       index <- index +1
@@ -252,13 +246,14 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     
     quntl <- quantile(leg_data)
     if (relative){
-      rescaled <- (quntl)**(1/root)
-      rescaled <- rescaled/max(rescaled)
-      quntl_pos <- nlabels-(ceiling(rescaled*50)-1)
+      scale <- (c(1,1000)-1)**(1/root)
+      rescaled <- ((quntl)-1)**(1/root)
+      rescaled <- rescaled/max(scale)
+      quntl_pos <- nlabels-ceiling((nlabels-1)*rescaled)
     } else{
-      quntl_pos <- ceiling(c(1,0.75,0.5,0.25,0.0001)*50)
+      quntl_pos <- ceiling(c(1,0.75,0.5,0.25,0)*(nlabels-1)+1)
     }
-    quntl <- format_scientific(quntl,n=4)
+    quntl <- format_scientific(quntl,n=6)
     for (i in  1:length(quntl)){
       pushViewport(viewport(layout.pos.row = quntl_pos[i]))
       grid.text(quntl[i])
@@ -280,7 +275,9 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     
     if (relative){
       colramp <- def_colRamp(hexbin1,root=root)
-    }
+      reframp <- colramp[[2]]
+      colramp <- colramp[[1]]
+    } else {reframp <- colramp}
     
     pushViewport(viewport(layout = grid.layout(2, 1, heights=heights)))
     pushViewport(viewport(layout.pos.row=1))
@@ -293,7 +290,7 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     #plot legend
     pushViewport(viewport(layout.pos.col=2))
     leg_data <- hexbin1@count
-    leg(leg_data,leg_title,root=root,colramp=colramp,relative=relative)
+    leg(leg_data,leg_title,root=root,colramp=reframp,relative=relative)
     popViewport()
     
     #plot map & hexbin

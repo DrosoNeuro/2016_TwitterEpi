@@ -76,6 +76,9 @@
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=300,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=100,log_scale=TRUE)
   
+  #time lapse of sick tweets
+  animateFlu(df,tag=tag,path="plots/only_")
+  
   #  histogram of longitude and latitude ----
   coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast
   hist_coord <- function(datatable,tag,explore){

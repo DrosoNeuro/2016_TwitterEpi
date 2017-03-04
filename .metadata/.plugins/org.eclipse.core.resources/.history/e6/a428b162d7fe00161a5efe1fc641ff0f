@@ -1,0 +1,97 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package experiments;
+
+import cells.dSir;
+import cells.unit;
+import java.awt.Point;
+import java.util.Vector;
+import javax.swing.JFrame;
+import topologies.gridTorus;
+import topologies.map;
+import topologies.mapPanel;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class parameterFitting {
+    public static void main(String args[]) throws InterruptedException
+    {
+        double trueData[] = getCurve(.25,.25);
+        
+        for(double a = 0.05; a<.5;a+=.05)
+            for(double b=0.05;b<.5;b+=.05)
+            {
+                double testData[] = getCurve(a,b);
+                
+                double diff = 0;
+                for(int i=0;i<500;i++)
+                {
+                    diff+= Math.pow(trueData[i]-testData[i],2);
+                }
+                System.out.println(a+","+b+","+diff);
+            }
+    }
+    public static double[] getCurve(double a, double b) throws InterruptedException
+    {
+        float distance = 1;
+        
+        double infected[] = new double[500];
+        
+        map world = new gridTorus(20,20);
+        //world = new network(200,.005);
+        world.fillAll(new dSir(a,b,0.01,world));
+
+        for(unit u: world.getAllUnits())
+        {
+            if(Math.random()<.0125f)
+            {
+                ((dSir)u).I = .1;
+                ((dSir)u).S = .9;
+            }
+        }
+        
+        dSir s = (dSir) world.getNear(new Point(10,10), 0).firstElement();
+
+        JFrame frame = new JFrame();
+        frame.setSize(600, 600);
+        frame.add(new mapPanel(world));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        int ct=0;
+        Vector<unit> all = world.getAllUnits();
+        boolean updated = true;
+        while(ct< 500){
+            for (unit u : all) {
+               
+                    u.doStuff();
+               
+            }
+            updated = false;
+            double S=0,I=0,R=0;
+            for (unit u : all) {
+               
+                    if(u.update())
+                        updated = true;
+               
+                    S+=((dSir)u).S;
+                    
+                    I+=((dSir)u).I;
+                    
+                    R+=((dSir)u).R;
+            }
+            Thread.sleep(50);
+            frame.repaint();
+            infected[ct]=I;
+            ct++;
+            //System.out.println(ct+","+S+","+I+","+R);
+        }
+       // System.out.println(ct);
+
+        frame.setVisible(false);
+        return infected;
+    }
+}

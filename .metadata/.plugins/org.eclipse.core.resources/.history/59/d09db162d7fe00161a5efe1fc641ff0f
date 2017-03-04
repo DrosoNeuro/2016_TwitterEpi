@@ -1,0 +1,121 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tools;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+
+
+/**
+ * Uses yahoo!'s place finder to convert a longitude/latitude pair into "political" info
+ * @author toddbodnar
+ */
+public class coord_to_county {
+    
+    /**
+     * Makes an array of [City,State,County,Zip,line1,line2,line3,line4,country] where line# is the mailing address
+     * @param lon
+     * @param lat
+     * @return 
+     */
+    public static String[] query(double lon, double lat) throws MalformedURLException, IOException, ParserConfigurationException, SAXException
+    {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(coord_to_county.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        URL url = new URL("http://where.yahooapis.com/geocode?q="+lat+",+"+lon+"&gflags=R&appid=["+key+"]");
+        InputStream in = url.openStream();
+        String result[] = new String[9];
+        
+     //   while(in.available()>0)
+       // System.out.print((char)in.read());
+        
+        DocumentBuilder db = (DocumentBuilderFactory.newInstance()).newDocumentBuilder();
+        
+        Document d = db.parse(in);
+        
+        NodeList n = d.getChildNodes();
+        
+        for(int ct=0;ct<n.getLength();ct++)
+        {
+            if(n.item(ct).getNodeName().equals("ResultSet"))
+            {
+                n = n.item(ct).getChildNodes();
+                break;
+            }
+        }
+        
+        
+        for(int ct=0;ct<n.getLength();ct++)
+        {
+            if(n.item(ct).getNodeName().equals("Result"))
+            {
+                n = n.item(ct).getChildNodes();
+                break;
+            }
+        }
+        
+        
+        
+        for(int ct=0;ct<n.getLength();ct++)
+        {
+            if(n.item(ct).getNodeName().equals("county"))
+                result[2] = n.item(ct).getTextContent();
+            
+            if(n.item(ct).getNodeName().equals("statecode"))
+                result[1] = n.item(ct).getTextContent();
+             
+            if(n.item(ct).getNodeName().equals("city"))
+                result[0] = n.item(ct).getTextContent();
+              
+            if(n.item(ct).getNodeName().equals("uzip"))
+                result[3] = n.item(ct).getTextContent();
+            
+            
+            if(n.item(ct).getNodeName().equals("line1"))
+                result[4] = n.item(ct).getTextContent();
+            
+            if(n.item(ct).getNodeName().equals("line2"))
+                result[5] = n.item(ct).getTextContent();
+             
+            if(n.item(ct).getNodeName().equals("line3"))
+                result[6] = n.item(ct).getTextContent();
+              
+            if(n.item(ct).getNodeName().equals("line4"))
+                result[7] = n.item(ct).getTextContent();
+            
+            
+            if(n.item(ct).getNodeName().equals("countrycode"))
+                result[8] = n.item(ct).getTextContent();
+            
+        }
+        
+        
+      
+        return result;
+    }
+    
+    public static void main(String args[]) throws MalformedURLException, IOException, ParserConfigurationException, SAXException
+    {
+        for(String s: query(38.898717,-77.035974)) //test case for the White House
+            System.out.println(s);
+    }
+    
+    private static final String key = "dj0yJmk9aTI0WWdJUUcwUHNuJmQ9WVdrOVpFNWxRMUpzTkhFbWNHbzlOakE0TXpjNE1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTU1";
+}

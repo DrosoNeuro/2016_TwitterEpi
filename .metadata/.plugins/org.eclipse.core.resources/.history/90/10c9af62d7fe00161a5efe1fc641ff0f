@@ -1,0 +1,253 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package crowdbreaks_location;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import user_interface.crowdbreaks_tweets_to_raw_double_lat;
+
+/**
+ * Stores the keyword counts for a "pixel" on the map
+ * Eventually we will be integrating by these, al la Viola Jones
+ * @author toddbodnar
+ */
+public class crowd_point {
+    public static int width = 360; //the resolution
+    public static int height = 180;
+    public static crowd_point nullPoint = null; //this is incase we go off the edge of the array
+    public static boolean initedNullPt = false;
+    public crowd_point(int x,int y, int days, String words[])
+    {
+        this.x=x;
+        this.y=y;
+        this.words = words;
+        
+        counts = new double[days][words.length];
+        s = null;
+        integral =null;
+        for(int i=0;i<days;i++)
+            for(int j=0;j<words.length;j++){
+                counts[i][j] = 0;
+            //    s[i][j] = 0;
+              //  integral[i][j] = 0;
+                
+            }
+        
+        if(!initedNullPt)
+        {
+            initedNullPt=true;
+            nullPoint = new crowd_point(-1,-1,days,words);
+            nullPoint.integral = new double[days][words.length];
+            for(int i=0;i<days;i++)
+            for(int j=0;j<words.length;j++){
+                nullPoint.integral[i][j] = 0;
+            }
+            nullPoint.counts = nullPoint.s = nullPoint.integral;
+        }
+        
+        left = up = nullPoint;
+    }
+    
+    public void increment(int day, int word, double score) {
+        counts[day][word]+=score;
+    }
+    
+    public void increment(int day, int word)
+    {
+        counts[day][word]++;
+    }
+    
+    public void setUp(crowd_point u)
+    {
+        up = u;
+    }
+    
+    public void setLeft(crowd_point u)
+    {
+        left = u;
+    }
+    
+    private double[][] getS()
+    {
+        //System.out.println("GetS("+x+","+y+")");
+        if(s == null)
+        {
+            double[][] upS = up.getS();
+            s = new double[upS.length][upS[0].length];
+            
+            for(int i=0;i<s.length;i++)
+                for(int j=0;j<s[0].length;j++)
+                    s[i][j] = upS[i][j]+counts[i][j];
+            
+            counts = null;
+        }
+        
+        return s;
+    }
+    
+    private double[][]getI()
+    {
+        
+        //System.out.println("GetI("+x+","+y+")");
+        if(integral == null)
+        {
+           getS();
+           double[][] leftI = left.getI();
+           
+           integral = new double[leftI.length][leftI[0].length];
+            
+            for(int i=0;i<integral.length;i++)
+                for(int j=0;j<integral[0].length;j++)
+                    integral[i][j] = s[i][j] + leftI[i][j];
+            
+        }
+        
+        return integral;
+    }
+    public void integrate()
+    {
+        getI();
+        getS();
+    }
+    int x,y;
+    double counts[][];
+    double s[][],integral[][];
+    String words[];
+    crowd_point left,up;
+    
+    public String toString()
+    {
+        String o = "";
+        double output[][] = integral;
+        //System.out.println(integral==null);
+        if(integral == null)
+            output=counts;
+        //return "";
+            
+        for(int i=0;i<output.length;i++)
+        {
+            for(int j=0;j<output[0].length;j++)
+                o+=output[i][j]+",";
+            
+            o+="\n";
+                      
+        }
+        return o;
+    }
+    
+    public void save()
+    {
+        save("crowd_integrated_"+x+"_"+y+".dat");
+        /*try {
+            PrintWriter out = new PrintWriter(new FileWriter("/opt/data/crowd_integrated_"+x+"_"+y+".dat"));
+            for(String s:crowdbreaks_tweets_to_raw_double_lat.keywords)
+            {
+                out.print(s);
+                out.print(",");
+            }
+            out.println();
+            out.println(this.toString());
+            out.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(crowd_point.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+    }
+    
+    
+    public static void main(String args[])
+    {
+        crowd_point.width = 5;
+        crowd_point points[][] = new crowd_point[crowd_point.width][crowd_point.height];
+        /*for(int i=0;i<crowd_point.width;i++)
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j] = new crowd_point(i,j,10,new String[]{"","","",""});
+        
+        for(int i=0;i<10000000;i++)
+        {
+            points[(int)(Math.random()*crowd_point.width)][(int)(Math.random()*crowd_point.height)].increment((int)(Math.random()*10),(int)(Math.random()*4));
+        }
+        
+        for(int i=0;i<crowd_point.width;i++)
+        {
+            for(int j=1;j<crowd_point.height;j++)
+                points[i][j].setUp(points[i][j-1]);
+        }
+        
+        for(int i=1;i<crowd_point.width;i++)
+        {
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j].setLeft(points[i-1][j]);
+        }
+        
+        
+        System.out.println(points[0][0]);
+        System.out.println("--------\n"+points[1][1]);
+        
+        for(int i=0;i<crowd_point.width;i++)
+            for(int j=0;j<crowd_point.height;j++)
+                points[i][j].integrate();
+        
+        System.out.println("--------\n");
+        System.out.println(points[0][0]);
+        System.out.println("--------\n"+points[1][1]);
+        
+        */
+        
+        points = new crowd_point[2][2];
+        for(int i=0;i<2;i++)
+            for(int j=0;j<2;j++)
+                points[i][j] = new crowd_point(i,j,1,new String[]{""});
+        
+        points[0][0].increment(0, 0);
+        points[1][0].increment(0, 0);
+        points[1][1].increment(0, 0);
+        points[0][1].increment(0, 0);
+        
+        points[1][1].setUp(points[1][0]);
+        points[1][1].setLeft(points[0][1]);
+        
+        points[0][1].setUp(points[0][0]);
+        points[1][0].setLeft(points[0][0]);
+        
+        System.out.println(points[0][0]);
+        System.out.println(points[1][0]);
+        System.out.println(points[1][1]);
+        System.out.println(points[0][1]);
+        
+        points[1][1].integrate();
+        points[1][0].integrate();
+        points[0][0].integrate();
+        points[0][1].integrate();
+        
+        System.out.println(points[0][0]);
+        System.out.println(points[1][0]);
+        System.out.println(points[1][1]);
+        System.out.println(points[0][1]);
+    }
+
+    public void save(String string) {
+        try {
+            PrintWriter out = new PrintWriter(new FileWriter("/opt/data/"+string));
+            for(String s:words)
+            {
+                out.print(s);
+                out.print(",");
+            }
+            out.println();
+            out.println(this.toString());
+            out.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(crowd_point.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+}

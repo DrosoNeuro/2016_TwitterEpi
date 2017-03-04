@@ -1,0 +1,189 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.awt.Polygon;
+import java.io.File;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import gui.JobFileIO;
+import java.awt.geom.Point2D;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class regionFilter implements tweetfilter{
+
+    public regionFilter(int region, twitterprocess Next)
+    {
+        regCode = region;
+        try {
+            next=Next;
+            inside=region>=0;
+            region = Math.abs(region);
+            String states[];
+            if(region <=10)
+            {
+                states = regions[region];
+            }
+            else
+            {
+                Vector<String> all = new Vector<String>();
+                for(String arra[]:regions)
+                    for(String arr:arra)
+                        all.add(arr);
+                
+                states = new String[all.size()];
+                for(int ct=0;ct<all.size();ct++)
+                    states[ct]=all.get(ct);
+            }
+               
+            
+            
+            //from http://www.mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                    
+            //from http://econym.org.uk/gmap/states.xml
+                    Document doc = (Document) dBuilder.parse(new File("states.xml"));
+                    
+                    
+            System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
+            
+            NodeList statesnode = doc.getElementsByTagName("state");
+            for(int ct=0;ct<statesnode.getLength();ct++)
+            {
+                System.out.println(statesnode.item(ct).getAttributes().getNamedItem("name").getNodeValue());
+                
+                String name = statesnode.item(ct).getAttributes().getNamedItem("name").getNodeValue().toLowerCase();
+                
+                boolean outside = true;
+                for(String st: states)
+                {
+                    if(st.equals(name))
+                        outside=false;
+                }
+                
+                if(outside)
+                    continue;
+                
+                Polygon p = new Polygon();
+                NodeList points = statesnode.item(ct).getChildNodes();
+                for(int ct2=0;ct2<points.getLength();ct2++)
+                {
+                   // System.out.println(points.item(ct2).getAttributes().getNamedItem("lat").getNodeValue());
+                    if(points.item(ct2).getAttributes() == null)
+                        continue;
+                    
+                    System.out.println(points.item(ct2).getAttributes().getNamedItem("lat"));
+                    
+               //     String l = points.item(ct2).getAttributes().getNamedItem("lat").;
+                    int lat = (int)(1000*((Double.parseDouble(points.item(ct2).getAttributes().getNamedItem("lat").getNodeValue()))));
+                    int lng = (int)(1000*((Double.parseDouble(points.item(ct2).getAttributes().getNamedItem("lng").getNodeValue()))));
+                     
+                    p.addPoint(lng, lat);
+                    
+                }
+               
+                locations.add(p);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(regionFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        
+        
+    }
+    @Override
+    public tweetfilter clone(twitterprocess next) {
+        String flags = JOptionPane.showInputDialog("Region Select");
+        return new regionFilter(Integer.parseInt(flags),next);
+    }
+
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        Point2D loc = new Point2D.Double(1000*t.loc.x,1000*t.loc.y);
+        if(inside)
+        {
+            for(Polygon p:locations)
+            {
+                if(p.contains(loc))
+                {
+                    next.consume(t);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for(Polygon p:locations)
+            {
+                if(p.contains(loc))
+                    return;
+            }
+            next.consume(t);
+        }
+    }
+
+    @Override
+    public String end() {
+        return next.end();
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return next.quitAtEnd();
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Region Filter";
+    }
+
+    public String toString() {
+        return "Region "+regCode+" filter -> "+next.toString();
+    }
+ 
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        int first = in.indexOf(":");
+        System.out.println(in);
+        return new regionFilter(Integer.parseInt(in.substring(0, first)),JobFileIO.load(in.substring(first+1)));
+    }
+
+    @Override
+    public String save() {
+        return regCode+":"+next.buttonMenu()+";"+next.save();
+    }
+
+    @Override
+    public String toolTip() {
+        return "Only uses tweets in a CDC flu region";
+    }
+    Vector<Polygon> locations = new Vector<Polygon>(); //locations to test
+    int regCode;
+    boolean inside = true; //test if inside (true) or not inside (false)
+    
+    twitterprocess next;
+
+    
+     public twitterprocess clone() {
+        
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+      static String[][] regions = {{},{"connecticut","maine","massachusetts","new hampshire","rhode island","vermont"},{"new jersey","new york"},{"delaware", "district of columbia","maryland","pennsylvania","virginia","west virginia"},{"alabama","florida","georgia","kentucky","mississippi","north carolina","south carolina","tennessee"},{"illinois","indiana","michigan","minnesota","ohio","wisconsin"},{"arkansas","louisiana","new mexico","oklahoma","texas"},{"iowa","kansas","missouri","nebraska"},{"colorado","montana","north dakota","south dakota","utah","wyoming"},{"arizona","california","nevada"},{"idaho","oregon","washington"}};
+
+}

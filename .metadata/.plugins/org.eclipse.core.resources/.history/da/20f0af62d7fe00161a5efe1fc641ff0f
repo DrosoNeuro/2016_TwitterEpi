@@ -1,0 +1,2 @@
+Phase 2 of my twitter tool, this one reads in jsons from Twitter' 
+GET users/lookup and does stuff with it.

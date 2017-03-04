@@ -1,0 +1,177 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classification;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Vector;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class perceptron implements classifier {
+
+    perceptron(Vector<String> subset, Vector<String> negative, int length) {
+        train(subset,negative,length);
+    }
+    
+    private void train(Vector<String>positiveTrain, Vector<String>negativeTrain, int topWords)
+    {
+        HashMap<String,Integer> wordCounts = new HashMap();
+        for(String st:negativeTrain)
+            for(String s: naiveBayesClassifier.uniqueVector(naiveBayesClassifier.cleanString(st)))
+            {
+                int ct = wordCounts.containsKey(s)?wordCounts.get(s)+1:1;
+                wordCounts.put(s, ct);
+            }
+        for(String st:positiveTrain)
+            for(String s: naiveBayesClassifier.uniqueVector(naiveBayesClassifier.cleanString(st)))
+            {
+                int ct = wordCounts.containsKey(s)?wordCounts.get(s)+1:1;
+                wordCounts.put(s, ct);
+                   }
+        
+        HashSet<String> topStrings = new HashSet();
+        wordCounts.put("", 1);
+        keys = new String[topWords];
+        for(int ct=0;ct<topWords;ct++)
+        {
+            int max = -1;
+            String best = "";
+            
+            for(String s:wordCounts.keySet())
+            {
+                if(topStrings.contains(s))
+                    continue;
+                if(wordCounts.get(s) > max)
+                {
+                    best = s;
+                    max = wordCounts.get(s);
+                }
+            }
+            topStrings.add(best);
+            keys[ct] = best;
+            //System.out.println(best+","+max);
+        }
+        
+        bias = 0;
+        weights = new double[keys.length];
+        for(int ct=0;ct<weights.length;ct++)
+            weights[ct]=Math.random()*2-1;
+        
+        for(int round=0;round<100000;round++)
+        {
+            int rand = (int)(Math.random()*(positiveTrain.size()+negativeTrain.size()));
+            boolean positive = rand<positiveTrain.size();
+            String input;
+            if(positive)
+                input = positiveTrain.get(rand);
+            else
+                input = negativeTrain.get(rand-positiveTrain.size());
+                   
+            input = naiveBayesClassifier.cleanString(input);
+            double total = bias;
+            for(int ct=0;ct<keys.length;ct++)
+            {
+                if(input.contains(keys[ct]))
+                    total+=weights[ct];
+                else
+                    total-=weights[ct];
+            }
+            double change = .01/(round*0+1)*(positive?1:-1 - (total>0?1:-1));
+            for(int ct=0;ct<keys.length;ct++)
+                weights[ct]+= change*(input.contains(keys[ct])?1:-1);
+            
+            bias+=change;
+            
+           // if(positive != (total>0))
+             //   System.out.println(round);
+        }
+        
+     //   for(int ct=0;ct<keys.length;ct++)
+       //     System.out.println(keys[ct]+","+weights[ct]);
+        
+    }
+    
+    public perceptron(File file, int max, double cut) throws FileNotFoundException, IOException
+    {
+        this(file,max);
+        this.cut = cut;
+    }
+     public perceptron(File filter,int max) throws FileNotFoundException, IOException {
+        Vector<String> positiveTrain = new Vector<String>();
+        Vector<String> negativeTrain = new Vector<String>();
+
+        File f = filter;
+     //   filtername = filter.toString();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        while (true) {
+            String text = in.readLine();
+            if (text == null) {
+                break;
+            }
+            text = text.toUpperCase();
+            int value = Integer.parseInt(in.readLine());
+
+            
+
+            if (value == 0) {
+                negativeTrain.add(text);
+            } else {
+                positiveTrain.add(text);
+            }
+
+        }
+        train(positiveTrain,negativeTrain,max);
+        
+    }
+
+     String keys[];
+     double bias,weights[];
+    public static void main(String args[]) throws Exception
+    {
+        classifier c = new perceptron(new File("dataset_flu.csv"),500);
+        
+        System.out.println(c.getProbability(" HE IS SO BEAUTIFUL..:-)RT@ZEE_WON: FOR A SECOND, I THOUGHT HE'S A GIRL, URI TAEMINIE."));
+        
+        
+      //  System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),5).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        //System.out.println(new naiveBayesClassifier(new File("dataset_flu.csv"),25).getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+        System.out.println(c.getProbability(" HAD A FEVER, BUT RECOVERING.\\N:)"));
+    }
+
+    double cut = .5;
+    
+    @Override
+    public double getValue(String input) throws Exception {
+        if(cut<0)
+            return getProbability(input);
+        else
+            return getProbability(input)>cut?1:0;
+    }
+
+    @Override
+    public double getProbability(String input) throws Exception {
+        input = naiveBayesClassifier.cleanString(input);
+        
+        double total = bias;
+        for(int ct=0;ct<keys.length;ct++)
+        {
+            if(input.contains(keys[ct]))
+                total+=weights[ct];
+            else
+                total-=weights[ct];
+        }
+        return 1.0/(1+Math.exp(-total));
+    }
+}

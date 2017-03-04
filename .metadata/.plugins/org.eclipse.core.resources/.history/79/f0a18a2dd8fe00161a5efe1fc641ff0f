@@ -1,0 +1,5 @@
+Now needed for the crowdbreaks backend. Includes a gui and script support. This 'should' be able to process any of the tweet data we've collected. It should be pretty easy to add your own processes to this (see below.)
+
+Run the main parser through gui/mainGui.
+
+Process are divided into two types: filters and processes. You can implement your own by implementing user_interface/tweetfilter.java or user_interface/twitterprocess.java. Add them to their respective array in gui/JobFileIO.java, and the system will automatically add them to the gui's menu and process them in scripts.

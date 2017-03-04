@@ -1,0 +1,87 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package colorExperiments;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.StringTokenizer;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class plot extends JPanel{
+    public plot(int width,int height)
+    {
+        this.width= width;
+        this.height=height;
+        graph = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+        
+        Graphics g = graph.getGraphics();
+        g.setColor(Color.black);
+        g.fillRect(0, 0, width, height);
+    }
+    public void add(float h,float s, float v)
+    {
+        if(h<0 || h>1)
+            return;
+        
+        int x = (int)(s*width);
+        int y = (int)((1-v)*height);
+        Color c = new Color(Color.HSBtoRGB(h, 1.0f, 1.0f));
+        //c = new Color(h,h,h);
+        //c = Color.white;
+        Graphics g = graph.getGraphics();
+        g.setColor(c);
+        g.fillRect(x,y,1,1);
+    }
+    public void paint(Graphics g)
+    {
+        g.drawImage(graph, 0, 0, null);
+    }
+    public static void main(String args[]) throws FileNotFoundException, IOException
+    {
+        plot p = new plot(800,800);
+        
+        File colorLoc = new File("/colors.csv");
+        BufferedReader in = new BufferedReader(new FileReader(colorLoc));
+        String line = in.readLine();
+        
+        while((line = in.readLine())!= null)
+        {
+            //System.out.println(line);
+            try{
+            StringTokenizer st = new StringTokenizer(line, "\t");
+            
+            for(int ct=0;ct<13;ct++)
+                st.nextToken();
+            
+            float hue = Float.parseFloat(st.nextToken());
+            
+            float saturation = Float.parseFloat(st.nextToken());
+            
+            float brightness = Float.parseFloat(st.nextToken());
+            
+            p.add(brightness, saturation, hue);
+            }
+            catch(Exception e){};
+        }
+        
+        JFrame f = new JFrame();
+        f.add(p);
+        f.setSize(400, 400);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+    }
+    
+    int width,height;
+    
+    Image graph;
+}

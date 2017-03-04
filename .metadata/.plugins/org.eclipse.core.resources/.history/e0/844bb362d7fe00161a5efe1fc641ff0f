@@ -1,0 +1,190 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ * Calculates the coorelation cooeficients of logit(y) = a*logit(x)+e where logit(x) = log(x/(1-x))
+ * for various keywords (loaded from a file) to the cdc's percentage of ili related doctor's visits
+ * @author toddbodnar
+ */
+public class keyword_coorelation implements twitterprocess{
+
+    public keyword_coorelation()
+    {
+        ;
+    }
+    /**
+     * Main constructor
+     * @param infile the file to read keywords from
+     * @param outfile the file to write keywords,R^2 to
+     * @param Area the region to work in
+     */
+    public keyword_coorelation(String infile, String outfile, int Area)
+    {
+        area = Area;
+        try {
+            inFile = infile;
+            outFile = outfile;
+
+            Vector<String> tempWordList = new Vector<String>();
+            BufferedReader in = new BufferedReader(new FileReader("foo.in"));
+
+            String s = in.readLine();
+
+            while (s != null) {
+                tempWordList.add(s);
+                s = in.readLine();
+            }
+
+            keywords = new String[tempWordList.size()];
+            for (int ct = 0; ct < keywords.length; ct++) {
+                keywords[ct] = tempWordList.get(ct);
+            }
+
+            
+            frequencies = new double[keywords.length][endWeekPlusOne-beginWeek];
+            
+            for(int i=0;i<frequencies.length;i++)
+                for(int j=0;j<frequencies[0].length;j++)
+                    frequencies[i][j]=0;
+            
+            
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+            System.exit(-1);
+        }
+    }
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        Date d = new Date(t.time);
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        
+        int index = (c.get(Calendar.YEAR)-2011)*53 + c.get(Calendar.WEEK_OF_YEAR);
+        if(index < beginWeek || index >= endWeekPlusOne)
+            return;
+        
+        for(int i=0;i<keywords.length;i++)
+        {
+            if(t.text.contains(keywords[i]))
+            {
+                frequencies[i][index - beginWeek]++;
+            }
+        }
+    }
+
+    @Override
+    public String end() {
+        try
+        {
+            PrintStream out = new PrintStream(new FileOutputStream(new File(outFile)));
+        
+        for(int key=0;key<keywords.length;key++)
+        {
+            double[] logitfreq = new double[frequencies.length];
+            double[] logitcdc = new double[frequencies.length];
+            
+            for(int ct=0;ct<frequencies.length;ct++)
+            {
+                logitfreq[ct] = Math.log(frequencies[key][ct]/total[area][beginWeek+ct]) - Math.log1p(-frequencies[key][ct]/total[area][beginWeek+ct]);
+                logitcdc[ct] = Math.log(cdc[ct]) - Math.log1p(-cdc[ct]);
+            }
+            
+            double meanLFreq = 0;
+            double meanLCdc = 0;
+            
+            for(int ct=0;ct<frequencies.length;ct++)
+            {
+                meanLFreq+=logitfreq[ct];
+                meanLCdc+=logitcdc[ct];
+            }
+            
+            meanLFreq/=frequencies.length;
+            meanLCdc/=frequencies.length;
+            
+            
+            double SSX=0,SSY=0,SSXY=0;
+            
+            for(int ct=0;ct<frequencies.length;ct++)
+            {
+                SSX+=Math.pow(logitfreq[ct]-meanLFreq, 2);
+                SSY+=Math.pow(logitcdc[ct]-meanLCdc, 2);
+                SSXY+=(logitfreq[ct]-meanLFreq)*(logitcdc[ct]-meanLCdc);
+            }
+            
+            double rsq = SSXY*SSXY/SSX/SSY;
+            out.println(keywords[key]+","+rsq);
+        }
+        
+        out.close();
+        
+        }catch(Exception e){return "Error with coorelations "+e;}
+        
+        return "Processed";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Coorelate Keywords";
+    }
+
+
+    public twitterprocess clone(){
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(null);
+        String in = jfc.getSelectedFile().toString();
+        jfc.showSaveDialog(null);
+        String out = jfc.getSelectedFile().toString();
+        
+        return new keyword_coorelation(in,out,Integer.parseInt(JOptionPane.showInputDialog("Region Code?")));
+    }
+    
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        String[] sp = in.split(";");
+        
+        return new keyword_coorelation(sp[0],sp[1],Integer.parseInt(sp[2]));
+    }
+
+    @Override
+    public String save() {
+        return inFile+";"+outFile+";"+area;
+    }
+
+    @Override
+    public String toolTip() {
+        return "Logit Linear Coorelation described in Ginsberg paper";
+    }
+    double frequencies[][];
+    int area;
+    String keywords[];
+    String inFile,outFile;
+    
+    
+    static final double cdc[] = {};
+    static final double total[][] = {};
+    static final int beginWeek=0;//TODO: actual values for all of this
+    static final int endWeekPlusOne=90;
+}

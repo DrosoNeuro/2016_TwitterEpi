@@ -1,0 +1,97 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user_parser.user;
+import user_parser.userProcess;
+
+/**
+ * Prints out user info for users and the amount of retweets they get 
+ * for ML
+ * @author toddbodnar
+ */
+public class makeRetweetCountTrainingData implements user_parser.userProcess{
+    public makeRetweetCountTrainingData()
+    {
+        
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getDescription() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void process(user u) {
+        if (mapping == null) {
+            try {
+
+                List<String> lines = Files.readAllLines(new File("/Users/toddbodnar/data/h7n9/allReTweetsAprilAggregated.csv").toPath(), Charset.forName("UTF-8"));
+                
+
+                mapping = new HashMap<String, String>();
+
+                for (String s : lines) {
+                    
+                    String id = s.split(",")[4];
+                    String count = s.split(",")[0];
+                    
+                  //  System.out.println(id);
+                    
+                    if(mapping.containsKey(id))
+                        count = mapping.get(id)+","+count;
+                        
+                    mapping.put(id, count);
+                    // System.out.println(result.getString("user_id")+","+ mapping.get(result.getString("user_id")));
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(makeRetweetCountTrainingData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Retweets, Description, Favourites, Followers, Friends, isContributors, isVerified, listedCount, statusesCount");
+        }
+        
+        //System.out.println(u.id);
+        
+        if(!mapping.containsKey(u.id))
+            return;
+        
+        if(!u.language.equals("en"))
+            return;
+        
+        String cleanText = u.description.replace("\"", " ").replace("\'", " ").replace(",", " ").replace("%", " ");
+        for(String s:mapping.get(u.id).split(","))
+            System.out.println(s+","+cleanText+","+u.favourites_count+","+u.followers_count+","+u.friends_count+","+u.isContributorsEnabled+","+u.isVerified+","+u.listed_count+","+u.status_count);
+        
+    }
+
+    @Override
+    public String end() {
+        return "";
+    }
+    HashMap<String,String> mapping = null;
+
+    @Override
+    public userProcess clone() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}

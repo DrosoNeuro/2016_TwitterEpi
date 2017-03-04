@@ -1,0 +1,156 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.tartarus.snowball.ext.englishStemmer;
+import twitter.tweet;
+import weka.filters.unsupervised.attribute.StringToWordVector;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class frequent_keywords implements twitterprocess{
+    public frequent_keywords()
+    {
+        StringToWordVector stw = new StringToWordVector();
+        
+        //weka.core.stemmers.SnowballStemmer
+        
+       
+        stem = new englishStemmer();
+        
+        
+        
+        candidates = new HashMap<String,Integer>();
+        goodWords = new HashSet<String>();
+    }
+    public frequent_keywords(String save)
+    {
+        this();
+        outfile = save;
+    }
+    @Override
+    public void consume(tweet t) {
+        String text = " "+t.text.toUpperCase()+" ";
+        text = text.replace(".", " ");
+        text = text.replace(",", " ");
+        text = text.replace(";", " ");
+        text = text.replace(":", " ");
+        text = text.replace("(", " ");
+        text = text.replace(")", " ");
+        text = text.replace("-", " ");
+        text = text.replace("[", " ");
+        text = text.replace("]", " ");
+        text = text.replace("!", " ");
+        text = text.replace("@", " ");
+        text = text.replace("#", " ");
+        text = text.replace("$", " ");
+        text = text.replace("%", " ");
+        text = text.replace("^", " ");
+        text = text.replace("&", " ");
+        text = text.replace("*", " ");
+        text = text.replace("\\", " ");        
+        text = text.replace("/", " ");
+        text = text.replace("?", " ");
+        text = text.replace("~", " ");
+        text = text.replace("`", " ");
+        text = text.replace("_", " ");
+        text = text.replace("+", " ");
+        text = text.replace("=", " ");
+        text = text.replace("<", " ");
+        text = text.replace(">", " ");
+        text = text.replace("{", " ");
+        text = text.replace("}", " ");
+        
+        for(String s : text.split("\\ "))
+        {
+            
+            stem.setCurrent(s);
+            stem.stem();
+         
+            
+            String stemmed = stem.getCurrent().toUpperCase();
+            if(goodWords.contains(stemmed))
+                continue;
+            
+            if(candidates.containsKey(stemmed))
+            {
+                int value = candidates.get(stemmed);
+                if ( value == 9) 
+                {
+                    candidates.remove(stemmed);
+                    goodWords.add(stemmed);
+                }
+                else
+                {
+                    candidates.put(stemmed,value+1);
+                }
+            }
+            else
+            {
+                candidates.put(stemmed, 1);
+            }
+        }
+    }
+
+    @Override
+    public String end() {
+        PrintStream out = null;
+        try {
+            out = new PrintStream(new FileOutputStream(new File(outfile)));
+            for(String s: goodWords)
+                out.println(s);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(frequent_keywords.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            out.close();
+            return "Frequent Keywords: \n\nFound "+goodWords.size()+" keywords.";
+        }
+    }
+    
+    String outfile = null;
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    englishStemmer stem;
+    Map <String,Integer> candidates;
+    Set <String> goodWords;
+
+    @Override
+    public String buttonMenu() {
+        return "Find Frequent Keywords";
+    }
+    
+    public String toolTip()
+    {
+        return "Finds words that appear atleast 10 times";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        return new frequent_keywords(JOptionPane.showInputDialog("Output file name?"));
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        return new frequent_keywords(in);
+    }
+
+    @Override
+    public String save() {
+        return outfile;
+    }
+}

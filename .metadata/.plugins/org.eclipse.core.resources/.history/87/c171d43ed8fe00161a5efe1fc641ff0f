@@ -1,0 +1,20 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class mailer {
+    public static void sendText(String subject, String text, String number)
+    {
+        tools.sendEmail.send("your@email.com",new String[]{number+"@txt.att.net"}, subject, text);
+    }
+
+    public static void sendText(String subject, String text) {
+        sendText(subject,text,"5555550125");
+    }
+}

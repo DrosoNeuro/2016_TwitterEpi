@@ -1,0 +1,93 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class symptomRecorder implements twitterprocess{
+    public symptomRecorder()
+    {
+        ;
+    }
+    
+    public symptomRecorder(String save, File trainingset)
+    {
+        this.save = save;
+        try {
+            out = new PrintStream(new FileOutputStream(new File(save),true));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(symptomRecorder.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+        try {
+            classify = new classification.wekaClassifier(trainingset);
+        } catch (Exception ex) {
+            Logger.getLogger(symptomRecorder.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+    }
+    @Override
+    public void consume(tweet t) {
+        try {
+            if(classify.getProbability(t.text)>= CUTOFF)
+            {
+                out.println(t.user.id_str+","+t.time);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(symptomRecorder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public String end() {
+        out.close();
+        return "Finished Recording Symptoms";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    PrintStream out=null;
+    classification.classifier classify;
+    public static final double CUTOFF = 0.5;
+    String save;
+
+    @Override
+    public String buttonMenu() {
+        return "Record Symptoms";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        gui.Settings.jfc.showOpenDialog(null);
+        File data = gui.Settings.jfc.getSelectedFile();
+        gui.Settings.jfc.showSaveDialog(null);
+        return new symptomRecorder(gui.Settings.jfc.getSelectedFile().toString(),data);
+    }
+    
+    public String toolTip()
+    {
+        return "Records all positive tweets";
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        return new symptomRecorder(in.split(",")[1],new File(in.split(",")[0]));
+    }
+
+    @Override
+    public String save() {
+        return classify.toString()+","+save;
+    }
+}

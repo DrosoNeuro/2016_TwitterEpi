@@ -1,0 +1,55 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_parser.processors;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import user_interface.TwitterMessage;
+import user_interface.twitterprocess;
+import user_parser.main_frame;
+import user_parser.userProcess;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class processors_helpers {
+
+
+private static class addProcess extends JMenuItem{
+    public addProcess(userProcess t, main_frame f)
+    {
+        super.setText(t.getName());
+        super.setToolTipText(t.getDescription());
+        prototype = t;
+        frame = f;
+        super.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userProcess proc = prototype.clone();
+                    frame.currentPanel().theJob.attachProcess(proc);
+                
+                
+            }
+        });
+    }
+    private userProcess prototype;
+    private main_frame frame;
+}
+
+    public static void fillProcessMenu(main_frame f)
+    {
+        for(userProcess p:processes)
+        {
+            f.processMenu.add(new addProcess(p,f));
+        }
+    }
+
+
+    public static userProcess processes[] = new userProcess[]{new classifyUsers(false),new makeUserTypeTrainingData(false), new makeUserTypeEvaluate(false)};
+}

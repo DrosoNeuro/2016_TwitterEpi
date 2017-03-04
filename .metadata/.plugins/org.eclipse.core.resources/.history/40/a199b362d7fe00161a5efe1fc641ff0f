@@ -1,0 +1,71 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class name_filter implements tweetfilter{
+
+    name_filter(String userName, twitterprocess next)
+    {
+        pipe = next;
+        username = userName;
+    }
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        if(t.user.screen_name.equals(username))
+        {
+            pipe.consume(t);
+            System.out.println(t);
+        }
+    }
+
+    @Override
+    public String end() {
+        return pipe.end();
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return pipe.quitAtEnd();
+    }
+    twitterprocess pipe;
+    String username;
+
+    @Override
+    public tweetfilter clone(twitterprocess next) {
+        return new name_filter(JOptionPane.showInputDialog("User name to find?"),next);
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "User Name Filter";
+    }
+    
+    public String toolTip()
+    {
+        return "Filters out all but a specified user";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}

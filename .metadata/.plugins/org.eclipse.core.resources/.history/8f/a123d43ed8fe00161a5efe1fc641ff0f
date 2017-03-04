@@ -1,0 +1,73 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import classification.userClassifierBinary;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class userRating implements twitterprocess{
+
+    userClassifierBinary classifier;
+    public userRating()
+    {
+        classifier = new userClassifierBinary();
+    }
+    public userRating(boolean i)
+    {
+        
+    }
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        if(classifier.isInMainCategory(t.user))
+        {
+            System.out.print("A");
+        }
+        else
+        {
+            System.out.print("B");
+        }
+        System.out.println(","+t.time+","+t.tweetId);
+    }
+
+    @Override
+    public String end() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "User Type";
+    }
+
+    @Override
+    public twitterprocess clone(){
+        return new userRating();
+    }
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toolTip() {
+        return "Prints the time and id of tweets for two different classes of users";
+    }
+    
+}

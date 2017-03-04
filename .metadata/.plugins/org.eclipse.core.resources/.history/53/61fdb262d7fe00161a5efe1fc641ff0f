@@ -1,0 +1,126 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.*;
+import twitter.tweet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class averageLocations implements twitterprocess{
+
+    public averageLocations()
+    {
+        dataset = new HashMap<String, LocationData>();
+    }
+    
+    
+    @Override
+    public void consume(tweet t) {
+        String id = t.user.id_str;
+        LocationData data = null;
+        if(dataset.containsKey(id))
+            data = dataset.get(id);
+        else
+            data = new LocationData();
+
+        data.add((t.boundingbox[0].x+t.boundingbox[1].x)/2, (t.boundingbox[0].y+t.boundingbox[1].y)/2);
+        dataset.put(id, data);
+    }
+
+    @Override
+    public String end() {
+        PrintStream out = null;
+        try {
+            out = new PrintStream(new FileOutputStream(new File("userLocations.csv")));
+            for(String id: dataset.keySet())
+            {
+                LocationData data = dataset.get(id);
+                out.println(id+","+data.getTotal()+","+data.getX()+","+data.getY());
+                
+            }
+            
+        } catch (FileNotFoundException ex) {
+            
+            Logger.getLogger(averageLocations.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error saving locations";
+        } finally {
+           
+                out.close();
+            
+        }
+        return "Location Finder:\n\n\nProcessed "+dataset.size()+" users";
+        
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    
+     Map<String, LocationData> dataset;
+
+    @Override
+    public String buttonMenu() {
+        return "Average User Locations";
+    }
+    
+    public String toString()
+    {
+        return "Average User Locations";
+    }
+
+    @Override
+    public twitterprocess clone() {
+        return new averageLocations();
+    }
+    
+    public String toolTip()
+    {
+        return "Finds the average location of each user";
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        return new averageLocations();
+    }
+
+    @Override
+    public String save() {
+        return "";
+    }
+
+    private class LocationData
+    {
+        public void add(double x, double y)
+        {
+            sumX+=x;
+            sumY+=y;
+            total++;
+        }
+        public double getX()
+        {
+            return sumX/total;
+        }
+        public double getY()
+        {
+            return sumY/total;
+        }
+        public int getTotal()
+        {
+            return total;
+        }
+        private double sumX=0, sumY=0;
+        private int total=0;
+    }
+
+    
+}

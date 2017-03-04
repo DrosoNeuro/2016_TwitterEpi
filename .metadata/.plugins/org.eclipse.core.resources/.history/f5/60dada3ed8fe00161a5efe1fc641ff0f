@@ -1,0 +1,48 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package analysis;
+
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class keywordCountInfo {
+    public static void main(String args[]) throws IOException
+    {
+        File input = null; //the location of the data, or null if random sine waves
+        int repeats = 100;
+        repeats = 1;
+        
+        
+        double features[][];
+
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(null);
+        input = jfc.getSelectedFile();
+
+        if(input == null)
+        {
+            features = svmStuff.generateDataSin(7500);
+            
+        }
+        else
+            features = svmStuff.getData(0,input);
+        
+        for(int i=0;i<features[0].length;i++)
+        {
+            int length=0;
+            
+            for(int week=0;week<features.length;week++) {
+                length+=(int)features[week][i];
+            }
+            
+            System.out.println(length);
+        }
+    }
+}

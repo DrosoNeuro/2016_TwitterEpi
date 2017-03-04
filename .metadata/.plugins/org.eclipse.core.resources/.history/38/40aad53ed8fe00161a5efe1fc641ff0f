@@ -1,0 +1,97 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class tweet_counter implements twitterprocess{
+
+    public tweet_counter(String outfile)
+    {
+        count = new long[365*2];
+        for(int i=0;i<count.length;i++)
+            count[i]=0;
+        file = outfile;
+    }
+    @Override
+    public void consume(tweet t) throws TwitterMessage {
+        Date d = new Date(t.time);
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        int index = (c.get(Calendar.YEAR)-2011)*53 + c.get(Calendar.WEEK_OF_YEAR);
+            
+        count[index]++;
+    }
+
+    @Override
+    public String end() {
+        PrintStream out = null;
+        long total=0;
+        try {
+            out = new PrintStream(new FileOutputStream(new File(file)));
+            
+            for(int ct=0;ct<count.length;ct++)
+            {
+                out.println(count[ct]);
+                total+=count[ct];
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(tweet_counter.class.getName()).log(Level.SEVERE, null, ex);
+            return "Tweet count error "+ex;
+                    }
+        
+        return total+" Tweets counted";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+
+    @Override
+    public String buttonMenu() {
+        return "Count Tweets";
+    }
+
+   
+    public twitterprocess clone() {
+        return new tweet_counter(JOptionPane.showInputDialog("output file?"));
+    }
+
+    @Override
+    public twitterprocess load(String in) throws TwitterMessage {
+        return new tweet_counter(in);
+    }
+
+    @Override
+    public String save() {
+        return file;
+    }
+    
+    public String toString()
+    {
+        return "Count Tweets";
+    }
+
+    @Override
+    public String toolTip() {
+        return "Counts the number of tweets per week";
+    }
+    long count[];
+    String file;
+}

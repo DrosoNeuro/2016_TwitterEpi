@@ -1,0 +1,115 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user_interface;
+
+import java.math.BigDecimal;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.tweet;
+
+/**
+ *
+ * @author toddbodnar
+ */
+public class sqlProcessTuckerClass implements twitterprocess{
+    
+    public sqlProcessTuckerClass()
+    {
+        try {
+             Class.forName("org.gjt.mm.mysql.Driver");
+        
+           // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sample_day", "root","");172.31.182.40
+          //  stat = connection.prepareStatement("INSERT INTO tweets (text,tweetId,x_coord,y_coord,time) VALUES(?,?,?,?,?)");stdatalab.engr-do.psu.edu
+            connection = DriverManager.getConnection("jdbc:mysql://stdatalab.engr-do.psu.edu:3306/twitter-project", "twitter-project","");
+            stat = connection.prepareStatement("INSERT INTO tweets14 (longitude,latitude, flu_probability, text, time, tweet_id, user_id, state_id,source) VALUES(?,?,?,?,?,?,?,?,?)");
+        } catch (Exception ex) {
+            Logger.getLogger(sqlProcessTuckerClass.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(-10);
+        }
+    }
+    
+    public static void main(String args[]) throws Exception
+    {
+        Class.forName("org.gjt.mm.mysql.Driver");
+        
+        Connection connection = connection = DriverManager.getConnection("jdbc:mysql://stdatalab.engr-do.psu.edu:3306/twitter-project", "twitter-project","");
+            
+        //PreparedStatement stat = connection.prepareStatement("INSERT INTO tweets (text) VALUES(?)");
+        
+        //stat.setString(1, "Test");
+        
+        //stat.executeUpdate();
+    }
+
+    @Override
+    public void consume(tweet t) {
+        
+        try {
+            stat.setDouble(1, (t.boundingbox[0].getX()+t.boundingbox[1].getX())/2.0);  //average the bounding box!
+            stat.setDouble(2, (t.boundingbox[0].getY()+t.boundingbox[1].getY())/2.0);
+            stat.setNull(3, java.sql.Types.DOUBLE);
+            stat.setString(4, t.text);
+            stat.setTimestamp(5, new Timestamp(t.time));
+            
+            stat.setBigDecimal(6, new BigDecimal(t.tweet_id));
+            stat.setBigDecimal(7, new BigDecimal(t.user.id_str));
+            stat.setNull(8, java.sql.Types.INTEGER);
+            stat.setString(9,t.file);
+            stat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(sqlProcessTuckerClass.class.getName()).log(Level.SEVERE, null, ex);
+            errors++;
+        } catch (Exception e){
+            System.err.println(e);
+            errors++;
+        }
+      
+    }
+
+    @Override
+    public String end() {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(sqlProcessTuckerClass.class.getName()).log(Level.SEVERE, null, ex);
+//            return "Error closing SQL: "+ex.toString();
+        }
+        return "SQL Closed: "+errors+" errors";
+    }
+
+    @Override
+    public boolean quitAtEnd() {
+        return true;
+    }
+    private Connection connection;
+    private PreparedStatement stat;
+    private int errors = 0;
+
+    @Override
+    public String buttonMenu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess clone() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public twitterprocess load(String in) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String save() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toolTip() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}

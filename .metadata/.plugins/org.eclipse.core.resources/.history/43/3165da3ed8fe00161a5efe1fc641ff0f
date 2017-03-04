@@ -1,0 +1,283 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classification;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import twitter.user;
+import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.functions.LibSVM;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.functions.supportVector.PolyKernel;
+import weka.classifiers.functions.supportVector.RBFKernel;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
+
+/**
+ * Classifies users based on their profile
+ * @author toddbodnar
+ */
+public class userClassifierMultiple extends userClassifierBinary{
+    public userClassifierMultiple(File pcas, File training)
+    {
+        super(null,null);
+        super.loadPCA(pcas);
+        
+        
+        FastVector fv = new FastVector(8+1+pcaCount);
+        FastVector types = new FastVector(4);
+        FastVector domains = new FastVector(3);
+        FastVector trueFalse = new FastVector(2);
+        types.addElement("personal");
+        types.addElement("other");
+        types.addElement("news");
+        types.addElement("health");
+        
+        domains.addElement("other");
+        domains.addElement("com");
+        domains.addElement("null");
+        
+        trueFalse.addElement("true");
+        trueFalse.addElement("false");
+        
+        Attribute PCAs[] = new Attribute[pcaCount];
+        for(int ct=0;ct<pcaCount;ct++)
+        {
+            PCAs[ct] = new Attribute("pca_"+ct);
+            fv.addElement(PCAs[ct]);
+        }
+        
+        Attribute favourites = new Attribute("favourites");
+        Attribute followers= new Attribute("followers");
+        Attribute friends= new Attribute("friends");
+        Attribute isContribute= new Attribute("isContribute",trueFalse);
+        Attribute isVerified= new Attribute("isVerified",trueFalse);
+        Attribute listed= new Attribute("listed");
+        Attribute statusCount= new Attribute("statusCount");
+        Attribute domain = new Attribute("domain", domains);
+        
+        Attribute value = new Attribute("type", types);
+        
+        fv.addElement(favourites);
+        fv.addElement(followers);
+        fv.addElement(friends);
+        fv.addElement(isContribute);
+        fv.addElement(isVerified);
+        fv.addElement(listed);
+        fv.addElement(statusCount);
+        fv.addElement(domain);
+        fv.addElement(value);
+        
+        
+        Instances dataset = new Instances("value",fv,1);
+        Instance ins = null;
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(training));
+            String line;
+            
+            br.readLine();
+           
+            while ((line = br.readLine()) != null) {
+                Instance i = new Instance(8+1+pcaCount);
+                i.setDataset(dataset);
+                String split[] = line.split("\t");
+               // System.err.println(line);
+                if(split[0].equals("personal account"))
+                    i.setValue(value, "personal");
+                else if(split[0].equals("health organizations"))
+                    i.setValue(value, "health");
+                else if(split[0].equals("news organization"))
+                    i.setValue(value, "news");
+                else
+                    i.setValue(value, "other");
+                
+                i.setValue(favourites,Math.log(1+Double.parseDouble(split[2])));
+                i.setValue(followers,Math.log(1+Double.parseDouble(split[3])));
+                i.setValue(friends,Math.log(1+Double.parseDouble(split[4])));
+                i.setValue(isContribute,(split[5]));
+                i.setValue(isVerified,(split[6]));
+                i.setValue(listed,Math.log(1+Double.parseDouble(split[7])));
+                i.setValue(statusCount,Math.log(1+Double.parseDouble(split[8])));
+                i.setValue(domain,split[9].toLowerCase());
+                
+                double values[] = stringToDouble(split[1]);
+                for(int ct=0;ct<pcaCount;ct++)
+                    i.setValue(PCAs[ct], values[ct]);
+                
+                if(ins==null)
+                ins = i;
+                dataset.add(i);
+            }
+            
+            
+            
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(userClassifierMultiple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        dataset.setClass(value);
+        
+        //LibSVM svm = new LibSVM();
+        SMO svm = new SMO();
+        svm.setC(1);
+        svm.setEpsilon(1.0E-12);
+        svm.setNumFolds(-1);
+        svm.setRandomSeed(1);
+        svm.setToleranceParameter(0.001);
+        RBFKernel k = new RBFKernel();
+        k.setGamma(.01);
+        //svm.setKernel(k);
+        svm.setKernel(new PolyKernel());
+        
+       classifier = svm;
+       svm.setDebug(false);
+       classifier.setDebug(false);
+       //classifier;
+        try {
+            classifier.buildClassifier(dataset);
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierMultiple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Evaluation eval;
+        try {
+            eval = new Evaluation(dataset);
+            eval.crossValidateModel(svm, dataset, 10, new java.util.Random());
+            System.out.println(pcaCount+","+eval.correct());
+            
+            System.out.println(eval.toSummaryString("Title!",true)); //(~0.869 correct)
+            System.out.println("\n\n");
+            for(int ct=0;ct<4;ct++)
+            {
+                for(int i=0;i<4;i++)
+                    System.out.print(eval.confusionMatrix()[ct][i]+"\t");
+                System.out.println();
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierMultiple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+
+    public userClassifierMultiple()
+    {
+        this(new File("PCAs"),new File("/Users/toddbodnar/Documents/amazon turk ratings all types combined other.csv"));
+    }
+    
+    
+    public String getType(user u) {
+        FastVector fv = new FastVector(8 + 1 + pcaCount);
+        FastVector types = new FastVector(4);
+        FastVector domains = new FastVector(3);
+        FastVector trueFalse = new FastVector(2);
+        types.addElement("personal");
+        types.addElement("other");
+        types.addElement("news");
+        types.addElement("health");
+
+        domains.addElement("other");
+        domains.addElement("com");
+        domains.addElement("null");
+
+        trueFalse.addElement("true");
+        trueFalse.addElement("false");
+
+        Attribute PCAs[] = new Attribute[pcaCount];
+        for (int ct = 0; ct < pcaCount; ct++) {
+            PCAs[ct] = new Attribute("pca_" + ct);
+            fv.addElement(PCAs[ct]);
+        }
+
+        Attribute favourites = new Attribute("favourites");
+        Attribute followers = new Attribute("followers");
+        Attribute friends = new Attribute("friends");
+        Attribute isContribute = new Attribute("isContribute", trueFalse);
+        Attribute isVerified = new Attribute("isVerified", trueFalse);
+        Attribute listed = new Attribute("listed");
+        Attribute statusCount = new Attribute("statusCount");
+        Attribute domain = new Attribute("domain", domains);
+
+        Attribute value = new Attribute("type", types);
+
+        fv.addElement(favourites);
+        fv.addElement(followers);
+        fv.addElement(friends);
+        fv.addElement(isContribute);
+        fv.addElement(isVerified);
+        fv.addElement(listed);
+        fv.addElement(statusCount);
+        fv.addElement(domain);
+        fv.addElement(value);
+
+
+        Instances dataset = new Instances("value", fv, 1);
+
+        Instance i = new Instance(8 + 1 + pcaCount);
+        i.setDataset(dataset);
+
+        i.setValue(value, "other");
+
+        i.setValue(favourites, Math.log(1 + u.favourites_count));
+        i.setValue(followers, Math.log(1 + u.followers_count));
+        i.setValue(friends, Math.log(1 + u.friends_count));
+        i.setValue(isContribute, ("false"));
+        i.setValue(isVerified, ("false"));
+        i.setValue(listed, Math.log(1 + u.listed_count));
+        i.setValue(statusCount, Math.log(1 + u.status_count));
+        String top = "other";
+
+        if (u.topLevelDomain.equalsIgnoreCase("null") || u.topLevelDomain.equalsIgnoreCase("com")) {
+            top = u.topLevelDomain.toLowerCase();
+        }
+        i.setValue(domain, top);
+
+        double values[] = stringToDouble(u.description);
+        for (int ct = 0; ct < pcaCount; ct++) {
+            i.setValue(PCAs[ct], values[ct]);
+        }
+
+        dataset.add(i);
+
+        dataset.setClass(value);
+        i.setClassMissing();
+        try {
+            return classifier.classifyInstance(i) + "";
+        } catch (Exception ex) {
+            Logger.getLogger(userClassifierMultiple.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "null";
+    }
+
+    public boolean isInCategory(twitter.user u, int category) {
+        return Integer.parseInt(getType(u))==(category);
+    }
+
+    public static void main(String args[]) {
+        int total = 0;
+        int values[] = {100};//{1,5,10,25,50,75,100};
+        for (int val : values) {
+            //for(int ct=0;ct<10;ct++){
+            pcaCount = val;
+            total += new userClassifierMultiple().hashCode();
+           // }
+        }
+        //System.out.println(new userClassifier().stringToDouble("#health is important!")[0]);
+    }
+
+    
+
+}
