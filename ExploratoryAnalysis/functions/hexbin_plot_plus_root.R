@@ -8,6 +8,7 @@
 
 library("hexbin") #for hexagonal binning
 library("grid")
+library("scales") # for function colour_ramp()
 #add explore compatibility
 hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50),path="",
                              xbins=100,root=1)  #function print spatial distribution of sick tweets
