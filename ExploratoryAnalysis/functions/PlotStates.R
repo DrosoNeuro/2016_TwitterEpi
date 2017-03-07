@@ -94,7 +94,7 @@ state_flu_activity <- function(us_states,main_title="",cols,boxColours){
 }
 
 #meta-function to combine all of the abvoe 
-plot_flu_states <- function(data,filename="") {
+plot_flu_states <- function(data,filename="animation.mp4") {
   data <-
     data[, .(statename, activity_level, weekend, activity_level_label)]
   states <- state_names()
@@ -121,5 +121,36 @@ plot_flu_states <- function(data,filename="") {
       us_states <- map("state", plot=F,fill=T,col=flu_cols)
       state_flu_activity(us_states,main_title=as.character(weeks[i]),cols=flu_cols,boxColours=legcols)
       }
+  },video.name=filename,ani.width = 1000, ani.height = 600)
+}
+
+#meta-function to combine all of the abvoe 
+plot_flu_diff_states <- function(data,filename="animation.mp4") {
+  data <-
+    data[, .(statename, activity_level, weekend, activity_level_label)]
+  states <- state_names()
+  weeks <- unique(data$weekend)
+  n <- length(weeks)
+  
+  #leg_ind <- c(0,1,4,6,8)
+  leg_lab <- unique(data$activity_level_label)
+  leg_nr <- c("1-3: ","4-5: ","6-7: ","8-10: ","0: ")
+  leg_lab <- paste0(leg_nr,leg_lab)
+  leg_lab <- leg_lab[order(leg_lab)]
+  
+  #define colourramp
+  cr <- colour_ramp(c("blue", "white", "red"))
+  legcols <- cr(seq(0,1,by=0.1))
+  ani.options("interval"=0.5)
+  saveVideo({
+    for (i in 1:n) {
+      #prepare statemap
+      temp <- data[weekend==weeks[i],]
+      temp <- temp[,.(statename,activity_level)]
+      temp <- merge(temp,states,by="statename")
+      flu_cols <- cr(temp$activity_level / 10)
+      us_states <- map("state", plot=F,fill=T,col=flu_cols)
+      state_flu_activity(us_states,main_title=as.character(weeks[i]),cols=flu_cols,boxColours=legcols)
+    }
   },video.name=filename,ani.width = 1000, ani.height = 600)
 }

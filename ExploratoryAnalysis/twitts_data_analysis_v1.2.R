@@ -80,8 +80,8 @@
   animateFlu(df,tag=tag,path="plots/only_")
   
   #time lapse of CDC state data
-  state_data <- scrapeCDC(time_window=seq(2010,2016,by=1))
-  plot_flu_states(state_data,filename="plots/CDC_timelapse.mp4")
+  cdc_data <- scrapeCDC(time_window=seq(2010,2014,by=1))
+  plot_flu_states(cdc_data,filename="plots/CDC_timelapse.mp4")
   
   #  histogram of longitude and latitude ----
   coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast

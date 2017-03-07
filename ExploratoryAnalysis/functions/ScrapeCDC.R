@@ -13,7 +13,7 @@ state_data <- as.data.table(state_data)
 #remove states outside mainland
 state_data <-
   state_data[!(state_data$statename %in% c("Hawaii", "Puerto Rico", "Alaska", "Virgin Islands")), ]
-data$statename <- tolower(data$statename)
-setkey(data, statename,weekend)
+state_data$statename <- tolower(state_data$statename)
+setkey(state_data, statename,weekend)
 return(state_data)
 }
