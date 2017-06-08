@@ -315,7 +315,7 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     hexbin1@count <- (hexbin1@count)**(1/root) #root-transforming counts in order to improve readability
     grid.hexagons(hexbin1,style="colorscale",colramp=colramp,mincnt=0)
     grid.points(unit(geodata[[2]]$longitude,"native"),unit(geodata[[2]]$latitude,"native"),
-                gp=gpar(col="blue",lwd=10,lty="solid",fontsize=10),pch="o")
+                gp=gpar(col="black",lwd=10,lty="solid",fontsize=10),pch="o")
     grid.polygon(unit(geodata[[3]]$longitude,"native"),unit(geodata[[3]]$latitude,"native"),
                  gp=gpar(col="blue",fill="blue",alpha=0.5))
     popViewport(2)
@@ -337,6 +337,7 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
     if(is.vector(sub_set)&&is.integer(sub_set)){
       hx_ls_ref <- create_hexbins(datatable,coord,type=c(1),subset_tag)
       datatable <- datatable[sub_set,]
+      #hx_ls_ref <- create_hexbins(datatable,coord,type=c(1),subset_tag)
       hx_ls <- create_hexbins(datatable,coord,type,subset_tag)
       hx_rel_ls <- create_rel_hexbins(hx_ls,type,ref_set=hx_ls_ref,subset_tag)
     }

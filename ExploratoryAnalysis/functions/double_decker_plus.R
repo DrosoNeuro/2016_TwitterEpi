@@ -7,7 +7,7 @@ double_decker_plus <- function(table,sickness_state = c("random","healthy","sick
   filename <- paste0(path,"doubledecker_",sickness_state,".pdf")
   pdf(file=filename,width=14)
   doubledecker(table,pop=F,varnames=F,
-               gp = gpar(fill = c("cyan","green","green","deeppink")))
+               gp = gpar(fill = c("cyan","green","green","red")))
   labeling_cells(text = format(table,scientific=T), margin=0)(table)
   dev.off()
 }

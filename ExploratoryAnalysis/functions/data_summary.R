@@ -39,6 +39,10 @@ data_summary <- function(datatable){
     #disease table with number of sick/healthy users
     dis_table <- as.table(matrix(c(num_only_sick_users,num_both,num_both,num_only_healthy_users),ncol=2,byrow=T))
     names(dimnames(dis_table))<-c("A"," ")
+    dis_table_tweets <- as.table(matrix(c(length(only_sick_position),length(both_position),length(both_position),
+                                          length(only_healthy_position)),ncol=2,byrow=T))
+    names(dimnames(dis_table_tweets))<-c("A"," ")
+    
     prop_all <- prop.table(dis_table)
     prop_all <- prop_all+dis_table[1,2]*prop_all/num_all_users #correcting the proportions table for 
     #the fact that the healthy:sick relation is counted double in the proportions table
@@ -47,7 +51,8 @@ data_summary <- function(datatable){
     prop_healthy <- matrix(prop.table(dis_table,2)[,2],1,2)
     rownames(dis_table) <- colnames(dis_table)  <-
     rownames(prop_all) <- colnames(prop_all) <-
-    colnames(prop_sick) <- colnames(prop_healthy) <- c("sick","healthy") 
+    colnames(prop_sick) <- colnames(prop_healthy) <- 
+    rownames(dis_table_tweets)<-  colnames(dis_table_tweets) <- c("sick","healthy") 
 
     out <- list(num_all_tweets,all_users,num_all_users,
                 sick_position,num_sick_tweets,sick_users,num_sick_users,
@@ -55,13 +60,13 @@ data_summary <- function(datatable){
                 only_sick_position,only_sick,num_only_sick_users,
                 only_healthy_position, only_healthy,num_only_healthy_users,
                 both_position,both,num_both,
-                dis_table,prop_all,prop_sick,prop_healthy)
+                dis_table,prop_all,prop_sick,prop_healthy,dis_table_tweets)
     names(out) <- c("num_all_tweets","all_users","num_all_users", 
                     "sick_position","num_sick_tweets","sick_users","num_sick_users",
                     "healthy_position", "num_healthy_tweets", "healthy_users","num_healthy_users",
                     "only_sick_position","only_sick","num_only_sick_users",
                     "only_healthy_position", "only_healthy","num_only_health_users",
                     "both_position","both","num_both",
-                    "dis_table","prop_all","prop_sick","prop_healthy")
+                    "dis_table","prop_all","prop_sick","prop_healthy","dis_table_tweets")
     return(out)
   }

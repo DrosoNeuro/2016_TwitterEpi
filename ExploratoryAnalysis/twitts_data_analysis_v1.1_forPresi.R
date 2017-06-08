@@ -603,7 +603,6 @@ profvis({
   
 ### ---------------- here we analyse the user/state activity ------------
   
-  
 ##hist of US states activity ----
   
   #state_abbr = c("dc","as","gu","mp","vi","pr","hi","ak","ct","me","ma","nh","ri","vt","nj","ny","de","md","pa","va","wv","al","fl","ga","ky","ms","nc","sc","tn","il","in","mi","mn","oh","wi","ar","la","nm","ok","tx","ia","ks","mo","ne","co","mt","nd","sd","ut","wy","az","ca","nv","id","or","wa")

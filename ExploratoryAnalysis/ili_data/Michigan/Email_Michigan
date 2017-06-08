@@ -1,0 +1,12 @@
+ILI surveillance data from the counties and/or regions of Illinois
+http://www.health.state.mn.us/divs/idepc/diseases/flu/stats/
+Dear Sir or Madam,
+
+I am a researcher in the Digital Epidemiology Laboratory of the EPFL, in Lausanne, Switzerland. I am currently working on a project in which we try to use geo-tagged Twitter data from the US to make predictions about the occurence of ILI in the respective areas of the tweeters. Currently, we are using ILI surveillance data on the national and the state level in order to assess the performance of our algorithms.
+
+However, we would also like to see whether our predictions hold in smaller geographical areas such as counties or state regions. Hence, I wanted to know whether there is any possibility to access the weekly ILI surveillance data for the counties or at least the regions of the state of Michigan (preferably in the time window from 2010 to 2015, since our model was built on Twitter data from that time). On the website of the Michigan Health Department, I could unfortunately only access the weekly summaries in pdf format, which makes usage very cumbersome.
+
+Access to these data would very much help us to further test and hopefully improve our flu detection algorithm.
+Thank you very much in advance for your help and best regards
+
+Servan Grüninger

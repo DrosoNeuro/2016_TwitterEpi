@@ -37,7 +37,7 @@
   setwd(paste0(root_path,"functions/")) 
   file.sources = list.files(pattern="*.R")
   sapply(file.sources,source,.GlobalEnv)
-
+  
   setwd(root_path) # set WD back
   #source("datasets/load_csv.R")
   #source("datasets/load_feather.R")
@@ -58,6 +58,7 @@
   
   #plotting mosaic plots
   double_decker_plus(df_summary$dis_table,"sick","plots/")
+  double_decker_plus(df_summary$dis_table_tweets,"sick_tweets","plots/")
  
 
 # ---------------- here we analyse the data `in space' ------------
@@ -67,21 +68,31 @@
   tag <- "sick_df_continent "
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=1000,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,path="plots/",xbins=500,log_scale=TRUE)
-  hexbin_plot_plus(df,tag=tag,path="plots/",xbins=300,root=10)
-  hexbin_plot_plus(df,summary=df_summary,tag=tag,path="plots/",xbins=100,log_scale=TRUE)
+  hexbin_plot_plus(df,summary=df_summary,tag=tag,path="plots/",xbins=300,root=10)
+  hexbin_plot_plus(df,summary=df_summary,tag=tag,path="plots/",xbins=100,root=10)
 
-  tag <- "sick_df_East Coast"
+  tag <- "sick_df_West Coast"
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=1000,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=500,log_scale=TRUE)
-  hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=300,log_scale=TRUE)
+  hexbin_plot_plus(df,tag=tag,summary=df_summary,coord = c(-125,-112,32,40),path="plots/",xbins=100,root=10)
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=100,log_scale=TRUE)
   
   #time lapse of sick tweets
-  animateFlu(df,tag=tag,path="plots/only_")
+  animate_flu_daily(df,tag=tag,path="plots/only_")
   
   #time lapse of CDC state data
-  cdc_data <- scrapeCDC(time_window=seq(2010,2014,by=1))
-  plot_flu_states(cdc_data,filename="plots/CDC_timelapse.mp4")
+  cdc_data_state <- scrapeCDC_state(time_window=seq(2010,2015,by=1))
+  save("cdc_data_state",file="ili_data/cdc_data_state.RData")
+  cdc_data_nat_reg <- scrapeCDC(time_window=seq(2010,2015,by=1))
+  save("cdc_data_nat_reg",file="ili_data/cdc_data_nat_reg.RData")
+  
+  #find out regional baselines: https://www.cdc.gov/flu/weekly/overview.htm
+  
+  
+  plot_flu_states(cdc_data_state,filename="plots/CDC_timelapse.avi")
+  
+  twitter_data <- summarise_flu_weekly(df,cdc_data)
+  
   
   #  histogram of longitude and latitude ----
   coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast
@@ -169,9 +180,13 @@
 ## plot histogram of User ID  ----
   user_activity <- function(datatable,tag){#datatable has to be in the form of a data.table; preferentially with key already set to "userID"
     setkey(datatable,"userID")
+    IDs <- unique(datatable[sick==1,userID])
+    IDs <- which(datatable[,userID] %in% IDs)
+    sick_only <- datatable[IDs,]
     user_ac <- datatable[,.N,by=.(userID)] #".N" is a shortcut for length(current_object), in this case, it outputs the nunber of occurences of each user in the column userID; .() is a shorthand for "list"
+    user_ac_sick <- sick_only[,.N,by=.(userID)]
     #user_ac[,N:=log10(N)]
-    user_ac[,N:=N-1]
+    #user_ac[,N:=N-1]
     #user_ac[,N:=N**(1/15)]
     #Freedman-Diaconis rule to calculate optimal bin-width http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram
     bw <- 2*IQR(user_ac$N)/(length(user_ac$N)**(1/3))
@@ -183,7 +198,11 @@
     activity_plot <- ggplot(data =  user_ac, aes(x = user_ac[,N]))+ 
       geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
       xlab('numb. of tweets') + ylab("proportion of users") + scale_x_continuous(limits=c(0,50),expand=c(0,0))  # Overlay with transparent density plot
+    sick_plot <- ggplot(data =  user_ac_sick, aes(x = user_ac_sick[,N]))+ 
+      geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
+      xlab('numb. of tweets') + ylab("proportion of users") + scale_x_continuous(limits=c(0,50),expand=c(0,0))  # Overlay with transparent density plot
     print(activity_plot)
+    print(sick_plot)
     dev.off()
     #note to me: find out how to set x-Axes to zero
   }

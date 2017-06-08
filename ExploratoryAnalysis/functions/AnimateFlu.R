@@ -3,6 +3,21 @@ library(ggplot2)
 library(animation)
 library(XML)
 
+ili_baseline_calculator <- function(cdc_nat_reg){
+  cdc_nat_reg <- cdc_nat_reg[,c("REGION TYPE","REGION","YEAR","WEEK","% WEIGHTED ILI","%UNWEIGHTED ILI","ILITOTAL","DATE")]
+  colnames(cdc_nat_reg) <- c("type","region","year","week","weightedILI","unweightedILI","totalILI","date") 
+  weeks <- unique(cdc_nat_reg$date)
+  years <- gsub("\\-.*","",weeks)
+  states <- unique(aggregate_data$statename)
+  sum_flu <- as.data.table(aggregate(sick~year+statename,data=aggregate_data,sum))
+  avg_flu <- as.data.table(aggregate(sick~year+statename,data=aggregate_data,mean))
+  sd_flu <- as.data.table(aggregate(sick~year+statename,data=aggregate_data,sd))
+  flu_baseline <- avg_flu[,.(year,statename)]
+  flu_baseline[,mean:= avg_flu$sick]
+  flu_baseline[,std:= sd_flu$sick]
+  flu_baseline[,sum:= sum_flu$sick]
+  return(flu_baseline)
+}
 
 animate_flu_daily <- function(datatable,coord=c(-125,-66,25,50),path="",tag=""){
   datatable$time <- as.POSIXct(datatable$time,origin="1970-01-01")
@@ -27,7 +42,7 @@ animate_flu_daily <- function(datatable,coord=c(-125,-66,25,50),path="",tag=""){
   p <- ggmap(m)+scale_x_continuous(limits=lon,expand=c(0,0))+
     scale_y_continuous(limits=lat,expand=c(0,0)) + 
     xlab("longitude") + ylab("latitude")
-  vid_name <- paste0(path,tag,"_timelapse.mp4")
+  vid_name <- paste0(path,tag,"_timelapse.avi")
   ani.options("interval"=0.2)
 saveVideo({
     for (i in 1:n) 
@@ -190,7 +205,7 @@ summarise_flu_weekly <- function(datatable,cdc_data,start=as.Date("2011-03-05"),
 
   add_label_thresholds <- function(flu_baseline){
     std <- flu_baseline$std
-    avg <- flu_baseline$mean
+    avg <- flu_baseline$mean + 2*std
     flu_baseline$zero <- -999999
     flu_baseline$one <- avg
     flu_baseline$two <- avg+std
@@ -231,15 +246,17 @@ summarise_flu_weekly <- function(datatable,cdc_data,start=as.Date("2011-03-05"),
   
   flu_aggregated <- add_labels(flu_baseline,flu_aggregated)
   setkey(flu_aggregated,weekend)
+  plot_flu_states(flu_aggregated,filename="twitter_flu.avi")
   merged_set <- merge(flu_aggregated,cdc_data,by=c("weekend","statename"))
   merged_set$activity_level <- merged_set$activity_level.y-merged_set$activity_level.x
   merged_set$activity_level <- (merged_set$activity_level+10)/2
   merged_set$activity_level_label <- merged_set$activity_level_label.x
-  plot_flu_diff_states(merged_set)
+  setkey(merged_set,weekend)
+  plot_flu_diff_states(merged_set,filename="Twitter_cdc_diff.avi")
   
-  state_names <-
-    state_names[!(state_names %in% c("hawaii", "puerto rico", "alaska", "virgin islands",
-                                     "northern mariana islands","samoa","guam"))]
+  # state_names <-
+  #   state_names[!(state_names %in% c("hawaii", "puerto rico", "alaska", "virgin islands",
+  #                                    "northern mariana islands","samoa","guam"))]
 }
 
 

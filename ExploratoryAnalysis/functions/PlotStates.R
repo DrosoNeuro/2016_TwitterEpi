@@ -39,6 +39,8 @@ leg <- function(leg_title="",boxColours){
   pushViewport(viewport(x=0.5, y=0.45, width=1,height=0.5))
   pushViewport(vp_grid)
   
+  newlabels <- seq(-10,10,by=2)
+  
   for (i in  1:nlabels){
     pushViewport(viewport(layout.pos.row = i))
     grid.text(i-1)
@@ -94,7 +96,7 @@ state_flu_activity <- function(us_states,main_title="",cols,boxColours){
 }
 
 #meta-function to combine all of the abvoe 
-plot_flu_states <- function(data,filename="animation.mp4") {
+plot_flu_states <- function(data,filename="animation.avi") {
   data <-
     data[, .(statename, activity_level, weekend, activity_level_label)]
   states <- state_names()
@@ -108,7 +110,7 @@ plot_flu_states <- function(data,filename="animation.mp4") {
   leg_lab <- leg_lab[order(leg_lab)]
   
   #define colourramp
-  cr <- colour_ramp(c("white", "yellow", "red"))
+  cr <- colour_ramp(c("white", "yellow","red"))
   legcols <- cr(seq(0,1,by=0.1))
   ani.options("interval"=0.5)
   saveVideo({
@@ -133,10 +135,10 @@ plot_flu_diff_states <- function(data,filename="animation.mp4") {
   n <- length(weeks)
   
   #leg_ind <- c(0,1,4,6,8)
-  leg_lab <- unique(data$activity_level_label)
-  leg_nr <- c("1-3: ","4-5: ","6-7: ","8-10: ","0: ")
+  leg_lab <- c("Twitter overestimated","spot on","Twitter underestimated")
+  leg_nr <- c("-10: ","0: ","10: ")
   leg_lab <- paste0(leg_nr,leg_lab)
-  leg_lab <- leg_lab[order(leg_lab)]
+  #leg_lab <- leg_lab[order(leg_lab)]
   
   #define colourramp
   cr <- colour_ramp(c("blue", "white", "red"))
