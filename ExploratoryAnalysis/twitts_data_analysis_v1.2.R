@@ -81,18 +81,83 @@
   animate_flu_daily(df,tag=tag,path="plots/only_")
   
   #time lapse of CDC state data
-  cdc_data_state <- scrapeCDC_state(time_window=seq(2010,2015,by=1))
-  save("cdc_data_state",file="ili_data/cdc_data_state.RData")
-  cdc_data_nat_reg <- scrapeCDC(time_window=seq(2010,2015,by=1))
-  save("cdc_data_nat_reg",file="ili_data/cdc_data_nat_reg.RData")
+  #if you've already scraped the CDC data, you can ignore the following four lines and just load the saved DataSets
   
-  #find out regional baselines: https://www.cdc.gov/flu/weekly/overview.htm
+  #cdc_data_state <- scrapeCDC_state(time_window=seq(2010,2015,by=1))
+  #save("cdc_data_state",file="ili_data/cdc_data_state.RData")
   
+  #cdc_data_nat_reg <- scrapeCDC(time_window=seq(2010,2015,by=1))
+  #save("cdc_data_nat_reg",file="ili_data/cdc_data_nat_reg.RData")
   
-  plot_flu_states(cdc_data_state,filename="plots/CDC_timelapse.avi")
+  load("ili_data/cdc_data_nat_reg.RData")
+  load("ili_data/cdc_data_state.RData")
+
+  #plot geographical comparison of Twitter and cdc data
+  setwd(paste0(root_path,"/plots"))
+  summarise_flu(df,cdc_data_state,nat_reg="state")
+  summarise_flu(df,cdc_data_nat_reg,nat_reg="regional")
+  summarise_flu(df,cdc_data_nat_reg,nat_reg="national")
+  setwd(paste0(root_path,"/plots"))
   
-  twitter_data <- summarise_flu_weekly(df,cdc_data)
+  #analyse county-level data
+  #Oregon
+  #ignore the following lines if oregon_data has already been preprocessed
+  ili_oregon <- fread("ili_data/Oregon/2010_2017_ili_Oregon.csv")
+  colnames(ili_oregon)[c(1,2,9)] <- c("week","county","ili")
+  #region_type <- rep("county",length(ili_oregon$county))
+  ili_oregon$year <- as.integer(gsub("([0-9]{4}).*","\\1",ili_oregon$week))
+  ili_oregon$week <- as.integer(gsub("^[0-9]{4}","",ili_oregon$week))
+  ili_oregon$region_type <- "county"
+  ili_oregon$county <- paste0("oregon,",tolower(ili_oregon$county))
+
+  #extract weekend dates
+  time_window <- seq(min(ili_oregon$year)-1,max(ili_oregon$year),by=1)
+  weekend_lookup <- wk_lookup(time_window)
+  ili_oregon <- ili_oregon[weekend_lookup,date:=i.DATE,on=c(year="YEAR",week="WEEK")]
+  save("ili_oregon",file="ili_data/Oregon/ili_oregon.RData")
+
+  #only run this line of Oregon has already been processed
+  load("ili_data/Oregon/ili_oregon.RData")
   
+  summarise_flu(df,ili_oregon,nat_reg="county")
+  
+  #Mississppi
+  #ignore the following lines if Mississippi data has already been preprocessed
+  load("ili_data/Mississippi/ili_rates_ms.RData")
+  ili_ms <- ili_rates_ms
+  colnames(ili_ms)[1] <- "county"
+  ili_ms[week<=20,year:= gsub(".*([0-9]{4})","\\1",year)]
+  ili_ms[week>20,year:=  gsub("([0-9]{4}).*","\\1",year)]
+  ili_ms[,year:=as.integer(year)]
+  time_window <- seq(min(ili_ms$year)-1,max(ili_ms$year),by=1)
+  weekend_lookup <- wk_lookup(time_window)
+  ili_ms <- ili_ms[weekend_lookup,date:=i.DATE,on=c(year="YEAR",week="WEEK")]
+  
+  save("ili_ms",file="ili_data/Mississippi/ili_mississippi.RData")
+  
+  #you can only load this if the previous few lines have been executed
+  load("ili_data/Mississippi/ili_mississippi.RData")
+  
+  #New Jersey
+  load("ili_data/NewJersey/ili_rates_nj.RData")
+  ili_nj <- ili_rates_nj
+  time_window <- seq(min(ili_nj$year)-1,max(ili_nj$year),by=1)
+  weekend_lookup <- wk_lookup(time_window)
+  ili_nj <- ili_nj[weekend_lookup,date:=i.DATE,on=c(year="YEAR",week="WEEK")]
+  ili_nj_counties <- ili_nj[-which(ili_nj$district %in% c("NW Region","NE Region","CW Region","CE Region","South Region","State Total","UNKNOWN"))]
+  ili_nj_counties$district <- paste0("new jersey,",tolower(ili_nj_counties$district))
+  colnames(ili_nj_counties)[1] <- "county"
+  save("ili_nj_counties",file="ili_data/NewJersey/ili_nj_counties.RData")
+
+  ili_nj_regions <-  ili_nj[which(ili_nj$district %in% c("NW Region","NE Region","CW Region","CE Region","South Region","State Total"))]
+  colnames(ili_nj_regions)[1] <- "region"
+  save("ili_nj_regions",file="ili_data/NewJersey/ili_nj_regions.RData")
+  
+  #load dataset for new jersey
+  load("ili_data/NewJersey/ili_nj_counties.RData")
+  colnames(ili_nj_counties)[7] <- "ili"
+  
+  summarise_flu(df,ili_nj_counties,nat_reg="county")
   
   #  histogram of longitude and latitude ----
   coord_local <- c(-80,-66,38,43) #select only tweets on the East Coast

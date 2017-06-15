@@ -77,7 +77,7 @@ state_flu_activity <- function(us_states,main_title="",cols,boxColours){
   height <- 2
   xbnds <- us_states$range[1:2]
   ybnds <- us_states$range[3:4]
-  xrange <- range(xbnds)+ width/2*c(-1,0.2)
+  xrange <- range(xbnds) + width/2*c(-1,0.2)
   yrange <- range(ybnds) + height/2*c(-1,0.2)
   vp <- viewport(x=0.5,y=0.5,width=0.9,height=0.85,
                  xscale=xrange,yscale=yrange)
@@ -87,24 +87,64 @@ state_flu_activity <- function(us_states,main_title="",cols,boxColours){
   popViewport()
   pushViewport(viewport(x=0.5, y=0.5, width=0.9, height=0.85,
                         xscale=xrange, yscale=yrange, clip="on"))
-  single_states <- c(1,which(is.na(us_states$x))) #get index boundaries of single state data frames
-  for (i in 2:length(single_states)){
+  single_states <- c(1,which(is.na(us_states$x)),length(us_states$x)) #get index boundaries of single state data frames
+  for (i in 2:(length(single_states))){
     grid.polygon(unit(us_states$x[single_states[i-1]:single_states[i]],"native"),unit(us_states$y[single_states[i-1]:single_states[i]],"native"),
-                 gp=gpar(col="black",fill=cols[i]))
+                 gp=gpar(col="black",fill=cols[i-1]))
   }
   popViewport(2)
 }
 
 #meta-function to combine all of the abvoe 
-plot_flu_states <- function(data,filename="animation.avi") {
+plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F) {
   data <-
     data[, .(statename, activity_level, weekend, activity_level_label)]
-  states <- state_names()
+  if (nat_reg == "county"){
+    states <- map('county', target_state,plot = F)$names
+    states <- data.table(states)
+    colnames(states) <- "statename"
+  } else{
+    states <- state_names()
+  }
+  if (nat_reg=="regional"){
+    colnames(data)[1] <- "region"
+    region_list <- list("Region 1" = c("connecticut","maine","massachusetts","new hampshire", "rhode island","vermont"),
+                        "Region 2" = c("new jersey","new york","new york city","puerto rico","us virgin islands"),
+                        "Region 3" = c("delaware", "district of columbia", "maryland", "pennsylvania", "virginia", "west virginia"),
+                        "Region 4" = c("alabama","florida", "georgia", "kentucky", "mississippi", "north carolina", "south carolina", "tennessee"),
+                        "Region 5" = c("illinois", "indiana", "michigan", "minnesota", "ohio", "wisconsin"),
+                        "Region 6" = c("arkansas", "louisiana", "new mexico", "oklahoma", "texas"),
+                        "Region 7" = c("iowa", "kansas", "missouri", "nebraska"),
+                        "Region 8" = c("colorado", "montana", "north dakota", "south dakota", "utah", "wyoming"),
+                        "Region 9" = c("arizona", "california", "hawaii", "nevada"),
+                        "Region 10" = c("alaska", "idaho", "oregon", "washington"))
+    states$region <- NA
+    for (i in 1:length(region_list)){
+      states$region[which(states$statename %in% region_list[[i]])] <- names(region_list)[i]
+    } 
+  } else if (nat_reg == "national"){
+    data <- data[statename=="National",]
+    data$region <- "National"
+  } else if (!any(nat_reg %in% c("state","county"))){
+    stop("Variable 'nat_reg' must be specified with either 'national','regional', 'state' or 'county'")
+  }
   weeks <- unique(data$weekend)
   n <- length(weeks)
   
+  if (diff == T){
+    #leg_ind <- c(0,1,4,6,8)
+    leg_lab <- c("Twitter overestimated","spot on","Twitter underestimated")
+    leg_nr <- c("-10: ","0: ","10: ")
+    leg_lab <- paste0(leg_nr,leg_lab)
+    #leg_lab <- leg_lab[order(leg_lab)]
+    
+    #define colourramp
+    cr <- colour_ramp(c("blue", "white", "red"))
+    legcols <- cr(seq(0,1,by=0.1))
+    ani.options("interval"=0.5)
+  } else {
   #leg_ind <- c(0,1,4,6,8)
-  leg_lab <- unique(data$activity_level_label)
+  leg_lab <- c("Minimal","Low","Moderate","High","Insufficient Data")   
   leg_nr <- c("1-3: ","4-5: ","6-7: ","8-10: ","0: ")
   leg_lab <- paste0(leg_nr,leg_lab)
   leg_lab <- leg_lab[order(leg_lab)]
@@ -113,27 +153,65 @@ plot_flu_states <- function(data,filename="animation.avi") {
   cr <- colour_ramp(c("white", "yellow","red"))
   legcols <- cr(seq(0,1,by=0.1))
   ani.options("interval"=0.5)
+  }
   saveVideo({
     for (i in 1:n) {
       #prepare statemap
       temp <- data[weekend==weeks[i],]
-      temp <- temp[,.(statename,activity_level)]
-      temp <- merge(temp,states,by="statename")
+      if (nat_reg == "regional"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- merge(temp,states,by="region")
+        temp <- temp[order(statename)]
+      } else if (nat_reg == "national"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- temp[rep(1,length(states$statename)),]
+      }
+      else {
+        temp <- temp[,.(statename,activity_level)]
+        temp <- merge(temp,states,by="statename")
+      }
       flu_cols <- cr(temp$activity_level / 10)
-      us_states <- map("state", plot=F,fill=T,col=flu_cols)
+      
+      if (nat_reg == "county"){
+        us_states <- map("county",target_state,plot=F,fill=T,col=flu_cols)
+      } else{
+        us_states <- map("state", plot=F,fill=T,col=flu_cols)
+      }
       state_flu_activity(us_states,main_title=as.character(weeks[i]),cols=flu_cols,boxColours=legcols)
       }
   },video.name=filename,ani.width = 1000, ani.height = 600)
-}
+  }
 
 #meta-function to combine all of the abvoe 
-plot_flu_diff_states <- function(data,filename="animation.mp4") {
+plot_flu_diff_states <- function(data,filename="animation.mp4",nat_reg=F) {
   data <-
     data[, .(statename, activity_level, weekend, activity_level_label)]
   states <- state_names()
+  if (nat_reg=="regional"){
+    colnames(data)[1] <- "region"
+    region_list <- list("Region 1" = c("connecticut","maine","massachusetts","new hampshire", "rhode island","vermont"),
+                        "Region 2" = c("new jersey","new york","new york city","puerto rico","us virgin islands"),
+                        "Region 3" = c("delaware", "district of columbia", "maryland", "pennsylvania", "virginia", "west virginia"),
+                        "Region 4" = c("alabama","florida", "georgia", "kentucky", "mississippi", "north carolina", "south carolina", "tennessee"),
+                        "Region 5" = c("illinois", "indiana", "michigan", "minnesota", "ohio", "wisconsin"),
+                        "Region 6" = c("arkansas", "louisiana", "new mexico", "oklahoma", "texas"),
+                        "Region 7" = c("iowa", "kansas", "missouri", "nebraska"),
+                        "Region 8" = c("colorado", "montana", "north dakota", "south dakota", "utah", "wyoming"),
+                        "Region 9" = c("arizona", "california", "hawaii", "nevada"),
+                        "Region 10" = c("alaska", "idaho", "oregon", "washington"))
+    states$region <- NA
+    for (i in 1:length(region_list)){
+      states$region[which(states$statename %in% region_list[[i]])] <- names(region_list)[i]
+    }
+   } else if (nat_reg == "national"){
+    data <- data[statename=="National",]
+    data$region <- "National"
+   } else if (nat_reg != "state"){
+     stop("Variable 'nat_reg' must be specified with either 'national','regional' or 'state'")
+   }
   weeks <- unique(data$weekend)
   n <- length(weeks)
-  
+   
   #leg_ind <- c(0,1,4,6,8)
   leg_lab <- c("Twitter overestimated","spot on","Twitter underestimated")
   leg_nr <- c("-10: ","0: ","10: ")
@@ -148,11 +226,86 @@ plot_flu_diff_states <- function(data,filename="animation.mp4") {
     for (i in 1:n) {
       #prepare statemap
       temp <- data[weekend==weeks[i],]
-      temp <- temp[,.(statename,activity_level)]
-      temp <- merge(temp,states,by="statename")
+      if (nat_reg == "regional"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- merge(temp,states,by="region")
+        temp <- temp[order(statename)]
+      } else if (nat_reg == "national"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- temp[rep(1,length(states$statename)),]
+      }
+      else {
+        temp <- temp[,.(statename,activity_level)]
+        temp <- merge(temp,states,by="statename")
+      }
       flu_cols <- cr(temp$activity_level / 10)
       us_states <- map("state", plot=F,fill=T,col=flu_cols)
       state_flu_activity(us_states,main_title=as.character(weeks[i]),cols=flu_cols,boxColours=legcols)
     }
   },video.name=filename,ani.width = 1000, ani.height = 600)
 }
+
+#meta-function to combine all of the abvoe 
+plot_flu_old <- function(data,filename="animation.avi") {
+  data <-
+    data[, .(statename, activity_level, weekend, activity_level_label)]
+  states <- state_names()
+  if (nat_reg=="regional"){
+    colnames(data)[1] <- "region"
+    region_list <- list("Region 1" = c("connecticut","maine","massachusetts","new hampshire", "rhode island","vermont"),
+                        "Region 2" = c("new jersey","new york","new york city","puerto rico","us virgin islands"),
+                        "Region 3" = c("delaware", "district of columbia", "maryland", "pennsylvania", "virginia", "west virginia"),
+                        "Region 4" = c("alabama","florida", "georgia", "kentucky", "mississippi", "north carolina", "south carolina", "tennessee"),
+                        "Region 5" = c("illinois", "indiana", "michigan", "minnesota", "ohio", "wisconsin"),
+                        "Region 6" = c("arkansas", "louisiana", "new mexico", "oklahoma", "texas"),
+                        "Region 7" = c("iowa", "kansas", "missouri", "nebraska"),
+                        "Region 8" = c("colorado", "montana", "north dakota", "south dakota", "utah", "wyoming"),
+                        "Region 9" = c("arizona", "california", "hawaii", "nevada"),
+                        "Region 10" = c("alaska", "idaho", "oregon", "washington"))
+    states$region <- NA
+    for (i in 1:length(region_list)){
+      states$region[which(states$statename %in% region_list[[i]])] <- names(region_list)[i]
+    } 
+  } else if (nat_reg == "national"){
+    data <- data[statename=="National",]
+    data$region <- "National"
+  } else if (nat_reg != "state"){
+    stop("Variable 'nat_reg' must be specified with either 'national','regional' or 'state'")
+  }
+  weeks <- unique(data$weekend)
+  n <- length(weeks)
+  
+  #leg_ind <- c(0,1,4,6,8)
+  leg_lab <- c("Minimal","Low","Moderate","High","Insufficient Data")   
+  leg_nr <- c("1-3: ","4-5: ","6-7: ","8-10: ","0: ")
+  leg_lab <- paste0(leg_nr,leg_lab)
+  leg_lab <- leg_lab[order(leg_lab)]
+  
+  #define colourramp
+  cr <- colour_ramp(c("white", "yellow","red"))
+  legcols <- cr(seq(0,1,by=0.1))
+  ani.options("interval"=0.5)
+  saveVideo({
+    for (i in 1:n) {
+      #prepare statemap
+      temp <- data[weekend==weeks[i],]
+      if (nat_reg == "regional"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- merge(temp,states,by="region")
+        temp <- temp[order(statename)]
+      } else if (nat_reg == "national"){
+        temp <- temp[,.(region,activity_level)]
+        temp <- temp[rep(1,length(states$statename)),]
+      }
+      else {
+        temp <- temp[,.(statename,activity_level)]
+        temp <- merge(temp,states,by="statename")
+      }
+      flu_cols <- cr(temp$activity_level / 10)
+      us_states <- map("state", plot=F,fill=T,col=flu_cols)
+      state_flu_activity(us_states,main_title=as.character(weeks[i]),cols=flu_cols,boxColours=legcols)
+    }
+  },video.name=filename,ani.width = 1000, ani.height = 600)
+}
+
+
