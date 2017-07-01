@@ -44,6 +44,35 @@
   
   #if neither of the above two scripts has been excecuted, you must uncomment it in order to get dataset for further analysis
   load(file="datasets/sick_tweets.RData")
+  load(file="FluTwitterClassification_StateLookup.RData")
+  
+  #transform full Twitter data set
+  load(file="twitter_data_aggregated/df_agg_base.RData")
+  
+  #add statenames to aggregated dataset
+  state_list_lookup <- function(state_name,df){
+    return(getmode(df[statename==state_name,state]))
+  }
+  statenames <- unique(datatable$statename)
+  statenumbers <- sapply(statenames,state_list_lookup,datatable)
+  statenames <- as.data.table(cbind(statenames,statenumbers))
+  colnames(statenames) <- c("statename","state")
+  statenames <- statenames[!(statename=="new york city"),]
+  statenames[,state:=as.numeric(state)]
+  df_agg_merged <- merge(df_agg,statenames,by=c("state"))
+  
+  wks_ind <- seq(0,208)
+  secs_per_week <- 7*24*3600
+  wks_time <- as.numeric(as.POSIXct("2011-03-05",tz="UTC"))+ wks_ind*secs_per_week
+  wks_lookup <- as.data.table(cbind(wks_ind,wks_time))
+  colnames(wks_lookup) <- c("week","date")
+  df_agg_merged <- merge(df_agg_merged,wks_lookup,by=c("week"))
+  df_agg_merged$date <- as.POSIXct(df_agg_merged$date,origin="1970-01-01")
+  df_agg_merged[,date:=as.Date(date,format="%Y-%m-%d")]
+  df_agg_merged[order(df_agg_merged$date),]
+  save(df_agg_merged,file="twitter_data_aggregated/df_agg_merged.RData")
+  
+  
   
 # EXPLORATORY DATA ANALYSIS ------
   #select only tweets from mainland USA

@@ -1,5 +1,7 @@
-#function to explore basic statistical characteristics of dataset
-#datatable must contain paramaters: "userID", "sick"
+## function to explore basic statistical characteristics of dataset
+## datatable must contain parameters: "userID", "sick"
+
+require(data.table)
 data_summary <- function(datatable){
     options(scipen=0,digits=3) #transforms numbers into scientific format as soon as they are longer than 5-4=1
     num_all_tweets <- length(datatable[,userID])
@@ -27,7 +29,7 @@ data_summary <- function(datatable){
     only_sick_position <- which(datatable[,userID] %in% only_sick)
     
     healthy_ind <- !(healthy_users %in% sick_users)
-    only_healthy <- as.numeric(healthy_users[healthy_ind])
+    only_healthy <- healthy_users[healthy_ind]
     num_only_healthy_users <- sum(healthy_ind)
     only_healthy_position <- which(datatable[,userID] %in% only_healthy)
 
@@ -53,20 +55,28 @@ data_summary <- function(datatable){
     rownames(prop_all) <- colnames(prop_all) <-
     colnames(prop_sick) <- colnames(prop_healthy) <- 
     rownames(dis_table_tweets)<-  colnames(dis_table_tweets) <- c("sick","healthy") 
-
+    
+    #get number of tweets per user, per both user, per sick_only user and per healthy only user
+    ID_table_tot <- table(datatable$userID)
+    ID_table_both <- table(datatable$userID[both_ind])
+    ID_table_sick <- table(datatable$userID[sick_ind])
+    ID_table_healthy <- table(datatable$userID[healthy_ind])
+    
     out <- list(num_all_tweets,all_users,num_all_users,
                 sick_position,num_sick_tweets,sick_users,num_sick_users,
                 healthy_position,num_healthy_tweets,healthy_users,num_healthy_users,
                 only_sick_position,only_sick,num_only_sick_users,
                 only_healthy_position, only_healthy,num_only_healthy_users,
                 both_position,both,num_both,
-                dis_table,prop_all,prop_sick,prop_healthy,dis_table_tweets)
+                dis_table,prop_all,prop_sick,prop_healthy,dis_table_tweets,
+                ID_table_tot, ID_table_both,ID_table_sick,ID_table_healthy)
     names(out) <- c("num_all_tweets","all_users","num_all_users", 
                     "sick_position","num_sick_tweets","sick_users","num_sick_users",
                     "healthy_position", "num_healthy_tweets", "healthy_users","num_healthy_users",
                     "only_sick_position","only_sick","num_only_sick_users",
                     "only_healthy_position", "only_healthy","num_only_health_users",
                     "both_position","both","num_both",
-                    "dis_table","prop_all","prop_sick","prop_healthy","dis_table_tweets")
+                    "dis_table","prop_all","prop_sick","prop_healthy","dis_table_tweets",
+                    "ID_table_tot","ID_table_both","ID_table_sick","ID_table_healthy")
     return(out)
   }

@@ -4,17 +4,20 @@ library("maps")
 library("animation")
 
 #function to retrievestatenames
-state_names <- function() {
+state_names <- function(tot_set=F) {
   us_states <- map('state', plot = F)
-  us_states$names <-
-    gsub("new york:manhattan", "new york city", us_states$names)
-  us_states$names <-
-    gsub("new york:main", "new york city", us_states$names)
+  if (!tot_set){
+    us_states$names <-
+      gsub("new york:manhattan", "new york city", us_states$names)
+    us_states$names <-
+      gsub("new york:main", "new york city", us_states$names)
+  }
   us_states$names <- gsub("\\:.*", "", us_states$names)
   states <- data.table(us_states$names)
   colnames(states) <- "statename"
   return(states)
 }
+
 
 #function to plot legends
 leg <- function(leg_title="",boxColours){
@@ -44,6 +47,7 @@ leg <- function(leg_title="",boxColours){
   for (i in  1:nlabels){
     pushViewport(viewport(layout.pos.row = i))
     grid.text(i-1)
+    #grid.text(newlabels[i])
     popViewport()
   }
   popViewport(4)
@@ -96,15 +100,15 @@ state_flu_activity <- function(us_states,main_title="",cols,boxColours){
 }
 
 #meta-function to combine all of the abvoe 
-plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F) {
+plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F,tot_set=T) {
   data <-
-    data[, .(statename, activity_level, weekend, activity_level_label)]
+    data[, .(statename, activity_level, date, activity_level_label)]
   if (nat_reg == "county"){
     states <- map('county', target_state,plot = F)$names
     states <- data.table(states)
     colnames(states) <- "statename"
   } else{
-    states <- state_names()
+    states <- state_names(tot_set)
   }
   if (nat_reg=="regional"){
     colnames(data)[1] <- "region"
@@ -128,7 +132,7 @@ plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F
   } else if (!any(nat_reg %in% c("state","county"))){
     stop("Variable 'nat_reg' must be specified with either 'national','regional', 'state' or 'county'")
   }
-  weeks <- unique(data$weekend)
+  weeks <- unique(data$date)
   n <- length(weeks)
   
   if (diff == T){
@@ -157,7 +161,7 @@ plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F
   saveVideo({
     for (i in 1:n) {
       #prepare statemap
-      temp <- data[weekend==weeks[i],]
+      temp <- data[date==weeks[i],]
       if (nat_reg == "regional"){
         temp <- temp[,.(region,activity_level)]
         temp <- merge(temp,states,by="region")
@@ -185,7 +189,7 @@ plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F
 #meta-function to combine all of the abvoe 
 plot_flu_diff_states <- function(data,filename="animation.mp4",nat_reg=F) {
   data <-
-    data[, .(statename, activity_level, weekend, activity_level_label)]
+    data[, .(statename, activity_level, date, activity_level_label)]
   states <- state_names()
   if (nat_reg=="regional"){
     colnames(data)[1] <- "region"
@@ -209,7 +213,7 @@ plot_flu_diff_states <- function(data,filename="animation.mp4",nat_reg=F) {
    } else if (nat_reg != "state"){
      stop("Variable 'nat_reg' must be specified with either 'national','regional' or 'state'")
    }
-  weeks <- unique(data$weekend)
+  weeks <- unique(data$date)
   n <- length(weeks)
    
   #leg_ind <- c(0,1,4,6,8)
@@ -225,7 +229,7 @@ plot_flu_diff_states <- function(data,filename="animation.mp4",nat_reg=F) {
   saveVideo({
     for (i in 1:n) {
       #prepare statemap
-      temp <- data[weekend==weeks[i],]
+      temp <- data[date==weeks[i],]
       if (nat_reg == "regional"){
         temp <- temp[,.(region,activity_level)]
         temp <- merge(temp,states,by="region")
@@ -248,7 +252,7 @@ plot_flu_diff_states <- function(data,filename="animation.mp4",nat_reg=F) {
 #meta-function to combine all of the abvoe 
 plot_flu_old <- function(data,filename="animation.avi") {
   data <-
-    data[, .(statename, activity_level, weekend, activity_level_label)]
+    data[, .(statename, activity_level, date, activity_level_label)]
   states <- state_names()
   if (nat_reg=="regional"){
     colnames(data)[1] <- "region"
@@ -272,7 +276,7 @@ plot_flu_old <- function(data,filename="animation.avi") {
   } else if (nat_reg != "state"){
     stop("Variable 'nat_reg' must be specified with either 'national','regional' or 'state'")
   }
-  weeks <- unique(data$weekend)
+  weeks <- unique(data$date)
   n <- length(weeks)
   
   #leg_ind <- c(0,1,4,6,8)
@@ -288,7 +292,7 @@ plot_flu_old <- function(data,filename="animation.avi") {
   saveVideo({
     for (i in 1:n) {
       #prepare statemap
-      temp <- data[weekend==weeks[i],]
+      temp <- data[date==weeks[i],]
       if (nat_reg == "regional"){
         temp <- temp[,.(region,activity_level)]
         temp <- merge(temp,states,by="region")
@@ -308,4 +312,40 @@ plot_flu_old <- function(data,filename="animation.avi") {
   },video.name=filename,ani.width = 1000, ani.height = 600)
 }
 
+plot_twitter_cdc_comp <- function(twitter_data,cdc_data,reg="National",smooth=1,yrange=c(0,0.1),ctg="rel_sick",gr="region"){
+  ind_gr <- which(colnames(twitter_data)==gr)
+  ind_ctg <- which(colnames(twitter_data)==ctg)
+  colnames(twitter_data)[c(ind_gr,ind_ctg)] <- c("group","category")
+  ind_gr <- which(colnames(cdc_data)==gr)
+  colnames(cdc_data)[c(ind_gr)] <- c("group")
+  require("forecast")
+  cdc <- as.numeric(ma(cdc_data[group%in%reg,rel_sick],order=smooth))
+  tw <- as.numeric(ma(twitter_data[group%in%reg,category],order=smooth))
+  wks <- twitter_data[group%in%reg,date]
+  temp <- data.table(cdc,tw,wks)
+  temp <- temp[!(is.na(tw)),]
+  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw/sum(tw))) + 
+    geom_line(colour="blue") + geom_point(colour="blue") +
+    geom_line(aes(y=cdc/sum(cdc)),colour="red") + 
+    geom_point(aes(y=cdc/sum(cdc)),colour="red") +
+    xlab(" ") + ylab("") + ggtitle(reg) +
+    theme(text = element_text(size=20)) +scale_y_continuous(labels=percent) +
+    coord_cartesian(ylim=yrange)
+  return(nat_plot)
+}
 
+plot_twitter_cdc_comp_ac_level <- function(twitter_data,cdc_data,reg="National",yrange=c(0,10)){
+  joined <- merge(twitter_data,cdc_data,by="date")
+  tw <- joined$activity_level.x
+  wks <- joined$date
+  cdc <- joined$activity_level.y
+  temp <- data.table(cdc,tw,wks)
+  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
+    geom_line(colour="blue") + geom_point(colour="blue") +
+    geom_line(aes(y=cdc),colour="red") + 
+    geom_point(aes(y=cdc),colour="red") +
+    xlab(" ") + ylab("Activity level") + ggtitle(reg) +
+    theme(text = element_text(size=20)) + scale_y_discrete(limits = seq(0,10))
+    coord_cartesian(ylim=yrange)
+  return(nat_plot)
+}
