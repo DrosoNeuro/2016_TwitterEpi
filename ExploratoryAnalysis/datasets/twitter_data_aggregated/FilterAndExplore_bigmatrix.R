@@ -160,16 +160,56 @@ for (i in files_to_process){
   require("gridExtra")
   load("additional_resources/cdc_data.RData")
   
+  #naïve approach: Plot raw Twitter results against CDC data
+  cdc <- as.numeric(cdc_data_nat_reg[region=="National",rel_sick])
+  
+  #using sick tweets
+  tw <- as.numeric(df_nat_reg[region=="National",rel_sick])
+  wks <- df_nat_reg[region=="National",date]
+  temp <- data.table(cdc,tw,wks)
+  temp <- temp[!(is.na(tw)),]
+  pdf(file="plots/cdc_twitter_comp_nat_raw.pdf",width=10)
+  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
+    geom_line(colour="blue") + geom_point(colour="blue") +
+    geom_line(aes(y=cdc/100),colour="red") + 
+    geom_point(aes(y=cdc/100),colour="red") +
+    xlab(" ") + ylab("") + ggtitle("National") +
+    theme(text = element_text(size=20)) + scale_y_continuous(labels=percent)# +
+    #coord_cartesian(ylim=yrange)
+  print(nat_plot)
+  dev.off()
+  
+  #using sick users
+  tw <- as.numeric(df_nat_reg[region=="National",rel_sick_user])
+  wks <- df_nat_reg[region=="National",date]
+  temp <- data.table(cdc,tw,wks)
+  temp <- temp[!(is.na(tw)),]
+  
+  pdf(file="plots/cdc_twitter_comp_nat_raw_user.pdf",width=10)
+  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
+    geom_line(colour="blue") + geom_point(colour="blue") +
+    geom_line(aes(y=cdc/100),colour="red") + 
+    geom_point(aes(y=cdc/100),colour="red") +
+    xlab(" ") + ylab("") + ggtitle("National") +
+    theme(text = element_text(size=20)) +scale_y_continuous(labels=percent)# +
+  #coord_cartesian(ylim=yrange)
+  print(nat_plot)
+  dev.off()
+  
+  #comparing normalised values
   yrange <- c(0,0.025)
   ctg <- "rel_sick"
   pdf(file="plots/cdc_twitter_comp_nat_ma1.pdf",width=10)
   p1 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=1,yrange=yrange,ctg=ctg,gr="region")
+  print(p1)
   dev.off()
   pdf(file="plots/cdc_twitter_comp_nat_ma2.pdf",width=10)
   p2 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=2,yrange=yrange,ctg=ctg,gr="region")
+  print(p2)
   dev.off()
   pdf(file="plots/cdc_twitter_comp_nat_ma4.pdf",width=10)
   p3 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=3,yrange=yrange,ctg=ctg,gr="region")
+  print(p3)
   dev.off()
   
   reg_list <- list()
@@ -198,12 +238,15 @@ for (i in files_to_process){
   ctg <- "rel_sick_user"
   pdf(file="plots/cdc_twitter_comp_nat_ma1_user.pdf",width=10)
   p1 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=1,yrange=yrange,ctg=ctg,gr="region")
+  print(p1)
   dev.off()
   pdf(file="plots/cdc_twitter_comp_nat_ma2_user.pdf",width=10)
   p2 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=2,yrange=yrange,ctg=ctg,gr="region")
+  print(p2)
   dev.off()
   pdf(file="plots/cdc_twitter_comp_nat_ma4_user.pdf",width=10)
   p3 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=3,yrange=yrange,ctg=ctg,gr="region")
+  print(p3)
   dev.off()
   
   reg_list <- list()
