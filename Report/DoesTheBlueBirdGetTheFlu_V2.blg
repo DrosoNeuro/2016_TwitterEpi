@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
+The style file: mywiley.bst
+Database file #1: Masterarbeit.bib.bib
+Warning--I didn't find a database entry for "rothman2012epidemiology"
+Warning--I didn't find a database entry for "koepsell2014epidemiologic"
+Warning--I didn't find a database entry for "bailey2005introduction"
+Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "martcheva2015introduction"
+Warning--empty booktitle in bodnar_ground_2014
+Warning--empty booktitle in liu_assessing_2017
+You've used 41 entries,
+            1932 wiz_defined-function locations,
+            703 strings with 13008 characters,
+and the built_in function-call counts, 18656 in all, are:
+= -- 1791
+> -- 1026
+< -- 18
++ -- 367
+- -- 364
+* -- 1671
+:= -- 3286
+add.period$ -- 123
+call.type$ -- 41
+change.case$ -- 387
+chr.to.int$ -- 40
+cite$ -- 43
+duplicate$ -- 611
+empty$ -- 1104
+format.name$ -- 413
+if$ -- 3600
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 64
+newline$ -- 204
+num.names$ -- 123
+pop$ -- 320
+preamble$ -- 1
+purify$ -- 387
+quote$ -- 0
+skip$ -- 470
+stack$ -- 0
+substring$ -- 1190
+swap$ -- 101
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 246
+warning$ -- 2
+while$ -- 134
+width$ -- 0
+write$ -- 520
+(There were 7 warnings)

@@ -1,17 +1,17 @@
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
-\contentsline {subsection}{\numberline {1.1}Complementary epidemiology}{2}{subsection.1.1}
-\contentsline {section}{\numberline {2}Description of the data set}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}The starting point}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Description of the \textit {sick} data set}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Description of the \textit {all\_tweets} data set}{6}{subsection.2.3}
-\contentsline {section}{\numberline {3}Results}{8}{section.3}
-\contentsline {subsection}{\numberline {3.1}Comparison with CDC data}{9}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Comparison with regard to CDC activity levels}{9}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Comparison on the state level}{12}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Comparison on the county level}{13}{subsection.3.4}
-\contentsline {section}{\numberline {4}Discussion}{14}{section.4}
-\contentsline {subsection}{\numberline {4.1}Errors in the aggregation and processing of the Twitter data set}{15}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The findings from \citep {bodnar_data_2015} are based on a different data set}{15}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}There are errors present in the Twitter flu classifier}{16}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}The findings only be replicated by using the classified tweets as a starting point for more intricate models}{16}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Missing parts}{17}{subsection.4.5}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Complementary epidemiology}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}Description of the data set}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}The starting point}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Description of the \textit {sick} data set}{5}{section.2.2}
+\contentsline {section}{\numberline {2.3}Description of the \textit {all\_tweets} data set}{6}{section.2.3}
+\contentsline {chapter}{\numberline {3}Results}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Comparison with CDC data}{14}{section.3.1}
+\contentsline {section}{\numberline {3.2}Comparison with regard to CDC activity levels}{15}{section.3.2}
+\contentsline {section}{\numberline {3.3}Comparison on the state level}{17}{section.3.3}
+\contentsline {section}{\numberline {3.4}Comparison on the county level}{19}{section.3.4}
+\contentsline {chapter}{\numberline {4}Discussion}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Errors in the aggregation and processing of the Twitter data set}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}The findings from \citep {bodnar_data_2015} are based on a different data set}{33}{section.4.2}
+\contentsline {section}{\numberline {4.3}There are errors present in the Twitter flu classifier}{33}{section.4.3}
+\contentsline {section}{\numberline {4.4}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{34}{section.4.4}
+\contentsline {section}{\numberline {4.5}Missing parts}{35}{section.4.5}

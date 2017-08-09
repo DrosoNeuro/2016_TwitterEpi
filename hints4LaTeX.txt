@@ -1,0 +1,141 @@
+Here are some general guidelines compiled for STA480 based on personal, JMVA and Biometrika guidelines.
+
+Titles:
+=======
+
+Titles and section headings should be concise and informative (titles are often used in information-retrieval systems). Avoid abbreviations and formulae where possible. 
+
+Use text capitalization in the title (as opposed to title capitalization). 
+
+Subsubsections are not used.
+
+
+
+Math formulae
+=============
+
+Present simple formulae in line with normal text where possible. Long or important mathematical (not verbal) expressions should be displayed (i.e., shown on a separate line). In principle, variables are to be presented in italics, typically achieved through the use of $.$. 
+
+
+Personally, I solely use  
+   \begin{align} 
+     y & = x + 2,   \label{eq:1} 
+   \end{align} 
+(as well as the starred version).  Other examples are 
+   \begin{align} 
+     y_1 & = x_1 + 2x_2 + 2,   \nonumber  \\ 
+     y_2 & = x_1 + 3,            \label{eq:2} 
+   \end{align} 
+This environment is very flexible and covers virtually all cases.
+
+
+Number consecutively any equations that have to be displayed separately from the text (but only if referred to explicitly in the text).
+
+
+References should be done through  `[...] and in equation~\eqref{eq:1} we see [...]' (note the lowercase `equation' and the nonbreakable space `~'
+
+Care is needed with punctuation. Use punctuation, as the formula would be normal text. For example
+
+The ACF of an MA(1) is
+\begin{align}
+  \gamma_h= \begin{cases} (\theta^2+1)\sigma^2, & h=0,\\
+    \theta \sigma^2,& h=1,\\
+    0,& h\geq 2. \end{cases}
+\end{align}
+
+
+Citation in text
+================
+
+Please cite all relevant material which includes the range from ideas to quotes. Artwork (adapted or copied) has to be credited appropriately. 
+
+Please ensure that every reference cited in the text is also present in the reference list (and vice versa).  
+
+For simplicity, I suggest to use \citet{label}, \citep{label} or \citealp{label} (the latter is used in situation like here, see Furrer and Sain, 2009).
+
+Unpublished results and personal communications are not recommended in the reference list, but may be mentioned in the text. If these references are included in the reference list they should follow the standard reference style of the journal and should include a substitution of the publication date with either 'Unpublished results' or 'Personal communication'. Citation of a reference as 'in press' implies that the item has been accepted for publication.
+
+
+Figures and Tables
+==================
+
+Figures and Tables are inserted and based on \begin{} \end{}, which is placed after a paragraph.
+
+Ensure that each illustration has a caption. A caption should comprise a brief title (not on the figure itself) and a description of the illustration. Keep text in the illustrations themselves to a minimum but explain all symbols and abbreviations used. The caption to a figure should contain descriptions of lines and symbols used and the text should give the interpretation of the figure.  
+
+
+Figure and Table captions always end with a full stop. Figure captions are below the figure, table captions above.  
+
+
+Check that all the axes are labelled correctly and include units of measurement.  Axis labels should have the format `Difference of loglikelihoods': only the initial letter of the first word is upper-case. The font sizes of the axes in the Figures and the text should be coherent.
+
+
+Use the `\label{tag}' (inside the figure and table environment) and refer to by using `[...] as shown in Figure~\ref{tag} [...]'  (uppercase Figure and Table, with a nonbreakable space). It is good practice to use creative label names or add chapter number in front, e.g. \label{mysunnyfigurehistogram}, \label{fig03:hist}.
+
+
+Use Figure~ and Table~; do not use Fig.~ or Tab.~.
+
+ 
+Put all figures in a separate directory and use \graphicspath{{./figures/}} in your tex document.
+
+
+Whenever possible use vector graphics or lossless pixel graphics (.pdf, .png). When setting \DeclareGraphicsExtensions{.pdf,.png} you can omit the extension.
+
+
+
+
+Some other helpful remarks
+==========================
+
+Hyphens - (\verb+-+ in \TeX), n-dashes -- (\verb+--+), m-dashes --- (\verb+---+), and minus signs $-$ (\verb+$-$+) have different uses.  Hyphens are used to join two words, or in the double-barrelled name of a single person (e.g.\ non-user, Barndorff-Nielsen); n-dashes are used in ranges of numbers or to join the names of two different people (1--7, Neyman--Pearson); and minus signs are used in mathematics (e.g. $-2$). m-dashes are used as parenthetical remarks, like this subordinate clause (these may also be placed between two commas).
+
+
+Symbols should not start sentences. Distinctive type (e.g. boldface) for matrices and vectors is encouraged. Vectors are assumed to be column vectors, unless explicitly transposed. The use of an apostrophe to denote matrix or vector transposition should be avoided; it is preferable to write $A^T$, $a^T$.   
+
+
+Ranges of integers are denoted $i=1,\ldots, n$, whereas $0\leq x\leq 1$ is used for ranges of real numbers.  
+
+
+Paragraphs are created with a double newline (an empty line). Use '\\' only within tables, equations etc.
+
+
+Here are some classical errors and tips:
+
+-   \overline{z}_t   not \overline{z_t} 
+
+-   use punctuation for display style equation as if it would be part of the text
+
+-   $\var(x)$ not var $x$ or Var($x$); similarly for \E, \cov, \corr 
+
+-   $r$th not $r$-th or $r^{\rm th}$
+
+-   $n^{1/2}$ not $n^{\frac12}$   
+
+-   $\dots$ not ...  
+
+-   Zeros precede decimal points: $0.2$ not $.2$ or $0,2$.
+
+-   $\sum^{n}_{i=1}$ not $\sum^n_1$
+
+-   $p$-values   not   P-values or p-values
+
+-   Quotes `a'  or ``b''  and not 'a' and ''b''  
+
+-   Powers of e are often more conveniently denoted by \exp
+
+-   $a/bc$  should be written $a/(bc)$ or $a(bc)^{-1}$
+
+-   avoid $\underline{.}$, use $\emph{.}$.   
+
+-   $a*b$ should be $a\times b$, or $a\cdot b$, or simply $a b$
+
+-  Subscripts for sequences are required: 
+   "\Sigma(X-\bar{X})^2" -> "\sum_{i=1}^n(X_i-\bar{X})^2"
+
+-  In a math environment SE and SD and such like should be typesetted with \text{SE} and \text{SD} for proper letter spacing.
+
+
+
+================================================================================
+Reinhard Furrer, May 2016
+================================================================================

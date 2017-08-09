@@ -1,0 +1,259 @@
+\begin{thebibliography}{}
+
+\bibitem[Achrekar {\it et~al.}, 2011]{achrekar_predicting_2011}
+Achrekar, H., Gandhe, A., Lazarus, R., Yu, S.-H., and Liu, B. (2011).
+\newblock Predicting {Flu} {Trends} using {Twitter} data.
+\newblock In {\em 2011 {IEEE} {Conference} on {Computer} {Communications}
+  {Workshops} ({INFOCOM} {WKSHPS})},   702--707.
+
+\bibitem[Anema {\it et~al.}, 2014]{anema_digital_2014}
+Anema, A., Kluberg, S., Wilson, K., Hogg, R.~S., Khan, K., Hay, S.~I., Tatem,
+  A.~J., and Brownstein, J.~S. (2014).
+\newblock Digital surveillance for enhanced detection and response to
+  outbreaks.
+\newblock {\em The Lancet. Infectious diseases}, {\bf14},  1035--1037.
+
+\bibitem[Aramaki {\it et~al.}, 2011]{aramaki_twitter_2011}
+Aramaki, E., Maskawa, S., and Morita, M. (2011).
+\newblock Twitter catches the flu: detecting influenza epidemics using
+  {Twitter}.
+\newblock In {\em Proceedings of the conference on empirical methods in natural
+  language processing},   1568--1576. Association for Computational
+  Linguistics.
+
+\bibitem[Bach {\it et~al.}, 2017]{bach_participatory_2017}
+Bach, M., Jordan, S., Hartung, S., Santos-Hövener, C., and Wright, M.~T.
+  (2017).
+\newblock Participatory epidemiology: the contribution of participatory
+  research to epidemiology.
+\newblock {\em Emerging Themes in Epidemiology}, {\bf14}, .
+
+\bibitem[Bodnar, 2015]{bodnar_data_2015}
+Bodnar, T. (2015).
+\newblock Data science with social media for epidemiology and public health.
+
+\bibitem[Bodnar {\it et~al.}, 2014]{bodnar_ground_2014}
+Bodnar, T., Barclay, V.~C., Ram, N., Tucker, C.~S., and Salathé, M. (2014).
+\newblock On the ground validation of online diagnosis with {Twitter} and
+  medical records.
+\newblock   651--656. ACM Press.
+\newblock bibtex: bodnar\_ground\_2014.
+
+\bibitem[Bodnar and Salathé, 2013]{bodnar_validating_2013}
+Bodnar, T. and Salathé, M. (2013).
+\newblock Validating models for disease detection using twitter.
+\newblock {\em Proceedings of the 22nd international conference on World Wide
+  Web companion}.
+
+\bibitem[Brownstein {\it et~al.}, 2008]{brownstein_surveillance_2008}
+Brownstein, J.~S., Freifeld, C.~C., Reis, B.~Y., and Mandl, K.~D. (2008).
+\newblock Surveillance {Sans} {Frontières}: {Internet}-{Based} {Emerging}
+  {Infectious} {Disease} {Intelligence} and the {HealthMap} {Project}.
+\newblock {\em PLoS Medicine}, {\bf5}, .
+
+\bibitem[Butler, 2013]{butler_when_2013}
+Butler, D. (2013).
+\newblock When {Google} got flu wrong.
+\newblock {\em Nature}, {\bf494},  155.
+
+\bibitem[Chunara {\it et~al.}, 2013]{chunara_flu_2013}
+Chunara, R., Aman, S., Smolinski, M., and Brownstein, J.~S. (2013).
+\newblock Flu near you: an online self-reported influenza surveillance system
+  in the {USA}.
+\newblock {\em Online Journal of Public Health Informatics}, {\bf5}, .
+
+\bibitem[Chunara {\it et~al.}, 2015]{chunara_estimating_2015}
+Chunara, R., Goldstein, E., Patterson-Lomba, O., and Brownstein, J.~S. (2015).
+\newblock Estimating influenza attack rates in the {United} {States} using a
+  participatory cohort.
+\newblock {\em Scientific Reports}, {\bf5},  9540.
+
+\bibitem[Culotta, 2010]{culotta_towards_2010}
+Culotta, A. (2010).
+\newblock Towards detecting influenza epidemics by analyzing {Twitter}
+  messages.
+\newblock In {\em Proceedings of the first workshop on social media analytics},
+    115--122. ACM.
+
+\bibitem[for Disease Control {and}~Prevention,
+  2016]{centers_for_disease_control_and_prevention_overview_2016}
+for Disease Control {and}~Prevention, C. (2016).
+\newblock Overview of {Influenza} {Surveillance} in the {United}
+  {States}{\textbar} {Seasonal} {Influenza} ({Flu}) {\textbar} {CDC}.
+
+\bibitem[Freifeld {\it et~al.}, 2010]{freifeld_participatory_2010}
+Freifeld, C.~C., Chunara, R., Mekaru, S.~R., Chan, E.~H., Kass-Hout, T.,
+  Iacucci, A.~A., and Brownstein, J.~S. (2010).
+\newblock Participatory epidemiology: use of mobile phones for community-based
+  health reporting.
+\newblock {\em PLoS medicine}, {\bf7},  e1000376.
+
+\bibitem[Freifeld {\it et~al.}, 2008]{freifeld_healthmap:_2008}
+Freifeld, C.~C., Mandl, K.~D., Reis, B.~Y., and Brownstein, J.~S. (2008).
+\newblock {HealthMap}: {Global} {Infectious} {Disease} {Monitoring} through
+  {Automated} {Classification} and {Visualization} of {Internet} {Media}
+  {Reports}.
+\newblock {\em Journal of the American Medical Informatics Association :
+  JAMIA}, {\bf15},  150--157.
+
+\bibitem[für Gesundheit, 2016a]{bundesamt_fur_gesundheit_saisonale_2016-1}
+für Gesundheit, B. (2016a).
+\newblock Saisonale {Grippe} - {Lagebericht} {Schweiz}.
+
+\bibitem[für Gesundheit, 2016b]{bundesamt_fur_gesundheit_saisonale_2016}
+für Gesundheit, B. (2016b).
+\newblock Saisonale {Grippe} ({Influenza}).
+
+\bibitem[Gardy {\it et~al.}, 2015]{gardy_real-time_2015}
+Gardy, J., Loman, N.~J., and Rambaut, A. (2015).
+\newblock Real-time digital pathogen surveillance — the time is now.
+\newblock {\em Genome Biology}, {\bf16}, .
+
+\bibitem[Generous {\it et~al.}, 2014]{generous_global_2014}
+Generous, N., Fairchild, G., Deshpande, A., Del~Valle, S.~Y., and Priedhorsky,
+  R. (2014).
+\newblock Global {Disease} {Monitoring} and {Forecasting} with {Wikipedia}.
+\newblock {\em PLoS Computational Biology}, {\bf10},  e1003892.
+
+\bibitem[Ginsberg {\it et~al.}, 2009]{ginsberg_detecting_2009}
+Ginsberg, J., Mohebbi, M.~H., Patel, R.~S., Brammer, L., Smolinski, M.~S., and
+  Brilliant, L. (2009).
+\newblock Detecting influenza epidemics using search engine query data.
+\newblock {\em Nature}, {\bf457},  1012--1014.
+
+\bibitem[Goff {\it et~al.}, 2015]{goff_surveillance_2015}
+Goff, J., Rowe, A., Brownstein, J.~S., and Chunara, R. (2015).
+\newblock Surveillance of {Acute} {Respiratory} {Infections} {Using}
+  {Community}-{Submitted} {Symptoms} and {Specimens} for {Molecular}
+  {Diagnostic} {Testing}.
+\newblock {\em PLoS Currents}.
+
+\bibitem[Hufnagel {\it et~al.}, 2004]{hufnagel_forecast_2004}
+Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
+\newblock Forecast and control of epidemics in a globalized world.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, {\bf101},  15124--15129.
+
+\bibitem[Khoury {\it et~al.}, 2013]{khoury_transforming_2013}
+Khoury, M.~J., Lam, T.~K., Ioannidis, J. P.~A., Hartge, P., Spitz, M.~R.,
+  Buring, J.~E., Chanock, S.~J., Croyle, R.~T., Goddard, K.~A., Ginsburg,
+  G.~S., Herceg, Z., Hiatt, R.~A., Hoover, R.~N., Hunter, D.~J., Kramer, B.~S.,
+  Lauer, M.~S., Meyerhardt, J.~A., Olopade, O.~I., Palmer, J.~R., Sellers,
+  T.~A., Seminara, D., Ransohoff, D.~F., Rebbeck, T.~R., Tourassi, G., Winn,
+  D.~M., Zauber, A., and Schully, S.~D. (2013).
+\newblock Transforming {Epidemiology} for 21st {Century} {Medicine} and
+  {Public} {Health}.
+\newblock {\em Cancer Epidemiology Biomarkers \& Prevention}, {\bf22},
+  508--516.
+
+\bibitem[Lamb {\it et~al.}, 2013]{lamb_separating_2013}
+Lamb, A., Paul, M.~J., and Dredze, M. (2013).
+\newblock Separating {Fact} from {Fear}: {Tracking} {Flu} {Infections} on
+  {Twitter}.
+\newblock In {\em {HLT}-{NAACL}},   789--795.
+
+\bibitem[Lampos and Cristianini, 2010]{lampos_tracking_2010}
+Lampos, V. and Cristianini, N. (2010).
+\newblock Tracking the flu pandemic by monitoring the social web.
+\newblock In {\em 2010 2nd {International} {Workshop} on {Cognitive}
+  {Information} {Processing}},   411--416.
+
+\bibitem[Lazer {\it et~al.}, 2014]{lazer_parable_2014}
+Lazer, D., Kennedy, R., King, G., and Vespignani, A. (2014).
+\newblock The parable of {Google} flu: traps in big data analysis.
+\newblock {\em Science}, {\bf343},  1203--1205.
+
+\bibitem[Liu {\it et~al.}, 2017]{liu_assessing_2017}
+Liu, J., Weitzman, E.~R., and Chunara, R. (2017).
+\newblock Assessing {Behavior} {Stage} {Progression} {From} {Social} {Media}
+  {Data}.
+\newblock   1320--1333. ACM Press.
+
+\bibitem[Lozano {\it et~al.}, 2013]{lozano_global_2013}
+Lozano, R., Naghavi, M., Foreman, K., Lim, S., Shibuya, K., Aboyans, V.,
+  Abraham, J., Adair, T., Aggarwal, R., Ahn, S.~Y., and {others} (2013).
+\newblock Global and regional mortality from 235 causes of death for 20 age
+  groups in 1990 and 2010: a systematic analysis for the {Global} {Burden} of
+  {Disease} {Study} 2010.
+\newblock {\em The Lancet}, {\bf380},  2095--2128.
+
+\bibitem[Milinovich {\it et~al.}, 2015]{milinovich_role_2015}
+Milinovich, G.~J., Magalhães, R. J.~S., and Hu, W. (2015).
+\newblock Role of big data in the early detection of {Ebola} and other emerging
+  infectious diseases.
+\newblock {\em The Lancet Global Health}, {\bf3},  e20--e21.
+
+\bibitem[Olson {\it et~al.}, 2013]{olson_reassessing_2013}
+Olson, D.~R., Konty, K.~J., Paladini, M., Viboud, C., and Simonsen, L. (2013).
+\newblock Reassessing {Google} {Flu} {Trends} {Data} for {Detection} of
+  {Seasonal} and {Pandemic} {Influenza}: {A} {Comparative} {Epidemiological}
+  {Study} at {Three} {Geographic} {Scales}.
+\newblock {\em PLoS Computational Biology}, {\bf9},  e1003256.
+
+\bibitem[Paul {\it et~al.}, 2015]{paul_worldwide_2015}
+Paul, M., Dredze, M., Broniatowski, D., and Generous, N. (2015).
+\newblock Worldwide influenza surveillance through twitter.
+\newblock In {\em {AAAI} {Workshop} on the {World} {Wide} {Web} and {Public}
+  {Health} {Intelligence}}.
+
+\bibitem[Paul and Dredze, 2011]{paul_you_2011}
+Paul, M.~J. and Dredze, M. (2011).
+\newblock You are what you {Tweet}: {Analyzing} {Twitter} for public health.
+\newblock {\em ICWSM}, {\bf20},  265--272.
+
+\bibitem[Paul {\it et~al.}, 2014]{paul_twitter_2014}
+Paul, M.~J., Dredze, M., and Broniatowski, D. (2014).
+\newblock Twitter {Improves} {Influenza} {Forecasting}.
+\newblock {\em PLoS Currents}.
+
+\bibitem[Ray {\it et~al.}, 2016]{ray_network_2016}
+Ray, B., Ghedin, E., and Chunara, R. (2016).
+\newblock Network inference from multimodal data: {A} review of approaches from
+  infectious disease transmission.
+\newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
+
+\bibitem[Salathe {\it et~al.}, 2012]{salathe_digital_2012}
+Salathe, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,
+  Buckee, C., Campbell, E.~M., Cattuto, C., Khandelwal, S., Mabry, P.~L., and
+  {others} (2012).
+\newblock Digital epidemiology.
+\newblock {\em PLoS Comput Biol}, {\bf8},  e1002616.
+
+\bibitem[Scott {\it et~al.}, 2017]{scott_time_2017}
+Scott, C.~F., Bay-Cheng, L.~Y., Prince, M.~A., Nochajski, T.~H., and Collins,
+  R.~L. (2017).
+\newblock Time spent online: {Latent} profile analyses of emerging adults'
+  social media use.
+\newblock {\em Computers in Human Behavior}, {\bf75},  311--319.
+
+\bibitem[Simonsen {\it et~al.}, 2016]{simonsen_infectious_2016}
+Simonsen, L., Gog, J.~R., Olson, D., and Viboud, C. (2016).
+\newblock Infectious {Disease} {Surveillance} in the {Big} {Data} {Era}:
+  {Towards} {Faster} and {Locally} {Relevant} {Systems}.
+\newblock {\em Journal of Infectious Diseases}, {\bf214},  S380--S385.
+
+\bibitem[Sloan and Morgan, 2015]{sloan_who_2015}
+Sloan, L. and Morgan, J. (2015).
+\newblock Who {Tweets} with {Their} {Location}? {Understanding} the
+  {Relationship} between {Demographic} {Characteristics} and the {Use} of
+  {Geoservices} and {Geotagging} on {Twitter}.
+\newblock {\em PLoS ONE}, {\bf10}, .
+
+\bibitem[Twitter, 2013]{twitter_twitter_2013_annual_report_2013}
+Twitter (2013).
+\newblock Twitter\_2013\_annual\_report.
+
+\bibitem[Wang {\it et~al.}, 2016]{wang_regional_2016}
+Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
+  (2016).
+\newblock Regional {Level} {Influenza} {Study} with {Geo}-{Tagged} {Twitter}
+  {Data}.
+\newblock {\em Journal of Medical Systems}, {\bf40}, .
+
+\bibitem[Wójcik {\it et~al.}, 2014]{wojcik_public_2014}
+Wójcik, O.~P., Brownstein, J.~S., Chunara, R., and Johansson, M.~A. (2014).
+\newblock Public health for the people: participatory infectious disease
+  surveillance in the digital age.
+\newblock {\em Emerging themes in epidemiology}, {\bf11},  7.
+
+\end{thebibliography}

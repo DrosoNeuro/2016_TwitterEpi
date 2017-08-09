@@ -1,17 +1,17 @@
-\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Complementary epidemiology}{section.1}% 2
-\BOOKMARK [1][-]{section.2}{Description of the data set}{}% 3
-\BOOKMARK [2][-]{subsection.2.1}{The starting point}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.2}{Description of the sick data set}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.3}{Description of the all\137tweets data set}{section.2}% 6
-\BOOKMARK [1][-]{section.3}{Results}{}% 7
-\BOOKMARK [2][-]{subsection.3.1}{Comparison with CDC data}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.2}{Comparison with regard to CDC activity levels}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.3}{Comparison on the state level}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.4}{Comparison on the county level}{section.3}% 11
-\BOOKMARK [1][-]{section.4}{Discussion}{}% 12
-\BOOKMARK [2][-]{subsection.4.1}{Errors in the aggregation and processing of the Twitter data set}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.2}{The findings from bodnardata2015 are based on a different data set}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.3}{There are errors present in the Twitter flu classifier}{section.4}% 15
-\BOOKMARK [2][-]{subsection.4.4}{The findings only be replicated by using the classified tweets as a starting point for more intricate models}{section.4}% 16
-\BOOKMARK [2][-]{subsection.4.5}{Missing parts}{section.4}% 17
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Complementary epidemiology}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{Description of the data set}{}% 3
+\BOOKMARK [1][-]{section.2.1}{The starting point}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Description of the sick data set}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Description of the all\137tweets data set}{chapter.2}% 6
+\BOOKMARK [0][-]{chapter.3}{Results}{}% 7
+\BOOKMARK [1][-]{section.3.1}{Comparison with CDC data}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.2}{Comparison with regard to CDC activity levels}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.3}{Comparison on the state level}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.4}{Comparison on the county level}{chapter.3}% 11
+\BOOKMARK [0][-]{chapter.4}{Discussion}{}% 12
+\BOOKMARK [1][-]{section.4.1}{Errors in the aggregation and processing of the Twitter data set}{chapter.4}% 13
+\BOOKMARK [1][-]{section.4.2}{The findings from bodnardata2015 are based on a different data set}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.3}{There are errors present in the Twitter flu classifier}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.4}{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.5}{Missing parts}{chapter.4}% 17
