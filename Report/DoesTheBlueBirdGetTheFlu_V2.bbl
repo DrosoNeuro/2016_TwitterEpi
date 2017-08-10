@@ -28,6 +28,11 @@ Bach, M., Jordan, S., Hartung, S., Santos-Hövener, C., and Wright, M.~T.
   research to epidemiology.
 \newblock {\em Emerging Themes in Epidemiology}, {\bf14}, .
 
+\bibitem[Bailey {\it et~al.}, 2005]{bailey2005introduction}
+Bailey, L., Vardulaki, K., Langham, J., and Chandramohan, D. (2005).
+\newblock {\em Introduction to epidemiology}.
+\newblock Open University Press London.
+
 \bibitem[Bodnar, 2015]{bodnar_data_2015}
 Bodnar, T. (2015).
 \newblock Data science with social media for epidemiology and public health.
@@ -146,6 +151,11 @@ Khoury, M.~J., Lam, T.~K., Ioannidis, J. P.~A., Hartge, P., Spitz, M.~R.,
 \newblock {\em Cancer Epidemiology Biomarkers \& Prevention}, {\bf22},
   508--516.
 
+\bibitem[Koepsell and Weiss, 2014]{koepsell2014epidemiologic}
+Koepsell, T.~D. and Weiss, N.~S. (2014).
+\newblock {\em Epidemiologic methods: studying the occurrence of illness}.
+\newblock Oxford University Press (UK).
+
 \bibitem[Lamb {\it et~al.}, 2013]{lamb_separating_2013}
 Lamb, A., Paul, M.~J., and Dredze, M. (2013).
 \newblock Separating {Fact} from {Fear}: {Tracking} {Flu} {Infections} on
@@ -176,6 +186,12 @@ Lozano, R., Naghavi, M., Foreman, K., Lim, S., Shibuya, K., Aboyans, V.,
   groups in 1990 and 2010: a systematic analysis for the {Global} {Burden} of
   {Disease} {Study} 2010.
 \newblock {\em The Lancet}, {\bf380},  2095--2128.
+
+\bibitem[Martcheva, 2015]{martcheva2015introduction}
+Martcheva, M. (2015).
+\newblock Introduction to epidemic modeling.
+\newblock In {\em An Introduction to Mathematical Epidemiology},   9--31.
+  Springer.
 
 \bibitem[Milinovich {\it et~al.}, 2015]{milinovich_role_2015}
 Milinovich, G.~J., Magalhães, R. J.~S., and Hu, W. (2015).
@@ -211,6 +227,11 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
 \newblock Network inference from multimodal data: {A} review of approaches from
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
+
+\bibitem[Rothman, 2012]{rothman2012epidemiology}
+Rothman, K.~J. (2012).
+\newblock {\em Epidemiology: an introduction}.
+\newblock Oxford university press.
 
 \bibitem[Salathe {\it et~al.}, 2012]{salathe_digital_2012}
 Salathe, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,

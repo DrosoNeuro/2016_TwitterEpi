@@ -14,10 +14,11 @@
 \BOOKMARK [1][-]{section.3.4}{Comparison on the county level}{chapter.3}% 14
 \BOOKMARK [1][-]{section.3.5}{Additional attempts to reproduce the findings froms bodnardata2015}{chapter.3}% 15
 \BOOKMARK [2][-]{subsection.3.5.1}{Attempt to reclassify raw Twitter data}{section.3.5}% 16
-\BOOKMARK [2][-]{subsection.3.5.2}{Attempt to reproduce SIR model described in bodnardata2015}{section.3.5}% 17
-\BOOKMARK [0][-]{chapter.4}{Discussion}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Errors in the aggregation and processing of the Twitter data set}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{The findings from bodnardata2015 are based on a different data set}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.3}{There are errors present in the Twitter flu classifier}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.4}{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.5}{Missing parts}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.3.5.2}{Attempt to reproduce the SIR model described in bodnardata2015}{section.3.5}% 17
+\BOOKMARK [2][-]{subsection.3.5.3}{Attempt to reproduce the AR model described in bodnardata2015}{section.3.5}% 18
+\BOOKMARK [0][-]{chapter.4}{Discussion}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Errors in the aggregation and processing of the Twitter data set}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{The findings from bodnardata2015 are based on a different data set}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{There are errors present in the Twitter flu classifier}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.4}{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.5}{Missing parts}{chapter.4}% 24

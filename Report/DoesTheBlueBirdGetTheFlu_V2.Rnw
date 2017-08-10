@@ -226,7 +226,7 @@ Zurich, August 2017
 \newpage
 
 \begin{abstract}
-blabla
+Coming soon...
 \end{abstract}
 
 \chapter{Introduction}
@@ -258,7 +258,8 @@ And it does not stop with digital data alone. Many of the approaches outlined ab
 
 One particularly potent source of information, however, are social media data.\newline
 
-\section{What "Larry the Bird" can tell us about the flu}\footnote{The Twitter bird has been dubbed "Larry the Bird" by its creators: https://www.nytimes.com/2014/08/10/magazine/who-made-that-twitter-bird.html}
+\section{What "Larry the Bird" can tell us about the flu}
+%\footnote{The Twitter bird has been dubbed "Larry the Bird" by its creators: https://www.nytimes.com/2014/08/10/magazine/who-made-that-twitter-bird.html}
 
 Social media is an especially rich source of information, since it offers the possibility to directly measure a user's sentiments and behaiouvs via his posts - information that can be highly valuable from an epidemiological point of view. If somebody is suffering from the flu, her behaviour undoubtedly changes: She behaves more lethargicly, stays in bed and might complain about her symptoms in the presence of family, friends or work colleagues. Given the fact that social media usage takes up a considerable amount of time of many people and is often used to share information about one's personal well-being and/or feeling, it is to be expected that 
 %(http://www.smartinsights.com/social-media-marketing/social-media-strategy/new-global-social-media-research/, http://mediakix.com/2016/12/how-much-time-is-spent-on-social-media-lifetime/#gs.=ZffwTY, 
@@ -872,11 +873,11 @@ Therefore, I went on to fit the very same SIR model that is shown in Figure~\ref
   \caption{}
   \label{fig:SIR_comparison_full}
   \end{subfigure}
-  \caption{Comparison between the SIR model depicted in \citep{bodnar_data_2015} (a) and replications based on the official CDC ILI rates (b) and the full retrospective Twitter model (c)}
+  \caption{Comparison between the SIR model depicted in \citep{bodnar_data_2015} (a) and replications based on the official CDC ILI rates (b) and the full retrospective Twitter model (c).}
   %\label{fig:SIR_comparison}
 \end{figure}
 
-It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015} - even though model curves seem to match. As can be seen from Table~\ref{tab_nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably form the ones depicted in Table~\ref{tab_nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. Hence, it is safe to assume that those values do \textbf{not} represent the values that were used to calculate the curves shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.\newline
+It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015} - even though model curves seem to match. As can be seen from Table~\ref{tab:nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably from the ones depicted in Table~\ref{tab:nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. Hence, it is safe to assume that those values do \textbf{not} represent the values that were used to calculate the curves shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.\newline
 
  \begin{table}[H]
 \centering
@@ -920,7 +921,7 @@ Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bo
   \caption{}
   \label{fig:TwitterModel_comparison_AR2}
   \end{subfigure}
-  \caption{Comparison between the SIR model depicted in \citep{bodnar_data_2015} (a) and replications based on the official CDC ILI rates (b) and the full retrospective Twitter model (c)}
+  \caption{Comparison between the full retrospective Twitter model depicted in \citep{bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)}
   \label{fig:TwitterModel_comparison}
 \end{figure}
 
@@ -961,7 +962,7 @@ Hence, using the Twitter data to fit a model to the official CDC data does certa
 
 In fact, \citep{bodnar_data_2015} fitted an SIR model to the results from the Twitter flu classifier in order to compare results. However, he reported that the model had to be refitted for every individual year based on the official CDC data (again, defeating the purpose of having a classifier independent of population level data). Also, the model fit was much lower (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}) and in no way comparable to the extraordinary fit shown in Figure~\ref{fig:cdc_fit_bodnar_thesis}). In the meantime, I received the code used to fit the SIR model as well as the data used to produce Figure~\ref{fig:cdc_fit_bodnar_thesis}. However, it as of yet unclear to me how exactly this data was produced based on the model parameters fitted in the SIR model. An answer to a follow-up e-mail to Todd Bodnar with regard to this is currently pending.\newline
 
-In any case, however, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are worrying. Whatever the reason may be, it is clear that the information from the Twitter classifier on its on cannot be used to reliably predict CDC ILI rates. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:description_data_set}) and only focusing on the (processed) data that supposedly served as basis for \citep{bodnar_data_2015}, many unpleasant discrepancies are found that. It seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
+In any case, however, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are worrying. Whatever the reason may be, it is clear that the information from the Twitter classifier on its on cannot be used to reliably predict CDC ILI rates. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for \citep{bodnar_data_2015}, many unpleasant discrepancies are found that. It seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
 
 \section{Missing parts}
 
