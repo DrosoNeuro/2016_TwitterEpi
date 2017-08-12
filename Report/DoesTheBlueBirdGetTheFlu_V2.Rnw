@@ -307,13 +307,9 @@ In addition, the algorithm is bound to classify tweets too early as being sick. 
 There are no indications in the data set that something like this has happened, but since the overall number of users identified as being sick at any given point during the whole study time is very low, this does not mean much.}\newline
 
 Bodnar applied the algorithm in the above-described fashion to a set of 15'560'328 users who sent a total of 2'732'174'105 geotagged tweets between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015.\footnote{Note that tweets from users who tweeted less than 10 times during this period as well as tweets that could not be attributed to a specific state on the US mainland were discarded. However, the total number of tweets analysed was not given in any of the documentations available to me.} In a next step, Bodnar created a Kermack-McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
-
-$$\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma$$
-
+$$\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.$$
 $S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official ILI results from the Center for Disease Control (CDC) in Atlanta using a multi-grid search method. Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR model minimised the residual sum of squares (RSS):
-
-$$RSS = \sum_{t}(I_{\gamma,\beta}(t)-I_{CDC}(t))$$
-
+$$RSS = \sum_{t}(I_{\gamma,\beta}(t)-I_{CDC}(t)).$$
 Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($$I_{\gamma,\beta}$$ and the official CDC data ($$I_{CDC}$$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}).\footnote{Note that in \citep{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.}
 
 \begin{table}[H]
@@ -345,9 +341,7 @@ Based on these values he could then calculate yearly ILI estimates for the flu s
 
 %This model served him to calculate $R_0$ \citep{heesterbeek2002brief}
 In addition, he fitted a autocorrelation model using the results from the Twitter base model and dthe official CDC data: 
-
-$$ILI(t+1) = a*I_{CDC}(t-1) + b*I_{CDC}(t) + c*I_{Twitter}(t)+d$$
-
+$$\times textILI(t+1) = a cdot I_{CDC}(t-1) + b*I_{CDC}(t) + c*I_{Twitter}(t)+d.$$
 Here, $t$ denotes the time in weeks, $I_{CDC}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{Twitter}$ denotes the ILI percentages received from the Twitter base model. \footnote{Personal communication by Todd Bodnar. Note that it is unclear whether the ``Twitter base model" consists of the raw results from the Twitter classifier or consists of these raw results combined with additional information. An e-mail requesting clarification of this has been sent on June 24th, with three more follow-up emails sent in June and August. However, a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.}\newline
 
 Applying the above-described autocorrelation model, Bodnar was able to achieve a very close fit to the official Twitter data (see Figure~\ref{fig:cdc_fit_bodnar_thesis}).This Master thesis is the (unsuccessful) attempt to reproduce these results. 
@@ -411,7 +405,7 @@ load("SampleData/statistics_processed_sick_raw_df.RData")
 
 As mentioned above, the \textit{sick\_user} data set should contain all tweets from those users who had at least one of their tweets labelled as ``sick" by the classifier.\newline
 
-First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W \Sexpr{coord_USA[1]}° to W \Sexpr{coord_USA[2]}° representing the longitudinal and N \Sexpr{coord_USA[3]}° to N \Sexpr{coord_USA[4]}° representing the latitudinal expansion of the window. This way, a total of \Sexpr{rm_raw_window} entries were removed with \Sexpr{rows_after} entries remaining.\newline
+First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $\Sexpr{coord_USA[1]}°$ to W $\Sexpr{coord_USA[2]}°$ representing the longitudinal and N $\Sexpr{coord_USA[3]}°$ to N $\Sexpr{coord_USA[4]}°$ representing the latitudinal expansion of the window. This way, a total of $\Sexpr{rm_raw_window}$ entries were removed with $\Sexpr{rows_after}$ entries remaining.\newline
 
 In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the statename as well as to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additionol control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific US state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:code56})\newline
 
@@ -796,8 +790,6 @@ In a next step, I tried to assess the performance of Twitter flu classifier by l
 \bigskip
 
 \centering \href{run:vids/state_Twitter_cdc_diff_full_rel_sick_user.avi}{\includegraphics[scale=0.5]{vids/ScreenshotState.png}} 
-
-\raggedright
 
 \section{Comparison on the county level}
 In order to assess the performance of the classifier on the county level, I contacted 18 state health departments (Arkansas, California, Florida, Illinois, Iowa, Louisiana, Maine, Michigan, Minnesota, Mississippi, Missouri, New Jersey, New York, North Dakota, Oregon, South Dakota), asking them for their county-level or regional ILI data between 2011 and 2015. I only received the county-level data from the state of Oregon, while the state of California provided me with state-level data only (an official request for county-level data is pending). All other states did either not answer or declined my request. Luckily, the states of New Jersey and Mississippi provided (almost) complete county-level ILI data on their website for the requested time period. Since the data was only provided in pdf-format, I built a scraper for both states in order to retrieve the relevant information.\newline 
