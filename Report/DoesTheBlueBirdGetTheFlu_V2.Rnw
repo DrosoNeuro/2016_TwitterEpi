@@ -304,6 +304,32 @@ This is what \cite{bodnar_ground_2014} have done. They built a flu classificatio
 
 \chapter{The challenge of reproducibility}
 \label{ch:reproducibility}
+An important part of daily research practice is the evaluation and interpretation of other scientist's work. To do so, we mainly rely on information from scientific publications. With the plethora of new articles being published every day and with the increasing difficulty that even high quality journals have when it comes to ensuring the reproducibility of the experiments described in their articles, it is important that researchers know how to critically judge and evaluate papers in order to extract the necessary information they need without being led on the wrong track. 
+
+However, while everybody seems to believe that reproducibility is important, nobody seems to agree on what it exactly is. Hence, talks, papers and discussions about reproducibility are often rife with opportunities for misunderstandings: Some see reproducibility already achieved if a single confirmatory study shows the same overall effect as an exploratory study, others contend that a finding has only been reproduced if several independent studies could show the very same results as the experiment that is supposed to be replicated. In the following, I will give a quick overview over current challenges with regard to reproducibility and also explain how reproducibility plays a role in my thesis. 
+
+\section[To replicate or to reproduce?]{To replicate or to reproduce? Why semantics matter.}
+One of the major sources of confusion in the discussion about reproducibility is its distinction from replicability (or "results reproducibility"). Many articles writing about the so-called ``reproducibility crisis" \citep{casadevall_reproducible_2010,prinz_believe_2011,begley_six_2013,begley2015reproducibility,freedman_economics_2015,aarts2015estimating,baker2016there,baker2016reproducibility,crotty_reproducible_2017,nosek_reproducibility_2017} actually have replicability at their heart.
+
+\section{The replicability}
+The ability to replicate research findings has always been the hallmark of reliable empirical research. A finding that couldn
+In recent years, discussions about the inability reproduce or replicate many research findings have become more prominente and in fact the papers written about it have steadily increased \citep{goodman_what_2016}. The discussions revolving around the reproducibility of scientific findings have become so dominant, in fact, that even found their way into the popular media, causing a deluge of news article decrying the lack of replicability in different areas of the sciences \citep{} an 
+
+So this thesis has a second important goal: It is the attempt to reproduce \textit{and} replicate the findings from 
+
+Finally, one should mention that replicability is neither a necessary nor a sufficient criterion for good science. There are many areas of science (evolutionary biology, paleontology, geology, climatology) which make empirical claims that cannot be replicated - simply because it is impossible to replicate dinsoaurs marching on earth or vulcanoes erupting, for example. \citep{dfg_reproduzierbarkeit_2017,}
+ 
+ 
+\citep{lehrer_truth_2010}
+
+
+
+We explain and define different forms of reproducibility and what they mean for research (additional reading:(Mogil, Macleod, and others 2017; Reichlin, Vogt, and Würbel 2016; Ioannidis 2005; Kass et al. 2016), Lazic)
+
+ (Begley 2013) )
+
+One important aspect of ensuring reproducible research are well-designed studies as well as detailed and complete reports on the experimental procedures, the study design, potential confounders, techniques, and methods used, chemicals, and drugs used, study protocols, statistical designs and further important elements that might be different between different fields of research. (see for example (Kass et al. 2016; Nature 2017; Ayris, Group, and others 2013; Smith et al. 2017) )
+
 \section{On the ground validation of online diagnosis with Twitter and medical records}
 \label{sec:on_the_ground}
 In their study, conducted during the 2012-2013 Influenza season, \cite{bodnar_ground_2014} analysed the tweeting behaviour of a group of 104 students from the Pennsylvania State University, of which they also had received medical records from the university's health services, telling whether a participant was sick with the flu during a given month or not.\newline
@@ -312,6 +338,14 @@ The researchers collected a total of 37'599 tweets from the 104 accounts mention
 Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods (Naive Bayes, random forest, C4.5, logistic regression, and support vector machine), which showed that the keywords were only poor predictors of a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).\newline
 
 In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the Naive Bayes classifier performed best with a classification accuracy of 89.72\% and an AUC of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
+
+Even when doing everything correctly, the right way to interpret and analyse statisical information is still a challenge (Reichlin, Vogt, and Würbel 2016) . Scientists must overcome dichotomous thinking when it comes to analysing their data. No experiment is completely successful or unsuccessful, there are always shades of grey (see (Amrhein, Korner-Nievergelt, and Roth 2017; McShane and Gal 2016; Wasserstein and Lazar 2016; Colquhoun 2014; Ziliak 2016a; Ioannidis 2016; IntHout, Ioannidis, and Borm 2016; Benjamin et al. 2017)). 
+
+Participants learn to differentiate between Bayesian and frequentist type of thinking and learn their importance for reproducibility (see also (Christensen 2005))
+Participants learn different ways to report and represent their data that improve analysis and prevent false interpretations (e.g. see the p-value you can't buy, the earth is flat, 
+Participants learn how they can improve the interpretations and analysis of their experiments in their reports (see also ((Ziliak 2016b)
+Participants learn how their study design and experimental setup directly influences their statistical and scientific interpretation of the results (see also (Gelman 2016)
+Participants understand the differences between accuracy, specificity and sensitivity and its implications on reproducibility (see also (Baratloo et al. 2015)
 
 \begin{figure}[H]
   \centering

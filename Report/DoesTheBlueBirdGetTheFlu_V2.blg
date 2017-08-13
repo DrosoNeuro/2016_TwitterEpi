@@ -3,47 +3,64 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
+Warning--I didn't find a database entry for ""
+Warning--empty journal in asano_socialmediatime_2017
+Warning--empty journal in bauer_timeonline_2016
+Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
+Warning--empty journal in bag_grippe_2016
+Warning--empty journal in bag_lagebericht_2017
+Warning--empty journal in bag_influenza_2017
+Warning--empty journal in cdc_surveillance_2016
+Warning--empty journal in cdc_flu_2017
+Warning--empty journal in crotty_reproducible_2017
+Warning--empty journal in dfg_reproduzierbarkeit_2017
+Warning--empty journal in GFT_nextchapter_2015
 Warning--empty booktitle in liu_assessing_2017
-You've used 86 entries,
-            1932 wiz_defined-function locations,
-            936 strings with 22829 characters,
-and the built_in function-call counts, 38097 in all, are:
-= -- 3814
-> -- 1812
-< -- 50
-+ -- 644
-- -- 630
-* -- 3198
-:= -- 6565
-add.period$ -- 283
-call.type$ -- 86
-change.case$ -- 741
-chr.to.int$ -- 84
-cite$ -- 88
-duplicate$ -- 1370
-empty$ -- 2345
-format.name$ -- 736
-if$ -- 7530
-int.to.chr$ -- 3
+Warning--empty journal in rehak_twitterbird_2014
+Warning--empty journal in rolfes_estimated_2016
+Warning--empty journal in sentinella_2017
+Warning--empty journal in twitter_annual_2013
+Warning--empty journal in twitter_annual_2017
+You've used 96 entries,
+            1967 wiz_defined-function locations,
+            996 strings with 24390 characters,
+and the built_in function-call counts, 42239 in all, are:
+= -- 4213
+> -- 1931
+< -- 58
++ -- 685
+- -- 668
+* -- 3553
+:= -- 7248
+add.period$ -- 317
+call.type$ -- 96
+change.case$ -- 810
+chr.to.int$ -- 93
+cite$ -- 114
+duplicate$ -- 1542
+empty$ -- 2677
+format.name$ -- 788
+if$ -- 8364
+int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 128
-newline$ -- 446
-num.names$ -- 258
-pop$ -- 583
+missing$ -- 176
+newline$ -- 500
+num.names$ -- 288
+pop$ -- 663
 preamble$ -- 1
-purify$ -- 744
+purify$ -- 813
 quote$ -- 0
-skip$ -- 1123
+skip$ -- 1234
 stack$ -- 0
-substring$ -- 2572
-swap$ -- 307
+substring$ -- 2887
+swap$ -- 315
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 510
-warning$ -- 2
-while$ -- 291
+type$ -- 570
+warning$ -- 18
+while$ -- 325
 width$ -- 0
-write$ -- 1134
-(There were 2 warnings)
+write$ -- 1269
+(There were 19 warnings)

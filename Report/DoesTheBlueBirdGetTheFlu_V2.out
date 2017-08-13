@@ -3,23 +3,25 @@
 \BOOKMARK [1][-]{section.1.2}{Digital epidemiology}{chapter.1}% 3
 \BOOKMARK [1][-]{section.1.3}{What can ``Larry the Bird" tell us about the flu?}{chapter.1}% 4
 \BOOKMARK [0][-]{chapter.2}{The challenge of reproducibility}{}% 5
-\BOOKMARK [1][-]{section.2.1}{On the ground validation of online diagnosis with Twitter and medical records}{chapter.2}% 6
-\BOOKMARK [0][-]{chapter.3}{Description of the data set}{}% 7
-\BOOKMARK [1][-]{section.3.1}{The starting point}{chapter.3}% 8
-\BOOKMARK [1][-]{section.3.2}{Description of the sick data set}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.3}{Description of the all\137tweets data set}{chapter.3}% 10
-\BOOKMARK [0][-]{chapter.4}{Results}{}% 11
-\BOOKMARK [1][-]{section.4.1}{Comparison with CDC data}{chapter.4}% 12
-\BOOKMARK [1][-]{section.4.2}{Comparison with regard to CDC activity levels}{chapter.4}% 13
-\BOOKMARK [1][-]{section.4.3}{Comparison on the state level}{chapter.4}% 14
-\BOOKMARK [1][-]{section.4.4}{Comparison on the county level}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.5}{Additional attempts to reproduce the findings froms bodnardata2015}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.5.1}{Attempt to reclassify raw Twitter data}{section.4.5}% 17
-\BOOKMARK [2][-]{subsection.4.5.2}{Attempt to reproduce the SIR model described in bodnardata2015}{section.4.5}% 18
-\BOOKMARK [2][-]{subsection.4.5.3}{Attempt to reproduce the AR model described in bodnardata2015}{section.4.5}% 19
-\BOOKMARK [0][-]{chapter.5}{Discussion}{}% 20
-\BOOKMARK [1][-]{section.5.1}{Errors in the aggregation and processing of the Twitter data set}{chapter.5}% 21
-\BOOKMARK [1][-]{section.5.2}{The findings from bodnardata2015 are based on a different data set}{chapter.5}% 22
-\BOOKMARK [1][-]{section.5.3}{There are errors present in the Twitter flu classifier}{chapter.5}% 23
-\BOOKMARK [1][-]{section.5.4}{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{chapter.5}% 24
-\BOOKMARK [1][-]{section.5.5}{Missing parts}{chapter.5}% 25
+\BOOKMARK [1][-]{section.2.1}{To replicate or to reproduce?}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{The replicability}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{On the ground validation of online diagnosis with Twitter and medical records}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Description of the data set}{}% 9
+\BOOKMARK [1][-]{section.3.1}{The starting point}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Description of the sick data set}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.3}{Description of the all\137tweets data set}{chapter.3}% 12
+\BOOKMARK [0][-]{chapter.4}{Results}{}% 13
+\BOOKMARK [1][-]{section.4.1}{Comparison with CDC data}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.2}{Comparison with regard to CDC activity levels}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.3}{Comparison on the state level}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.4}{Comparison on the county level}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.5}{Additional attempts to reproduce the findings froms bodnardata2015}{chapter.4}% 18
+\BOOKMARK [2][-]{subsection.4.5.1}{Attempt to reclassify raw Twitter data}{section.4.5}% 19
+\BOOKMARK [2][-]{subsection.4.5.2}{Attempt to reproduce the SIR model described in bodnardata2015}{section.4.5}% 20
+\BOOKMARK [2][-]{subsection.4.5.3}{Attempt to reproduce the AR model described in bodnardata2015}{section.4.5}% 21
+\BOOKMARK [0][-]{chapter.5}{Discussion}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Errors in the aggregation and processing of the Twitter data set}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{The findings from bodnardata2015 are based on a different data set}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{There are errors present in the Twitter flu classifier}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.4}{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.5}{Missing parts}{chapter.5}% 27

@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Aarts {\it et~al.}, 2015]{aarts2015estimating}
+Aarts, A., Anderson, J., Anderson, C., Attridge, P., Attwood, A., and Fedor, A.
+  (2015).
+\newblock Estimating the reproducibility of psychological science.
+\newblock {\em Science}, {\bf349},  1--8.
+
 \bibitem[Abbar {\it et~al.}, 2015]{abbar2015you}
 Abbar, S., Mejova, Y., and Weber, I. (2015).
 \newblock You tweet what you eat: Studying food consumption through twitter.
@@ -52,12 +58,34 @@ Bailey, L., Vardulaki, K., Langham, J., and Chandramohan, D. (2005).
 \newblock {\em Introduction to {Epidemiology}}.
 \newblock Open University Press London.
 
+\bibitem[Baker, 2016a]{baker2016there}
+Baker, M. (2016a).
+\newblock Is there a reproducibility crisis? a nature survey lifts the lid on
+  how researchers view the'crisis rocking science and what they think will
+  help.
+\newblock {\em Nature}, {\bf533},  452--455.
+
+\bibitem[Baker, 2016b]{baker2016reproducibility}
+Baker, M. (2016b).
+\newblock Reproducibility: seek out stronger science.
+\newblock {\em Nature}, {\bf537},  703--704.
+
 \bibitem[Bauer, 2016]{bauer_timeonline_2016}
 Bauer, R. (2016).
 \newblock Media {(R)evolutions}: time spent online continues to rise.
 \newblock
   \url{https://blogs.worldbank.org/publicsphere/media-revolutions-time-spent-online-continues-rise}.
 \newblock [Online; accessed 12-August-2017].
+
+\bibitem[Begley, 2013]{begley_six_2013}
+Begley, C.~G. (2013).
+\newblock Six red flags for suspect work.
+\newblock {\em Nature}, {\bf497},  431--433.
+
+\bibitem[Begley and Ioannidis, 2015]{begley2015reproducibility}
+Begley, C.~G. and Ioannidis, J.~P. (2015).
+\newblock Reproducibility in science.
+\newblock {\em Circulation research}, {\bf116},  116--126.
 
 \bibitem[Bodnar, 2015]{bodnar_data_2015}
 Bodnar, T. (2015).
@@ -126,6 +154,11 @@ Butler, D. (2013).
 \newblock When {Google} got flu wrong.
 \newblock {\em Nature}, {\bf494},  155.
 
+\bibitem[Casadevall and Fang, 2010]{casadevall_reproducible_2010}
+Casadevall, A. and Fang, F.~C. (2010).
+\newblock Reproducible {Science}.
+\newblock {\em Infection and Immunity}, {\bf78},  4972--4975.
+
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
   2016]{cdc_surveillance_2016}
 Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
@@ -165,6 +198,13 @@ Chunara, R., Goldstein, E., Patterson-Lomba, O., and Brownstein, J.~S. (2015).
   participatory cohort.
 \newblock {\em Scientific Reports}, {\bf5},  9540.
 
+\bibitem[Crotty, 2014]{crotty_reproducible_2017}
+Crotty, D. (2014).
+\newblock Who made that {Twitter} bird?
+\newblock
+  \url{https://scholarlykitchen.sspnet.org/2017/05/24/reproducible-research-just-not-reproducible/}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Culotta, 2010]{culotta_towards_2010}
 Culotta, A. (2010).
 \newblock Towards detecting influenza epidemics by analyzing {Twitter}
@@ -179,6 +219,14 @@ Eichstaedt, J.~C., Schwartz, H.~A., Kern, M.~L., Park, G., Labarthe, D.~R.,
 \newblock Psychological language on twitter predicts county-level heart disease
   mortality.
 \newblock {\em Psychological science}, {\bf26},  159--169.
+
+\bibitem[Feilden, 2010]{lehrer_truth_2010}
+Feilden, T. (2010).
+\newblock The {Truth} {Wears} {Off}.
+\newblock {\em The {New} {Yorker}}.
+\newblock
+  \url{http://www.newyorker.com/magazine/2010/12/13/the-truth-wears-off}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Freifeld {\it et~al.}, 2010]{freifeld_participatory_2010}
 Freifeld, C.~C., Chunara, R., Mekaru, S.~R., Chan, E.~H., Kass-Hout, T.,
@@ -206,6 +254,13 @@ Generous, N., Fairchild, G., Deshpande, A., Del~Valle, S.~Y., and Priedhorsky,
 \newblock Global {Disease} {Monitoring} and {Forecasting} with {Wikipedia}.
 \newblock {\em PLoS Computational Biology}, {\bf10},  e1003892.
 
+\bibitem[German{\ }Research{\ }Foundation, 2017]{dfg_reproduzierbarkeit_2017}
+German{\ }Research{\ }Foundation (2017).
+\newblock Replicability of {Research} {Results}.
+\newblock
+  \url{http://www.dfg.de/download/pdf/dfg_im_profil/reden_stellungnahmen/2017/170425_stellungnahme_replizierbarkeit_forschungsergebnisse_en.pdf}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Ginsberg {\it et~al.}, 2009]{ginsberg_detecting_2009}
 Ginsberg, J., Mohebbi, M.~H., Patel, R.~S., Brammer, L., Smolinski, M.~S., and
   Brilliant, L. (2009).
@@ -225,6 +280,11 @@ Golbeck, J., Robles, C., Edmondson, M., and Turner, K. (2011).
 \newblock In {\em Privacy, Security, Risk and Trust (PASSAT) and 2011 IEEE
   Third Inernational Conference on Social Computing (SocialCom), 2011 IEEE
   Third International Conference on},   149--156. IEEE.
+
+\bibitem[Goodman {\it et~al.}, 2016]{goodman_what_2016}
+Goodman, S.~N., Fanelli, D., and Ioannidis, J. P.~A. (2016).
+\newblock What does research reproducibility mean?
+\newblock {\em Science Translational Medicine}, {\bf8},  341ps12--341ps12.
 
 \bibitem[Google{\ }Flu{\ }Trends{\ }Team, 2015]{GFT_nextchapter_2015}
 Google{\ }Flu{\ }Trends{\ }Team (2015).
