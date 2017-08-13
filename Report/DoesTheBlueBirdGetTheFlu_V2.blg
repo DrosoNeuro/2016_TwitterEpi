@@ -3,48 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for ""
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty booktitle in liu_assessing_2017
-You've used 45 entries,
+You've used 86 entries,
             1932 wiz_defined-function locations,
-            718 strings with 13448 characters,
-and the built_in function-call counts, 20032 in all, are:
-= -- 1923
-> -- 1076
-< -- 22
-+ -- 383
-- -- 380
-* -- 1769
-:= -- 3530
-add.period$ -- 136
-call.type$ -- 45
-change.case$ -- 412
-chr.to.int$ -- 44
-cite$ -- 47
-duplicate$ -- 672
-empty$ -- 1208
-format.name$ -- 435
-if$ -- 3878
-int.to.chr$ -- 2
+            936 strings with 22829 characters,
+and the built_in function-call counts, 38097 in all, are:
+= -- 3814
+> -- 1812
+< -- 50
++ -- 644
+- -- 630
+* -- 3198
+:= -- 6565
+add.period$ -- 283
+call.type$ -- 86
+change.case$ -- 741
+chr.to.int$ -- 84
+cite$ -- 88
+duplicate$ -- 1370
+empty$ -- 2345
+format.name$ -- 736
+if$ -- 7530
+int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 71
-newline$ -- 224
-num.names$ -- 135
-pop$ -- 353
+missing$ -- 128
+newline$ -- 446
+num.names$ -- 258
+pop$ -- 583
 preamble$ -- 1
-purify$ -- 415
+purify$ -- 744
 quote$ -- 0
-skip$ -- 515
+skip$ -- 1123
 stack$ -- 0
-substring$ -- 1257
-swap$ -- 110
-text.length$ -- 8
+substring$ -- 2572
+swap$ -- 307
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 264
+type$ -- 510
 warning$ -- 2
-while$ -- 145
+while$ -- 291
 width$ -- 0
-write$ -- 570
-(There were 3 warnings)
+write$ -- 1134
+(There were 2 warnings)

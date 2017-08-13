@@ -5,12 +5,12 @@
 %% Eva Furrer, 2013.02.01 (for STA490)
 %% Isaac Gravestock, 2014.09.01 (Update for RStudio, knitr)
 %% Servan Gr?ninger, 2015.12.23
-\documentclass[11pt, a4paper]{report}
+\documentclass[11pt, a4paper,twoside]{report}
 
 \usepackage{verbatim}
 \usepackage[vmargin=3cm, hmargin=2cm]{geometry}
 \usepackage{url}
-\usepackage{hyperref}
+\usepackage[colorlinks=true,pdftex]{hyperref} 
 \usepackage{fancyhdr}
 \usepackage{color}
 \usepackage{amsmath, amssymb}
@@ -33,6 +33,8 @@
 %\usepackage[sc]{mathpazo}
 \linespread{1.05} 
 \definecolor{grey}{rgb}{.95,.95,.95}
+\renewcommand{\baselinestretch}{1.1}
+
 
 % And Arial for the rest
 %\usepackage[scaled]{helvet}
@@ -132,12 +134,12 @@ Version \of \versiondate
 \fancyhf{}
 \renewcommand{\footrulewidth}{0.4pt}
 \fancyfoot[ce, co]{\thepage}
-\fancyfoot[le, lo]{\textsf{\name}, \href{\mail}{\textsf{\emph{\mail}}}}
-\fancyfoot[re, ro]{\textsf{\versiondate}}
+\fancyfoot[le, lo]{\textrm{\name}}%, \href{\mail}{\textsf{\emph{\mail}}}
+\fancyfoot[re, ro]{\textrm{\versiondate}}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyhead[ce, co]{}
-\fancyhead[le, lo]{\textsf{\grp}}
-\fancyhead[re, ro]{\textsf{\inst}}
+\fancyhead[le, lo]{\textrm{\grp}}
+\fancyhead[re, ro]{\textrm{\inst}}
 }
 
 % =======================================
@@ -170,7 +172,7 @@ fig.path='plots/p', echo = FALSE, results='markup'
 
 \begin{document}
 
-\thispagestyle{empty}
+
 \renewcommand{\baselinestretch}{1.5}\normalfont
 \begin{center}
 \setlength{\parindent}{0cm}
@@ -209,11 +211,15 @@ Prof. Marcel Salathé (EPFL)
 
 Zurich, August 2017
 \end{center}
-\renewcommand\familydefault{\rmdefault}%
-\renewcommand{\baselinestretch}{1.0}\rm 
+\renewcommand\familydefault{\rmdefault}\normalfont%
+%\renewcommand{\baselinestretch}{1.0}\rm 
+%set numbering to roman 
 \setcounter{page}{0}
+\pagenumbering{roman}
+\thispagestyle{empty}
 \cleardoublepage
 
+%\cleardoublepage
 
 \pagestyle{standard}
 %\mytitle{\bigtitle}{\subtitle}
@@ -221,76 +227,96 @@ Zurich, August 2017
 %\hrule
 %\pagebreak
 
-% \maketitle
-\tableofcontents
-\newpage
-
 \begin{abstract}
 Coming soon...
 \end{abstract}
 
+\thispagestyle{empty}
+\cleardoublepage
+
+% \maketitle
+\tableofcontents
+\cleardoublepage
+
+
 \chapter{Introduction}
 \label{ch:intro}
-We all know it and we all hate it: The common flu. What may be a mere nuisance for some, can have deadly consequences for others. Every year, between 112'000 and 275'000 patients in Switzerland seek medical care because of influenza-like symptoms, several hundred of which eventually succumb to the disease \citep{bag_lagebericht_2017}. 
+\setcounter{page}{0}
+\pagenumbering{arabic}
+We all know it and we all hate it: The common flu. What may be a mere nuisance for some, can have deadly consequences for others. Every year, between 112'000 and 275'000 patients in Switzerland seek medical care because of influenza-like symptoms, several hundred of which eventually succumb to the disease \citep{bag_lagebericht_2017}. in the US, tens of thousands of people die from the flu each year and hundreds of thousands need to be hospitalised \citep{rolfes_estimated_2016}.
 
-However, these numbers represent just the tip of the proverbial ice-berg. Studies have shown that only a minority of the people suffering from influenza or influenza-like symptoms actually seek medical care \citep{goff_surveillance_2015}. Also, both the Centers for Disease Control and Prevention (CDC) as well the Swiss Federal Office of Public Health only recommend patients to seek medical care if they belong to a risk group or if they show strong symptoms \citep{cdc_flu_2017,bag_grippe_2016}.
+However, these numbers represent just the tip of the proverbial ice-berg. Studies have shown that only a minority of the people suffering from influenza or influenza-like symptoms actually seek medical care \citep{goff_surveillance_2015}. In addition, both the Centers for Disease Control and Prevention (CDC) as well the Swiss Federal Office of Public Health only recommend patients to seek medical care if they belong to a risk group or if they show strong symptoms \citep{bag_grippe_2016,cdc_flu_2017}.
 
-This puts traditional influenza surveillance methods, which are usually based on data from healthcare providers acting as sentinels, at a certain disadvantage, because they are more likely to catch the more severe flu cases while underestimating the overall magnitude of the flu. Also, traditional influenza surveillance systems such as ``Sentinalla" in Switzerland or the ``U.S. Outpatient Influenza-like Illness Surveillance Network" (ILINet) in the USA only publish their reports with a lag of one to two weeks due to the time it takes to gather and aggregate the available information from the surveillance sentinels \citep{bag_influenza_2017, sentinella_2017, cdc_surveillance_2016}.
+This puts traditional influenza surveillance methods, which are usually based on data from healthcare providers acting as sentinels, at a certain disadvantage, because they are more likely to catch the more severe flu cases while underestimating the overall magnitude of the flu. Also, traditional influenza surveillance systems such as ``Sentinalla" in Switzerland \citep{bag_influenza_2017, sentinella_2017} or the ``U.S. Outpatient Influenza-like Illness Surveillance Network" (ILINet) in the USA \citep{cdc_surveillance_2016} only publish their reports with a lag of one to two weeks due to the time it takes to gather and aggregate the available information from the surveillance sentinels.
 
-Hence, novel methods might be suitable to complement traditional epidemiological information in order to make influenza surveillance faster, more exhaustive and more reliable. 
+Hence, novel methods to complement traditional epidemiological information might be needed in order to make influenza surveillance faster and more exhaustive. Luckily, the flu provides researchers with an excellent starting point to test new surveillance methods, due to the following reasons: 
+
+\begin{description}
+\item [Reliable data are available] Most high-income countries have well-established Influenza surveillance systems which provide reliable data sources that can be used as ``gold standard" with which the performance of new methods can easily be compared.
+\item [Spatio-temporal analysis possible] Influenza leads to recurring epidemics each year all over the world, providing researchers with a vast amount of data to work with.
+\item [No stigma attached] Influenza is ``normal", in that Influenza patients are not stigmatised and it is not taboo to talk openly about it (in fact, getting sick with the flu is a very common content of small talk and news articles)
+\item [Relevant for public health ] Even though the flu is ``normal", it is far from harmless. As outlined above, the flu poses a serious threat to the health of hundreds of thousands of people in Switzerland alone. Hence, better surveillance method would allow for better preventive and therapeutic measures.
+\item [Large body of pre-existing research] Partially due to the reasons outlined above, there exists extensive research about about the prevention and treatment of the flu as well as about its etiology, transmission paths, pathophysiology, and virological characteristics. These information serve as excellent basis for epidemiological research
+\item [Thriving research community] Many researchers are working on understanding, preventing, and combatting the flu on different levels, offering ample opportunities for collaborations.
+\end{description}
 
 \section{Complementary epidemiology}
-Epidemiologists have always used a wide range of genetic, population and environmental information to study the transmission and propagation of disease - from simple counts of disease incidences, mortality or birth tables, and patient histories up to vast cohort studies, sophisticated disease models, and intricate clinical trials \citep{rothman2012epidemiology,koepsell2014epidemiologic}. The epidemiologist's goal is not only to discover where and when a disease occurs, but also why it does to and through which mechanisms. Hence, it should not come as a suprise that the advent of powerful genetic screening techniques, sophisticated algorithms, and cheap computing power have added a lot of new weapons to the scientific arsenal of the ``disease detectives" \citep{bailey2005introduction, khoury_transforming_2013, gardy_real-time_2015} - additions that are sorely needed to keep up with the ever-changing disease landscape.\newline
+Epidemiologists have always used a wide range of genetic, population and environmental information to study the transmission and propagation of disease - from simple counts of disease incidences, mortality or birth tables, and patient histories up to vast cohort studies, sophisticated disease models, and intricate clinical trials \citep{rothman2012epidemiology,koepsell2014epidemiologic}. The epidemiologist's goal is not only to discover where and when a disease occurs, but also why it does so and through which mechanisms. Hence, it should not come as a suprise that the advent of powerful genetic screening techniques, sophisticated algorithms, and cheap computing power have added a lot of new weapons to the scientific arsenal of the ``disease detectives" \citep{bailey2005introduction, khoury_transforming_2013, gardy_real-time_2015} - additions that are sorely needed to keep up with the ever-changing disease landscape.\newline
 
-Because nowadays, epidemiological work is decidedly different in two particular ways: First, non-communicable disease are the primary cause of illness and life-years lost in high-income countries and are on the rise world-wide \citep{lozano_global_2013}. Second, infectious diseases can spread faster than ever before thanks increased social and spatial mobility on a global scale \citep{hufnagel_forecast_2004}.
+Nowadays, epidemiological work is decidedly different in two particular ways: First, non-communicable disease are the primary cause of life-years lost in high-income countries and are on the rise world-wide \citep{lozano_global_2013}. Second, infectious diseases can spread faster than ever before thanks to increased social and spatial mobility on a global scale \citep{hufnagel_forecast_2004}. 
 
-While accurately tracking the causes of non-communicable disease still remains a challenge, the potential for a fast spread of infectious diseases calls for more efficient surveillance methods. Complementary epidemiological data source are thus sorely needed in order to keep up with the changing challenge in epidemiology. And when it comes to disease surveillance, digital data sources appear to be especially promising. \citep{salathe_digital_2012, simonsen_infectious_2016}.
+For both challenges, however, novel epidemiological methods are rising to the task. They can help to track down the underlying causes of non-communicable disease as well as improve the speed and efficience of disease surveillance methods in order to keep up with emerging epidemics and even pandemics. In this regard, digital data sources appear to be especially promising to complement established epidemiological work \citep{salathe_digital_2012, simonsen_infectious_2016}.
 
-\subsection{Digital epidemiology}
+\section{Digital epidemiology}
 
-Digital data seem especially promising sources for making statistical inferences about disease transmission or disease spread. Thanks to vast amount of digital footprints each one of us leaves behind, these data sources do not have to be medical in nature in order to be epidemiological useful. This ``digital epidemiology" can offer epidemiological insights that are very different from traditional surveillance systems and public health infrastructure. More importantly, data sources such as web queries, social networking sites, online news articles or mobile devices and other wearables offer the great advantages of being internationally available and accessible, offering fine-grained geospatial location of the users (or patients) and often allow for instantaneous feedback \citep{salathe_digital_2012}. For example, Google tried to use search queries in order to predict the spread and the intensity of the flu in certain countries \citep{ginsberg_detecting_2009}. Retrospective analysis of Google search queries and online media reports showed that these data sources could have been used to detect the Ebola epidemic of 2014/2015 quicker and with more sensitivity \citep{anema_digital_2014, milinovich_role_2015}.
-In addition, Wikipedia page views proved to be reliable predictors to model the epidemiology of such different diseases as dengue fever, influenza, cholera, HIV/AIDS, or tuberculosis \citep{generous_global_2014}. 
-Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}.
-Finally, there exist participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogenous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.\newline
+In the digital age, everybody leaves traces. And thanks to the vast amount of digital footprints each one of us leaves behind, digital data sources do not have to be medical in nature in order to be epidemiological useful. ``Digital epidemiology" can offer epidemiological insights that are very different from traditional surveillance systems and public health infrastructure. More importantly, data sources such as web queries, social networking sites, online news articles, or mobile devices and other wearables have the great advantages of being internationally available and accessible, offering fine-grained geospatial location of the users (or patients) and often allow for instantaneous feedback \citep{salathe_digital_2012}. 
+
+For example, Google tried to use search queries in order to predict the spread and the intensity of the flu in certain countries \citep{ginsberg_detecting_2009}. Retrospective analysis of Google search queries and online media reports showed that these data sources could have been used to detect the Ebola epidemic of 2014/2015 quicker and with more sensitivity \citep{anema_digital_2014, milinovich_role_2015}. And finally, Wikipedia page views proved to be reliable predictors to model the epidemiology of such different diseases as dengue fever, influenza, cholera, HIV/AIDS, or tuberculosis \citep{generous_global_2014}.\newline 
+
+Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}. Finally, there exist a vast range of participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogenous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.
 
 And it does not stop with digital data alone. Many of the approaches outlined above can be combined with and extended by other biologically or clinically relevant data such as high-throughput sequence data, clinical visits, pharmaceutical prescriptions, or clinical symptoms, in order to allow for a more accurate description of the mechanisms of disease spread, the pathogens involved, and the treatments administered \citep{ray_network_2016}.
 
-One particularly potent source of information, however, are social media data.\newline
+For the scope of this thesis, I am focusing on one particularly potent source of information: social media data.
 
-\section{What ``Larry the Bird" can tell us about the flu}
-%\footnote{The Twitter bird has been dubbed ``Larry the Bird" by its creators: https://www.nytimes.com/2014/08/10/magazine/who-made-that-twitter-bird.html}
+\section{What can ``Larry the Bird" tell us about the flu?}
+Social media offers the possibility to directly measure a user's sentiments and behaviours via his posts and interactions with other users - information that can be highly valuable from an epidemiological point of view. If somebody is suffering from the flu, her behaviour undoubtedly changes: She behaves more lethargicly, stays in bed, and might complain about her symptoms in the presence of family, friends, or work colleagues. Even people on Twitter or Facebook can exhibit ``disease symptoms" which can be diagnosed. A tweet, in which somebody is complaining about having fever, joint aches, and a cough can be a tell-tale sign of the flu. Similarly, somebody who tweets that all his colleagues were absent from work due to the flu, gives researchers precious and above-all fast warning about an incoming flu wave.
 
-Social media is an especially rich source of information, since it offers the possibility to directly measure a user's sentiments and behaiouvs via his posts - information that can be highly valuable from an epidemiological point of view. If somebody is suffering from the flu, her behaviour undoubtedly changes: She behaves more lethargicly, stays in bed and might complain about her symptoms in the presence of family, friends or work colleagues. Given that social media is often used to share information about one's personal well-being and/or feeling and takes up an increasing amount of time of many people \citep{scott_time_2017,asano_socialmediatime_2017,bauer_timeonline_2016}, it is to be expected that behavioural changes due to a disease can also be detected by analysing the social media behaviour of the people afflicted. Either because said people are explicitely informing their peers about their current affliction or because the frequency or other implicit aspects of their social media behaviour changes. All these changes can - in theory - be detected on the population level if researchers get access to large enough data sets. 
+Given that social media is often used to share information about one's personal well-being and/or feeling and takes up an increasing amount of time of many people \citep{bauer_timeonline_2016,scott_time_2017,asano_socialmediatime_2017}, it is to be expected that behavioural changes due to a disease can also be detected by analysing the social media behaviour of the people afflicted. Either because said people are explicitely informing their peers about their current affliction or because the frequency or other implicit aspects of their social media behaviour changes. All these changes can - in theory - be detected on the population level if researchers get access to data sets that are large enough.
 
-Because even people on Twitter or Facebook can exhibit ``disease symptoms" which can be diagnosed. A tweet, in which somebody is complaining about having fever, joint aches and a cough can be a tell-tale sign of the flu. Similarly, somebody who tweets that all his colleagues were absent from work due to the flu, gives researchers precious and above-all fast warning about an incoming flu wave.\newline
+However, using social media for epidemiological surveillance is deeply hampered by one crucial fact: Most social media plattforms do not offer access to user's profiles. The profiles of most social media users are either completely inaccessible to the public (e.g. Whatsapp, Snapchat, FB-Messenger) or only accessible if the user allows it (Facebook, Instagram). But even if profiles are publicly available, they are often not easily accessible and aggregatable for research purposes due to the strict rules of the respective application programming interfaces (APIs) provided by the respectie companies.
 
-However, using social media for epidemiological surveillance is deeply hampered by one crucial fact: Most social media plattforms do not offer access to user's profiles. The profiles of most social media users are either completely inaccessible to the public (Whatsapp, Snapchat, FB-Messenger) or only accessible if the user allows it (Facebook, Instagram). But even if profiles are publicly available, they are often not easily accessible and aggregatable for research purposes due to the strict rules of the respective APIs.\newline
+``Larry the Bird", as Twitter's trademark mascot is affectionately called by its creators \citep{rehak_twitterbird_2014}, is a notable exception to this. Due to the ease-of-access to the Twitter-API as well as due to the fact, that tweets often contain a direct expression of sentiment of some sort, researchers can gain access to millions of tweets sent out every day \citep{twitter_annual_2017}. The source of information is so rich, in fact, that it has spawned a variety of studies in wide range of disciplines, such as political science \citep{tumasjan2010predicting,tumasjan2011election,stieglitz2012political,newman2016tracking}, business \citep{swani2014should,chae2015insights}, economics \citep{bollen2011twitter,bollen2011modeling,zhang2012predicting,sul2014trading}, sociology \citep{poblete2011all,himelboim2013birds,mccormick2015using}, communication science \citep{zhao2009and,marwick2011tweet,himelboim2013birds,hermida2013journalism}, psychology \citep{chen2011tweet,golbeck2011predicting,qiu2012you,eichstaedt2015psychological,braithwaite2016validating}, nutrition science \citep{widener2014using,vidal2015using, abbar2015you}, or medicine \citep{salathe2013dynamics,love2013twitter,nwosu2014social,adrover2015identifying,eichstaedt2015psychological,mowery2017feature}, even though studies from the computer and information sciences studies are clearly in the majority \citep{lee2013real,zimmer2014topology,steiger2015advanced}. 
 
-Twitter is a notable exception to this and thus offers an especially rich source of information due to the ease-of-access to the Twitter-API as well as due to the fact, that tweets often contain a direct expression of sentiment of some sort. With millions of tweets  sent out every day, the source of information is incredibly rich, so it appears straightforward to fit a model using the content of those tweets as independent variables and the official influenza data dependent variable. 
-There is one catch, however: This approach is prone to overfitting, i.e. to picking up signals that do not indicate that the user has the flu, but that are caused by other, unrelated characteristics, which just happen to correlate with the flu season, for example. Google Flu Trends \citep{ginsberg_detecting_2009} initially fell prey to these kinds of overfitting, linking search terms such as ``High School Basketball" to flu disease state - just because the basketball season coincided is in winter which happens to coincide with the flu season. The Google researchers tried to root out these kind of correlations in order to improve the performance of their algorithms, but eventually had to admit defeat to their daunting task: The huge data masses coupled with changes of user behaviour, external influences from media reports and the constant adaptions of Google's search algorithm itself proved to create too much noise to allow for reliable flu predictions \citep{olson_reassessing_2013,butler_when_2013,lazer_parable_2014,} Eventually, Google Flu Trends was discontinued in summer 2015 as a publicly available service, but the data are still accessible to and used by researchers all around the world \citep{GFT_nextchapter_2015}.\newline
+Hence, it seems straightforward to use Twitter data for epidemiological purposes as well and to fit a model using the content of those tweets as independent variables and the official influenza data as dependent variable.
 
-Google Flu trends was a pioneering attempt to use online data to make predictions and despite its (temporary?) failure, it provided researchers with many insights into the promises and perils of using big online data for epidemiological purposes. One of the main problem in all approaches which use large data sets to infer flu states is: How to prevent overfitting if the set of independent variables (e. g. the tweets) is in the billions, while your dependent variables (the official flu information) is in the thousands?\newline
+There is one catch, however: This approach is prone to overfitting, i. e. to picking up signals that do not indicate that the user has the flu, but that are caused by other, unrelated characteristics, which just happen to correlate with, for example, the flu season. Google Flu Trends \citep{ginsberg_detecting_2009} initially fell prey to this kind of overfitting, linking search terms such as ``High School Basketball" to flu disease state - just because the basketball season happened to be in winter which unsurprisingl coincided with the flu season. The Google researchers tried to root out these kind of correlations in order to improve the performance of their algorithms, but eventually had to admit defeat to their daunting task: The huge data masses coupled with changes of user behaviour, external influences from media reports, and the constant adaptions of Google's search algorithm itself created too much noise to allow for reliable flu predictions \citep{olson_reassessing_2013,butler_when_2013,lazer_parable_2014} Eventually, Google Flu Trends was discontinued in summer 2015 as a publicly available service, but the data are still accessible to and used by researchers all around the world \citep{GFT_nextchapter_2015}.
 
-One approach to mitigate this problem is to restrict the tweets used to those, which clearly indicate that the user or somebody in her surroundings fell sick to the flu. If somebody tweets: ``stuffy nose, headache and fever - \#flu sucks!" or ``nobody at work - everybody's taking a \#flu leave", then these tweets indicate a clear presence of a flu infection - either within the tweeter him or herself or within the people in surrounding him or her. Hence, we can use these tweets to get an estimate over the amount of twitter users that are currently tweeting about the flu or influenza like symptoms - and thereby over the distribution of flu in the areas where the tweeters are located at.\newline
+Google Flu trends was a pioneering attempt to use online data to make predictions and despite its (temporary?) failure, it provided researchers with many insights into the promises and perils of using big online data for epidemiological purposes. However, the main problem when using large data sets to infer flu states still remains: How to prevent overfitting if the set of independent variables (e. g. the tweets) is in the billions, while your dependent variables (the official flu information) is in the thousands?
 
-However, even with the powerful methods from natural language processing, the identification of tweets that indicate disease state (as opposed to general awareness of the flu, for example) is not trivial. There are several very promising methods to extract epidemiologically relevant data from tweets and creating descriptive or predictive models from them. These methods include simple keyword ratios \citep{lampos_tracking_2010}, partial-differential equations \citep{wang_regional_2016}, linear regression models \citep{culotta_towards_2010}, autoregressive models \citep{achrekar_predicting_2011,paul_twitter_2014,paul_worldwide_2015}, support vector machines \citep{paul_you_2011}, probabilistic topic models \citep{paul_you_2011}, sentiment detection \citep{aramaki_twitter_2011}, and semantic text analysis \citep{lamb_separating_2013}. However, most of them still depend on some sort of correlation with the official data. making them again prone to overfitting - up to the point that even seemingly irrelevant tweets can ``predict" flu outbreaks almost as good as tweets containing clinically relevant information \citep{bodnar_validating_2013}. Also, it has been shown that media reports can have a substantial influence on Twitter users' behaviour and thus on the content of their tweets - thereby creating a ``news bias" in the twitter models \citep{aramaki_twitter_2011}\newline
+One approach to mitigate this problem is to restrict the relevant tweets to those, which clearly indicate that the user or somebody in her surroundings fell sick to the flu. If somebody tweets: ``stuffy nose, headache and fever - \#flu sucks!" or ``nobody at work - everybody's taking a \#flu leave", then these tweets show a clear presence of a flu infection - either within the tweeter herself or within the people in surrounding her. Hence, we can use these tweets to get an estimate of the amount of twitter users that are currently tweeting about the flu or influenza like symptoms - and thereby of the distribution of flu in the areas where the tweeters are located at.
 
-It would be prudent then, to validate any keywords that might indicate disease state by comparing them with the true disease state of the tweeter. Since it is implausible to do so with the roughly 319 million of worldwide users who were active on a monthly base by the end of 2016 - or even with the 69 million monthly active users in the US - we need to aim for a smaller subset \citep{twitter_annual_2017}.\newline
+However, even with the powerful methods from natural language processing, the identification of tweets that indicate disease state (as opposed to general awareness of the flu, for example) is not trivial. There are several very promising methods to extract epidemiologically relevant data from tweets and creating descriptive or predictive models from them. These methods include simple keyword ratios \citep{lampos_tracking_2010}, partial-differential equations \citep{wang_regional_2016}, linear regression models \citep{culotta_towards_2010}, autoregressive models \citep{achrekar_predicting_2011,paul_twitter_2014,paul_worldwide_2015}, support vector machines \citep{paul_you_2011}, probabilistic topic models \citep{paul_you_2011}, sentiment detection \citep{aramaki_twitter_2011}, and semantic text analysis \citep{lamb_separating_2013}. However, most of them still depend on some sort of correlation with official data from public health authorities. making them again prone to overfitting - up to the point that even seemingly irrelevant tweets about zombies can ``predict" flu outbreaks almost as good as tweets containing clinically relevant information \citep{bodnar_validating_2013}. Also, it has been shown that media reports can have a substantial influence on Twitter users' behaviour and thus on the content of their tweets - thereby creating a ``news bias" in the Twitter models \citep{aramaki_twitter_2011}.
 
-This is what \citep{bodnar_ground_2014} have done. They built a flu classification model on tweets from users of which they knew the disease state up to the temporal resolution of a month. I.e. they had the possibility to build their model knowing which one of their twitter users were sick and which weren't within a certain month. Hence, they did not only correlate Tweet content with population-level, but could directly assign a twitter user's timeline with his or her disease state.\newline
+It would be prudent then, to validate any keywords that might indicate disease state by comparing them with the true disease state of the tweeter. Since it is implausible to do so with the roughly 319 million of worldwide users who were active on a monthly base by the end of 2016 - or even with the 69 million monthly active users in the US \citep{twitter_annual_2017} - we need to aim for a smaller subset.
 
+This is what \cite{bodnar_ground_2014} have done. They built a flu classification model on tweets from users of which they knew the disease state up to the temporal resolution of a month. That is, they had the possibility to build their model knowing which one of the observed Twitter users were sick and which were not within a specific month. Hence, they did not only correlate Tweet content with population-level, but could directly assign a twitter user's timeline with his or her disease state. The first goal of this thesis is to assess the validity of the flu classifier they built based on these data (see Section~\ref{sec:on_the_ground}) as well as to make suggestions on how its performance might be improved.
+
+\chapter{The challenge of reproducibility}
+\label{ch:reproducibility}
 \section{On the ground validation of online diagnosis with Twitter and medical records}
-In their study, conducted during the 2012-2013 Influenza season, \citep{bodnar_ground_2014} analysed the tweeting behaviour of a group of 104 students from the Pennsylvania State University, of which they also had received medical records from the university's health services, telling whether a participant was sick with the flu during a given month or not.\newline
+\label{sec:on_the_ground}
+In their study, conducted during the 2012-2013 Influenza season, \cite{bodnar_ground_2014} analysed the tweeting behaviour of a group of 104 students from the Pennsylvania State University, of which they also had received medical records from the university's health services, telling whether a participant was sick with the flu during a given month or not.\newline
 
 The researchers collected a total of 37'599 tweets from the 104 accounts mentioned above (``seed accounts") as well as 30'950'958 tweets from the 913'082 accounts that were connected to those seed accounts (either by following one of them or by being followed by one of them). They then proceeded to divide the tweets from the seed accounts into two categories: Tweets that were sent during a month in which the user was sick and the rest. This way, a total of 1609 tweets from 35 users could be extracted. 
-Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods (Naive Bayes, random forest, C4.5, logistic regression, and support vector machine), which showed that the keywords were only poor predictors of a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).
+Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods (Naive Bayes, random forest, C4.5, logistic regression, and support vector machine), which showed that the keywords were only poor predictors of a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).\newline
 
 In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the Naive Bayes classifier performed best with a classification accuracy of 89.72\% and an AUC of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=.9\textwidth]{ROC_classification_seed.png}
-  \caption{The ROC of classifiers that use hand chosen key words (a) and algorithmically chosen keywords (b) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features (taken from \citep{bodnar_ground_2014})}
+  \caption{The ROC of classifiers that use hand chosen key words (a) and algorithmically chosen keywords (b) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features (taken from \cite{bodnar_ground_2014})}
   \label{fig:ROC_classification_seed}
   \end{figure}
 
@@ -300,24 +326,21 @@ In a second step, the researchers also applied simple bag-of-words techniques to
 
 This model has its limitations as well, though: It was based on a very small data set consisting of only 104 twitter accounts generating a total of 37’599 tweets during the study period. Out of this sample, 35 users fell sick during the study period and generated a total of 1609 tweets in the month in which they were sick. Furthermore, all twitter users stemmed from the same state (Pennsylvania) and belonged to approximately the same socio-economic group (young students of the Pennsylvania State University). Hence, one would assume that their tweeting behaviour might be different from that of the average twitter use. In addition, the exact time of disease of the twitter users is not know. Due to privacy concerns, the researchers were limited to know in which month a specific twitter user was diagnosed with the flu. Finally, the model was built based on the tweeting behaviour and medical records of only one flu season (2011-2012). All these points either reduce the models' temporal resolution or add a considerable amount of bias to it. \newline
 
-Hence, it is necessary to test the performance of the Naive Bayes classifier describe above for different cities and states and compare the results with reliable epidemiological data. In his dissertation \citep{bodnar_data_2015}, Todd Bodnar performed such tests on the level of counties, states, and the complete US mainland.\newline
+Hence, it is necessary to test the performance of the Naive Bayes classifier describe above for different cities and states and compare the results with reliable epidemiological data. In his dissertation, \cite{bodnar_data_2015} performed such tests on the level of counties, states, and the complete US mainland.\newline
 
 To do so, he applied the classifier to the tweets of each user within a 4-week sliding window with a one-day step-size. ``The classifier assigns score (sic!) to the day where the sliding window begins based on the Tweets the user has posted within the window. For example, when the sliding window first encounters a user’s Tweet that says `I am getting sick with the flu', the classifier will heavily lean toward her being sick. Later, the user may Tweet `I am no longer sick' which will give a strong signal that the user is no longer sick which will tend to outweigh the user’s previous “sick” Tweet even if they both occur in the same window. Of course, it is rare that such strong signals are in the data, so the classifier is built on an amalgamation of many weaker signals—mentioning going to a party asnot-sick signal, for example—which, while weaker, are more prevalent. We chosestep size of one day in order to increase the temporal granularity of the classifier. Users that are inactive for more than 30 days are not included for any analysis during that time window."\footnote{Note that this way of assigning diseas status has one problematic implication, namely that information from future tweets is incorporated while information from past tweets are ignored. This insofar counterintuitive as a Twitter user who tweeted about being sick on day 1, will most certainly still be sick on day 2 - regardless of what she tweets about. However, the algortihm will not take into consideration any information from past days, so when shifting the onset of the 4-week-sliding window to day 2, all information from day 1 will be lost. If there are no additional flu keywords to be found in the tweets sent within the following 4-week-sliding window, the algorithm will mistakenly classify the user as being ``non sick". 
 In addition, the algorithm is bound to classify tweets too early as being sick. For example, if particularly strong ``flu" signal turns up, the algorithm might classify the user as being ``sick" up to four weeks before the actual onset of the sickness. In other words; instead of assuming that a user remains sick for some time after she has tweeted about being sick, the algorithm might give the faulty impression that the user has been sick up to the point where she tweeted about it - but not afterwards.
 There are no indications in the data set that something like this has happened, but since the overall number of users identified as being sick at any given point during the whole study time is very low, this does not mean much.}\newline
 
 Bodnar applied the algorithm in the above-described fashion to a set of 15'560'328 users who sent a total of 2'732'174'105 geotagged tweets between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015.\footnote{Note that tweets from users who tweeted less than 10 times during this period as well as tweets that could not be attributed to a specific state on the US mainland were discarded. However, the total number of tweets analysed was not given in any of the documentations available to me.} In a next step, Bodnar created a Kermack-McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
-
-$$\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma$$
-
+$$\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.$$
 $S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official ILI results from the Center for Disease Control (CDC) in Atlanta using a multi-grid search method. Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR model minimised the residual sum of squares (RSS):
-
-$$RSS = \sum_{t}(I_{\gamma,\beta}(t)-I_{CDC}(t))$$
-
-Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($$I_{\gamma,\beta}$$ and the official CDC data ($$I_{CDC}$$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}).\footnote{Note that in \citep{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.}
+$$\text{RSS} = \sum_{t}(I_{\gamma, \beta}(t)-I_{\text{CDC}}(t)).$$
+Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($I_{\gamma, \beta}$ and the official CDC data ($I_{\text{CDC}}$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}). Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.
 
 \begin{table}[H]
 \centering
+\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter data (grey); taken from \cite{bodnar_data_2015}}
 \begin{tabular}{l l l l l}
 
  Year & \(\gamma\) & \(\beta\) & RSS\\ \hline
@@ -330,25 +353,22 @@ Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people 
   {\multirow{2}{*}{ Combined }}& 0.6998 & 0.8225  & 0.003719   \\ 
    & \cellcolor{grey}0.6765  & \cellcolor{grey}0.7935  & \cellcolor{grey}0.003252   \\ 
 \end{tabular}
-\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter data (grey); taken from \citep{bodnar_ground_2014}}
 \label{tab:nationalparams}
 \end{table}
 
-Based on these values he could then calculate yearly ILI estimates for the flu seasons of 2011-2012, 2012-2013, and 2013-2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR})\newline
+Based on these values he could then calculate yearly ILI estimates for the flu seasons of 2011--2012, 2012--2013, and 2013--2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR})\newline
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=.9\textwidth]{todd_bodnar_SIR.png}
-  \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters (taken from \citep{bodnar_data_2015})}
+  \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters (taken from \cite{bodnar_data_2015})}
   \label{fig:cdc_fit_bodnar_thesis_SIR}
   \end{figure}
 
 %This model served him to calculate $R_0$ \citep{heesterbeek2002brief}
-In addition, he fitted a autocorrelation model using the results from the Twitter base model and dthe official CDC data: 
-
-$$ILI(t+1) = a*I_{CDC}(t-1) + b*I_{CDC}(t) + c*I_{Twitter}(t)+d$$
-
-Here, $t$ denotes the time in weeks, $I_{CDC}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{Twitter}$ denotes the ILI percentages received from the Twitter base model. \footnote{Personal communication by Todd Bodnar. Note that it is unclear whether the ``Twitter base model" consists of the raw results from the Twitter classifier or consists of these raw results combined with additional information. An e-mail requesting clarification of this has been sent on June 24th, with three more follow-up emails sent in June and August. However, a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.}\newline
+In addition, he fitted a autocorrelation model using the results from the Twitter base model and the official CDC data: 
+$$I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d.$$
+Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model. \footnote{Personal communication by Todd Bodnar. Note that it is unclear whether the ``Twitter base model" consists of the raw results from the Twitter classifier or consists of these raw results combined with additional information. An e-mail requesting clarification of this has been sent on June 24th, with three more follow-up emails sent in June and August. However, a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.}\newline
 
 Applying the above-described autocorrelation model, Bodnar was able to achieve a very close fit to the official Twitter data (see Figure~\ref{fig:cdc_fit_bodnar_thesis}).This Master thesis is the (unsuccessful) attempt to reproduce these results. 
 
@@ -358,6 +378,9 @@ Applying the above-described autocorrelation model, Bodnar was able to achieve a
   \caption{Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influneza rates (circles) for national (A), HHS Region 1 (B), and Seattle area (C) (taken from \citep{bodnar_data_2015})}
   \label{fig:cdc_fit_bodnar_thesis}
   \end{figure}
+  
+\thispagestyle{empty}
+\cleardoublepage
 
 \chapter{Description of the data set}
 \label{ch:data_set_description}
@@ -369,6 +392,23 @@ library("data.table")
 #set environment to environemnt where R-script is stored at
 load("SampleData/SampleData.RData")
 load("SampleData/Replications.RData")
+
+r1 <- function(x){
+  return(round(x,1))
+}
+  
+r2 <- function(x){
+  return(round(x,2))
+}
+
+r3 <- function(x){
+  return(round(x,3))
+}
+
+r4 <- function(x){
+  return(round(x,4))
+}
+
 @
 At the beginning of my analysis, I was handed a data set with tweet ratings, subdivided into three different sets: 
 
@@ -411,7 +451,7 @@ load("SampleData/statistics_processed_sick_raw_df.RData")
 
 As mentioned above, the \textit{sick\_user} data set should contain all tweets from those users who had at least one of their tweets labelled as ``sick" by the classifier.\newline
 
-First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W \Sexpr{coord_USA[1]}° to W \Sexpr{coord_USA[2]}° representing the longitudinal and N \Sexpr{coord_USA[3]}° to N \Sexpr{coord_USA[4]}° representing the latitudinal expansion of the window. This way, a total of \Sexpr{rm_raw_window} entries were removed with \Sexpr{rows_after} entries remaining.\newline
+First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $\Sexpr{coord_USA[1]}°$ to W $\Sexpr{coord_USA[2]}°$ representing the longitudinal and N $\Sexpr{coord_USA[3]}°$ to N $\Sexpr{coord_USA[4]}°$ representing the latitudinal expansion of the window. This way, a total of $\Sexpr{rm_raw_window}$ entries were removed with $\Sexpr{rows_after}$ entries remaining.\newline
 
 In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the statename as well as to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additionol control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific US state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:code56})\newline
 
@@ -523,6 +563,9 @@ These points give reason to believe that the data used to build the ILI models r
 \caption{The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.}
 \label{fig:avg_tw_diff}
 \end{figure}
+
+\thispagestyle{empty}
+\cleardoublepage
 
 \chapter{Results}
 \label{ch:results}
@@ -797,8 +840,6 @@ In a next step, I tried to assess the performance of Twitter flu classifier by l
 
 \centering \href{run:vids/state_Twitter_cdc_diff_full_rel_sick_user.avi}{\includegraphics[scale=0.5]{vids/ScreenshotState.png}} 
 
-\raggedright
-
 \section{Comparison on the county level}
 In order to assess the performance of the classifier on the county level, I contacted 18 state health departments (Arkansas, California, Florida, Illinois, Iowa, Louisiana, Maine, Michigan, Minnesota, Mississippi, Missouri, New Jersey, New York, North Dakota, Oregon, South Dakota), asking them for their county-level or regional ILI data between 2011 and 2015. I only received the county-level data from the state of Oregon, while the state of California provided me with state-level data only (an official request for county-level data is pending). All other states did either not answer or declined my request. Luckily, the states of New Jersey and Mississippi provided (almost) complete county-level ILI data on their website for the requested time period. Since the data was only provided in pdf-format, I built a scraper for both states in order to retrieve the relevant information.\newline 
 
@@ -921,6 +962,9 @@ Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bo
   \caption{Comparison between the full retrospective Twitter model depicted in \citep{bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)}
   \label{fig:TwitterModel_comparison}
 \end{figure}
+
+\thispagestyle{empty}
+\cleardoublepage
 
 \chapter{Discussion}
 \label{ch:discussion}
