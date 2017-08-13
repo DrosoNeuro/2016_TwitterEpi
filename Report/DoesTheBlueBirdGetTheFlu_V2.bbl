@@ -21,12 +21,31 @@ Aramaki, E., Maskawa, S., and Morita, M. (2011).
   language processing},   1568--1576. Association for Computational
   Linguistics.
 
+\bibitem[Asano, 2017]{asano_socialmediatime_2017}
+Asano, E. (2017).
+\newblock How much time do people spend on social media?
+\newblock
+  \url{http://www.socialmediatoday.com/marketing/how-much-time-do-people-spend-social-media-infographic}.
+\newblock [Online; accessed 12-August-2017].
+
 \bibitem[Bach {\it et~al.}, 2017]{bach_participatory_2017}
 Bach, M., Jordan, S., Hartung, S., Santos-Hövener, C., and Wright, M.~T.
   (2017).
 \newblock Participatory epidemiology: the contribution of participatory
   research to epidemiology.
 \newblock {\em Emerging Themes in Epidemiology}, {\bf14}, .
+
+\bibitem[Bailey {\it et~al.}, 2005]{bailey2005introduction}
+Bailey, L., Vardulaki, K., Langham, J., and Chandramohan, D. (2005).
+\newblock {\em Introduction to {Epidemiology}}.
+\newblock Open University Press London.
+
+\bibitem[Bauer, 2016]{bauer_timeonline_2016}
+Bauer, R. (2016).
+\newblock Media {(R)evolutions}: time spent online continues to rise.
+\newblock
+  \url{https://blogs.worldbank.org/publicsphere/media-revolutions-time-spent-online-continues-rise}.
+\newblock [Online; accessed 12-August-2017].
 
 \bibitem[Bodnar, 2015]{bodnar_data_2015}
 Bodnar, T. (2015).
@@ -51,10 +70,45 @@ Brownstein, J.~S., Freifeld, C.~C., Reis, B.~Y., and Mandl, K.~D. (2008).
   {Infectious} {Disease} {Intelligence} and the {HealthMap} {Project}.
 \newblock {\em PLoS Medicine}, {\bf5}, .
 
+\bibitem[Bundesamt{\ }für{\ }Gesundheit{\ }, 2016]{bag_grippe_2016}
+Bundesamt{\ }für{\ }Gesundheit{\ } (2016).
+\newblock Saisonale grippe: Antworten auf häufige {Fragen}.
+\newblock
+  \url{https://www.bag.admin.ch/dam/bag/de/dokumente/mt/infektionskrankheiten/grippe/fach-faq-grippe.pdf.download.pdf/faq-grippe-aw-faq-fach-de.pdf}.
+\newblock [Online; accessed 12-August-2017].
+
+\bibitem[Bundesamt{\ }für{\ }Gesundheit{\ }, 2017a]{bag_lagebericht_2017}
+Bundesamt{\ }für{\ }Gesundheit{\ } (2017a).
+\newblock Saisonale grippe - {Lagebericht} {Schweiz}.
+\newblock
+  \url{https://www.bag.admin.ch/bag/de/home/themen/mensch-gesundheit/uebertragbare-krankheiten/infektionskrankheiten-a-z/grippe.html}.
+\newblock [Online; accessed 12-August-2017].
+
+\bibitem[Bundesamt{\ }für{\ }Gesundheit{\ }, 2017b]{bag_influenza_2017}
+Bundesamt{\ }für{\ }Gesundheit{\ } (2017b).
+\newblock Saisonale grippe (influenza).
+\newblock
+  \url{https://www.bag.admin.ch/bag/de/home/themen/mensch-gesundheit/uebertragbare-krankheiten/infektionskrankheiten-a-z/grippe.html}.
+\newblock [Online; accessed 12-August-2017].
+
 \bibitem[Butler, 2013]{butler_when_2013}
 Butler, D. (2013).
 \newblock When {Google} got flu wrong.
 \newblock {\em Nature}, {\bf494},  155.
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  2016]{cdc_surveillance_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
+\newblock Overview of influenza surveillance in the united states.
+\newblock \url{https://www.cdc.gov/flu/weekly/overview.htm}.
+\newblock [Online; accessed 24-June-2017].
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  2017]{cdc_flu_2017}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017).
+\newblock The flu: What to do if you get sick.
+\newblock \url{https://www.cdc.gov/flu/takingcare.htm}.
+\newblock [Online; accessed 12-August-2017].
 
 \bibitem[Chunara {\it et~al.}, 2013]{chunara_flu_2013}
 Chunara, R., Aman, S., Smolinski, M., and Brownstein, J.~S. (2013).
@@ -114,6 +168,13 @@ Goff, J., Rowe, A., Brownstein, J.~S., and Chunara, R. (2015).
   {Diagnostic} {Testing}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Google{\ }Flu{\ }Trends{\ }Team, 2015]{GFT_nextchapter_2015}
+Google{\ }Flu{\ }Trends{\ }Team (2015).
+\newblock The next chapter for flu trends.
+\newblock
+  \url{https://research.googleblog.com/2015/08/the-next-chapter-for-flu-trends.html}.
+\newblock [Online; accessed 20-July-2017].
+
 \bibitem[Hufnagel {\it et~al.}, 2004]{hufnagel_forecast_2004}
 Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
 \newblock Forecast and control of epidemics in a globalized world.
@@ -131,6 +192,11 @@ Khoury, M.~J., Lam, T.~K., Ioannidis, J. P.~A., Hartge, P., Spitz, M.~R.,
   {Public} {Health}.
 \newblock {\em Cancer Epidemiology Biomarkers \& Prevention}, {\bf22},
   508--516.
+
+\bibitem[Koepsell and Weiss, 2014]{koepsell2014epidemiologic}
+Koepsell, T.~D. and Weiss, N.~S. (2014).
+\newblock {\em Epidemiologic methods: studying the occurrence of illness}.
+\newblock Oxford University Press (UK).
 
 \bibitem[Lamb {\it et~al.}, 2013]{lamb_separating_2013}
 Lamb, A., Paul, M.~J., and Dredze, M. (2013).
@@ -162,6 +228,12 @@ Lozano, R., Naghavi, M., Foreman, K., Lim, S., Shibuya, K., Aboyans, V.,
   groups in 1990 and 2010: a systematic analysis for the {Global} {Burden} of
   {Disease} {Study} 2010.
 \newblock {\em The Lancet}, {\bf380},  2095--2128.
+
+\bibitem[Martcheva, 2015]{martcheva2015introduction}
+Martcheva, M. (2015).
+\newblock Introduction to {Epidemic} {Modeling}.
+\newblock In {\em An Introduction to Mathematical Epidemiology},   9--31.
+  Springer.
 
 \bibitem[Milinovich {\it et~al.}, 2015]{milinovich_role_2015}
 Milinovich, G.~J., Magalhães, R. J.~S., and Hu, W. (2015).
@@ -198,6 +270,11 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
 
+\bibitem[Rothman, 2012]{rothman2012epidemiology}
+Rothman, K.~J. (2012).
+\newblock {\em Epidemiology: an introduction}.
+\newblock Oxford university press.
+
 \bibitem[Salathe {\it et~al.}, 2012]{salathe_digital_2012}
 Salathe, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,
   Buckee, C., Campbell, E.~M., Cattuto, C., Khandelwal, S., Mabry, P.~L., and
@@ -212,6 +289,12 @@ Scott, C.~F., Bay-Cheng, L.~Y., Prince, M.~A., Nochajski, T.~H., and Collins,
   social media use.
 \newblock {\em Computers in Human Behavior}, {\bf75},  311--319.
 
+\bibitem[Sentinella, 2017]{sentinella_2017}
+Sentinella (2017).
+\newblock Willkommen bei {Sentinella}.
+\newblock \url{http://sentinella.ch/de/info}.
+\newblock [Online; accessed 12-August-2017].
+
 \bibitem[Simonsen {\it et~al.}, 2016]{simonsen_infectious_2016}
 Simonsen, L., Gog, J.~R., Olson, D., and Viboud, C. (2016).
 \newblock Infectious {Disease} {Surveillance} in the {Big} {Data} {Era}:
@@ -224,6 +307,20 @@ Sloan, L. and Morgan, J. (2015).
   {Relationship} between {Demographic} {Characteristics} and the {Use} of
   {Geoservices} and {Geotagging} on {Twitter}.
 \newblock {\em PLoS ONE}, {\bf10}, .
+
+\bibitem[Twitter, 2013]{twitter_annual_2013}
+Twitter (2013).
+\newblock Annual {Report} 2013.
+\newblock
+  \url{http://files.shareholder.com/downloads/AMDA-2F526X/4733143221x0x742484/A418947A-E065-4822-8BD4-00FA8EB4E795/Twitter_2013_Annual_Report_-_FINAL.pdf}.
+\newblock [Online; accessed 12-August-2017].
+
+\bibitem[Twitter, 2017]{twitter_annual_2017}
+Twitter (2017).
+\newblock Annual {Report} 2017.
+\newblock
+  \url{https://investor.twitterinc.com/common/download/download.cfm?companyid=AMDA-2F526X&fileid=935049&filekey=05E6E71E-D609-4A17-A8BD-B621324A950D&filename=TWTR_2016_Annual_Report.pdf}.
+\newblock [Online; accessed 12-August-2017].
 
 \bibitem[Wang {\it et~al.}, 2016]{wang_regional_2016}
 Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
