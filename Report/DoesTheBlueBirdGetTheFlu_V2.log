@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.30)  12 AUG 2017 22:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.30)  13 AUG 2017 12:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1044,240 +1044,208 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 282.
 [4]
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 298--299
-
+Overfull \hbox (1.64227pt too wide) in paragraph at lines 295--296
+[]\OT1/cmr/m/n/10.95 Hence, novel meth-ods to com-ple-ment tra-di-tional epi-de
+mi-o-log-i-cal in-for-ma-tion might be needed
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1
+[1
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 306--310
+Overfull \hbox (9.81844pt too wide) in paragraph at lines 298--299
+[]\OT1/cmr/m/n/10.95 Most high-income coun-tries have well-established In-fluen
+za surveil-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--308
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 313--314
+Underfull \hbox (badness 10000) in paragraph at lines 317--318
 
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 320--321
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 322--323
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 324--326
-
- []
-
-
-Underfull \vbox (badness 4316) has occurred while \output is active []
-
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 327--328
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 331--332
-
- []
-
-
-Underfull \vbox (badness 4316) has occurred while \output is active []
+[3] [4]
+Underfull \vbox (badness 1817) has occurred while \output is active []
 
  [5]
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \vbox (badness 4316) has occurred while \output is active []
+
+ [6]
+[7]
+Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+Underfull \hbox (badness 10000) in paragraph at lines 354--356
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \vbox (badness 1852) has occurred while \output is active []
 
- []
+ [8
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
-
- []
-
-[6] <./fig/ROC_classification_seed.png, id=359, 654.445pt x 321.2pt>
+]
+<./fig/ROC_classification_seed.png, id=476, 654.445pt x 321.2pt>
 File: ./fig/ROC_classification_seed.png Graphic file (type png)
 
 <use ./fig/ROC_classification_seed.png>
 Package pdftex.def Info: ./fig/ROC_classification_seed.png used on input line 3
-47.
+61.
 (pdftex.def)             Requested size: 409.71692pt x 201.08768pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 356--357
+Underfull \hbox (badness 10000) in paragraph at lines 370--371
 
  []
 
-[7 <./fig/ROC_classification_seed.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 358--359
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 360--363
+[9 <./fig/ROC_classification_seed.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 372--373
 
  []
 
 
-Underfull \vbox (badness 1292) has occurred while \output is active []
-
- [8]
-Underfull \vbox (badness 4673) has occurred while \output is active []
-
- [9]
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 374--377
 
  []
 
-<./fig/todd_bodnar_SIR.png, id=407, 1230.5975pt x 540.0175pt>
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 402--403
+
+ []
+
+[11] <./fig/todd_bodnar_SIR.png, id=519, 1230.5975pt x 540.0175pt>
 File: ./fig/todd_bodnar_SIR.png Graphic file (type png)
 
 <use ./fig/todd_bodnar_SIR.png>
-Package pdftex.def Info: ./fig/todd_bodnar_SIR.png used on input line 392.
+Package pdftex.def Info: ./fig/todd_bodnar_SIR.png used on input line 406.
 (pdftex.def)             Requested size: 409.71692pt x 179.78839pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--401
+Underfull \hbox (badness 10000) in paragraph at lines 413--415
 
  []
 
-[10 <./fig/todd_bodnar_SIR.png>]
-<./fig/cdc_fit_bodnar_thesis.png, id=420, 1150.2975pt x 384.43625pt>
+<./fig/cdc_fit_bodnar_thesis.png, id=526, 1150.2975pt x 384.43625pt>
 File: ./fig/cdc_fit_bodnar_thesis.png Graphic file (type png)
 
 <use ./fig/cdc_fit_bodnar_thesis.png>
-Package pdftex.def Info: ./fig/cdc_fit_bodnar_thesis.png used on input line 406
+Package pdftex.def Info: ./fig/cdc_fit_bodnar_thesis.png used on input line 420
 .
 (pdftex.def)             Requested size: 409.71692pt x 136.93044pt.
- [11 <./fig/cdc_fit_bodnar_thesis.png>]
-[12
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12 <./fig/todd_bodnar_SIR.png>] [13 <./fig/cdc_fit_bodnar_thesis.png>]
+[14
 
 ]
-Chapter 2.
+Chapter 3.
 
-Package natbib Warning: Citation `Rbase' on page 13 undefined on input line 416
+Package natbib Warning: Citation `Rbase' on page 15 undefined on input line 430
 .
 
-Package color Info: Redefining color shadecolor on input line 431.
-[13
+Package color Info: Redefining color shadecolor on input line 445.
+[15
 
 ]
 
-Package natbib Warning: Citation `datatable' on page 14 undefined on input line
- 453.
+Package natbib Warning: Citation `datatable' on page 16 undefined on input line
+ 467.
 
 
-Package natbib Warning: Citation `bigmemory' on page 14 undefined on input line
- 453.
+Package natbib Warning: Citation `bigmemory' on page 16 undefined on input line
+ 467.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--461
-
- []
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 462.
-
-Missing character: There is no ° in font cmr10!
-
-Underfull \hbox (badness 10000) in paragraph at lines 462--463
+Underfull \hbox (badness 10000) in paragraph at lines 474--475
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 464--465
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 476.
+
+Missing character: There is no ° in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 476--477
 
  []
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 466--467
+
+Underfull \hbox (badness 10000) in paragraph at lines 478--479
 
  []
 
-<./fig/state56_sick_raw_df.png, id=454, 1806.75pt x 1003.75pt>
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 480--481
+
+ []
+
+<./fig/state56_sick_raw_df.png, id=562, 1806.75pt x 1003.75pt>
 File: ./fig/state56_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/state56_sick_raw_df.png>
-Package pdftex.def Info: ./fig/state56_sick_raw_df.png used on input line 471.
+Package pdftex.def Info: ./fig/state56_sick_raw_df.png used on input line 485.
 (pdftex.def)             Requested size: 409.71692pt x 227.61066pt.
 
-<./fig/CanexicoAndRemoved_sick_raw_df.png, id=455, 1806.75pt x 1003.75pt>
+<./fig/CanexicoAndRemoved_sick_raw_df.png, id=563, 1806.75pt x 1003.75pt>
 File: ./fig/CanexicoAndRemoved_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/CanexicoAndRemoved_sick_raw_df.png>
 Package pdftex.def Info: ./fig/CanexicoAndRemoved_sick_raw_df.png used on input
- line 476.
+ line 490.
 (pdftex.def)             Requested size: 409.71692pt x 227.61066pt.
 
 
-LaTeX Warning: Float too large for page by 23.49106pt on input line 481.
+LaTeX Warning: Float too large for page by 23.49106pt on input line 495.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 483--484
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
 
  []
 
-<./fig/user_activity_total_sick_raw_df.png, id=461, 1003.75pt x 501.875pt>
+<./fig/user_activity_total_sick_raw_df.png, id=569, 1003.75pt x 501.875pt>
 File: ./fig/user_activity_total_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/user_activity_total_sick_raw_df.png>
 Package pdftex.def Info: ./fig/user_activity_total_sick_raw_df.png used on inpu
-t line 487.
+t line 501.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
 
@@ -1286,853 +1254,854 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 4316) has occurred while \output is active []
 
- [15]
-<./fig/barplot_sick_raw_df.pdf, id=471, 1011.78pt x 505.89pt>
+ [17]
+<./fig/barplot_sick_raw_df.pdf, id=578, 1011.78pt x 505.89pt>
 File: ./fig/barplot_sick_raw_df.pdf Graphic file (type pdf)
 
 <use ./fig/barplot_sick_raw_df.pdf>
-Package pdftex.def Info: ./fig/barplot_sick_raw_df.pdf used on input line 496.
+Package pdftex.def Info: ./fig/barplot_sick_raw_df.pdf used on input line 510.
 (pdftex.def)             Requested size: 455.24411pt x 227.62523pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./fig/user_activity_both_sick_raw_df.png, id=472, 1003.75pt x 501.875pt>
+<./fig/user_activity_both_sick_raw_df.png, id=579, 1003.75pt x 501.875pt>
 File: ./fig/user_activity_both_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/user_activity_both_sick_raw_df.png>
 Package pdftex.def Info: ./fig/user_activity_both_sick_raw_df.png used on input
- line 504.
+ line 518.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
-<./fig/user_activity_only_healthy_sick_raw_df.png, id=473, 1003.75pt x 501.875p
+<./fig/user_activity_only_healthy_sick_raw_df.png, id=580, 1003.75pt x 501.875p
 t>
 File: ./fig/user_activity_only_healthy_sick_raw_df.png Graphic file (type png)
  <use ./fig/user_activity_only_healthy_sick_raw_df.png>
 Package pdftex.def Info: ./fig/user_activity_only_healthy_sick_raw_df.png used 
-on input line 508.
+on input line 522.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
 
-LaTeX Warning: Float too large for page by 23.52167pt on input line 514.
+LaTeX Warning: Float too large for page by 23.52167pt on input line 528.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package natbib Warning: Citation `bigmatrix' on page 16 undefined on input line
- 523.
+Package natbib Warning: Citation `bigmatrix' on page 18 undefined on input line
+ 537.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 523--524
-
- []
-
-[16]
-Package color Info: Redefining color shadecolor on input line 528.
-
-Underfull \hbox (badness 10000) in paragraph at lines 551--552
+Underfull \hbox (badness 10000) in paragraph at lines 537--538
 
  []
 
+[18]
+Package color Info: Redefining color shadecolor on input line 542.
 
-Underfull \hbox (badness 10000) in paragraph at lines 553--554
+Underfull \hbox (badness 10000) in paragraph at lines 565--566
 
  []
 
-[17]
-Package color Info: Redefining color shadecolor on input line 558.
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 560--560
+Underfull \hbox (badness 10000) in paragraph at lines 567--568
+
+ []
+
+[19]
+Package color Info: Redefining color shadecolor on input line 572.
+
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 574--574
 []\OT1/cmtt/m/n/10.95 ##    week state sick  total healthy     sick_per        
     statename       date 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 561--561
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 575--575
 []\OT1/cmtt/m/n/10.95 ## 1:   23    34    1  86616   86615 1.154521e-05        
     wisconsin 2011-08-13[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 562--562
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 576--576
 []\OT1/cmtt/m/n/10.95 ## 2:  194    43    2  69629   69627 2.872366e-05        
      nebraska 2014-11-22[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 563--563
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 577--577
 []\OT1/cmtt/m/n/10.95 ## 3:  155    16    0 140482  140482 0.000000e+00        
      delaware 2014-02-22[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 564--564
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 578--578
 []\OT1/cmtt/m/n/10.95 ## 4:   67    24  686 181757  181071 3.774270e-03        
      kentucky 2012-06-16[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 565--565
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 579--579
 []\OT1/cmtt/m/n/10.95 ## 5:   40    28    0 101685  101685 0.000000e+00        
     tennessee 2011-12-10[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 566--566
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 580--580
 []\OT1/cmtt/m/n/10.95 ## 6:   17     0    0  10142   10142 0.000000e+00 distric
 t of columbia 2011-07-02[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 571--572
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--574
+Underfull \hbox (badness 10000) in paragraph at lines 587--588
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 575--576
+Underfull \hbox (badness 10000) in paragraph at lines 589--590
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 577--578
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 591--592
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 579--580
-
- []
-
-<./fig/avg_tw_sick_healthy.pdf, id=516, 722.7pt x 505.89pt>
-File: ./fig/avg_tw_sick_healthy.pdf Graphic file (type pdf)
-
-<use ./fig/avg_tw_sick_healthy.pdf>
-Package pdftex.def Info: ./fig/avg_tw_sick_healthy.pdf used on input line 583.
-(pdftex.def)             Requested size: 455.24411pt x 318.67378pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [19]
-[20 <./fig/avg_tw_sick_healthy.pdf>] [21 <./fig/state56_sick_raw_df.png> <./fig
-/CanexicoAndRemoved_sick_raw_df.png (PNG copy)>] [22 <./fig/user_activity_total
-_sick_raw_df.png> <./fig/barplot_sick_raw_df.pdf>] [23 <./fig/user_activity_bot
-h_sick_raw_df.png> <./fig/user_activity_only_healthy_sick_raw_df.png>] [24
-
-]
-Chapter 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 593--594
 
  []
 
+<./fig/avg_tw_sick_healthy.pdf, id=622, 722.7pt x 505.89pt>
+File: ./fig/avg_tw_sick_healthy.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 595--596
+<use ./fig/avg_tw_sick_healthy.pdf>
+Package pdftex.def Info: ./fig/avg_tw_sick_healthy.pdf used on input line 597.
+(pdftex.def)             Requested size: 455.24411pt x 318.67378pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21]
+[22 <./fig/avg_tw_sick_healthy.pdf>] [23 <./fig/state56_sick_raw_df.png> <./fig
+/CanexicoAndRemoved_sick_raw_df.png (PNG copy)>] [24 <./fig/user_activity_total
+_sick_raw_df.png> <./fig/barplot_sick_raw_df.pdf>] [25 <./fig/user_activity_bot
+h_sick_raw_df.png> <./fig/user_activity_only_healthy_sick_raw_df.png>] [26
+
+]
+Chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 607--608
 
  []
 
 
-<./fig/activity_total_date_Twitter_full_aggregated.png, id=566, 1003.75pt x 501
+Underfull \hbox (badness 10000) in paragraph at lines 609--610
+
+ []
+
+
+<./fig/activity_total_date_Twitter_full_aggregated.png, id=667, 1003.75pt x 501
 .875pt>
 File: ./fig/activity_total_date_Twitter_full_aggregated.png Graphic file (type 
 png)
  <use ./fig/activity_total_date_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_total_date_Twitter_full_aggregated.png 
-used on input line 599.
+used on input line 613.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25
+ [27
 
 ]
-<./fig/activity_healthy_date_Twitter_full_aggregated.png, id=574, 1003.75pt x 5
+<./fig/activity_healthy_date_Twitter_full_aggregated.png, id=674, 1003.75pt x 5
 01.875pt>
 File: ./fig/activity_healthy_date_Twitter_full_aggregated.png Graphic file (typ
 e png)
  <use ./fig/activity_healthy_date_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_healthy_date_Twitter_full_aggregated.pn
-g used on input line 607.
+g used on input line 621.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_sick_date_Twitter_full_aggregated.png, id=575, 1003.75pt x 501.
+<./fig/activity_sick_date_Twitter_full_aggregated.png, id=675, 1003.75pt x 501.
 875pt>
 File: ./fig/activity_sick_date_Twitter_full_aggregated.png Graphic file (type p
 ng)
  <use ./fig/activity_sick_date_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_sick_date_Twitter_full_aggregated.png u
-sed on input line 612.
+sed on input line 626.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_healthy_date_Twitter_full_aggregated.png, id=576, 1003.75pt
+<./fig/activity_rel_healthy_date_Twitter_full_aggregated.png, id=676, 1003.75pt
  x 501.875pt>
 File: ./fig/activity_rel_healthy_date_Twitter_full_aggregated.png Graphic file 
 (type png)
 
 <use ./fig/activity_rel_healthy_date_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_healthy_date_Twitter_full_aggregate
-d.png used on input line 619.
+d.png used on input line 633.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_sick_date_Twitter_full_aggregated.png, id=577, 1003.75pt x 
+<./fig/activity_rel_sick_date_Twitter_full_aggregated.png, id=677, 1003.75pt x 
 501.875pt>
 File: ./fig/activity_rel_sick_date_Twitter_full_aggregated.png Graphic file (ty
 pe png)
  <use ./fig/activity_rel_sick_date_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_sick_date_Twitter_full_aggregated.p
-ng used on input line 624.
+ng used on input line 638.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26 <./fig/activity_total_date_Twitter_full_aggregated.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 631--632
+ [28 <./fig/activity_total_date_Twitter_full_aggregated.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 645--646
 
  []
 
-[27 <./fig/activity_healthy_date_Twitter_full_aggregated.png> <./fig/activity_s
+[29 <./fig/activity_healthy_date_Twitter_full_aggregated.png> <./fig/activity_s
 ick_date_Twitter_full_aggregated.png> <./fig/activity_rel_healthy_date_Twitter_
 full_aggregated.png> <./fig/activity_rel_sick_date_Twitter_full_aggregated.png>
 ]
-<./fig/activity_total_state_Twitter_full_aggregated.png, id=603, 1003.75pt x 50
+<./fig/activity_total_state_Twitter_full_aggregated.png, id=700, 1003.75pt x 50
 1.875pt>
 File: ./fig/activity_total_state_Twitter_full_aggregated.png Graphic file (type
  png)
  <use ./fig/activity_total_state_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_total_state_Twitter_full_aggregated.png
- used on input line 638.
+ used on input line 652.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
-<./fig/activity_total_user_state_Twitter_full_aggregated.png, id=604, 1003.75pt
+<./fig/activity_total_user_state_Twitter_full_aggregated.png, id=701, 1003.75pt
  x 501.875pt>
 File: ./fig/activity_total_user_state_Twitter_full_aggregated.png Graphic file 
 (type png)
 
 <use ./fig/activity_total_user_state_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_total_user_state_Twitter_full_aggregate
-d.png used on input line 644.
+d.png used on input line 658.
 (pdftex.def)             Requested size: 455.24411pt x 227.62596pt.
 
-<./fig/ScatterTweetPop.png, id=605, 803.0pt x 803.0pt>
+<./fig/ScatterTweetPop.png, id=702, 803.0pt x 803.0pt>
 File: ./fig/ScatterTweetPop.png Graphic file (type png)
 
 <use ./fig/ScatterTweetPop.png>
-Package pdftex.def Info: ./fig/ScatterTweetPop.png used on input line 654.
+Package pdftex.def Info: ./fig/ScatterTweetPop.png used on input line 668.
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
-<./fig/ScatterTweetPop_user.png, id=606, 803.0pt x 803.0pt>
+<./fig/ScatterTweetPop_user.png, id=703, 803.0pt x 803.0pt>
 File: ./fig/ScatterTweetPop_user.png Graphic file (type png)
 
 <use ./fig/ScatterTweetPop_user.png>
-Package pdftex.def Info: ./fig/ScatterTweetPop_user.png used on input line 660.
+Package pdftex.def Info: ./fig/ScatterTweetPop_user.png used on input line 674.
 
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [28 <./fig/activity_total_state_Twitter_full_aggregated.png> <./fig/activity_t
+ [30 <./fig/activity_total_state_Twitter_full_aggregated.png> <./fig/activity_t
 otal_user_state_Twitter_full_aggregated.png>]
-<./fig/activity_healthy_statename_Twitter_full_aggregated.png, id=615, 1003.75p
+<./fig/activity_healthy_statename_Twitter_full_aggregated.png, id=711, 1003.75p
 t x 501.875pt>
 File: ./fig/activity_healthy_statename_Twitter_full_aggregated.png Graphic file
  (type png)
 
 <use ./fig/activity_healthy_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_healthy_statename_Twitter_full_aggregat
-ed.png used on input line 671.
+ed.png used on input line 685.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_sick_statename_Twitter_full_aggregated.png, id=616, 1003.75pt x
+<./fig/activity_sick_statename_Twitter_full_aggregated.png, id=712, 1003.75pt x
  501.875pt>
 File: ./fig/activity_sick_statename_Twitter_full_aggregated.png Graphic file (t
 ype png)
  <use ./fig/activity_sick_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_sick_statename_Twitter_full_aggregated.
-png used on input line 676.
+png used on input line 690.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_healthy_statename_Twitter_full_aggregated.png, id=617, 1003
+<./fig/activity_rel_healthy_statename_Twitter_full_aggregated.png, id=713, 1003
 .75pt x 501.875pt>
 File: ./fig/activity_rel_healthy_statename_Twitter_full_aggregated.png Graphic 
 file (type png)
 
 <use ./fig/activity_rel_healthy_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_healthy_statename_Twitter_full_aggr
-egated.png used on input line 683.
+egated.png used on input line 697.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_sick_statename_Twitter_full_aggregated.png, id=618, 1003.75
+<./fig/activity_rel_sick_statename_Twitter_full_aggregated.png, id=714, 1003.75
 pt x 501.875pt>
 File: ./fig/activity_rel_sick_statename_Twitter_full_aggregated.png Graphic fil
 e (type png)
 
 <use ./fig/activity_rel_sick_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_sick_statename_Twitter_full_aggrega
-ted.png used on input line 688.
+ted.png used on input line 702.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29 <./fig/ScatterTweetPop.png> <./fig/ScatterTweetPop_user.png>]
-<./fig/activity_healthy_user_statename_Twitter_full_aggregated.png, id=626, 100
+ [31 <./fig/ScatterTweetPop.png> <./fig/ScatterTweetPop_user.png>]
+<./fig/activity_healthy_user_statename_Twitter_full_aggregated.png, id=722, 100
 3.75pt x 501.875pt>
 File: ./fig/activity_healthy_user_statename_Twitter_full_aggregated.png Graphic
  file (type png)
 
 <use ./fig/activity_healthy_user_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_healthy_user_statename_Twitter_full_agg
-regated.png used on input line 698.
+regated.png used on input line 712.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_sick_user_statename_Twitter_full_aggregated.png, id=627, 1003.7
+<./fig/activity_sick_user_statename_Twitter_full_aggregated.png, id=723, 1003.7
 5pt x 501.875pt>
 File: ./fig/activity_sick_user_statename_Twitter_full_aggregated.png Graphic fi
 le (type png)
 
 <use ./fig/activity_sick_user_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_sick_user_statename_Twitter_full_aggreg
-ated.png used on input line 703.
+ated.png used on input line 717.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_healthy_user_statename_Twitter_full_aggregated.png, id=628,
+<./fig/activity_rel_healthy_user_statename_Twitter_full_aggregated.png, id=724,
  1003.75pt x 501.875pt>
 File: ./fig/activity_rel_healthy_user_statename_Twitter_full_aggregated.png Gra
 phic file (type png)
 
 <use ./fig/activity_rel_healthy_user_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_healthy_user_statename_Twitter_full
-_aggregated.png used on input line 710.
+_aggregated.png used on input line 724.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
-<./fig/activity_rel_sick_user_statename_Twitter_full_aggregated.png, id=629, 10
+<./fig/activity_rel_sick_user_statename_Twitter_full_aggregated.png, id=725, 10
 03.75pt x 501.875pt>
 File: ./fig/activity_rel_sick_user_statename_Twitter_full_aggregated.png Graphi
 c file (type png)
 
 <use ./fig/activity_rel_sick_user_statename_Twitter_full_aggregated.png>
 Package pdftex.def Info: ./fig/activity_rel_sick_user_statename_Twitter_full_ag
-gregated.png used on input line 715.
+gregated.png used on input line 729.
 (pdftex.def)             Requested size: 223.07211pt x 111.5309pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30 <./fig/activity_healthy_statename_Twitter_full_aggregated.png> <./fig/acti
+ [32 <./fig/activity_healthy_statename_Twitter_full_aggregated.png> <./fig/acti
 vity_sick_statename_Twitter_full_aggregated.png> <./fig/activity_rel_healthy_st
 atename_Twitter_full_aggregated.png> <./fig/activity_rel_sick_statename_Twitter
 _full_aggregated.png>]
 
-Package natbib Warning: Citation `cdcfluview' on page 31 undefined on input lin
-e 725.
+Package natbib Warning: Citation `cdcfluview' on page 33 undefined on input lin
+e 739.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 725--726
+Underfull \hbox (badness 10000) in paragraph at lines 739--740
 
  []
 
-<./fig/cdc_twitter_comp_nat_raw.pdf, id=640, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_raw.pdf, id=735, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_raw.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_raw.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_raw.pdf used on input line 
-732.
+746.
 (pdftex.def)             Requested size: 223.07211pt x 156.1527pt.
 
-<./fig/cdc_twitter_comp_nat_raw_user.pdf, id=641, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_raw_user.pdf, id=736, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_raw_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_raw_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_raw_user.pdf used on input 
-line 737.
+line 751.
 (pdftex.def)             Requested size: 223.07211pt x 156.1527pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31 <./fig/activity_healthy_user_statename_Twitter_full_aggregated.png> <./fig
+ [33 <./fig/activity_healthy_user_statename_Twitter_full_aggregated.png> <./fig
 /activity_sick_user_statename_Twitter_full_aggregated.png> <./fig/activity_rel_
 healthy_user_statename_Twitter_full_aggregated.png> <./fig/activity_rel_sick_us
 er_statename_Twitter_full_aggregated.png>]
 
-Package natbib Warning: Citation `forecast' on page 32 undefined on input line 
-744.
+Package natbib Warning: Citation `forecast' on page 34 undefined on input line 
+758.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 744--745
+Underfull \hbox (badness 10000) in paragraph at lines 758--759
 
  []
 
-<./fig/cdc_twitter_comp_nat_ma1.pdf, id=659, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma1.pdf, id=752, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma1.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma1.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma1.pdf used on input line 
-749.
+763.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
-<./fig/cdc_twitter_comp_nat_ma2.pdf, id=660, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma2.pdf, id=753, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma2.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma2.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma2.pdf used on input line 
-755.
+769.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
-<./fig/cdc_twitter_comp_nat_ma4.pdf, id=661, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma4.pdf, id=754, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma4.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma4.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma4.pdf used on input line 
-761.
+775.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32 <./fig/cdc_twitter_comp_nat_raw.pdf> <./fig/cdc_twitter_comp_nat_raw_user.
+ [34 <./fig/cdc_twitter_comp_nat_raw.pdf> <./fig/cdc_twitter_comp_nat_raw_user.
 pdf>]
-<./fig/cdc_twitter_comp_regs_ma4.pdf, id=682, 722.7pt x 722.7pt>
+<./fig/cdc_twitter_comp_regs_ma4.pdf, id=775, 722.7pt x 722.7pt>
 File: ./fig/cdc_twitter_comp_regs_ma4.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_regs_ma4.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_regs_ma4.pdf used on input line
- 770.
+ 784.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33 <./fig/cdc_twitter_comp_nat_ma1.pdf> <./fig/cdc_twitter_comp_nat_ma2.pdf> 
+ [35 <./fig/cdc_twitter_comp_nat_ma1.pdf> <./fig/cdc_twitter_comp_nat_ma2.pdf> 
 <./fig/cdc_twitter_comp_nat_ma4.pdf>]
-<./fig/cdc_twitter_comp_nat_ma1_user.pdf, id=706, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma1_user.pdf, id=798, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma1_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma1_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma1_user.pdf used on input 
-line 778.
+line 792.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
-<./fig/cdc_twitter_comp_nat_ma2_user.pdf, id=707, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma2_user.pdf, id=799, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma2_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma2_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma2_user.pdf used on input 
-line 784.
+line 798.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
-<./fig/cdc_twitter_comp_nat_ma4_user.pdf, id=708, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_ma4_user.pdf, id=800, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_ma4_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_ma4_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_ma4_user.pdf used on input 
-line 790.
+line 804.
 (pdftex.def)             Requested size: 273.15117pt x 136.57668pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34 <./fig/cdc_twitter_comp_regs_ma4.pdf>]
-<./fig/cdc_twitter_comp_regs_ma4_user.pdf, id=721, 722.7pt x 722.7pt>
+ [36 <./fig/cdc_twitter_comp_regs_ma4.pdf>]
+<./fig/cdc_twitter_comp_regs_ma4_user.pdf, id=812, 722.7pt x 722.7pt>
 File: ./fig/cdc_twitter_comp_regs_ma4_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_regs_ma4_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_regs_ma4_user.pdf used on input
- line 800.
+ line 814.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35 <./fig/cdc_twitter_comp_nat_ma1_user.pdf> <./fig/cdc_twitter_comp_nat_ma2_
+ [37 <./fig/cdc_twitter_comp_nat_ma1_user.pdf> <./fig/cdc_twitter_comp_nat_ma2_
 user.pdf> <./fig/cdc_twitter_comp_nat_ma4_user.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 806--807
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
 
  []
 
-[36 <./fig/cdc_twitter_comp_regs_ma4_user.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 810--811
+[38 <./fig/cdc_twitter_comp_regs_ma4_user.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 824--825
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 812--813
+Underfull \hbox (badness 10000) in paragraph at lines 826--827
 
  []
 
-<./fig/cdc_twitter_comp_nat_activity_sick.pdf, id=766, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_activity_sick.pdf, id=855, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_activity_sick.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_activity_sick.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_activity_sick.pdf used on i
-nput line 817.
+nput line 831.
 (pdftex.def)             Requested size: 273.14923pt x 191.20581pt.
 
-<./fig/cdc_twitter_comp_nat_activity_sick_user.pdf, id=767, 722.7pt x 505.89pt>
+<./fig/cdc_twitter_comp_nat_activity_sick_user.pdf, id=856, 722.7pt x 505.89pt>
 File: ./fig/cdc_twitter_comp_nat_activity_sick_user.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_nat_activity_sick_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_nat_activity_sick_user.pdf used
- on input line 823.
+ on input line 837.
 (pdftex.def)             Requested size: 273.14923pt x 191.20581pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37]
-<./fig/cdc_twitter_comp_regs_activity_sick.pdf, id=779, 722.7pt x 722.7pt>
+ [39]
+<./fig/cdc_twitter_comp_regs_activity_sick.pdf, id=866, 722.7pt x 722.7pt>
 File: ./fig/cdc_twitter_comp_regs_activity_sick.pdf Graphic file (type pdf)
 
 <use ./fig/cdc_twitter_comp_regs_activity_sick.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_regs_activity_sick.pdf used on 
-input line 833.
+input line 847.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [38 <./fig/cdc_twitter_comp_nat_activity_sick.pdf> <./fig/cdc_twitter_comp_nat
+ [40 <./fig/cdc_twitter_comp_nat_activity_sick.pdf> <./fig/cdc_twitter_comp_nat
 _activity_sick_user.pdf>]
-<./fig/cdc_twitter_comp_regs_activity_sick_user.pdf, id=797, 722.7pt x 722.7pt>
+<./fig/cdc_twitter_comp_regs_activity_sick_user.pdf, id=883, 722.7pt x 722.7pt>
 File: ./fig/cdc_twitter_comp_regs_activity_sick_user.pdf Graphic file (type pdf
 )
 <use ./fig/cdc_twitter_comp_regs_activity_sick_user.pdf>
 Package pdftex.def Info: ./fig/cdc_twitter_comp_regs_activity_sick_user.pdf use
-d on input line 840.
+d on input line 854.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39 <./fig/cdc_twitter_comp_regs_activity_sick.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 845--846
+ [41 <./fig/cdc_twitter_comp_regs_activity_sick.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 859--860
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [40 <./fig/cdc_twitter_comp_regs_activity_sick_user.pdf>]
-<vids/Screenshot_Movie.png, id=821, 1003.75pt x 602.25pt>
+ [42 <./fig/cdc_twitter_comp_regs_activity_sick_user.pdf>]
+<vids/Screenshot_Movie.png, id=906, 1003.75pt x 602.25pt>
 File: vids/Screenshot_Movie.png Graphic file (type png)
 
 <use vids/Screenshot_Movie.png>
-Package pdftex.def Info: vids/Screenshot_Movie.png used on input line 847.
+Package pdftex.def Info: vids/Screenshot_Movie.png used on input line 861.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 847--848
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 861--862
  [][][][][][] 
  []
 
 File: vids/Screenshot_Movie.png Graphic file (type png)
 <use vids/Screenshot_Movie.png>
-Package pdftex.def Info: vids/Screenshot_Movie.png used on input line 851.
+Package pdftex.def Info: vids/Screenshot_Movie.png used on input line 865.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 851--852
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 865--866
  [][][][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41 <./vids/Screenshot_Movie.png>]
-<vids/ScreenshotState.png, id=829, 1003.75pt x 602.25pt>
+ [43 <./vids/Screenshot_Movie.png>]
+<vids/ScreenshotState.png, id=914, 1003.75pt x 602.25pt>
 File: vids/ScreenshotState.png Graphic file (type png)
 
 <use vids/ScreenshotState.png>
-Package pdftex.def Info: vids/ScreenshotState.png used on input line 858.
+Package pdftex.def Info: vids/ScreenshotState.png used on input line 872.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 858--859
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 872--873
  [][][][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42]
+ [44]
 File: vids/ScreenshotState.png Graphic file (type png)
 
 <use vids/ScreenshotState.png>
-Package pdftex.def Info: vids/ScreenshotState.png used on input line 862.
+Package pdftex.def Info: vids/ScreenshotState.png used on input line 876.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 862--863
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 876--877
  [][][][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [43 <./vids/ScreenshotState.png>]
-<vids/Screenshot_Jersey.png, id=843, 1003.75pt x 602.25pt>
+ [45 <./vids/ScreenshotState.png>]
+<vids/Screenshot_Jersey.png, id=925, 1003.75pt x 602.25pt>
 File: vids/Screenshot_Jersey.png Graphic file (type png)
 
 <use vids/Screenshot_Jersey.png>
-Package pdftex.def Info: vids/Screenshot_Jersey.png used on input line 869.
+Package pdftex.def Info: vids/Screenshot_Jersey.png used on input line 883.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 869--870
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 883--884
  [][][][][][] 
  []
 
-<vids/Screenshot_Oregon.png, id=845, 1003.75pt x 602.25pt>
+<vids/Screenshot_Oregon.png, id=927, 1003.75pt x 602.25pt>
 File: vids/Screenshot_Oregon.png Graphic file (type png)
 
 <use vids/Screenshot_Oregon.png>
-Package pdftex.def Info: vids/Screenshot_Oregon.png used on input line 873.
+Package pdftex.def Info: vids/Screenshot_Oregon.png used on input line 887.
 (pdftex.def)             Requested size: 501.87378pt x 301.12425pt.
 
-Overfull \hbox (46.62967pt too wide) in paragraph at lines 873--875
+Overfull \hbox (46.62967pt too wide) in paragraph at lines 887--889
 [][][][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44 <./vids/Screenshot_Jersey.png>]
+ [46 <./vids/Screenshot_Jersey.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 876.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 876.
+(hyperref)                removing `\begingroup' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 876.
+(hyperref)                removing `\let' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 876.
+(hyperref)                removing `\<let>-command' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 876.
+(hyperref)                removing `\NAT@ctype' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 876.
+(hyperref)                removing `\z@' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 876.
+(hyperref)                removing `\let' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 876.
+(hyperref)                removing `\new@ifnextchar' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 876.
-
-[45 <./vids/Screenshot_Oregon.png>]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 886.
+(hyperref)                removing `subscript' on input line 890.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 886.
+(hyperref)                removing `subscript' on input line 890.
+
+[47 <./vids/Screenshot_Oregon.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\begingroup' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 886.
+(hyperref)                removing `\let' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 886.
+(hyperref)                removing `\<let>-command' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 886.
+(hyperref)                removing `\NAT@ctype' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 886.
+(hyperref)                removing `\z@' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 886.
+(hyperref)                removing `\let' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 886.
+(hyperref)                removing `\new@ifnextchar' on input line 900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 886.
+(hyperref)                removing `subscript' on input line 900.
 
-[46] [47]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 900.
+
+[48] [49]
 File: ./fig/todd_bodnar_SIR.png Graphic file (type png)
  <use ./fig/todd_bodnar_SIR.png>
-Package pdftex.def Info: ./fig/todd_bodnar_SIR.png used on input line 919.
+Package pdftex.def Info: ./fig/todd_bodnar_SIR.png used on input line 933.
 (pdftex.def)             Requested size: 295.89398pt x 147.94907pt.
 
-<./fig/SIR_model_cdc_data_25.pdf, id=903, 578.16pt x 325.215pt>
+<./fig/SIR_model_cdc_data_25.pdf, id=981, 578.16pt x 325.215pt>
 File: ./fig/SIR_model_cdc_data_25.pdf Graphic file (type pdf)
 
 <use ./fig/SIR_model_cdc_data_25.pdf>
-Package pdftex.def Info: ./fig/SIR_model_cdc_data_25.pdf used on input line 925
+Package pdftex.def Info: ./fig/SIR_model_cdc_data_25.pdf used on input line 939
 .
 (pdftex.def)             Requested size: 273.14676pt x 136.57448pt.
 
-<./fig/SIR_model_full_model_25.pdf, id=904, 578.16pt x 325.215pt>
+<./fig/SIR_model_full_model_25.pdf, id=982, 578.16pt x 325.215pt>
 File: ./fig/SIR_model_full_model_25.pdf Graphic file (type pdf)
 
 <use ./fig/SIR_model_full_model_25.pdf>
 Package pdftex.def Info: ./fig/SIR_model_full_model_25.pdf used on input line 9
-31.
+45.
 (pdftex.def)             Requested size: 273.14676pt x 136.57448pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
+ [50]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49 <./fig/SIR_model_cdc_data_25.pdf> <./fig/SIR_model_full_model_25.pdf>]
+ [51 <./fig/SIR_model_cdc_data_25.pdf> <./fig/SIR_model_full_model_25.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 961.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 961.
+(hyperref)                removing `\begingroup' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 961.
+(hyperref)                removing `\let' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 961.
+(hyperref)                removing `\<let>-command' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 961.
+(hyperref)                removing `\NAT@ctype' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 961.
+(hyperref)                removing `\z@' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 961.
+(hyperref)                removing `\let' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 961.
+(hyperref)                removing `\new@ifnextchar' on input line 975.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 961.
+(hyperref)                removing `subscript' on input line 975.
 
-[50]
-<./fig/SIR_model_full_both_25_colorised.pdf, id=960, 578.16pt x 325.215pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 975.
+
+[52]
+<./fig/SIR_model_full_both_25_colorised.pdf, id=1035, 578.16pt x 325.215pt>
 File: ./fig/SIR_model_full_both_25_colorised.pdf Graphic file (type pdf)
 
 <use ./fig/SIR_model_full_both_25_colorised.pdf>
 Package pdftex.def Info: ./fig/SIR_model_full_both_25_colorised.pdf used on inp
-ut line 967.
+ut line 981.
 (pdftex.def)             Requested size: 295.8987pt x 147.9532pt.
 
-<./fig/SIR_model_full_AR2_100_colorised.pdf, id=961, 578.16pt x 325.215pt>
+<./fig/SIR_model_full_AR2_100_colorised.pdf, id=1036, 578.16pt x 325.215pt>
 File: ./fig/SIR_model_full_AR2_100_colorised.pdf Graphic file (type pdf)
 
 <use ./fig/SIR_model_full_AR2_100_colorised.pdf>
 Package pdftex.def Info: ./fig/SIR_model_full_AR2_100_colorised.pdf used on inp
-ut line 973.
+ut line 987.
 (pdftex.def)             Requested size: 273.14676pt x 136.57448pt.
 
-<./fig/SIR_model_full_base_model_100_colorised.pdf, id=962, 578.16pt x 325.215p
-t>
+<./fig/SIR_model_full_base_model_100_colorised.pdf, id=1037, 578.16pt x 325.215
+pt>
 File: ./fig/SIR_model_full_base_model_100_colorised.pdf Graphic file (type pdf)
 
  <use ./fig/SIR_model_full_base_model_100_colorised.pdf>
 Package pdftex.def Info: ./fig/SIR_model_full_base_model_100_colorised.pdf used
- on input line 979.
+ on input line 993.
 (pdftex.def)             Requested size: 273.14676pt x 136.57448pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]
-[52 <./fig/SIR_model_full_both_25_colorised.pdf> <./fig/SIR_model_full_AR2_100_
+ [53]
+[54 <./fig/SIR_model_full_both_25_colorised.pdf> <./fig/SIR_model_full_AR2_100_
 colorised.pdf> <./fig/SIR_model_full_base_model_100_colorised.pdf>]
-Chapter 4.
-[53
+Chapter 5.
+[55
 
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 1010.
+(hyperref)                removing `\begingroup' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1010.
+(hyperref)                removing `\let' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 1010.
+(hyperref)                removing `\<let>-command' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 1010.
+(hyperref)                removing `\NAT@ctype' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 1010.
+(hyperref)                removing `\z@' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1010.
+(hyperref)                removing `\let' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 1010.
+(hyperref)                removing `\new@ifnextchar' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1010.
+(hyperref)                removing `subscript' on input line 1024.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1010.
+(hyperref)                removing `subscript' on input line 1024.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [54]
-[55] [56] (./DoesTheBlueBirdGetTheFlu_V2.bbl [57
+ [56]
+[57] [58] (./DoesTheBlueBirdGetTheFlu_V2.bbl [59
 
-] [58] [59] [60] [61]) [62]
+] [60] [61] [62] [63] [64]
+[65] [66]) [67]
 No file packages.bbl.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 1053.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 1067.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1065.
-[63]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1065.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1079.
+[68]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1079.
  (./DoesTheBlueBirdGetTheFlu_V2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1065.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1065.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1079.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1079.
 
 Package rerunfilecheck Info: File `DoesTheBlueBirdGetTheFlu_V2.out' has not cha
 nged.
-(rerunfilecheck)             Checksum: EEAC189714E7BAC0F759222596819C77;2085.
+(rerunfilecheck)             Checksum: 79C9EC60369F137B653BCE21CC20C2AB;2147.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1065.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1079.
  ) 
 Here is how much of TeX's memory you used:
- 10430 strings out of 494953
- 163677 string characters out of 6180977
- 250997 words of memory out of 5000000
- 13289 multiletter control sequences out of 15000+600000
- 28765 words of font info for 73 fonts, out of 8000000 for 9000
+ 10673 strings out of 494953
+ 169280 string characters out of 6180977
+ 252330 words of memory out of 5000000
+ 13495 multiletter control sequences out of 15000+600000
+ 25725 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,12n,45p,1890b,531s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,12n,45p,1890b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/drosoneuro/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk>{/us
 r/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist
@@ -2152,12 +2121,11 @@ ype1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on DoesTheBlueBirdGetTheFlu_V2.pdf (69 pages, 1976838 bytes).
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on DoesTheBlueBirdGetTheFlu_V2.pdf (74 pages, 1984647 bytes).
 PDF statistics:
- 1215 PDF objects out of 1440 (max. 8388607)
- 1005 compressed objects within 11 object streams
- 180 named destinations out of 1000 (max. 500000)
- 443 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1307 PDF objects out of 1440 (max. 8388607)
+ 1093 compressed objects within 11 object streams
+ 220 named destinations out of 1000 (max. 500000)
+ 451 words of extra memory for PDF output out of 10000 (max. 10000000)
 

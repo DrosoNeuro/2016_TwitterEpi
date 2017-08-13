@@ -1,10 +1,22 @@
 \begin{thebibliography}{}
 
+\bibitem[Abbar {\it et~al.}, 2015]{abbar2015you}
+Abbar, S., Mejova, Y., and Weber, I. (2015).
+\newblock You tweet what you eat: Studying food consumption through twitter.
+\newblock In {\em Proceedings of the 33rd Annual ACM Conference on Human
+  Factors in Computing Systems},   3197--3206. ACM.
+
 \bibitem[Achrekar {\it et~al.}, 2011]{achrekar_predicting_2011}
 Achrekar, H., Gandhe, A., Lazarus, R., Yu, S.-H., and Liu, B. (2011).
 \newblock Predicting {Flu} {Trends} using {Twitter} data.
 \newblock In {\em 2011 {IEEE} {Conference} on {Computer} {Communications}
   {Workshops} ({INFOCOM} {WKSHPS})},   702--707.
+
+\bibitem[Adrover {\it et~al.}, 2015]{adrover2015identifying}
+Adrover, C., Bodnar, T., Huang, Z., Telenti, A., and Salath{\'e}, M. (2015).
+\newblock Identifying adverse effects of hiv drug treatment and associated
+  sentiments using twitter.
+\newblock {\em JMIR public health and surveillance}, {\bf1}, .
 
 \bibitem[Anema {\it et~al.}, 2014]{anema_digital_2014}
 Anema, A., Kluberg, S., Wilson, K., Hogg, R.~S., Khan, K., Hay, S.~I., Tatem,
@@ -64,6 +76,24 @@ Bodnar, T. and Salathé, M. (2013).
 \newblock {\em Proceedings of the 22nd international conference on World Wide
   Web companion}.
 
+\bibitem[Bollen {\it et~al.}, 2011a]{bollen2011modeling}
+Bollen, J., Mao, H., and Pepe, A. (2011a).
+\newblock Modeling public mood and emotion: Twitter sentiment and
+  socio-economic phenomena.
+\newblock {\em ICWSM}, {\bf11},  450--453.
+
+\bibitem[Bollen {\it et~al.}, 2011b]{bollen2011twitter}
+Bollen, J., Mao, H., and Zeng, X. (2011b).
+\newblock Twitter mood predicts the stock market.
+\newblock {\em Journal of computational science}, {\bf2},  1--8.
+
+\bibitem[Braithwaite {\it et~al.}, 2016]{braithwaite2016validating}
+Braithwaite, S.~R., Giraud-Carrier, C., West, J., Barnes, M.~D., and Hanson,
+  C.~L. (2016).
+\newblock Validating machine learning algorithms for twitter data against
+  established measures of suicidality.
+\newblock {\em JMIR mental health}, {\bf3}, .
+
 \bibitem[Brownstein {\it et~al.}, 2008]{brownstein_surveillance_2008}
 Brownstein, J.~S., Freifeld, C.~C., Reis, B.~Y., and Mandl, K.~D. (2008).
 \newblock Surveillance {Sans} {Frontières}: {Internet}-{Based} {Emerging}
@@ -110,6 +140,19 @@ Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017).
 \newblock \url{https://www.cdc.gov/flu/takingcare.htm}.
 \newblock [Online; accessed 12-August-2017].
 
+\bibitem[Chae, 2015]{chae2015insights}
+Chae, B.~K. (2015).
+\newblock Insights from hashtag\# supplychain and twitter analytics:
+  Considering twitter and twitter data for supply chain practice and research.
+\newblock {\em International Journal of Production Economics}, {\bf165},
+  247--259.
+
+\bibitem[Chen, 2011]{chen2011tweet}
+Chen, G.~M. (2011).
+\newblock Tweet this: A uses and gratifications perspective on how active
+  twitter use gratifies a need to connect with others.
+\newblock {\em Computers in Human Behavior}, {\bf27},  755--762.
+
 \bibitem[Chunara {\it et~al.}, 2013]{chunara_flu_2013}
 Chunara, R., Aman, S., Smolinski, M., and Brownstein, J.~S. (2013).
 \newblock Flu near you: an online self-reported influenza surveillance system
@@ -128,6 +171,14 @@ Culotta, A. (2010).
   messages.
 \newblock In {\em Proceedings of the first workshop on social media analytics},
     115--122. ACM.
+
+\bibitem[Eichstaedt {\it et~al.}, 2015]{eichstaedt2015psychological}
+Eichstaedt, J.~C., Schwartz, H.~A., Kern, M.~L., Park, G., Labarthe, D.~R.,
+  Merchant, R.~M., Jha, S., Agrawal, M., Dziurzynski, L.~A., Sap, M.,{\it
+  et~al.} (2015).
+\newblock Psychological language on twitter predicts county-level heart disease
+  mortality.
+\newblock {\em Psychological science}, {\bf26},  159--169.
 
 \bibitem[Freifeld {\it et~al.}, 2010]{freifeld_participatory_2010}
 Freifeld, C.~C., Chunara, R., Mekaru, S.~R., Chan, E.~H., Kass-Hout, T.,
@@ -168,12 +219,31 @@ Goff, J., Rowe, A., Brownstein, J.~S., and Chunara, R. (2015).
   {Diagnostic} {Testing}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Golbeck {\it et~al.}, 2011]{golbeck2011predicting}
+Golbeck, J., Robles, C., Edmondson, M., and Turner, K. (2011).
+\newblock Predicting personality from twitter.
+\newblock In {\em Privacy, Security, Risk and Trust (PASSAT) and 2011 IEEE
+  Third Inernational Conference on Social Computing (SocialCom), 2011 IEEE
+  Third International Conference on},   149--156. IEEE.
+
 \bibitem[Google{\ }Flu{\ }Trends{\ }Team, 2015]{GFT_nextchapter_2015}
 Google{\ }Flu{\ }Trends{\ }Team (2015).
 \newblock The next chapter for flu trends.
 \newblock
   \url{https://research.googleblog.com/2015/08/the-next-chapter-for-flu-trends.html}.
 \newblock [Online; accessed 20-July-2017].
+
+\bibitem[Hermida, 2013]{hermida2013journalism}
+Hermida, A. (2013).
+\newblock \# journalism: Reconfiguring journalism research about twitter, one
+  tweet at a time.
+\newblock {\em Digital Journalism}, {\bf1},  295--313.
+
+\bibitem[Himelboim {\it et~al.}, 2013]{himelboim2013birds}
+Himelboim, I., McCreery, S., and Smith, M. (2013).
+\newblock Birds of a feather tweet together: Integrating network and content
+  analyses to examine cross-ideology exposure on twitter.
+\newblock {\em Journal of Computer-Mediated Communication}, {\bf18},  40--60.
 
 \bibitem[Hufnagel {\it et~al.}, 2004]{hufnagel_forecast_2004}
 Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
@@ -215,11 +285,24 @@ Lazer, D., Kennedy, R., King, G., and Vespignani, A. (2014).
 \newblock The parable of {Google} flu: traps in big data analysis.
 \newblock {\em Science}, {\bf343},  1203--1205.
 
+\bibitem[Lee {\it et~al.}, 2013]{lee2013real}
+Lee, K., Agrawal, A., and Choudhary, A. (2013).
+\newblock Real-time disease surveillance using twitter data: demonstration on
+  flu and cancer.
+\newblock In {\em Proceedings of the 19th ACM SIGKDD international conference
+  on knowledge discovery and data mining},   1474--1477. ACM.
+
 \bibitem[Liu {\it et~al.}, 2017]{liu_assessing_2017}
 Liu, J., Weitzman, E.~R., and Chunara, R. (2017).
 \newblock Assessing {Behavior} {Stage} {Progression} {From} {Social} {Media}
   {Data}.
 \newblock   1320--1333. ACM Press.
+
+\bibitem[Love {\it et~al.}, 2013]{love2013twitter}
+Love, B., Himelboim, I., Holton, A., and Stewart, K. (2013).
+\newblock Twitter as a source of vaccination information: content drivers and
+  what they are saying.
+\newblock {\em American journal of infection control}, {\bf41},  568--570.
 
 \bibitem[Lozano {\it et~al.}, 2013]{lozano_global_2013}
 Lozano, R., Naghavi, M., Foreman, K., Lim, S., Shibuya, K., Aboyans, V.,
@@ -235,11 +318,43 @@ Martcheva, M. (2015).
 \newblock In {\em An Introduction to Mathematical Epidemiology},   9--31.
   Springer.
 
+\bibitem[Marwick and Boyd, 2011]{marwick2011tweet}
+Marwick, A.~E. and Boyd, D. (2011).
+\newblock I tweet honestly, i tweet passionately: Twitter users, context
+  collapse, and the imagined audience.
+\newblock {\em New media \& society}, {\bf13},  114--133.
+
+\bibitem[McCormick {\it et~al.}, 2015]{mccormick2015using}
+McCormick, T.~H., Lee, H., Cesare, N., Shojaie, A., and Spiro, E.~S. (2015).
+\newblock Using twitter for demographic and social science research: tools for
+  data collection and processing.
+\newblock {\em Sociological Methods \& Research},   0049124115605339.
+
 \bibitem[Milinovich {\it et~al.}, 2015]{milinovich_role_2015}
 Milinovich, G.~J., Magalhães, R. J.~S., and Hu, W. (2015).
 \newblock Role of big data in the early detection of {Ebola} and other emerging
   infectious diseases.
 \newblock {\em The Lancet Global Health}, {\bf3},  e20--e21.
+
+\bibitem[Mowery {\it et~al.}, 2017]{mowery2017feature}
+Mowery, D., Bryan, C., and Conway, M. (2017).
+\newblock Feature studies to inform the classification of depressive symptoms
+  from twitter data for population health.
+\newblock {\em arXiv preprint arXiv:1701.08229}.
+
+\bibitem[Newman, 2016]{newman2016tracking}
+Newman, T.~P. (2016).
+\newblock Tracking the release of ipcc ar5 on twitter: Users, comments, and
+  sources following the release of the working group i summary for
+  policymakers.
+\newblock {\em Public Understanding of Science},   0963662516628477.
+
+\bibitem[Nwosu {\it et~al.}, 2014]{nwosu2014social}
+Nwosu, A.~C., Debattista, M., Rooney, C., and Mason, S. (2014).
+\newblock Social media and palliative medicine: a retrospective 2-year analysis
+  of global twitter data to evaluate the use of technology to communicate about
+  issues at the end of life.
+\newblock {\em BMJ supportive \& palliative care},   bmjspcare--2014.
 
 \bibitem[Olson {\it et~al.}, 2013]{olson_reassessing_2013}
 Olson, D.~R., Konty, K.~J., Paladini, M., Viboud, C., and Simonsen, L. (2013).
@@ -264,11 +379,41 @@ Paul, M.~J., Dredze, M., and Broniatowski, D. (2014).
 \newblock Twitter {Improves} {Influenza} {Forecasting}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Poblete {\it et~al.}, 2011]{poblete2011all}
+Poblete, B., Garcia, R., Mendoza, M., and Jaimes, A. (2011).
+\newblock Do all birds tweet the same?: characterizing twitter around the
+  world.
+\newblock In {\em Proceedings of the 20th ACM international conference on
+  Information and knowledge management},   1025--1030. ACM.
+
+\bibitem[Qiu {\it et~al.}, 2012]{qiu2012you}
+Qiu, L., Lin, H., Ramsay, J., and Yang, F. (2012).
+\newblock You are what you tweet: Personality expression and perception on
+  twitter.
+\newblock {\em Journal of Research in Personality}, {\bf46},  710--718.
+
 \bibitem[Ray {\it et~al.}, 2016]{ray_network_2016}
 Ray, B., Ghedin, E., and Chunara, R. (2016).
 \newblock Network inference from multimodal data: {A} review of approaches from
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
+
+\bibitem[Rehak, 2014]{rehak_twitterbird_2014}
+Rehak, M. (2014).
+\newblock Who made that {Twitter} bird?
+\newblock
+  \url{https://www.nytimes.com/2014/08/10/magazine/who-made-that-twitter-bird.html}.
+\newblock [Online; accessed 1-August-2017].
+
+\bibitem[Rolfes {\it et~al.}, 2016]{rolfes_estimated_2016}
+Rolfes, M.~A., Foppa, I.~M., Garg, S., Flannery, B., Brammer, L., Singleton,
+  J.~A., Burns, E., Jernigan, D., Reed, C., Olsen, S.~J., and Bresee, J.
+  (2016).
+\newblock Estimated {Influenza} {Illnesses}, {Medical} {Visits},
+  {Hospitalizations}, and {Deaths} {Averted} by {Vaccination} in the {United}
+  {States}.
+\newblock \url{https://www.cdc.gov/flu/about/disease/2015-16.htm}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Rothman, 2012]{rothman2012epidemiology}
 Rothman, K.~J. (2012).
@@ -281,6 +426,12 @@ Salathe, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,
   {others} (2012).
 \newblock Digital epidemiology.
 \newblock {\em PLoS Comput Biol}, {\bf8},  e1002616.
+
+\bibitem[Salath{\'e} {\it et~al.}, 2013]{salathe2013dynamics}
+Salath{\'e}, M., Vu, D.~Q., Khandelwal, S., and Hunter, D.~R. (2013).
+\newblock The dynamics of health behavior sentiments on a large online social
+  network.
+\newblock {\em EPJ Data Science}, {\bf2},  4.
 
 \bibitem[Scott {\it et~al.}, 2017]{scott_time_2017}
 Scott, C.~F., Bay-Cheng, L.~Y., Prince, M.~A., Nochajski, T.~H., and Collins,
@@ -308,6 +459,44 @@ Sloan, L. and Morgan, J. (2015).
   {Geoservices} and {Geotagging} on {Twitter}.
 \newblock {\em PLoS ONE}, {\bf10}, .
 
+\bibitem[Steiger {\it et~al.}, 2015]{steiger2015advanced}
+Steiger, E., Albuquerque, J.~P., and Zipf, A. (2015).
+\newblock An advanced systematic literature review on spatiotemporal analyses
+  of twitter data.
+\newblock {\em Transactions in GIS}, {\bf19},  809--834.
+
+\bibitem[Stieglitz and Dang-Xuan, 2012]{stieglitz2012political}
+Stieglitz, S. and Dang-Xuan, L. (2012).
+\newblock Political communication and influence through microblogging--an
+  empirical analysis of sentiment in twitter messages and retweet behavior.
+\newblock In {\em System Science (HICSS), 2012 45th Hawaii International
+  Conference on},   3500--3509. IEEE.
+
+\bibitem[Sul {\it et~al.}, 2014]{sul2014trading}
+Sul, H.~K., Dennis, A.~R., and Yuan, L.~I. (2014).
+\newblock Trading on twitter: The financial information content of emotion in
+  social media.
+\newblock In {\em System Sciences (HICSS), 2014 47th Hawaii International
+  Conference on},   806--815. IEEE.
+
+\bibitem[Swani {\it et~al.}, 2014]{swani2014should}
+Swani, K., Brown, B.~P., and Milne, G.~R. (2014).
+\newblock Should tweets differ for b2b and b2c? an analysis of fortune 500
+  companies' twitter communications.
+\newblock {\em Industrial Marketing Management}, {\bf43},  873--881.
+
+\bibitem[Tumasjan {\it et~al.}, 2010]{tumasjan2010predicting}
+Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2010).
+\newblock Predicting elections with twitter: What 140 characters reveal about
+  political sentiment.
+\newblock {\em Icwsm}, {\bf10},  178--185.
+
+\bibitem[Tumasjan {\it et~al.}, 2011]{tumasjan2011election}
+Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2011).
+\newblock Election forecasts with twitter: How 140 characters reflect the
+  political landscape.
+\newblock {\em Social science computer review}, {\bf29},  402--418.
+
 \bibitem[Twitter, 2013]{twitter_annual_2013}
 Twitter (2013).
 \newblock Annual {Report} 2013.
@@ -322,6 +511,12 @@ Twitter (2017).
   \url{https://investor.twitterinc.com/common/download/download.cfm?companyid=AMDA-2F526X&fileid=935049&filekey=05E6E71E-D609-4A17-A8BD-B621324A950D&filename=TWTR_2016_Annual_Report.pdf}.
 \newblock [Online; accessed 12-August-2017].
 
+\bibitem[Vidal {\it et~al.}, 2015]{vidal2015using}
+Vidal, L., Ares, G., Mach{\'\i}n, L., and Jaeger, S.~R. (2015).
+\newblock Using twitter data for food-related consumer research: A case study
+  on “what people say when tweeting about different eating situations”.
+\newblock {\em Food Quality and Preference}, {\bf45},  58--69.
+
 \bibitem[Wang {\it et~al.}, 2016]{wang_regional_2016}
 Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
   (2016).
@@ -329,10 +524,33 @@ Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
   {Data}.
 \newblock {\em Journal of Medical Systems}, {\bf40}, .
 
+\bibitem[Widener and Li, 2014]{widener2014using}
+Widener, M.~J. and Li, W. (2014).
+\newblock Using geolocated twitter data to monitor the prevalence of healthy
+  and unhealthy food references across the us.
+\newblock {\em Applied Geography}, {\bf54},  189--197.
+
 \bibitem[Wójcik {\it et~al.}, 2014]{wojcik_public_2014}
 Wójcik, O.~P., Brownstein, J.~S., Chunara, R., and Johansson, M.~A. (2014).
 \newblock Public health for the people: participatory infectious disease
   surveillance in the digital age.
 \newblock {\em Emerging themes in epidemiology}, {\bf11},  7.
+
+\bibitem[Zhang {\it et~al.}, 2012]{zhang2012predicting}
+Zhang, X., Fuehres, H., and Gloor, P. (2012).
+\newblock Predicting asset value through twitter buzz.
+\newblock {\em Advances in Collective Intelligence 2011},   23--34.
+
+\bibitem[Zhao and Rosson, 2009]{zhao2009and}
+Zhao, D. and Rosson, M.~B. (2009).
+\newblock How and why people twitter: the role that micro-blogging plays in
+  informal communication at work.
+\newblock In {\em Proceedings of the ACM 2009 international conference on
+  Supporting group work},   243--252. ACM.
+
+\bibitem[Zimmer and Proferes, 2014]{zimmer2014topology}
+Zimmer, M. and Proferes, N.~J. (2014).
+\newblock A topology of twitter research: disciplines, methods, and ethics.
+\newblock {\em Aslib Journal of Information Management}, {\bf66},  250--261.
 
 \end{thebibliography}

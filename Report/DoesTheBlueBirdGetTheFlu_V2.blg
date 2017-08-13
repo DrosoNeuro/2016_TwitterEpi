@@ -5,45 +5,45 @@ The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty booktitle in liu_assessing_2017
-You've used 52 entries,
+You've used 86 entries,
             1932 wiz_defined-function locations,
-            748 strings with 14866 characters,
-and the built_in function-call counts, 21890 in all, are:
-= -- 2135
-> -- 1125
-< -- 29
-+ -- 401
-- -- 394
-* -- 1874
-:= -- 3903
-add.period$ -- 172
-call.type$ -- 52
-change.case$ -- 454
-chr.to.int$ -- 51
-cite$ -- 54
-duplicate$ -- 742
-empty$ -- 1313
-format.name$ -- 456
-if$ -- 4223
-int.to.chr$ -- 2
+            936 strings with 22829 characters,
+and the built_in function-call counts, 38097 in all, are:
+= -- 3814
+> -- 1812
+< -- 50
++ -- 644
+- -- 630
+* -- 3198
+:= -- 6565
+add.period$ -- 283
+call.type$ -- 86
+change.case$ -- 741
+chr.to.int$ -- 84
+cite$ -- 88
+duplicate$ -- 1370
+empty$ -- 2345
+format.name$ -- 736
+if$ -- 7530
+int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 71
-newline$ -- 274
-num.names$ -- 156
-pop$ -- 359
+missing$ -- 128
+newline$ -- 446
+num.names$ -- 258
+pop$ -- 583
 preamble$ -- 1
-purify$ -- 457
+purify$ -- 744
 quote$ -- 0
-skip$ -- 578
+skip$ -- 1123
 stack$ -- 0
-substring$ -- 1345
-swap$ -- 110
-text.length$ -- 8
+substring$ -- 2572
+swap$ -- 307
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 306
+type$ -- 510
 warning$ -- 2
-while$ -- 159
+while$ -- 291
 width$ -- 0
-write$ -- 684
+write$ -- 1134
 (There were 2 warnings)
