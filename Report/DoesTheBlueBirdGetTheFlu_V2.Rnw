@@ -308,12 +308,47 @@ An important part of daily research practice is the evaluation and interpretatio
 
 However, while everybody seems to believe that reproducibility is important, nobody seems to agree on what it exactly is. Hence, talks, papers and discussions about reproducibility are often rife with opportunities for misunderstandings: Some see reproducibility already achieved if a single confirmatory study shows the same overall effect as an exploratory study, others contend that a finding has only been reproduced if several independent studies could show the very same results as the experiment that is supposed to be replicated. In the following, I will give a quick overview over current challenges with regard to reproducibility and also explain how reproducibility plays a role in my thesis. 
 
-\section[To replicate or to reproduce?]{To replicate or to reproduce? Why semantics matter.}
-One of the major sources of confusion in the discussion about reproducibility is its distinction from replicability (or "results reproducibility"). Many articles writing about the so-called ``reproducibility crisis" \citep{casadevall_reproducible_2010,prinz_believe_2011,begley_six_2013,begley2015reproducibility,freedman_economics_2015,aarts2015estimating,baker2016there,baker2016reproducibility,crotty_reproducible_2017,nosek_reproducibility_2017} actually have replicability at their heart.
+\section[To replicate or to reproduce?]{To replicate or to reproduce? Why semantics matter}
+One of the major sources of confusion in the discussion about (methods) reproducibility is its distinction from replicability (or "results reproducibility"). Many scientific articles tackling the so-called ``reproducibility crisis" \citep{casadevall_reproducible_2010,prinz_believe_2011,begley2012drug,begley_six_2013,begley2015reproducibility,freedman_economics_2015,aarts2015estimating,baker2016there,baker2016reproducibility,crotty_reproducible_2017,nosek_reproducibility_2017} actually have the issue of replication at heart \citep{schooler2014metascience,stroebe_alleged_2014,kullmann2015biomedicine,maxwell_is_2015,earp_replication_2015,camerer_evaluating_2016,loken_measurement_2017}. So, what is the difference, then?
 
-\section{The replicability}
+For \cite{peng_reproducible_2009}, the replication of scientific studies hinges on ``independent investigators, methods, data, equipment, and protocols" in order to evaluate the claims made in said study. However, replicating studies costs time and money and is sometimes neither feasible nor desirable. Nevertheless, ``there is a need for a minimum standard that can fill the void between full replication and nothing." Aiming for reproducibility, defined as the verification of published results and conducting alternative analyses using ``the data sets and computer code [$\dots$] made available to others", could provide such a minimal standard. 
+
+In other words, \cite{peng_reproducible_2009} sees reproducibility given if one can recreate the same results, statistical analyses, tables, and figures as those reported in the original study - not by recollecting the data and rewriting the code, but by using the very same data and code source used by the authors of the study that is supposed to be reproduced. Replication, however, depends on the ability to recreate the same results by independently collecting and evaluating the relevant data.
+
+\cite{cacioppo_social_2015} offer very similar definitions. For them, ``reproducibility refers to the ability of a researcher to duplicate the results of a prior study using the same materials and procedures as were used by the original investigator". Replicability, on the other hand, ``refers to the ability of a researcher to duplicate the results of a prior study if the same procedures are followed but new data are collected".
+
+These distinctions have also been adopted by the American Statistical Association, which calls a study reproducible, ``if you can take the original data and the computer code used to analyze the data and reproduce all of the numerical findings from the study". Replicability is defined as ``the act of repeating an entire study, independently of the original investigator without the use of original data (but generally using the same methods)" \citep{broman_recommendation_2017}.
+
+However, \cite{kenett2015clarifying} differentiate between repeatability, reproducibility, and replicability and point out that the nomenclature can vary in meaning across different fields. They suggest ``that these terms can be clarified by considering the intended generalisation of the study", since all three terms ``are aimed at assuring generalizability, but the generalizability is typically of different types". Within this framework, a repeatable finding can be recreated by keeping every aspect of the original study or analysis constant (including exactly the same methods, codes, locations, experimentors etc.); reproducible findings can be recreated by different researchers in different locations, but by using the methods and data sources from the original study; and replicable findings can be recreated by different researchers in different locations with different (i. e. recollected) data and sometimes by using different methods, too. For example, the PDF-version of this thesis can be exactly recreated by running the corresponding RNW-file (repeatability), while the findings described therein can be reproduced by using the data and codes provided in the Github-repository (reproducibility) or even by recollecting the data and rewriting the codes (replicability). In other words, repeatable research is least and replicable research is most generalisable.
+
+Finally, \cite{goodman_what_2016} point out that the concept of reproducible research originally emerged in the computational sciences with a clear-cut definition, namely to ``permit the reader of a paper to see the entire processing trail from the raw data and code to figures and tables", even though ``a wide range of issues [are nowadays] subsumed under the rubric of reproducibility: design, reporting, analysis, interpretation, and corroborating studies (that is, replication)". However, instead of upholding the existing, but muddled distinction between repeatability, reproducibility, and replicability, they offer a new terminology in order to subsume everything under the concept of reproducibility. That is, they differentiate between methods reproducibility, results reproducibility, and inferential reproducibility. 
+
+Methods reproducibility corresponds to the most common interpretation of reproducibility, namely ``the ability to implement, as exactly as possible, the experimental and computational procedures, with the same data and tools, to obtain the same results." Results reproducibility corresponds to replicability and is``the production of corroborating results in a new study, having followed the same experimental methods". Inferential reprodudicibility, however, is different from the concepts described so far and refers to ``the drawing of qualitatively similar conclusions from either an independent replication of a study or a reanalysis of the original study".
+
+I believe that the latter distinction is the most straightforward and exhaustive categorisation of different forms of reproducibility. Even the concept of repeatability can be subsumed under this categorisation, namely as an especially stringent case of methods reproducibility. Most importantly, however, this categorisation makes it clear that methods, results, and inferential reproducibility can occur independently from each other, something that is often forgotten in the discussions about reproducibility. In particular, methods reproducibility can be fulfilled even though results and inferential reproducibility are absent, e. g. if a finding based on Twitter user data can be perfectly recreated using the original raw data and codes, but fails replication when collecting data from a different set of Twitter users. The same holds true for results reproducibility, which can exist independently of methods reproducibility (e. g. if the raw data and code of the original study are not provided, but replication is possible by recollecting the data using the methods described in the study) and inferential reproducibility (e. g. if the original results can be replicated but still warrant a different interpretation because of theoretical or methodological discrepancies). Finally, inferential reproducibility can be fulfilled even in the absence of methods and results reproducibility, e. g. when the raw data and code of the original study are missing, while the replication of the study based on the described methods shows an attenuated (or exarcebated) effect with the same directionality as the original study.
+
+For rest of this thesis I will therefore adopt the definitons of \cite{goodman_what_2016} and distinguish between methods, results, and inferential reproducibility, respectively.
+
+\section{How to ensure reproducibility?}
+(Results) reproducibility is often called the ``hallmark" \citep{aarts2015estimating,munafo_manifesto_2017} or ``bedrock" \citep{casadevall_reproducible_2010} of science. After all, what good are scientific findings if they are only valid for the time and place they were originally created? 
+
+reproducibility is not everything
+
+ even best pracitce difficut!
+ !
+
+some of it is simply a matter of statistical necessity \citep{ioannidis_why_2005}
+
+
 The ability to replicate research findings has always been the hallmark of reliable empirical research. A finding that couldn
-In recent years, discussions about the inability reproduce or replicate many research findings have become more prominente and in fact the papers written about it have steadily increased \citep{goodman_what_2016}. The discussions revolving around the reproducibility of scientific findings have become so dominant, in fact, that even found their way into the popular media, causing a deluge of news article decrying the lack of replicability in different areas of the sciences \citep{} an 
+In recent years, discussions about the inability reproduce or replicate many research findings have become more prominente and in fact the papers written about it have steadily increased \citep{goodman_what_2016}. The discussions revolving around the reproducibility of scientific findings have become so dominant, in fact, that even found their way into the news outlets and the broad media, causing a deluge of news article decrying the lack of replicability in different areas of the sciences \citep{lehrer_truth_2010,carey_psychology_2015,carey_scrutiny_2015,achenbach_many_2015,achenbach_reproducibility_2015,yong_psychology_2016,engber_broken_2016,baker_crisis_2016,econ_try_2016,feilden_most_2017,belluz_cancer_2017,meyer_fix_2017}.
+
+
+Despite the seemingly clear-cut distinction between methods, results, and inferential reproducibility, it is important to note, 
+
+reproducible epi research > follow his recommend
+
+A manifesto for reproducible science \citep{munafo_manifesto_2017} > more comprehensive approach
 
 So this thesis has a second important goal: It is the attempt to reproduce \textit{and} replicate the findings from 
 
@@ -322,7 +357,15 @@ Finally, one should mention that replicability is neither a necessary nor a suff
  
 \citep{lehrer_truth_2010}
 
+Even when doing everything correctly, the right way to interpret and analyse statisical information is still a challenge (Reichlin, Vogt, and Würbel 2016) . Scientists must overcome dichotomous thinking when it comes to analysing their data. No experiment is completely successful or unsuccessful, there are always shades of grey (see (Amrhein, Korner-Nievergelt, and Roth 2017; McShane and Gal 2016; Wasserstein and Lazar 2016; Colquhoun 2014; Ziliak 2016a; Ioannidis 2016; IntHout, Ioannidis, and Borm 2016; Benjamin et al. 2017)). 
 
+Participants learn to differentiate between Bayesian and frequentist type of thinking and learn their importance for reproducibility (see also (Christensen 2005))
+Participants learn different ways to report and represent their data that improve analysis and prevent false interpretations (e.g. see the p-value you can't buy, the earth is flat, 
+Participants learn how they can improve the interpretations and analysis of their experiments in their reports (see also ((Ziliak 2016b)
+Participants learn how their study design and experimental setup directly influences their statistical and scientific interpretation of the results (see also (Gelman 2016)
+Participants understand the differences between accuracy, specificity and sensitivity and its implications on reproducibility (see also (Baratloo et al. 2015)
+
+Reproducible Research: A Range of Response
 
 We explain and define different forms of reproducibility and what they mean for research (additional reading:(Mogil, Macleod, and others 2017; Reichlin, Vogt, and Würbel 2016; Ioannidis 2005; Kass et al. 2016), Lazic)
 
@@ -338,14 +381,6 @@ The researchers collected a total of 37'599 tweets from the 104 accounts mention
 Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods (Naive Bayes, random forest, C4.5, logistic regression, and support vector machine), which showed that the keywords were only poor predictors of a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).\newline
 
 In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the Naive Bayes classifier performed best with a classification accuracy of 89.72\% and an AUC of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
-
-Even when doing everything correctly, the right way to interpret and analyse statisical information is still a challenge (Reichlin, Vogt, and Würbel 2016) . Scientists must overcome dichotomous thinking when it comes to analysing their data. No experiment is completely successful or unsuccessful, there are always shades of grey (see (Amrhein, Korner-Nievergelt, and Roth 2017; McShane and Gal 2016; Wasserstein and Lazar 2016; Colquhoun 2014; Ziliak 2016a; Ioannidis 2016; IntHout, Ioannidis, and Borm 2016; Benjamin et al. 2017)). 
-
-Participants learn to differentiate between Bayesian and frequentist type of thinking and learn their importance for reproducibility (see also (Christensen 2005))
-Participants learn different ways to report and represent their data that improve analysis and prevent false interpretations (e.g. see the p-value you can't buy, the earth is flat, 
-Participants learn how they can improve the interpretations and analysis of their experiments in their reports (see also ((Ziliak 2016b)
-Participants learn how their study design and experimental setup directly influences their statistical and scientific interpretation of the results (see also (Gelman 2016)
-Participants understand the differences between accuracy, specificity and sensitivity and its implications on reproducibility (see also (Baratloo et al. 2015)
 
 \begin{figure}[H]
   \centering
