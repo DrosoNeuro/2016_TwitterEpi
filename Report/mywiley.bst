@@ -717,6 +717,38 @@ FUNCTION {misc}
   new.block
   format.title output
   new.block
+  crossref missing$
+    { 
+      fjournal missing$
+	{
+          journal emphasize "journal" output.check        
+                % if one has only mathscinet entries, change journal
+		%  to fjournal for full name
+          format.vol.num.pages output
+	}
+	{	
+          fjournal emphasize "journal" output.check        
+                % if one has only mathscinet entries, change journal
+		%  to fjournal for full name
+          format.vol.num.pages output
+        }
+      if$
+    }
+    { format.article.crossref output.nonnull
+      format.pages output
+    }
+  if$
+%  crossref missing$
+%    { fjournal emphasize "journal" output.check        
+%                % if one has only mathscinet entries, change journal
+%		%  to fjournal for full name
+%      format.vol.num.pages output
+%    }
+%    { format.article.crossref output.nonnull
+%      format.pages output
+%    }
+%  if$
+  new.block	
   howpublished output
   new.block
   note output

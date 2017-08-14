@@ -1,10 +1,32 @@
 \begin{thebibliography}{}
 
+\bibitem[Aarts {\it et~al.}, 2015]{aarts2015estimating}
+Aarts, A., Anderson, J., Anderson, C., Attridge, P., Attwood, A., and Fedor, A.
+  (2015).
+\newblock Estimating the reproducibility of psychological science.
+\newblock {\em Science}, {\bf349},  1--8.
+
 \bibitem[Abbar {\it et~al.}, 2015]{abbar2015you}
 Abbar, S., Mejova, Y., and Weber, I. (2015).
 \newblock You tweet what you eat: Studying food consumption through twitter.
 \newblock In {\em Proceedings of the 33rd Annual ACM Conference on Human
   Factors in Computing Systems},   3197--3206. ACM.
+
+\bibitem[Achenbach, 2015a]{achenbach_many_2015}
+Achenbach, J. (2015a).
+\newblock Many scientific studies can’t be replicated. {That’s} a problem.
+\newblock {\em The {Washington} {Post}}.
+\newblock
+  \url{https://www.washingtonpost.com/news/speaking-of-science/wp/2015/08/27/trouble-in-science-massive-effort-to-reproduce-100-experimental-results-succeeds-only-36-times/?utm_term=.1a233386e88f}.
+\newblock [Online; accessed 13-August-2017].
+
+\bibitem[Achenbach, 2015b]{achenbach_reproducibility_2015}
+Achenbach, J. (2015b).
+\newblock No, science’s reproducibility problem is not limited to psychology.
+\newblock {\em The {Washington} {Post}}.
+\newblock
+  \url{https://www.washingtonpost.com/news/speaking-of-science/wp/2015/08/28/no-sciences-reproducibility-problem-is-not-limited-to-psychology/?tid=a_inl&utm_term=.d7bf9206f3dc}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Achrekar {\it et~al.}, 2011]{achrekar_predicting_2011}
 Achrekar, H., Gandhe, A., Lazarus, R., Yu, S.-H., and Liu, B. (2011).
@@ -36,6 +58,7 @@ Aramaki, E., Maskawa, S., and Morita, M. (2011).
 \bibitem[Asano, 2017]{asano_socialmediatime_2017}
 Asano, E. (2017).
 \newblock How much time do people spend on social media?
+\newblock {\em Social {Media} {Today}}.
 \newblock
   \url{http://www.socialmediatoday.com/marketing/how-much-time-do-people-spend-social-media-infographic}.
 \newblock [Online; accessed 12-August-2017].
@@ -52,12 +75,57 @@ Bailey, L., Vardulaki, K., Langham, J., and Chandramohan, D. (2005).
 \newblock {\em Introduction to {Epidemiology}}.
 \newblock Open University Press London.
 
+\bibitem[Baker, 2016a]{baker2016there}
+Baker, M. (2016a).
+\newblock Is there a reproducibility crisis? a nature survey lifts the lid on
+  how researchers view the'crisis rocking science and what they think will
+  help.
+\newblock {\em Nature}, {\bf533},  452--455.
+
+\bibitem[Baker, 2016b]{baker_crisis_2016}
+Baker, M. (2016b).
+\newblock The {Reproducibility} {Crisis} {Is} {Good} for {Science}.
+\newblock {\em Slate}.
+\newblock
+  \url{http://www.slate.com/articles/technology/future_tense/2016/04/the_reproducibility_crisis_is_good_for_science.html}.
+\newblock [Online; accessed 13-August-2017].
+
+\bibitem[Baker, 2016c]{baker2016reproducibility}
+Baker, M. (2016c).
+\newblock Reproducibility: seek out stronger science.
+\newblock {\em Nature}, {\bf537},  703--704.
+
 \bibitem[Bauer, 2016]{bauer_timeonline_2016}
 Bauer, R. (2016).
 \newblock Media {(R)evolutions}: time spent online continues to rise.
+\newblock {\em World {Bank} {Blog}}.
 \newblock
   \url{https://blogs.worldbank.org/publicsphere/media-revolutions-time-spent-online-continues-rise}.
 \newblock [Online; accessed 12-August-2017].
+
+\bibitem[Begley, 2013]{begley_six_2013}
+Begley, C.~G. (2013).
+\newblock Six red flags for suspect work.
+\newblock {\em Nature}, {\bf497},  431--433.
+
+\bibitem[Begley and Ellis, 2012]{begley2012drug}
+Begley, C.~G. and Ellis, L.~M. (2012).
+\newblock Drug development: Raise standards for preclinical cancer research.
+\newblock {\em Nature}, {\bf483},  531--533.
+
+\bibitem[Begley and Ioannidis, 2015]{begley2015reproducibility}
+Begley, C.~G. and Ioannidis, J.~P. (2015).
+\newblock Reproducibility in science.
+\newblock {\em Circulation research}, {\bf116},  116--126.
+
+\bibitem[Belluz, 2017]{belluz_cancer_2017}
+Belluz, J. (2017).
+\newblock Cancer scientists are having trouble replicating groundbreaking
+  research.
+\newblock {\em Vox}.
+\newblock
+  \url{https://www.vox.com/science-and-health/2017/1/23/14324326/replication-science-is-hard}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Bodnar, 2015]{bodnar_data_2015}
 Bodnar, T. (2015).
@@ -94,6 +162,16 @@ Braithwaite, S.~R., Giraud-Carrier, C., West, J., Barnes, M.~D., and Hanson,
   established measures of suicidality.
 \newblock {\em JMIR mental health}, {\bf3}, .
 
+\bibitem[Broman {\it et~al.}, 2017]{broman_recommendation_2017}
+Broman, K., Cetinkaya-Rundel, M., Nussbaum, A., Paciorek, C., Peng, R., Turek,
+  D., and Wickham, H. (2017).
+\newblock Recommendations to {Funding} {Agencies} for {Supporting}
+  {Reproducible} {Research}.
+\newblock {\em American {Statistical} {Association}}.
+\newblock
+  \url{https://www.amstat.org/asa/files/pdfs/POL-ReproducibleResearchRecommendations.pdf}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Brownstein {\it et~al.}, 2008]{brownstein_surveillance_2008}
 Brownstein, J.~S., Freifeld, C.~C., Reis, B.~Y., and Mandl, K.~D. (2008).
 \newblock Surveillance {Sans} {Frontières}: {Internet}-{Based} {Emerging}
@@ -125,6 +203,42 @@ Bundesamt{\ }für{\ }Gesundheit{\ } (2017b).
 Butler, D. (2013).
 \newblock When {Google} got flu wrong.
 \newblock {\em Nature}, {\bf494},  155.
+
+\bibitem[Cacioppo {\it et~al.}, 2015]{cacioppo_social_2015}
+Cacioppo, J.~T., Kaplan, R.~M., Krosnick, J.~A., Olds, J.~L., and Dean, H.
+  (2015).
+\newblock Social, {Behavioral}, and {Economic} {Sciences} {Perspectives} on
+  {Robust} and {Reliable} {Science}.
+
+\bibitem[Camerer {\it et~al.}, 2016]{camerer_evaluating_2016}
+Camerer, C.~F., Dreber, A., Forsell, E., Ho, T.-H., Huber, J., Johannesson, M.,
+  Kirchler, M., Almenberg, J., Altmejd, A., Chan, T., Heikensten, E.,
+  Holzmeister, F., Imai, T., Isaksson, S., Nave, G., Pfeiffer, T., Razen, M.,
+  and Wu, H. (2016).
+\newblock Evaluating replicability of laboratory experiments in economics.
+\newblock {\em Science}, {\bf351},  1433--1436.
+
+\bibitem[Carey, 2015a]{carey_psychology_2015}
+Carey, B. (2015a).
+\newblock Many {Psychology} {Findings} {Not} as {Strong} as {Claimed}, {Study}
+  {Says}.
+\newblock {\em The {New} {York} {Times}}.
+\newblock
+  \url{https://www.nytimes.com/2015/08/28/science/many-social-science-findings-not-as-strong-as-claimed-study-says.html}.
+\newblock [Online; accessed 13-August-2017].
+
+\bibitem[Carey, 2015b]{carey_scrutiny_2015}
+Carey, B. (2015b).
+\newblock Science, {Now} {Under} {Scrutiny} {Itself}.
+\newblock {\em The {New} {York} {Times}}.
+\newblock
+  \url{https://www.nytimes.com/2015/06/16/science/retractions-coming-out-from-under-science-rug.html}.
+\newblock [Online; accessed 13-August-2017].
+
+\bibitem[Casadevall and Fang, 2010]{casadevall_reproducible_2010}
+Casadevall, A. and Fang, F.~C. (2010).
+\newblock Reproducible {Science}.
+\newblock {\em Infection and Immunity}, {\bf78},  4972--4975.
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
   2016]{cdc_surveillance_2016}
@@ -165,6 +279,14 @@ Chunara, R., Goldstein, E., Patterson-Lomba, O., and Brownstein, J.~S. (2015).
   participatory cohort.
 \newblock {\em Scientific Reports}, {\bf5},  9540.
 
+\bibitem[Crotty, 2014]{crotty_reproducible_2017}
+Crotty, D. (2014).
+\newblock Reproducible {Research}, {Just} {Not} {Reproducible} {By} {You}.
+\newblock {\em The {Scholarly} {Kitchen}}.
+\newblock
+  \url{https://scholarlykitchen.sspnet.org/2017/05/24/reproducible-research-just-not-reproducible/}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Culotta, 2010]{culotta_towards_2010}
 Culotta, A. (2010).
 \newblock Towards detecting influenza epidemics by analyzing {Twitter}
@@ -172,20 +294,44 @@ Culotta, A. (2010).
 \newblock In {\em Proceedings of the first workshop on social media analytics},
     115--122. ACM.
 
+\bibitem[Earp and Trafimow, 2015]{earp_replication_2015}
+Earp, B.~D. and Trafimow, D. (2015).
+\newblock Replication, falsification, and the crisis of confidence in social
+  psychology.
+\newblock {\em Frontiers in Psychology}, {\bf6}, .
+
 \bibitem[Eichstaedt {\it et~al.}, 2015]{eichstaedt2015psychological}
 Eichstaedt, J.~C., Schwartz, H.~A., Kern, M.~L., Park, G., Labarthe, D.~R.,
   Merchant, R.~M., Jha, S., Agrawal, M., Dziurzynski, L.~A., Sap, M.,{\it
   et~al.} (2015).
 \newblock Psychological language on twitter predicts county-level heart disease
   mortality.
-\newblock {\em Psychological science}, {\bf26},  159--169.
+\newblock {\em Psychological Science}, {\bf26},  159--169.
+
+\bibitem[Engber, 2016]{engber_broken_2016}
+Engber, D. (2016).
+\newblock Cancer {Research} {Is} {Broken}.
+\newblock {\em Slate}.
+\newblock
+  \url{http://www.slate.com/articles/health_and_science/future_tense/2016/04/biomedicine_facing_a_worse_replication_crisis_than_the_one_plaguing_psychology.html}.
+\newblock [Online; accessed 13-August-2017].
+
+\bibitem[Feilden, 2017]{feilden_most_2017}
+Feilden, T. (2017).
+\newblock Most scientists 'can't replicate studies by their peers'.
+\newblock {\em BBC}.
+
+\bibitem[Freedman {\it et~al.}, 2015]{freedman_economics_2015}
+Freedman, L.~P., Cockburn, I.~M., and Simcoe, T.~S. (2015).
+\newblock The {Economics} of {Reproducibility} in {Preclinical} {Research}.
+\newblock {\em PLOS Biology}, {\bf13},  e1002165.
 
 \bibitem[Freifeld {\it et~al.}, 2010]{freifeld_participatory_2010}
 Freifeld, C.~C., Chunara, R., Mekaru, S.~R., Chan, E.~H., Kass-Hout, T.,
   Iacucci, A.~A., and Brownstein, J.~S. (2010).
 \newblock Participatory epidemiology: use of mobile phones for community-based
   health reporting.
-\newblock {\em PLoS medicine}, {\bf7},  e1000376.
+\newblock {\em PLoS Medicine}, {\bf7},  e1000376.
 
 \bibitem[Freifeld {\it et~al.}, 2008]{freifeld_healthmap:_2008}
 Freifeld, C.~C., Mandl, K.~D., Reis, B.~Y., and Brownstein, J.~S. (2008).
@@ -206,6 +352,13 @@ Generous, N., Fairchild, G., Deshpande, A., Del~Valle, S.~Y., and Priedhorsky,
 \newblock Global {Disease} {Monitoring} and {Forecasting} with {Wikipedia}.
 \newblock {\em PLoS Computational Biology}, {\bf10},  e1003892.
 
+\bibitem[German{\ }Research{\ }Foundation, 2017]{dfg_reproduzierbarkeit_2017}
+German{\ }Research{\ }Foundation (2017).
+\newblock Replicability of {Research} {Results}.
+\newblock
+  \url{http://www.dfg.de/download/pdf/dfg_im_profil/reden_stellungnahmen/2017/170425_stellungnahme_replizierbarkeit_forschungsergebnisse_en.pdf}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Ginsberg {\it et~al.}, 2009]{ginsberg_detecting_2009}
 Ginsberg, J., Mohebbi, M.~H., Patel, R.~S., Brammer, L., Smolinski, M.~S., and
   Brilliant, L. (2009).
@@ -225,6 +378,11 @@ Golbeck, J., Robles, C., Edmondson, M., and Turner, K. (2011).
 \newblock In {\em Privacy, Security, Risk and Trust (PASSAT) and 2011 IEEE
   Third Inernational Conference on Social Computing (SocialCom), 2011 IEEE
   Third International Conference on},   149--156. IEEE.
+
+\bibitem[Goodman {\it et~al.}, 2016]{goodman_what_2016}
+Goodman, S.~N., Fanelli, D., and Ioannidis, J. P.~A. (2016).
+\newblock What does research reproducibility mean?
+\newblock {\em Science Translational Medicine}, {\bf8},  341ps12--341ps12.
 
 \bibitem[Google{\ }Flu{\ }Trends{\ }Team, 2015]{GFT_nextchapter_2015}
 Google{\ }Flu{\ }Trends{\ }Team (2015).
@@ -251,6 +409,11 @@ Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
 \newblock {\em Proceedings of the National Academy of Sciences of the United
   States of America}, {\bf101},  15124--15129.
 
+\bibitem[Kenett and Shmueli, 2015]{kenett2015clarifying}
+Kenett, R.~S. and Shmueli, G. (2015).
+\newblock Clarifying the terminology that describes scientific reproducibility.
+\newblock {\em Nature methods}, {\bf12},  699--699.
+
 \bibitem[Khoury {\it et~al.}, 2013]{khoury_transforming_2013}
 Khoury, M.~J., Lam, T.~K., Ioannidis, J. P.~A., Hartge, P., Spitz, M.~R.,
   Buring, J.~E., Chanock, S.~J., Croyle, R.~T., Goddard, K.~A., Ginsburg,
@@ -267,6 +430,10 @@ Khoury, M.~J., Lam, T.~K., Ioannidis, J. P.~A., Hartge, P., Spitz, M.~R.,
 Koepsell, T.~D. and Weiss, N.~S. (2014).
 \newblock {\em Epidemiologic methods: studying the occurrence of illness}.
 \newblock Oxford University Press (UK).
+
+\bibitem[Kullmann, 2015]{kullmann2015biomedicine}
+Kullmann, D.~M. (2015).
+\newblock Biomedicine is plagued by failure of replication.
 
 \bibitem[Lamb {\it et~al.}, 2013]{lamb_separating_2013}
 Lamb, A., Paul, M.~J., and Dredze, M. (2013).
@@ -292,11 +459,24 @@ Lee, K., Agrawal, A., and Choudhary, A. (2013).
 \newblock In {\em Proceedings of the 19th ACM SIGKDD international conference
   on knowledge discovery and data mining},   1474--1477. ACM.
 
+\bibitem[Lehrer, 2010]{lehrer_truth_2010}
+Lehrer, J. (2010).
+\newblock The {Truth} {Wears} {Off}.
+\newblock {\em The {New} {Yorker}}.
+\newblock
+  \url{http://www.newyorker.com/magazine/2010/12/13/the-truth-wears-off}.
+\newblock [Online; accessed 13-August-2017].
+
 \bibitem[Liu {\it et~al.}, 2017]{liu_assessing_2017}
 Liu, J., Weitzman, E.~R., and Chunara, R. (2017).
 \newblock Assessing {Behavior} {Stage} {Progression} {From} {Social} {Media}
   {Data}.
 \newblock   1320--1333. ACM Press.
+
+\bibitem[Loken and Gelman, 2017]{loken_measurement_2017}
+Loken, E. and Gelman, A. (2017).
+\newblock Measurement error and the replication crisis.
+\newblock {\em Science}, {\bf355},  584--585.
 
 \bibitem[Love {\it et~al.}, 2013]{love2013twitter}
 Love, B., Himelboim, I., Holton, A., and Stewart, K. (2013).
@@ -324,11 +504,25 @@ Marwick, A.~E. and Boyd, D. (2011).
   collapse, and the imagined audience.
 \newblock {\em New media \& society}, {\bf13},  114--133.
 
+\bibitem[Maxwell {\it et~al.}, 2015]{maxwell_is_2015}
+Maxwell, S.~E., Lau, M.~Y., and Howard, G.~S. (2015).
+\newblock Is psychology suffering from a replication crisis? {What} does
+  'failure to replicate' really mean?
+\newblock {\em American Psychologist}, {\bf70},  487--498.
+
 \bibitem[McCormick {\it et~al.}, 2015]{mccormick2015using}
 McCormick, T.~H., Lee, H., Cesare, N., Shojaie, A., and Spiro, E.~S. (2015).
 \newblock Using twitter for demographic and social science research: tools for
   data collection and processing.
 \newblock {\em Sociological Methods \& Research},   0049124115605339.
+
+\bibitem[Meyer, 2017]{meyer_fix_2017}
+Meyer, M. (2017).
+\newblock Want to fix sciences's replication crisis? {Then} replicate.
+\newblock {\em Wired}.
+\newblock
+  \url{https://www.wired.com/2017/04/want-fix-sciences-replication-crisis-replicate/}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Milinovich {\it et~al.}, 2015]{milinovich_role_2015}
 Milinovich, G.~J., Magalhães, R. J.~S., and Hu, W. (2015).
@@ -342,12 +536,24 @@ Mowery, D., Bryan, C., and Conway, M. (2017).
   from twitter data for population health.
 \newblock {\em arXiv preprint arXiv:1701.08229}.
 
+\bibitem[Munafò {\it et~al.}, 2017]{munafo_manifesto_2017}
+Munafò, M.~R., Nosek, B.~A., Bishop, D. V.~M., Button, K.~S., Chambers, C.~D.,
+  Percie~du Sert, N., Simonsohn, U., Wagenmakers, E.-J., Ware, J.~J., and
+  Ioannidis, J. P.~A. (2017).
+\newblock A manifesto for reproducible science.
+\newblock {\em Nature Human Behaviour}, {\bf1},  0021.
+
 \bibitem[Newman, 2016]{newman2016tracking}
 Newman, T.~P. (2016).
 \newblock Tracking the release of ipcc ar5 on twitter: Users, comments, and
   sources following the release of the working group i summary for
   policymakers.
 \newblock {\em Public Understanding of Science},   0963662516628477.
+
+\bibitem[Nosek and Errington, 2017]{nosek_reproducibility_2017}
+Nosek, B.~A. and Errington, T.~M. (2017).
+\newblock Reproducibility in cancer biology: making sense of replications.
+\newblock {\em Elife}, {\bf6},  e23383.
 
 \bibitem[Nwosu {\it et~al.}, 2014]{nwosu2014social}
 Nwosu, A.~C., Debattista, M., Rooney, C., and Mason, S. (2014).
@@ -379,12 +585,23 @@ Paul, M.~J., Dredze, M., and Broniatowski, D. (2014).
 \newblock Twitter {Improves} {Influenza} {Forecasting}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Peng, 2009]{peng_reproducible_2009}
+Peng, R.~D. (2009).
+\newblock Reproducible research and {Biostatistics}.
+\newblock {\em Biostatistics}, {\bf10},  405--408.
+
 \bibitem[Poblete {\it et~al.}, 2011]{poblete2011all}
 Poblete, B., Garcia, R., Mendoza, M., and Jaimes, A. (2011).
 \newblock Do all birds tweet the same?: characterizing twitter around the
   world.
 \newblock In {\em Proceedings of the 20th ACM international conference on
   Information and knowledge management},   1025--1030. ACM.
+
+\bibitem[Prinz {\it et~al.}, 2011]{prinz_believe_2011}
+Prinz, F., Schlange, T., and Asadullah, K. (2011).
+\newblock Believe it or not: how much can we rely on published data on
+  potential drug targets?
+\newblock {\em Nature reviews Drug discovery}, {\bf10},  712--712.
 
 \bibitem[Qiu {\it et~al.}, 2012]{qiu2012you}
 Qiu, L., Lin, H., Ramsay, J., and Yang, F. (2012).
@@ -401,6 +618,7 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
 \bibitem[Rehak, 2014]{rehak_twitterbird_2014}
 Rehak, M. (2014).
 \newblock Who made that {Twitter} bird?
+\newblock {\em The {New} {York} {Times}}.
 \newblock
   \url{https://www.nytimes.com/2014/08/10/magazine/who-made-that-twitter-bird.html}.
 \newblock [Online; accessed 1-August-2017].
@@ -432,6 +650,11 @@ Salath{\'e}, M., Vu, D.~Q., Khandelwal, S., and Hunter, D.~R. (2013).
 \newblock The dynamics of health behavior sentiments on a large online social
   network.
 \newblock {\em EPJ Data Science}, {\bf2},  4.
+
+\bibitem[Schooler, 2014]{schooler2014metascience}
+Schooler, J.~W. (2014).
+\newblock Metascience could rescue the'replication crisis'.
+\newblock {\em Nature}, {\bf515},  9.
 
 \bibitem[Scott {\it et~al.}, 2017]{scott_time_2017}
 Scott, C.~F., Bay-Cheng, L.~Y., Prince, M.~A., Nochajski, T.~H., and Collins,
@@ -472,6 +695,11 @@ Stieglitz, S. and Dang-Xuan, L. (2012).
 \newblock In {\em System Science (HICSS), 2012 45th Hawaii International
   Conference on},   3500--3509. IEEE.
 
+\bibitem[Stroebe and Strack, 2014]{stroebe_alleged_2014}
+Stroebe, W. and Strack, F. (2014).
+\newblock The alleged crisis and the illusion of exact replication.
+\newblock {\em Perspectives on Psychological Science}, {\bf9},  59--71.
+
 \bibitem[Sul {\it et~al.}, 2014]{sul2014trading}
 Sul, H.~K., Dennis, A.~R., and Yuan, L.~I. (2014).
 \newblock Trading on twitter: The financial information content of emotion in
@@ -484,6 +712,14 @@ Swani, K., Brown, B.~P., and Milne, G.~R. (2014).
 \newblock Should tweets differ for b2b and b2c? an analysis of fortune 500
   companies' twitter communications.
 \newblock {\em Industrial Marketing Management}, {\bf43},  873--881.
+
+\bibitem[The{\ }Economist, 2016]{econ_try_2016}
+The{\ }Economist (2016).
+\newblock Let's just try this again.
+\newblock {\em The {Economist}}.
+\newblock
+  \url{https://www.economist.com/news/science-and-technology/21690020-reproducibility-should-be-sciences-heart-it-isnt-may-soon}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Tumasjan {\it et~al.}, 2010]{tumasjan2010predicting}
 Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2010).
@@ -535,6 +771,14 @@ Wójcik, O.~P., Brownstein, J.~S., Chunara, R., and Johansson, M.~A. (2014).
 \newblock Public health for the people: participatory infectious disease
   surveillance in the digital age.
 \newblock {\em Emerging themes in epidemiology}, {\bf11},  7.
+
+\bibitem[Yong, 2016]{yong_psychology_2016}
+Yong, E. (2016).
+\newblock Psychology’s {Replication} {Crisis} {Can’t} {Be} {Wished} {Away}.
+\newblock {\em The {Atlantic}}.
+\newblock
+  \url{https://www.theatlantic.com/science/archive/2016/03/psychologys-replication-crisis-cant-be-wished-away/472272/}.
+\newblock [Online; accessed 13-August-2017].
 
 \bibitem[Zhang {\it et~al.}, 2012]{zhang2012predicting}
 Zhang, X., Fuehres, H., and Gloor, P. (2012).
