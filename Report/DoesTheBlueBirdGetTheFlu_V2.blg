@@ -3,8 +3,7 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for "ioannidis_why_2005"
-Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "bodna_data_2015"
 Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty journal in bag_grippe_2016
@@ -21,45 +20,45 @@ Warning--empty journal in rolfes_estimated_2016
 Warning--empty journal in sentinella_2017
 Warning--empty journal in twitter_annual_2013
 Warning--empty journal in twitter_annual_2017
-You've used 123 entries,
+You've used 130 entries,
             1967 wiz_defined-function locations,
-            1129 strings with 29947 characters,
-and the built_in function-call counts, 52255 in all, are:
-= -- 5210
-> -- 2373
-< -- 78
-+ -- 846
-- -- 818
-* -- 4374
-:= -- 9083
-add.period$ -- 422
-call.type$ -- 123
-change.case$ -- 1020
-chr.to.int$ -- 117
-cite$ -- 139
-duplicate$ -- 1888
-empty$ -- 3299
-format.name$ -- 977
-if$ -- 10279
+            1164 strings with 31165 characters,
+and the built_in function-call counts, 54993 in all, are:
+= -- 5476
+> -- 2481
+< -- 82
++ -- 884
+- -- 854
+* -- 4624
+:= -- 9571
+add.period$ -- 443
+call.type$ -- 130
+change.case$ -- 1073
+chr.to.int$ -- 124
+cite$ -- 146
+duplicate$ -- 1979
+empty$ -- 3488
+format.name$ -- 1022
+if$ -- 10806
 int.to.chr$ -- 7
 int.to.str$ -- 0
-missing$ -- 230
-newline$ -- 659
-num.names$ -- 369
-pop$ -- 784
+missing$ -- 244
+newline$ -- 694
+num.names$ -- 390
+pop$ -- 812
 preamble$ -- 1
-purify$ -- 1023
+purify$ -- 1076
 quote$ -- 0
-skip$ -- 1496
+skip$ -- 1563
 stack$ -- 0
-substring$ -- 3476
-swap$ -- 344
+substring$ -- 3696
+swap$ -- 351
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 732
+type$ -- 774
 warning$ -- 16
-while$ -- 399
+while$ -- 422
 width$ -- 0
-write$ -- 1654
-(There were 18 warnings)
+write$ -- 1745
+(There were 17 warnings)

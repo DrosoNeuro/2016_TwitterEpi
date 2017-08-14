@@ -40,6 +40,12 @@ Adrover, C., Bodnar, T., Huang, Z., Telenti, A., and Salath{\'e}, M. (2015).
   sentiments using twitter.
 \newblock {\em JMIR public health and surveillance}, {\bf1}, .
 
+\bibitem[Amrhein {\it et~al.}, 2017]{amrhein_earth_2017}
+Amrhein, V., Korner-Nievergelt, F., and Roth, T. (2017).
+\newblock The earth is flat ( \textit{p} {\textgreater} 0.05): significance
+  thresholds and the crisis of unreplicable research.
+\newblock {\em PeerJ}, {\bf5},  e3544.
+
 \bibitem[Anema {\it et~al.}, 2014]{anema_digital_2014}
 Anema, A., Kluberg, S., Wilson, K., Hogg, R.~S., Khan, K., Hay, S.~I., Tatem,
   A.~J., and Brownstein, J.~S. (2014).
@@ -94,6 +100,11 @@ Baker, M. (2016b).
 Baker, M. (2016c).
 \newblock Reproducibility: seek out stronger science.
 \newblock {\em Nature}, {\bf537},  703--704.
+
+\bibitem[Banks, 2011]{banks_reproducible_2011}
+Banks, D. (2011).
+\newblock Reproducible research: {A} range of response.
+\newblock {\em Statistics, Politics, and Policy}, {\bf2},  4.
 
 \bibitem[Bauer, 2016]{bauer_timeonline_2016}
 Bauer, R. (2016).
@@ -154,6 +165,13 @@ Bollen, J., Mao, H., and Pepe, A. (2011a).
 Bollen, J., Mao, H., and Zeng, X. (2011b).
 \newblock Twitter mood predicts the stock market.
 \newblock {\em Journal of computational science}, {\bf2},  1--8.
+
+\bibitem[Bornmann and Mutz, 2015]{bornmann2015growth}
+Bornmann, L. and Mutz, R. (2015).
+\newblock Growth rates of modern science: A bibliometric analysis based on the
+  number of publications and cited references.
+\newblock {\em Journal of the Association for Information Science and
+  Technology}, {\bf66},  2215--2222.
 
 \bibitem[Braithwaite {\it et~al.}, 2016]{braithwaite2016validating}
 Braithwaite, S.~R., Giraud-Carrier, C., West, J., Barnes, M.~D., and Hanson,
@@ -409,6 +427,17 @@ Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
 \newblock {\em Proceedings of the National Academy of Sciences of the United
   States of America}, {\bf101},  15124--15129.
 
+\bibitem[Ioannidis, 2005]{ioannidis_why_2005}
+Ioannidis, J. P.~A. (2005).
+\newblock Why {Most} {Published} {Research} {Findings} {Are} {False}.
+\newblock {\em PLoS Medicine}, {\bf2},  e124.
+
+\bibitem[Kass {\it et~al.}, 2016]{kass_ten_2016}
+Kass, R.~E., Caffo, B.~S., Davidian, M., Meng, X.-L., Yu, B., and Reid, N.
+  (2016).
+\newblock Ten {Simple} {Rules} for {Effective} {Statistical} {Practice}.
+\newblock {\em PLOS Comput Biol}, {\bf12},  e1004961.
+
 \bibitem[Kenett and Shmueli, 2015]{kenett2015clarifying}
 Kenett, R.~S. and Shmueli, G. (2015).
 \newblock Clarifying the terminology that describes scientific reproducibility.
@@ -585,6 +614,11 @@ Paul, M.~J., Dredze, M., and Broniatowski, D. (2014).
 \newblock Twitter {Improves} {Influenza} {Forecasting}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Peng, 2006]{peng_reproducible_2006}
+Peng, R.~D. (2006).
+\newblock Reproducible {Epidemiologic} {Research}.
+\newblock {\em American Journal of Epidemiology}, {\bf163},  783--789.
+
 \bibitem[Peng, 2009]{peng_reproducible_2009}
 Peng, R.~D. (2009).
 \newblock Reproducible research and {Biostatistics}.
@@ -752,6 +786,12 @@ Vidal, L., Ares, G., Mach{\'\i}n, L., and Jaeger, S.~R. (2015).
 \newblock Using twitter data for food-related consumer research: A case study
   on “what people say when tweeting about different eating situations”.
 \newblock {\em Food Quality and Preference}, {\bf45},  58--69.
+
+\bibitem[Vogt {\it et~al.}, 2016]{vogt_authorization_2016}
+Vogt, L., Reichlin, T.~S., Nathues, C., and Würbel, H. (2016).
+\newblock Authorization of {Animal} {Experiments} {Is} {Based} on {Confidence}
+  {Rather} than {Evidence} of {Scientific} {Rigor}.
+\newblock {\em PLOS Biology}, {\bf14},  e2000598.
 
 \bibitem[Wang {\it et~al.}, 2016]{wang_regional_2016}
 Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
