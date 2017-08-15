@@ -365,7 +365,7 @@ In their study, conducted during the 2012-2013 Influenza season, \cite{bodnar_gr
 The researchers collected a total of 37'599 tweets from the 104 accounts mentioned above (``seed accounts") as well as 30'950'958 tweets from the 913'082 accounts that were connected to those seed accounts (either by following one of them or by being followed by one of them). They then proceeded to divide the tweets from the seed accounts into two categories: Tweets that were sent during a month in which the user was sick and the rest. This way, a total of 1609 tweets from 35 users could be extracted. 
 Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods: J48 (a Java implementation of the C4.5 algorithm), naive Bayes, logistic regression, Naive Bayes, random forest, and support vector machine (SVM). All classification methods failed to reliably correlate the keywords with a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).
 
-In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curver (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
+In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``healthy" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curver (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
 
 \begin{figure}[H]
   \centering
@@ -420,14 +420,14 @@ Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI p
 
 \begin{figure}[H]
   \centering
-    \includegraphics[width=1\textwidth]{todd_bodnar_SIR.png}
+    \includegraphics[width=1\textwidth]{02_todd_bodnar_SIR.png}
   \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters. The discontinuities stem from recalculating the SIR models for each year with the ILI rates from the Twitter classifier as a starting point for each year. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis_SIR}
   \end{figure}
 
 \begin{figure}[H]
   \centering
-    \includegraphics[width=0.9\textwidth,height=0.6\textwidth]{cdc_fit_bodnar_thesis.png}
+    \includegraphics[width=0.9\textwidth,height=0.6\textwidth]{03_cdc_fit_bodnar_thesis.png}
   \caption{Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) compared to the CDC's reported ILI rates (circles) for the whole United States. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis}
   \end{figure}
@@ -443,7 +443,7 @@ Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_
 
 \chapter{(Almost) big data: How to analyse 2.8 billion tweets}
 \label{ch:data_set_description}
-In the this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{Rbase}, even though some aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In this thesis, I will cite each library and programming resource I used in order to show my deference to the intellectual property of each . However, since I used several libraries at multiple occasions for my work,  I will only cite them when they are mentioned the first time. All functions and data sets, including the Rpackages used for  are available at Github.
+In the this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though some aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite each library I have used for the data aggregation and analysis. However, since I used several libraries at multiple occasions for my work,  I will only cite them when they are mentioned the first time. In addition, all data sets, custom-written functions, and their output are made avaialable on Github including a detailled description of the exact version of the libraries that were used for the creation of the findings presented in this thesis.
 
 \section{The nature of the data beast}
 \label{sec:starting}
@@ -520,26 +520,26 @@ In the next step, I ran a custom-written function using a polygon lookup based o
 
 Most of them either came to lie at the coastline or the Canadian-US-border and the Mexican-US-border, respectively. I removed a total of \Sexpr{l(n_canexico)} tweets that were sent from either Canada or Mexico (see Figure~\ref{fig:canexico_and_removed}). In order to reassign the unassigned tweets from the coastline, I first changed the coordinates of the ``border cases" by \Sexpr{dg} degrees longitude and latitude towards the center of the US main land (e.g. if a tweet was sent from northeastern Canadian border, I added \Sexpr{dg} degrees to its longitude and subtracted \Sexpr{dg} degrees from its latitude before re-running the code). Those tweets that were still unassigned received the same state name as majority of their neighbours within a \Sexpr{dg}$\times$\Sexpr{dg} degree window. This way, an additional \Sexpr{l(n_removed)} tweets were removed, most of them at the coastline or from the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
-After pre-processing, the \texttt{sick\_users} data set was left with a with \Sexpr{l(df_summary$num_all_tweets)} tweets remaining. These tweets were sent by total of \Sexpr{l(df_summary$num_all_users)} users, meaning that on average, each user sent \Sexpr{r2(df_summary$num_all_tweets/df_summary$num_all_users)} tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only sligthly longer than in my case). Furthermore, the maximal number of tweets sent per user over the course of the 208 week period was \Sexpr{max(df_summary$ID_table_tot)}, a very low number given the fact that there are twitter users out there who send over a hundred tweets \textit{per day} (see also Figure~\ref{fig:histogram_ID_tot} for distribution of the number of tweets sent per user in the \texttt{sick\_users} data set).\newpage
+After pre-processing, the \texttt{sick\_users} data set was left with a with \Sexpr{l(df_summary$num_all_tweets)} tweets remaining. These tweets were sent by total of \Sexpr{l(df_summary$num_all_users)} users, meaning that on average, each user sent \Sexpr{r2(df_summary$num_all_tweets/df_summary$num_all_users)} tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only sligthly longer than in my case). As can be in Figure~\ref{fig:histogram_ID_tot} a large part of the Twitter users in the \texttt{sick\_users} data set only sent one or two tweets over the whole study period. Furthermore, the maximal number of tweets sent per user over the course of the 208 week time window was \Sexpr{max(df_summary$ID_table_tot)}, a very low number given the fact that there are twitter users out there who send over a hundred tweets \textit{per day}.\newpage
 
 \begin{figure}[H]
   \centering
     \begin{subfigure}[t]{0.9\textwidth}
-    \includegraphics[width=1\linewidth]{state56_sick_raw_df.png}
+    \includegraphics[width=1\linewidth]{04_state56_sick_raw_df.png}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.9\textwidth}
-  \includegraphics[width=1\linewidth]{CanexicoAndRemoved_sick_raw_df.png}
+  \includegraphics[width=1\linewidth]{05_CanexicoAndRemoved_sick_raw_df.png}
   \caption{}
   \end{subfigure}
-  \caption{(a) All tweets having ``state = 56" as code in the \texttt{sick\_users} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt{sick\_users} data set. The green dots represent the tweets that had a ``state = 56" as  a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf{not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.}
+  \caption{(a) All tweets in the \texttt{sick\_users} data set whose \texttt{state} variable is coded as ``56", i. e. all tweets that could not be assigned to any specific US state. (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt{sick\_users} data set. The green dots represent the tweets that whose \texttt{state} was coded as ``56" as  a code, but which could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textit{not} have a \texttt{state} code other than ``56", but failed to be assigned to a state by the polygon lookup I performed.}
   \label{fig:canexico_and_removed}
   \end{figure}
 
 \begin{figure}[H]
   \centering
-    \includegraphics[width=1\textwidth]{user_activity_total_sick_raw_df.png}
-  \caption{Histogram of the number of tweets sent per user in the \texttt{sick\_users} data set during the 208 weeks between \Sexpr{time_window[[1]]} and \Sexpr{time_window[[2]]} (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent \Sexpr{max(df_summary$ID_table_tot)} tweets. Mean = \Sexpr{avg_med_tot[[1]]} (solid line); median = \Sexpr{avg_med_tot[[2]]} (dashed line)}
+    \includegraphics[width=1\textwidth]{06_user_activity_total_sick_raw_df.pdf}
+  \caption{Histogram of the number of tweets sent per user in the \texttt{sick\_users} data set during the 208 weeks between \Sexpr{time_window[[1]]} and \Sexpr{time_window[[2]]} (bin size = 1 tweet). Mean = \Sexpr{r2(avg_med_tot[[1]])} (solid line); median = \Sexpr{avg_med_tot[[2]]} (dashed line).}
   \label{fig:histogram_ID_tot}
 \end{figure}
 
@@ -547,8 +547,8 @@ After pre-processing, the \texttt{sick\_users} data set was left with a with \Se
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{barplot_sick_raw_df.pdf}
-\caption{The total number of users who only sent tweets labelled as ``sick" (\Sexpr{df_summary$num_only_sick_users}), users who sent at least one tweet labelled as ``sick" and ``healthy" (\Sexpr{df_summary$num_both}), and users who only sent tweets labelled as ``healthy" (\Sexpr{df_summary$num_only_health_users})}
+\includegraphics[width=1\linewidth]{07_barplot_sick_raw_df.pdf}
+\caption{The total number of users who only sent tweets labelled as ``sick" (\Sexpr{df_summary$num_only_sick_users}), users who sent at least one tweet labelled as ``sick" and ``healthy" (\Sexpr{l(df_summary$num_both)}), and users who only sent tweets labelled as ``healthy" (\Sexpr{l(df_summary$num_only_health_users)}).}
 \label{fig:barplot_sick_df}
 \end{figure}
 
@@ -556,23 +556,21 @@ Halfway through 2011, Twitter users sent approximately 200 million tweets per da
 
 One explanation for this discrepancy to the tweet rates found in the \texttt{sick\_users} data set might be found in the fact that the data set only contains geotagged tweets which only represent 0.85 \% \citep{sloan2013knowing} of all tweets. 
 
-If we make the naïve assumption that geotagged tweets represent a subset of all tweets that is uniformly distributed over all Twitter users (in other words: it is assumed that each Twitter user adds geolocation to 0.85 \% of his tweets) we receive a mean tweet rate (\Sexpr{r2(df_summary$num_all_tweets/df_summary$num_all_users/0.0085)} tweets per user in the \texttt{sick\_users} data set) that is comparable to the mean tweet rate of all Twitter uers (1907.29 tweets per user).
+If we make the naïve assumption that geotagged tweets represent a subset of all tweets that is uniformly distributed over all Twitter users (in other words: it is assumed that each Twitter user adds geolocation to 0.85\% of his tweets) we receive a mean tweet rate (\Sexpr{r2(df_summary$num_all_tweets/df_summary$num_all_users/0.0085)} tweets per user in the \texttt{sick\_users} data set) that is comparable to the mean tweet rate of all Twitter uers (1907.29 tweets per user).
 
-However, \cite{sloan_who_2015} have shown in a recent study that only 58.4 \% of all users have location services enabled and only 3.1 \% of all users ever sent a geotagged tweet. Hence, the complete body of geotagged tweets is clustered heavily around a small subset of Twitter users, so that our assumption of the uniform distribution of geotagged tweets over all Twitters users does not hold
+However, \cite{sloan_who_2015} have shown in a recent study that only 58.4 \% of all users have location services enabled and only 3.1\% of all users ever sent a geotagged tweet. Hence, the complete body of geotagged tweets is clustered heavily around a small subset of Twitter users, so that our assumption of the uniform distribution of geotagged tweets over all Twitters users does not hold
 
 Nevertheless, the information described above allows us the achieve an estimate of the total amount of tweets and users between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015 using the following formula:
   \begin{align}
 \text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{geotagged}} \cdot \frac{1}{0.0085}}{U_\text{geotagged} \cdot \frac{1}{0.031}} \label{eq:3}
   \end{align}
-%$$\text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{geotagged}} \cdot \frac{1}{0.0085}}{U_\text{geotagged} \cdot \frac{1}{0.031}}$$% = \frac{T_{\text{sick\_users}} \cdot \frac{T_{\text{all\_tweets}}}{T_{\text{sick\_users}}} \cdot \frac{1}{0.0085}}{U_\text{sick\_users} \cdot \frac{U_{\text{all\_tweets}}}{U_{\text{sick\_users}}} \cdot \frac{1}{0.031}}$$
 
 Here, $T_\text{tot}$ and $T_\text{geotagged}$ depcict the number of tweets in the real world and the number of tweets in the geotagged subsample, respectively, whereas $U_\text{tot}$ and $U_\text{geotagged}$ denominate the number of Twitter users in the real world and in the geotagged subsample, respectively. 
-
 Applying this formula yields a mean tweet rate of \Sexpr{r2(df_summary$num_all_tweets/0.0085/(df_summary$num_all_users/0.031))} tweets per user in the \texttt{sick\_users} data set between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, which is higher then the unadjusted tweet rate per user in the \texttt{sick\_users} data set, but still remains considerably lower than the conservative estimate of the real-world tweet rate based on the official Twitter data. Hence, I am led to believe that the \texttt{sick\_users} data set does is neither representative of rest of the data set, let alone the total corpus of tweets produced in the real world. This should not come as a suprise, since the \texttt{sick\_users} data set is supposed to contain the tweets of all those users who sent at least one tweet that was classified as ``sick" (Bodnar, personal communication).
 
 However, the large majority of the users within the \texttt{sick\_users} data set never sent a tweet that was labelled as ``sick" by the flu classifier (see Figure~\ref{fig:barplot_sick_df}). In fact, only \Sexpr{l(df_summary$dis_table[1,1]+df_summary$dis_table[1,2])} out of \Sexpr{l(df_summary$num_all_users)} (or \Sexpr{r2((df_summary$prop_all[1,1]+df_summary$prop_all[2,1])*100)}\%) ever sent such a tweet.
 
-Also, a total of \Sexpr{df_summary$dis_table[1,1]} users exclusively sent tweets that were labelled as sick---something that seems rather unlikely to happen. Finally, those \Sexpr{l(df_summary$dis_table[1,2])} users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (\Sexpr{r2(df_summary$dis_table_tweets[1,2]/df_summary$num_both)} and \Sexpr{r2(df_summary$dis_table_tweets[2,2]/df_summary$num_only_health_users)}, respectively. $p$ = \Sexpr{r2(diff_wilcox_both_healthy$p.value)} using a Mann-Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution ($p$ =\Sexpr{ks_both_healthy$p.value}), something that can also easily be seen in Figure~\ref{fig:both_vs_healthy_only_hist}.
+Also, a total of \Sexpr{df_summary$dis_table[1,1]} users exclusively sent tweets that were labelled as sick---something that seems rather unlikely to happen. Finally, those \Sexpr{l(df_summary$dis_table[1,2])} users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (\Sexpr{r2(df_summary$dis_table_tweets[1,2]/df_summary$num_both)} and \Sexpr{r2(df_summary$dis_table_tweets[2,2]/df_summary$num_only_health_users)}, respectively. $p$ = \Sexpr{r2(diff_wilcox_both_healthy$p.value)} using a Mann-Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution ($p$ =\Sexpr{ks_both_healthy$p.value}), something that can also easily be observed in Figure~\ref{fig:both_vs_healthy_only_hist}.
 
 Hence, it is unclear how exactly the \texttt{sick\_users} data set was constructed, since it is neither a representative subset of the whole twitter data set (for that, the percentage for sick tweets is too high, see Section~\ref{sec:full_set}) nor does it exclusively contain tweets from users who had at least one of their tweets labelled as ``sick".
 
@@ -581,14 +579,14 @@ Nevertheless, I used this data set as a basis to develop a basic grasp of the da
 \begin{figure}[H]
 \centering
   \begin{subfigure}[b]{1\textwidth}
-  \includegraphics[width=1\linewidth]{user_activity_both_sick_raw_df.png}
+  \includegraphics[width=1\linewidth]{08_user_activity_both_sick_raw_df.pdf}
   \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{1\textwidth}
-  \includegraphics[width=1\linewidth]{user_activity_only_healthy_sick_raw_df.png}
+  \includegraphics[width=1\linewidth]{09_user_activity_only_healthy_sick_raw_df.pdf}
   \caption{}
   \end{subfigure}
-  \caption{Histogram of numbers of tweets sent per user during the 208 weeks between \Sexpr{time_window[[1]]} and \Sexpr{time_window[[2]]} (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``sick" and one tweet labelled as ``healthy".  Mean = \Sexpr{avg_med_both[[1]]} (solid line); median = \Sexpr{avg_med_both[[2]]} (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``sick" by the classifier.  Mean = \Sexpr{avg_med_healthy[[1]]} (solid line); median = \Sexpr{avg_med_healthy[[2]]} (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``sick" and one tweet labelled as ``healthy")}
+  \caption{Histograms of the number of tweets sent per user during the 208 weeks between \Sexpr{time_window[[1]]} and \Sexpr{time_window[[2]]} (bin size = 1 tweet). (a) Users who sent at least one tweet labelled as ``sick" and one tweet labelled as ``healthy".  Mean = \Sexpr{r2(avg_med_both[[1]])} (solid line); median = \Sexpr{avg_med_both[[2]]} (dashed line). (b) Users who never sent a tweet that was labelled as ``sick" by the classifier.  Mean = \Sexpr{r2(avg_med_healthy[[1]])} (solid line); median = \Sexpr{avg_med_healthy[[2]]} (dashed line). Mode, median, and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet since the users in this group are defined by having sent at last one tweet labelled ``sick" and one tweet labelled as ``healthy".}
   \label{fig:both_vs_healthy_only_hist}
 
 \end{figure}
@@ -649,8 +647,8 @@ Finally, by applying Equation~\ref{eq:3} described in Section~\ref{sec:sick_user
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{avg_tw_sick_healthy.pdf}
-\caption{The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.}
+\includegraphics[width=1\linewidth]{10_avg_tw_sick_healthy.pdf}
+\caption{The unadjusted mean number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue), and total users (solid blue), respectively.}
 \label{fig:avg_tw_diff}
 \end{figure}
 
@@ -811,7 +809,7 @@ In order to assess the validity of the ILI predictions provided by the flu class
 
 In a first step, I simply compared the official CDC ILI percentage data on the national level with the the relative number of tweets labelled as ``sick" per week and the relative number of sick users per week, respectively. As can be seen from Figure~\ref{fig:naive_comparison_CDC_twitter}, the relative results from the Twitter classifer are an order of magnitude smaller than the official ILI data from the CDC.
 
-In order to make them directly comparable to each other, I normalised both time series by the total sum of relative tweets numbers and ILI percentages, respectively. Hence, the percentual values shown in Figure~\ref{fig:cdc_tw_comp_nat_ma1} do not represent weekly ILI percentage, but rather the percentual proportion of the relative number of tweets and the ILI percentages, respectively, of a given week within the whole 208 week study period (In other words: The percentages of each week add up to a 100\%). Since the fluctuations in the Twitter data were very high, I plotted the data again after applying a two-week (Figure~\ref{fig:cdc_tw_comp_nat_ma2}) and four-week (Figure~\ref{fig:cdc_tw_comp_nat_ma4}) moving average smoother (using the ``forecast" package \citeppackages{forecast}). This reduced the overall fluctuations a bit, but did not particularly improve the fit with the CDC curve. I did the same for each of the ten CDC flu surveillance regions (Figure~\ref{fig:cdc_tw_comp_regs_ma4}). The situation improves slightly if we use the relative amount of sick \textbf{users} per week (as opposed to the relative amount of sick \textbf{tweets} per week), as can be seen  from Figures~\ref{fig:cdc_tw_comp_nat_user} and \ref{fig:cdc_tw_comp_regs_ma4}. In both cases, however, the correlation between the relative ILI estimates based on Twitter data and the official CDC data were abysmal (Spearman's Rho was \Sexpr{r4(spearman_tw_cdc_ma4$estimate)} and \Sexpr{r4(spearman_tw_cdc_ma4_user$estimate)} for tweet- and user-based four-week average curves, respectively). 
+In order to make them directly comparable to each other, I normalised both time series by the total sum of relative tweets numbers and ILI percentages, respectively. Hence, the percentual values shown in Figure~\ref{fig:cdc_tw_comp_nat_ma1} do not represent weekly ILI percentage, but rather the percentual proportion of the relative number of tweets and the ILI percentages, respectively, of a given week within the whole 208 week study period (In other words: The percentages of each week add up to a 100\%). Since the fluctuations in the Twitter data were very high, I plotted the data again after applying a two-week (Figure~\ref{fig:cdc_tw_comp_nat_ma2}) and four-week (Figure~\ref{fig:cdc_tw_comp_nat_ma4}) moving average smoother (using the ``forecast" package \citeppackages{forecast}). This reduced the overall fluctuations a bit, but did not particularly improve the fit with the CDC curve. I did the same for each of the ten CDC flu surveillance regions (Figure~\ref{fig:cdc_tw_comp_regs_ma4}). The situation improves slightly if we use the relative amount of sick \textbf{users} per week (as opposed to the relative amount of sick \textbf{tweets} per week), as can be seen  from Figures~\ref{fig:cdc_tw_comp_nat_user} and \ref{fig:cdc_tw_comp_regs_ma4_user}. In both cases, however, the correlation between the relative ILI estimates based on Twitter data and the official CDC data were abysmal (Spearman's Rho was \Sexpr{r4(spearman_tw_cdc_ma4$estimate)} and \Sexpr{r4(spearman_tw_cdc_ma4_user$estimate)} for tweet- and user-based four-week average curves, respectively). 
 
 \begin{figure}[H]
 \centering
@@ -885,7 +883,7 @@ In order to make them directly comparable to each other, I normalised both time 
 \centering
 \includegraphics[width=1\linewidth]{cdc_twitter_comp_regs_ma4_user.pdf}
 \caption{Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.}
-\label{fig:cdc_tw_comp_regs_ma4}
+\label{fig:cdc_tw_comp_regs_ma4_user}
 \end{figure}
 
 \subsection{Comparing classifier results with CDC activity levels}
@@ -1023,7 +1021,7 @@ It is very peculiar, however, that the model parameters which I calculated for t
 \begin{figure}[H]
 \centering
   \begin{subfigure}[t]{0.65\textwidth}
-  \includegraphics[width=1\linewidth,height=0.5\linewidth]{todd_bodnar_SIR.png}
+  \includegraphics[width=1\linewidth,height=0.5\linewidth]{02_todd_bodnar_SIR.png}
   \caption{}
   \label{fig:SIR_comparison_original}
   \end{subfigure}
@@ -1108,7 +1106,7 @@ The classifier has shown that it can faithfully predict the Influenza peaks recu
 
 However, one can also see from these figures is that the peaks are very short and sharp. This might be explained by the way the Twitter classifier labels a certain user a tweet and thereby the author of said tweet as ``sick". The classifier does so by aggregating the daily signals within a 4-week-window in order to classify the tweets of the first day either as ``sick" or ``healthy" (see Section~\ref{sec:on_the_ground} for details). 
 
-However, this way of assigning disease status has one problematic implication, namely that information from future tweets is incorporated while information from past tweets is ignored. This is insofar counterintuitive as a Twitter users who tweeted about being sick on day 1, will most certainly still be sick on day 2---regardless of what he tweets about. However, the algorithm will not take this into account, so when shifting the onset of the 4-week-sliding window to day 2, all information from day 1 will be lost. If there are no additional flu keywords to be found in the tweets sent within the following 4-week-sliding window, the algorithm will mistakenly classify the user as being not sick anymore. 
+However, this way of assigning disease status has one problematic implication, namely that information from future tweets is incorporated while information from past tweets is ignored. This is insofar counterintuitive as a Twitter users who tweeted about being sick on day 1, will most certainly still be sick on day 2---regardless of what he tweets about. However, the algorithm will not take this into account, so when shifting the onset of the 4-week-sliding window to day 2, all information from day 1 will be lost. If there are no additional flu keywords to be found in the tweets sent within the following 4-week-sliding window, the algorithm will mistakenly classify the user as being healthy again.
 
 In addition, the algorithm is bound to classify tweets too early as being sick. For example, if particularly strong ``flu" signal turns up, the algorithm might classify the user as being ``sick" up to four weeks before the actual onset of the sickness. In other words; instead of assuming that a user remains sick for some time after she has tweeted about being sick, the algorithm might give the faulty impression that the user has been sick up to the point where she tweeted about it---but not afterwards.
 
@@ -1141,7 +1139,7 @@ Hence, future assessments of the performance of the Twitter classifier should fo
 \subsection{Low signal to noise ratio on regional, state, and county level}
 Using geotagged tweets offers the intriguing prospect of accurately tracking transmission dynamics on a national, regional, state-level, and county-level scale. In addition, it might allow for more fine-grained spatio-temporal surveillance of the flu due the fact that flu occurrences can be tracked for every day and up to street resolution. 
 
-However, as shown in Sections~\ref{sec:comp_cdc_county}, \ref{sec:comp_cdc_state}, and \ref{sec:comp_cdc_ac}, this approach does not yet seem to yield feasible results. The higher the spatial resolution become (moving from the national level with the lowest to the county level with the highest resolution), the more pronounced the influence of statistical noise becomes. One likely explanation for this is the fact that the number of available tweets is reduced the smaller the geographical region of interest becomes. In return, this increase the impact of individual tweets on the ratio of tweets labelled as ``sick" to tweets labelled as ``non sick". Even though this is to be expected, the extent of it is still surprising. 
+However, as shown in Sections~\ref{sec:comp_cdc_county}, \ref{sec:comp_cdc_state}, and \ref{sec:comp_cdc_ac}, this approach does not yet seem to yield feasible results. The higher the spatial resolution become (moving from the national level with the lowest to the county level with the highest resolution), the more pronounced the influence of statistical noise becomes. One likely explanation for this is the fact that the number of available tweets is reduced the smaller the geographical region of interest becomes. In return, this increase the impact of individual tweets on the ratio of tweets labelled as ``sick" to tweets labelled as ``healthy". Even though this is to be expected, the extent of it is still surprising. 
 
 After all, states like New Jersey or Oregon have a considerable Twitter population with xy and yz tweets stemming from these two states, respectively. Hence, one would assume that the sheer amount of tweets sent from within these states would be big enough to make them somewhat impervious to statistical noise and large outliers. However, what it is often forgotten that the flu rates are calculated on a weekly basis, therefore heavily reducing the number of tweets that are available to calculate the ratio of sick to healthy users in a given state or week. As I have shown with Figures~\ref{fig:cdc_tw_comp_nat_tot} and \ref{fig:cdc_tw_comp_nat_user}, these fluctuations can be reduced by applying a simple moving average over two or four weeks.
 

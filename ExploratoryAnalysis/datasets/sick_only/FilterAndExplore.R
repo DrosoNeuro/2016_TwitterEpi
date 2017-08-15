@@ -55,7 +55,7 @@ for (i in files_to_process){
                                    fill="white",color="black") +
     coord_fixed(ratio) + geom_point(data=df[state==56,],aes(x=longitude,y=latitude),
                                     color="black",size=3) + xlab("longitude") + ylab("latitude") +
-    theme(text=element_text(size=20)) +  theme(plot.margin = unit(c(1,1,1,1),"cm"))
+    theme(text=element_text(size=45)) +  theme(plot.margin = unit(c(1,1,1,1),"cm"))
   
   png(filename = paste0("plots/state56_",tag,".png"),
       width = base_width*1.8, height = base_width, units = "px")
@@ -79,7 +79,6 @@ for (i in files_to_process){
   states <- map_data("state")
   ratio <- 1.3
   base_width <- 1000
-  
   canexico_plot <- ggplot()+geom_polygon(data=states,aes(x=long,y=lat,group=group),
                         fill="white",color="black") +
     coord_fixed(ratio) + 
@@ -90,7 +89,7 @@ for (i in files_to_process){
     geom_point(data=df_processed[state==56,],aes(x=longitude,y=latitude),
                color = "green",size=3) +
     xlab("longitude") + ylab("latitude") + 
-    theme(text = element_text(size=20)) + 
+    theme(text = element_text(size=45)) + 
     theme(plot.margin = unit(c(1,1,1,1),"cm"))
   
   png(filename = paste0("plots/CanexicoAndRemoved_",tag,".png"),

@@ -674,8 +674,8 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
 
-\bibitem[R{\}{Core}{\ }{Team}, 2017]{Rbase}
-R{\}{Core}{\ }{Team} (2017).
+\bibitem[R{\ }{Core}{\ }{Team}, 2017]{rbase_2017}
+R{\ }{Core}{\ }{Team} (2017).
 \newblock R: {A} {Language} and {Environment} for {Statistical} {Computing}.
 \newblock Technical report, Vienna, Austria.
 

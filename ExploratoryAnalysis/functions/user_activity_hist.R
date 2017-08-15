@@ -27,12 +27,12 @@ user_activity <- function(datatable,tag,xrange=c(0,100),yrange=c(0,0.06)){#datat
   temp <- invisible(print(activity_plot))
   
   mod <- max(temp$data[[1]]$density)
-  filenames <- paste0("plots/","user_activity_",tag,".png")
+  filenames <- paste0("plots/","user_activity_",tag,".pdf")
   #create histogram & density plot using raw counts
-  png(filename=filenames,width=1000,height=500)
+  pdf(file=filenames,width=10,height=5)
   activity_plot <- activity_plot + geom_segment(aes(x=avg,y=0,xend=avg,yend=yrange[2]),linetype="solid") + geom_segment(aes(x=med,y=0,xend=med,yend=yrange[2]),linetype="dashed") + #geom_density(alpha=.2, fill="#FF6666") +
     xlab('Number of tweets') + ylab("Proportion of users") + 
-    theme(text = element_text(size=20))  # Overlay with transparent density plot
+    theme(text = element_text(size=15))  # Overlay with transparent density plot
   # sick_plot <- ggplot(data =  user_ac_sick, aes(x = user_ac_sick[,N]))+ 
   #   geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
   #   xlab('numb. of tweets') + ylab("proportion of users") + scale_x_continuous(limits=c(0,50),expand=c(0,0))  # Overlay with transparent density plot
