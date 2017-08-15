@@ -22,8 +22,8 @@
 \contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{55}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{56}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \cite {bodnar_data_2015}}{60}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Discussion}{63}{chapter.5}
-\contentsline {section}{\numberline {5.1}Has Larry the Bird deserved our trust?}{63}{section.5.1}
+\contentsline {chapter}{\numberline {5}Discussion and outlook}{63}{chapter.5}
+\contentsline {section}{\numberline {5.1}Has ``Larry the Bird" deserved our trust?}{63}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}The Twitter classifier can detect seasonal flu peaks on a national level}{63}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}The Twitter classifier might be able to detect ILI symptoms in summer}{64}{subsection.5.1.2}
 \contentsline {subsection}{\numberline {5.1.3}Autoregression trumps Twitter data}{65}{subsection.5.1.3}

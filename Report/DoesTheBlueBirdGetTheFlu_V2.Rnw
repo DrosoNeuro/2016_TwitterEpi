@@ -365,12 +365,12 @@ In their study, conducted during the 2012-2013 Influenza season, \cite{bodnar_gr
 The researchers collected a total of 37'599 tweets from the 104 accounts mentioned above (``seed accounts") as well as 30'950'958 tweets from the 913'082 accounts that were connected to those seed accounts (either by following one of them or by being followed by one of them). They then proceeded to divide the tweets from the seed accounts into two categories: Tweets that were sent during a month in which the user was sick and the rest. This way, a total of 1609 tweets from 35 users could be extracted. 
 Then, they screened the tweets in both categories for the occurrence or absence of a set of keywords {flu, influenza, sick, cough, cold, medicine, fever}. The predictive power of these seven words were then tested by applying five different classification methods: J48 (a Java implementation of the C4.5 algorithm), naive Bayes, logistic regression, Naive Bayes, random forest, and support vector machine (SVM). All classification methods failed to reliably correlate the keywords with a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).
 
-In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an AUC of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
+In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``non sick" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curver (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
 
 \begin{figure}[H]
   \centering
-    \includegraphics[width=.9\textwidth]{ROC_classification_seed.png}
-  \caption{The ROC of classifiers that use hand chosen key words (a) and algorithmically chosen keywords (b) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features; taken from \cite{bodnar_ground_2014}.}
+    \includegraphics[width=.9\textwidth]{01_ROC_classification_seed.png}
+  \caption{The receiver operating characteristic (ROC) of classifiers that use hand chosen key words (left) and algorithmically chosen keywords (right) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features. Taken from \cite{bodnar_ground_2014}.}
   \label{fig:ROC_classification_seed}
   \end{figure}
 
@@ -383,12 +383,14 @@ To do so, he applied the classifier to the tweets of each user within a 4-week s
 Bodnar applied the algorithm in the above-described fashion to a set of 15'560'328 users who sent a total of 2'732'174'105 geotagged tweets between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015. Note that tweets from users who tweeted less than 10 times during this period as well as tweets that could not be attributed to a specific state on the US mainland were discarded. However, the total number of tweets analysed was not given in any of the documentations available to me. 
 
 In a next step, Bodnar created a Kermack--McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
-$$\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.$$
+\begin{align}
+\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.
+\end{align}
 $S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official ILI results from the Center for Disease Control (CDC) in Atlanta using a multi-grid search method. Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR model minimised the residual sum of squares (RSS):
-$$\text{RSS} = \sum_{t}(I_{\gamma, \beta}(t)-I_{\text{CDC}}(t)).$$
+  \begin{align}
+\text{RSS} = \sum_{t}(I_{\gamma, \beta}(t)-I_{\text{CDC}}(t)). \label{eq:1}
+  \end{align}
 Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($I_{\gamma, \beta}$ and the official CDC data ($I_{\text{CDC}}$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}). 
-
-Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.
 
 \begin{table}[H]
 \centering
@@ -408,27 +410,29 @@ Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was al
 \label{tab:nationalparams}
 \end{table}
 
-Based on these values he could then calculate yearly ILI estimates for the flu seasons of 2011--2012, 2012--2013, and 2013--2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}).
+Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.
+
+Based on the values given in Table~\ref{tab:nationalparams}, he could then calculate yearly ILI estimates for the flu seasons of 2011--2012, 2012--2013, and 2013--2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}). In addition, he fitted an autocorrelation model using the results from the Twitter base model and the official CDC data: 
+  \begin{align}
+I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d. \label{eq:2}
+  \end{align}
+Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). Note that it is unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. An e-mail requesting clarification of this has been sent, but a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
 
 \begin{figure}[H]
   \centering
     \includegraphics[width=1\textwidth]{todd_bodnar_SIR.png}
-  \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters; taken from \cite{bodnar_data_2015}.}
+  \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters. The discontinuities stem from recalculating the SIR models for each year with the ILI rates from the Twitter classifier as a starting point for each year. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis_SIR}
   \end{figure}
 
-In addition, he fitted an autocorrelation model using the results from the Twitter base model and the official CDC data: 
-$$I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d.$$
-Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). Note that it is unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. An e-mail requesting clarification of this has been sent, but a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
-
-Applying the above-described autocorrelation model, Bodnar was able to achieve a very close fit to the official Twitter data (see Figure~\ref{fig:cdc_fit_bodnar_thesis}). In the following chapter, I will describe my attempts to reproduce these findings based on the raw results from the Twitter classifier as well as to repeat the tables and figures shown above based on part of the processed data and code sources provided by Bodnar. 
-
 \begin{figure}[H]
   \centering
-    \includegraphics[width=.9\textwidth]{cdc_fit_bodnar_thesis.png}
-  \caption{Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influneza rates (circles) for the whole United states; taken from \cite{bodnar_data_2015}.}
+    \includegraphics[width=0.9\textwidth,height=0.6\textwidth]{cdc_fit_bodnar_thesis.png}
+  \caption{Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) compared to the CDC's reported ILI rates (circles) for the whole United States. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis}
   \end{figure}
+  
+Applying the above-described autocorrelation model, Bodnar was able to achieve a very close fit to the official Twitter data (see Figure~\ref{fig:cdc_fit_bodnar_thesis}). In the following chapter, I will describe my attempts to reproduce these findings based on the raw results from the Twitter classifier as well as to repeat the tables and figures shown above based on part of the processed data and code sources provided by Bodnar. 
 
 In Section~\ref{sec:comparison_cdc}, I will focus, on my attempts to analyse and compare the results from the Twitter classifier with the official flu data from the CDC and thus are focusing on results reproducbility. In Section~\ref{sec:methods_reproduce}, on the other hand, I will describe my attempts to reproduce two figures and one table from \cite{bodnar_data_2015} by using the processed data and code used provided to me, i. e. it contains my efforts to ensure methods reproducibility. Finally, Chapter~\ref{ch:discussion} contains further remarks on the methods and results reproducibility of the findings in \cite{bodnar_data_2015} as well as additional comments regarding inferential reproducibility.
 
@@ -558,7 +562,7 @@ However, \cite{sloan_who_2015} have shown in a recent study that only 58.4 \% of
 
 Nevertheless, the information described above allows us the achieve an estimate of the total amount of tweets and users between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015 using the following formula:
   \begin{align}
-\text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{geotagged}} \cdot \frac{1}{0.0085}}{U_\text{geotagged} \cdot \frac{1}{0.031}} \label{eq:1}
+\text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{geotagged}} \cdot \frac{1}{0.0085}}{U_\text{geotagged} \cdot \frac{1}{0.031}} \label{eq:3}
   \end{align}
 %$$\text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{geotagged}} \cdot \frac{1}{0.0085}}{U_\text{geotagged} \cdot \frac{1}{0.031}}$$% = \frac{T_{\text{sick\_users}} \cdot \frac{T_{\text{all\_tweets}}}{T_{\text{sick\_users}}} \cdot \frac{1}{0.0085}}{U_\text{sick\_users} \cdot \frac{U_{\text{all\_tweets}}}{U_{\text{sick\_users}}} \cdot \frac{1}{0.031}}$$
 
@@ -641,7 +645,7 @@ In addition, I could observe a very peculiar difference in the mean tweet freque
 
 Also, the unadjusted mean tweet rate of all users combined (\Sexpr{r2(mean(avg_tw_tot))}) is six times smaller than the mean tweet rate per user reported in \cite{bodnar_data_2015} (175.59). The unadjusted median tweet rate (\Sexpr{r2(median(avg_tw_tot))}), however, is considerably higher than the median tweet rate reported in \cite{bodnar_data_2015} (10). These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I analysed for this thesis.
 
-Finally, by applying Equation~\ref{eq:1} described in Section~\ref{sec:sick_user_exploratory}, we can estimate the adjusted mean (\Sexpr{r2(mean(avg_tw_tot/(0.0085/0.031)))}) and median \Sexpr{r2(median(avg_tw_tot/(0.0085/0.031)))} of the twitter rate of the whole Twitter population, as well the mean tweet rate for sick (\Sexpr{r2(mean(avg_tw_sick/(0.0085/0.031)))}) and healthy (\Sexpr{r2(mean(avg_tw_healthy/(0.0085/0.031)))}) supbopulation, respectively.\newpage
+Finally, by applying Equation~\ref{eq:3} described in Section~\ref{sec:sick_user_exploratory}, we can estimate the adjusted mean (\Sexpr{r2(mean(avg_tw_tot/(0.0085/0.031)))}) and median \Sexpr{r2(median(avg_tw_tot/(0.0085/0.031)))} of the twitter rate of the whole Twitter population, as well the mean tweet rate for sick (\Sexpr{r2(mean(avg_tw_sick/(0.0085/0.031)))}) and healthy (\Sexpr{r2(mean(avg_tw_healthy/(0.0085/0.031)))}) supbopulation, respectively.\newpage
 
 \begin{figure}[H]
 \centering
