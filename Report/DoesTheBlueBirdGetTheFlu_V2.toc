@@ -5,7 +5,7 @@
 \contentsline {chapter}{\numberline {2}The challenge of reproducibility}{8}{chapter.2}
 \contentsline {section}{\numberline {2.1}To replicate or to reproduce?}{8}{section.2.1}
 \contentsline {section}{\numberline {2.2}Ensuring reproducibility: easier said than done}{11}{section.2.2}
-\contentsline {section}{\numberline {2.3}Putting emphasis on methods reproducibility}{12}{section.2.3}
+\contentsline {section}{\numberline {2.3}Putting emphasis on methods reproducibility}{13}{section.2.3}
 \contentsline {section}{\numberline {2.4}On the ground validation of online diagnosis}{14}{section.2.4}
 \contentsline {chapter}{\numberline {3}(Almost) big data: How to analyse 2.8 billion tweets}{21}{chapter.3}
 \contentsline {section}{\numberline {3.1}The nature of the data beast}{21}{section.3.1}
@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {4.1.2}Comparing the flu classifier results with CDC ILI rates}{41}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}Comparing classifier results with CDC activity levels}{46}{subsection.4.1.3}
 \contentsline {subsection}{\numberline {4.1.4}Comparing classifier results and ILI rates on the state level}{52}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the state level}{54}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the county level}{54}{subsection.4.1.5}
 \contentsline {section}{\numberline {4.2}Attempts to reproduce key figures and findings from \cite {bodnar_data_2015}}{55}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{55}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{56}{subsection.4.2.2}
@@ -26,11 +26,11 @@
 \contentsline {section}{\numberline {5.1}Has Larry the Bird deserved our trust?}{63}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}The Twitter classifier can detect seasonal flu peaks on a national level}{63}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}The Twitter classifier might be able to detect ILI symptoms in summer}{64}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}A simple autoregressive model can predict ILI rates with higher accuracy and precision than the Twitter classifier}{65}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}On a regional and county level, the signal to noise ratio}{65}{subsection.5.1.4}
-\contentsline {section}{\numberline {5.2}Replication}{65}{section.5.2}
-\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{66}{section.5.3}
-\contentsline {section}{\numberline {5.4}The findings from \citep {bodnar_data_2015} are based on a different data set}{67}{section.5.4}
-\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{67}{section.5.5}
-\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{68}{section.5.6}
-\contentsline {section}{\numberline {5.7}Missing parts}{69}{section.5.7}
+\contentsline {subsection}{\numberline {5.1.3}Autoregression trumps Twitter data}{65}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Low signal to noise ratio on regional, state, and county level}{66}{subsection.5.1.4}
+\contentsline {section}{\numberline {5.2}What the failure to reproduce can teach us}{67}{section.5.2}
+\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{68}{section.5.3}
+\contentsline {section}{\numberline {5.4}The findings from \cite {bodnar_data_2015} are based on a different data set}{69}{section.5.4}
+\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{69}{section.5.5}
+\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{70}{section.5.6}
+\contentsline {section}{\numberline {5.7}Missing parts}{70}{section.5.7}

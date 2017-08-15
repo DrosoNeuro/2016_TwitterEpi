@@ -17,7 +17,7 @@
 \BOOKMARK [2][-]{subsection.4.1.2}{Comparing the flu classifier results with CDC ILI rates}{section.4.1}% 17
 \BOOKMARK [2][-]{subsection.4.1.3}{Comparing classifier results with CDC activity levels}{section.4.1}% 18
 \BOOKMARK [2][-]{subsection.4.1.4}{Comparing classifier results and ILI rates on the state level}{section.4.1}% 19
-\BOOKMARK [2][-]{subsection.4.1.5}{Comparing classifier results and ILI rates on the state level}{section.4.1}% 20
+\BOOKMARK [2][-]{subsection.4.1.5}{Comparing classifier results and ILI rates on the county level}{section.4.1}% 20
 \BOOKMARK [1][-]{section.4.2}{Attempts to reproduce key figures and findings from bodnardata2015}{chapter.4}% 21
 \BOOKMARK [2][-]{subsection.4.2.1}{Reclassification of the raw Twitter data}{section.4.2}% 22
 \BOOKMARK [2][-]{subsection.4.2.2}{Reproduction of the SIR model described in bodnardata2015}{section.4.2}% 23
@@ -26,9 +26,9 @@
 \BOOKMARK [1][-]{section.5.1}{Has Larry the Bird deserved our trust?}{chapter.5}% 26
 \BOOKMARK [2][-]{subsection.5.1.1}{The Twitter classifier can detect seasonal flu peaks on a national level}{section.5.1}% 27
 \BOOKMARK [2][-]{subsection.5.1.2}{The Twitter classifier might be able to detect ILI symptoms in summer}{section.5.1}% 28
-\BOOKMARK [2][-]{subsection.5.1.3}{A simple autoregressive model can predict ILI rates with higher accuracy and precision than the Twitter classifier}{section.5.1}% 29
-\BOOKMARK [2][-]{subsection.5.1.4}{On a regional and county level, the signal to noise ratio}{section.5.1}% 30
-\BOOKMARK [1][-]{section.5.2}{Replication}{chapter.5}% 31
+\BOOKMARK [2][-]{subsection.5.1.3}{Autoregression trumps Twitter data}{section.5.1}% 29
+\BOOKMARK [2][-]{subsection.5.1.4}{Low signal to noise ratio on regional, state, and county level}{section.5.1}% 30
+\BOOKMARK [1][-]{section.5.2}{What the failure to reproduce can teach us}{chapter.5}% 31
 \BOOKMARK [1][-]{section.5.3}{Errors in the aggregation and processing of the Twitter data set}{chapter.5}% 32
 \BOOKMARK [1][-]{section.5.4}{The findings from bodnardata2015 are based on a different data set}{chapter.5}% 33
 \BOOKMARK [1][-]{section.5.5}{There are errors present in the Twitter flu classifier}{chapter.5}% 34

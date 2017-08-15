@@ -259,15 +259,15 @@ Casadevall, A. and Fang, F.~C. (2010).
 \newblock {\em Infection and Immunity}, {\bf78},  4972--4975.
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
-  ]{cdc_enterovirus_2016}
-Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention.
-\newblock Non-{Polio} {Enterovirus}, year = {2016}, howpublished =
-  "\url{https://www.cdc.gov/non-polio-enterovirus/about/symptoms.html}", note =
-  "[online; accessed 14-august-2017]".
+  2016a]{cdc_enterovirus_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016a).
+\newblock Non-{Polio} {Enterovirus}.
+\newblock \url{https://www.cdc.gov/non-polio-enterovirus/about/symptoms.html}.
+\newblock [Online; accessed 14-August-2017].
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
-  2016]{cdc_surveillance_2016}
-Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
+  2016b]{cdc_surveillance_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016b).
 \newblock Overview of influenza surveillance in the united states.
 \newblock \url{https://www.cdc.gov/flu/weekly/overview.htm}.
 \newblock [Online; accessed 24-June-2017].
@@ -676,7 +676,7 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
 
 \bibitem[R{\}{Core}{\ }{Team}, 2017]{Rbase}
 R{\}{Core}{\ }{Team} (2017).
-\newblock R: A language and environment for statistical computing.
+\newblock R: {A} {Language} and {Environment} for {Statistical} {Computing}.
 \newblock Technical report, Vienna, Austria.
 
 \bibitem[Rehak, 2014]{rehak_twitterbird_2014}
@@ -699,7 +699,7 @@ Rolfes, M.~A., Foppa, I.~M., Garg, S., Flannery, B., Brammer, L., Singleton,
 
 \bibitem[Rossum, 1995]{rossum_1995_python}
 Rossum, G. (1995).
-\newblock Python reference manual.
+\newblock Python {Reference} {Manual}.
 \newblock Technical report, Amsterdam, The Netherlands, The Netherlands.
 
 \bibitem[Rothman, 2012]{rothman2012epidemiology}
