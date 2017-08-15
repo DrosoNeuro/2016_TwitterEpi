@@ -259,6 +259,13 @@ Casadevall, A. and Fang, F.~C. (2010).
 \newblock {\em Infection and Immunity}, {\bf78},  4972--4975.
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  ]{cdc_enterovirus_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention.
+\newblock Non-{Polio} {Enterovirus}, year = {2016}, howpublished =
+  "\url{https://www.cdc.gov/non-polio-enterovirus/about/symptoms.html}", note =
+  "[online; accessed 14-august-2017]".
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
   2016]{cdc_surveillance_2016}
 Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
 \newblock Overview of influenza surveillance in the united states.
@@ -266,8 +273,15 @@ Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
 \newblock [Online; accessed 24-June-2017].
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
-  2017]{cdc_flu_2017}
-Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017).
+  2017a]{cdc_rhinovirus_2017}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017a).
+\newblock Common {Colds}: {Protect} {Yourself} and {Others}.
+\newblock \url{https://www.cdc.gov/features/rhinoviruses/index.html}.
+\newblock [Online; accessed 14-August-2017].
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  2017b]{cdc_flu_2017}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017b).
 \newblock The flu: What to do if you get sick.
 \newblock \url{https://www.cdc.gov/flu/takingcare.htm}.
 \newblock [Online; accessed 12-August-2017].
@@ -408,6 +422,11 @@ Google{\ }Flu{\ }Trends{\ }Team (2015).
 \newblock
   \url{https://research.googleblog.com/2015/08/the-next-chapter-for-flu-trends.html}.
 \newblock [Online; accessed 20-July-2017].
+
+\bibitem[Heikkinen and J{\"a}rvinen, 2003]{heikkinen2003common}
+Heikkinen, T. and J{\"a}rvinen, A. (2003).
+\newblock The common cold.
+\newblock {\em The Lancet}, {\bf361},  51--59.
 
 \bibitem[Hermida, 2013]{hermida2013journalism}
 Hermida, A. (2013).
@@ -631,6 +650,12 @@ Poblete, B., Garcia, R., Mendoza, M., and Jaimes, A. (2011).
 \newblock In {\em Proceedings of the 20th ACM international conference on
   Information and knowledge management},   1025--1030. ACM.
 
+\bibitem[Pons-Salort {\it et~al.}, 2015]{pons2015epidemiology}
+Pons-Salort, M., Parker, E.~P., and Grassly, N.~C. (2015).
+\newblock The epidemiology of non-polio enteroviruses: recent advances and
+  outstanding questions.
+\newblock {\em Current opinion in infectious diseases}, {\bf28},  479--487.
+
 \bibitem[Prinz {\it et~al.}, 2011]{prinz_believe_2011}
 Prinz, F., Schlange, T., and Asadullah, K. (2011).
 \newblock Believe it or not: how much can we rely on published data on
@@ -648,6 +673,11 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
 \newblock Network inference from multimodal data: {A} review of approaches from
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
+
+\bibitem[R{\}{Core}{\ }{Team}, 2017]{Rbase}
+R{\}{Core}{\ }{Team} (2017).
+\newblock R: A language and environment for statistical computing.
+\newblock Technical report, Vienna, Austria.
 
 \bibitem[Rehak, 2014]{rehak_twitterbird_2014}
 Rehak, M. (2014).

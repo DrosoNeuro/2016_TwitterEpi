@@ -3,63 +3,73 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for "Rbase"
+I was expecting a `,' or a `}'---line 2132 of file Masterarbeit.bib.bib
+ : 
+ : @article{pons2015epidemiology,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "cdcfluview"
+Warning--I didn't find a database entry for "Bodnar"
 Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty journal in bag_grippe_2016
 Warning--empty journal in bag_lagebericht_2017
 Warning--empty journal in bag_influenza_2017
 Warning--empty journal in cacioppo_social_2015
+Warning--empty year in cdc_enterovirus_2016
+Warning--empty journal in cdc_enterovirus_2016
 Warning--empty journal in cdc_surveillance_2016
+Warning--empty journal in cdc_rhinovirus_2017
 Warning--empty journal in cdc_flu_2017
 Warning--empty journal in dfg_reproduzierbarkeit_2017
 Warning--empty journal in GFT_nextchapter_2015
 Warning--empty journal in kullmann2015biomedicine
 Warning--empty booktitle in liu_assessing_2017
+Warning--empty institution in Rbase
 Warning--empty journal in rolfes_estimated_2016
 Warning--empty institution in rossum_1995_python
 Warning--empty journal in sentinella_2017
 Warning--empty journal in twitter_annual_2013
 Warning--empty journal in twitter_annual_2017
-You've used 133 entries,
+You've used 138 entries,
             1967 wiz_defined-function locations,
-            1180 strings with 31737 characters,
-and the built_in function-call counts, 56030 in all, are:
-= -- 5575
-> -- 2533
-< -- 84
-+ -- 902
-- -- 872
-* -- 4709
-:= -- 9770
-add.period$ -- 454
-call.type$ -- 133
-change.case$ -- 1098
-chr.to.int$ -- 127
-cite$ -- 150
-duplicate$ -- 2016
-empty$ -- 3548
-format.name$ -- 1043
-if$ -- 10999
-int.to.chr$ -- 7
+            1206 strings with 32518 characters,
+and the built_in function-call counts, 57656 in all, are:
+= -- 5739
+> -- 2585
+< -- 88
++ -- 923
+- -- 888
+* -- 4836
+:= -- 10064
+add.period$ -- 469
+call.type$ -- 138
+change.case$ -- 1132
+chr.to.int$ -- 131
+cite$ -- 159
+duplicate$ -- 2079
+empty$ -- 3660
+format.name$ -- 1066
+if$ -- 11309
+int.to.chr$ -- 8
 int.to.str$ -- 0
-missing$ -- 248
-newline$ -- 711
-num.names$ -- 399
-pop$ -- 828
+missing$ -- 256
+newline$ -- 736
+num.names$ -- 414
+pop$ -- 854
 preamble$ -- 1
-purify$ -- 1100
+purify$ -- 1133
 quote$ -- 0
-skip$ -- 1591
+skip$ -- 1636
 stack$ -- 0
-substring$ -- 3735
-swap$ -- 353
+substring$ -- 3843
+swap$ -- 355
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 792
-warning$ -- 17
-while$ -- 429
+type$ -- 822
+warning$ -- 21
+while$ -- 443
 width$ -- 0
-write$ -- 1787
-(There were 18 warnings)
+write$ -- 1849
+(There was 1 error message)
