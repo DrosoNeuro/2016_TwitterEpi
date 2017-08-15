@@ -667,6 +667,11 @@ Rolfes, M.~A., Foppa, I.~M., Garg, S., Flannery, B., Brammer, L., Singleton,
 \newblock \url{https://www.cdc.gov/flu/about/disease/2015-16.htm}.
 \newblock [Online; accessed 13-August-2017].
 
+\bibitem[Rossum, 1995]{rossum_1995_python}
+Rossum, G. (1995).
+\newblock Python reference manual.
+\newblock Technical report, Amsterdam, The Netherlands, The Netherlands.
+
 \bibitem[Rothman, 2012]{rothman2012epidemiology}
 Rothman, K.~J. (2012).
 \newblock {\em Epidemiology: an introduction}.
@@ -715,6 +720,13 @@ Sloan, L. and Morgan, J. (2015).
   {Relationship} between {Demographic} {Characteristics} and the {Use} of
   {Geoservices} and {Geotagging} on {Twitter}.
 \newblock {\em PLoS ONE}, {\bf10}, .
+
+\bibitem[Sloan {\it et~al.}, 2013]{sloan2013knowing}
+Sloan, L., Morgan, J., Housley, W., Williams, M., Edwards, A., Burnap, P., and
+  Rana, O. (2013).
+\newblock Knowing the tweeters: Deriving sociologically relevant demographics
+  from twitter.
+\newblock {\em Sociological research online}, {\bf18},  7.
 
 \bibitem[Steiger {\it et~al.}, 2015]{steiger2015advanced}
 Steiger, E., Albuquerque, J.~P., and Zipf, A. (2015).
@@ -766,6 +778,14 @@ Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2011).
 \newblock Election forecasts with twitter: How 140 characters reflect the
   political landscape.
 \newblock {\em Social science computer review}, {\bf29},  402--418.
+
+\bibitem[Twitter, 2011]{twitter_million_2011}
+Twitter (2011).
+\newblock 200 million {Tweets} per day.
+\newblock {\em Twitter {Blog}}.
+\newblock
+  \url{https://blog.twitter.com/official/en_us/a/2011/200-million-tweets-per-day.html}.
+\newblock [Online; accessed 14-August-2017].
 
 \bibitem[Twitter, 2013]{twitter_annual_2013}
 Twitter (2013).

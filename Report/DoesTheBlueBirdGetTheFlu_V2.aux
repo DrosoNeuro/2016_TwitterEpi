@@ -21,8 +21,8 @@
 \citation{bodnar_data_2015}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{iii}{(document)}{Doc-Start}}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{iii}{(document)}{Doc-Start}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{iii}{(document)}{Doc-Start}}}
 \citation{bodnar_data_2015}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{iv}{(document)}{Doc-Start}}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{iv}{(document)}{Doc-Start}}}
 \citation{bag_lagebericht_2017}
 \citation{rolfes_estimated_2016}
@@ -291,210 +291,230 @@
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\citation{bodna_data_2015}
+\citation{bodnar_data_2015}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influneza rates (circles) for the whole United states; taken from \cite  {bodnar_data_2015}.\relax }}{19}{figure.caption.5}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{19}{2.3}{figure.caption.5}}}
 \newlabel{fig:cdc_fit_bodnar_thesis}{{2.3}{19}{Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influneza rates (circles) for the whole United states; taken from \cite {bodnar_data_2015}.\relax }{figure.caption.5}{}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{19}{2.4}{figure.caption.5}}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{19}{2.4}{figure.caption.5}}}
 \@writefile{brf}{\backcite{bodnar_data_2015}{{19}{2.4}{figure.caption.5}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{20}{2.4}{figure.caption.5}}}
+\citation{Rbase}
+\citation{rossum_1995_python}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Description of the data set}{21}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{ch:data_set_description}{{3}{21}{Description of the data set}{chapter.3}{}}
+\@writefile{brf}{\backcite{rossum_1995_python}{{21}{3}{chapter.3}}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}The starting point}{21}{section.3.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Description of the \textit  {sick} data set}{22}{section.3.2}}
-\newlabel{sec:sick_user_exploratory}{{3.2}{22}{Description of the \textit {sick} data set}{section.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Description of the \texttt  {sick\_users} data set}{22}{section.3.2}}
+\newlabel{sec:sick_user_exploratory}{{3.2}{22}{Description of the \texttt {sick\_users} data set}{section.3.2}{}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{23}{3.2}{figure.caption.6}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{23}{3.2}{figure.caption.6}}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Description of the \textit  {all\_tweets} data set}{24}{section.3.3}}
-\newlabel{sec:full_set}{{3.3}{24}{Description of the \textit {all\_tweets} data set}{section.3.3}{}}
-\citation{bodnar_data_2015}
-\citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{25}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{25}{3.3}{section.3.3}}}
-\citation{bodnar_data_2015}
-\citation{bodnar_data_2015}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{23}{3.2}{section.3.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{23}{3.2}{section.3.2}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) All tweets having ``state = 56" as code in the \texttt  {sick\_users} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt  {sick\_users} data set. The green dots represent the tweets that had a ``state = 56" as a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf  {not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.\relax }}{24}{figure.caption.6}}
+\newlabel{fig:canexico_and_removed}{{3.1}{24}{(a) All tweets having ``state = 56" as code in the \texttt {sick\_users} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt {sick\_users} data set. The green dots represent the tweets that had a ``state = 56" as a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf {not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.\relax }{figure.caption.6}{}}
+\citation{twitter_million_2011}
+\citation{twitter_annual_2013}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Histogram of the number of tweets sent per user in the \texttt  {sick\_users} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)\relax }}{25}{figure.caption.7}}
+\newlabel{fig:histogram_ID_tot}{{3.2}{25}{Histogram of the number of tweets sent per user in the \texttt {sick\_users} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The total number of users who only sent tweets labelled as ``sick" (919), users who sent at least one tweet labelled as ``sick" and ``healthy" (\ensuremath  {1.9728\times 10^{4}}), and users who only sent tweets labelled as ``healthy" (192779)\relax }}{25}{figure.caption.8}}
+\newlabel{fig:barplot_sick_df}{{3.3}{25}{The total number of users who only sent tweets labelled as ``sick" (919), users who sent at least one tweet labelled as ``sick" and ``healthy" (\ensuremath {1.9728\times 10^{4}}), and users who only sent tweets labelled as ``healthy" (192779)\relax }{figure.caption.8}{}}
+\citation{sloan2013knowing}
 \citation{sloan_who_2015}
+\@writefile{brf}{\backcite{twitter_million_2011}{{26}{3.2}{figure.caption.8}}}
+\@writefile{brf}{\backcite{twitter_annual_2013}{{26}{3.2}{figure.caption.8}}}
+\@writefile{brf}{\backcite{sloan2013knowing}{{26}{3.2}{figure.caption.8}}}
+\@writefile{brf}{\backcite{sloan_who_2015}{{26}{3.2}{figure.caption.8}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``sick" and one tweet labelled as ``healthy". Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``sick" by the classifier. Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``sick" and one tweet labelled as ``healthy")\relax }}{28}{figure.caption.9}}
+\newlabel{fig:both_vs_healthy_only_hist}{{3.4}{28}{Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``sick" and one tweet labelled as ``healthy". Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``sick" by the classifier. Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``sick" and one tweet labelled as ``healthy")\relax }{figure.caption.9}{}}
+\citation{bodnar_data_2015}
+\citation{bodnar_data_2015}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Description of the \texttt  {all\_tweets} data set}{29}{section.3.3}}
+\newlabel{sec:full_set}{{3.3}{29}{Description of the \texttt {all\_tweets} data set}{section.3.3}{}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{29}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{29}{3.3}{section.3.3}}}
+\citation{bodnar_data_2015}
+\citation{bodnar_data_2015}
+\citation{sloan2013knowing}
+\citation{sloan2013knowing}
 \citation{bodnar_data_2015}
 \citation{twitter_annual_2013}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{26}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{26}{3.3}{section.3.3}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{sloan_who_2015}{{27}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{27}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{twitter_annual_2013}{{27}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{27}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{27}{3.3}{section.3.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{27}{3.3}{section.3.3}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.\relax }}{28}{figure.caption.10}}
-\newlabel{fig:avg_tw_diff}{{3.5}{28}{The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.\relax }{figure.caption.10}{}}
-\newlabel{fig:code56}{{3.1a}{29}{\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:code56}{{a}{29}{\relax }{figure.caption.6}{}}
-\newlabel{fig:canexico_and_removed}{{3.1b}{29}{\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:canexico_and_removed}{{b}{29}{\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces (a) All tweets having ``state = 56" as code in the \textit  {sick\_user} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \textit  {sick\_user} data set. The green dots represent the tweets that had a ``state = 56" as a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf  {not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.\relax }}{29}{figure.caption.6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Histogram of the number of tweets sent per user in the \textit  {sick\_user} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)\relax }}{30}{figure.caption.7}}
-\newlabel{fig:histogram_ID_tot}{{3.2}{30}{Histogram of the number of tweets sent per user in the \textit {sick\_user} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The total number of users who only sent tweets labelled as ``1 = sick" (919), users who sent at least one tweet labelled as ``1 = sick" and ``0 = healthy" (\ensuremath  {1.9728\times 10^{4}}), and users who only sent tweets labelled as ``0 = healthy" (192779)\relax }}{30}{figure.caption.8}}
-\newlabel{fig:barplot_sick_df}{{3.3}{30}{The total number of users who only sent tweets labelled as ``1 = sick" (919), users who sent at least one tweet labelled as ``1 = sick" and ``0 = healthy" (\ensuremath {1.9728\times 10^{4}}), and users who only sent tweets labelled as ``0 = healthy" (192779)\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``1 = sick" and one tweet labelled as ``0 = healthy". Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``1 = sick" by the classifier. Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``1 = sick" and one tweet labelled ``0 = healthy")\relax }}{31}{figure.caption.9}}
-\newlabel{fig:both_vs_healthy_only_hist}{{3.4}{31}{Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``1 = sick" and one tweet labelled as ``0 = healthy". Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``1 = sick" by the classifier. Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``1 = sick" and one tweet labelled ``0 = healthy")\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Results}{33}{chapter.4}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{sloan2013knowing}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{sloan2013knowing}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{twitter_annual_2013}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{31}{3.3}{section.3.3}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.\relax }}{32}{figure.caption.10}}
+\newlabel{fig:avg_tw_diff}{{3.5}{32}{The average number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue) and total users (solid blue). The average weekly tweet rate of sick users is significantly higher, while the tweet rate of healthy users is virtually indistinguishable from the total weekly tweet rate.\relax }{figure.caption.10}{}}
+\citation{bodnar_data_2015}
+\citation{bodnar_data_2015}
+\citation{bodnar_data_2015}
+\citation{cdc_surveillance_2016}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}What does the classified Twitter data set reveal about the flu?}{33}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:results}{{4}{33}{Results}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Comparison of CDC}{33}{section.4.1}}
-\newlabel{sec:comparison_cdc}{{4.1}{33}{Comparison of CDC}{section.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Relative number of tweets sent per week in the \textit  {all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).\relax }}{34}{figure.caption.11}}
-\newlabel{fig:tweets_seasonal_full}{{4.1}{34}{Relative number of tweets sent per week in the \textit {all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``1 = sick" follow a markedly different temporal pattern.\relax }}{35}{figure.caption.12}}
-\newlabel{fig:tweets_seasonal_healthy_sick}{{4.2}{35}{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``1 = sick" follow a markedly different temporal pattern.\relax }{figure.caption.12}{}}
-\newlabel{fig:tweets_state_full}{{4.3a}{36}{\relax }{figure.caption.13}{}}
-\newlabel{sub@fig:tweets_state_full}{{a}{36}{\relax }{figure.caption.13}{}}
-\newlabel{fig:tweets_state_full_user}{{4.3b}{36}{\relax }{figure.caption.13}{}}
-\newlabel{sub@fig:tweets_state_full_user}{{b}{36}{\relax }{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Relative number of tweets sent (a) and Twitter users (b) per state in the \textit  {all\_tweets} data set between 2011-03-05 and 2015-07-11 compared to each state's relative population size.\relax }}{36}{figure.caption.13}}
-\newlabel{fig:tweets_state_full_scatter}{{4.4a}{37}{\relax }{figure.caption.14}{}}
-\newlabel{sub@fig:tweets_state_full_scatter}{{a}{37}{\relax }{figure.caption.14}{}}
-\newlabel{fig:tweets_state_full_scatter_user}{{4.4b}{37}{\relax }{figure.caption.14}{}}
-\newlabel{sub@fig:tweets_state_full_scatter_user}{{b}{37}{\relax }{figure.caption.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Relative number of tweets sent per state (a) and Twitter users (b) in the \textit  {all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size\relax }}{37}{figure.caption.14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``1 = sick" follow a somewhat different spatial pattern.\relax }}{38}{figure.caption.15}}
-\newlabel{fig:tweets_state_healthy_sick}{{4.5}{38}{Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``1 = sick" follow a somewhat different spatial pattern.\relax }{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only users with at least one tweet labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.\relax }}{39}{figure.caption.16}}
-\newlabel{fig:tweets_state_healthy_sick_user}{{4.6}{39}{Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only users with at least one tweet labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.\relax }{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Comparison with CDC data}{39}{subsection.4.1.1}}
-\newlabel{sec:comp_cdc}{{4.1.1}{39}{Comparison with CDC data}{subsection.4.1.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. As can be seen from both figures, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data\relax }}{40}{figure.caption.17}}
-\newlabel{fig:naive_comparison_CDC_twitter}{{4.7}{40}{Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. As can be seen from both figures, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data\relax }{figure.caption.17}{}}
-\newlabel{fig:cdc_tw_comp_nat_ma1}{{4.8a}{41}{\relax }{figure.caption.18}{}}
-\newlabel{sub@fig:cdc_tw_comp_nat_ma1}{{a}{41}{\relax }{figure.caption.18}{}}
-\newlabel{fig:cdc_tw_comp_nat_ma2}{{4.8b}{41}{\relax }{figure.caption.18}{}}
-\newlabel{sub@fig:cdc_tw_comp_nat_ma2}{{b}{41}{\relax }{figure.caption.18}{}}
-\newlabel{fig:cdc_tw_comp_nat_ma4}{{4.8c}{41}{\relax }{figure.caption.18}{}}
-\newlabel{sub@fig:cdc_tw_comp_nat_ma4}{{c}{41}{\relax }{figure.caption.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``1 = sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }}{41}{figure.caption.18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }}{42}{figure.caption.19}}
-\newlabel{fig:cdc_tw_comp_regs_ma4}{{4.9}{42}{Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }{figure.caption.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``1 = sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }}{43}{figure.caption.20}}
-\newlabel{fig:cdc_tw_comp_nat_user}{{4.10}{43}{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``1 = sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }{figure.caption.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }}{44}{figure.caption.21}}
-\newlabel{fig:cdc_tw_comp_regs_ma4}{{4.11}{44}{Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Comparison with regard to CDC activity levels}{44}{subsection.4.1.2}}
-\newlabel{sec:comp_cdc_ac}{{4.1.2}{44}{Comparison with regard to CDC activity levels}{subsection.4.1.2}{}}
+\newlabel{ch:results}{{4}{33}{What does the classified Twitter data set reveal about the flu?}{chapter.4}{}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{33}{4}{chapter.4}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{33}{4}{chapter.4}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{33}{4}{chapter.4}}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Can the Twitter classifier compete for gold?}{33}{section.4.1}}
+\newlabel{sec:comparison_cdc}{{4.1}{33}{Can the Twitter classifier compete for gold?}{section.4.1}{}}
+\@writefile{brf}{\backcite{cdc_surveillance_2016}{{34}{4.1}{section.4.1}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Spatio-temporal patterns of Twitter usage}{34}{subsection.4.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Relative number of tweets sent per week in the \texttt  {all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).\relax }}{35}{figure.caption.11}}
+\newlabel{fig:tweets_seasonal_full}{{4.1}{35}{Relative number of tweets sent per week in the \texttt {all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``sick" follow a markedly different temporal pattern.\relax }}{36}{figure.caption.12}}
+\newlabel{fig:tweets_seasonal_healthy_sick}{{4.2}{36}{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``sick" follow a markedly different temporal pattern.\relax }{figure.caption.12}{}}
+\newlabel{fig:tweets_state_full}{{4.3a}{37}{\relax }{figure.caption.13}{}}
+\newlabel{sub@fig:tweets_state_full}{{a}{37}{\relax }{figure.caption.13}{}}
+\newlabel{fig:tweets_state_full_user}{{4.3b}{37}{\relax }{figure.caption.13}{}}
+\newlabel{sub@fig:tweets_state_full_user}{{b}{37}{\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Relative number of tweets sent (a) and Twitter users (b) per state in the \texttt  {all\_tweets} data set between 2011-03-05 and 2015-07-11 compared to each state's relative population size.\relax }}{37}{figure.caption.13}}
+\newlabel{fig:tweets_state_full_scatter}{{4.4a}{38}{\relax }{figure.caption.14}{}}
+\newlabel{sub@fig:tweets_state_full_scatter}{{a}{38}{\relax }{figure.caption.14}{}}
+\newlabel{fig:tweets_state_full_scatter_user}{{4.4b}{38}{\relax }{figure.caption.14}{}}
+\newlabel{sub@fig:tweets_state_full_scatter_user}{{b}{38}{\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Relative number of tweets sent per state (a) and Twitter users (b) in the \texttt  {all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size\relax }}{38}{figure.caption.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``sick" follow a somewhat different spatial pattern.\relax }}{39}{figure.caption.15}}
+\newlabel{fig:tweets_state_healthy_sick}{{4.5}{39}{Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``sick" follow a somewhat different spatial pattern.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only users with at least one tweet labelled as ``sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.\relax }}{40}{figure.caption.16}}
+\newlabel{fig:tweets_state_healthy_sick_user}{{4.6}{40}{Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only users with at least one tweet labelled as ``sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Comparison with CDC data}{40}{subsection.4.1.2}}
+\newlabel{sec:comp_cdc}{{4.1.2}{40}{Comparison with CDC data}{subsection.4.1.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. As can be seen from both figures, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data\relax }}{41}{figure.caption.17}}
+\newlabel{fig:naive_comparison_CDC_twitter}{{4.7}{41}{Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. As can be seen from both figures, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data\relax }{figure.caption.17}{}}
+\newlabel{fig:cdc_tw_comp_nat_ma1}{{4.8a}{42}{\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:cdc_tw_comp_nat_ma1}{{a}{42}{\relax }{figure.caption.18}{}}
+\newlabel{fig:cdc_tw_comp_nat_ma2}{{4.8b}{42}{\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:cdc_tw_comp_nat_ma2}{{b}{42}{\relax }{figure.caption.18}{}}
+\newlabel{fig:cdc_tw_comp_nat_ma4}{{4.8c}{42}{\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:cdc_tw_comp_nat_ma4}{{c}{42}{\relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }}{42}{figure.caption.18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }}{43}{figure.caption.19}}
+\newlabel{fig:cdc_tw_comp_regs_ma4}{{4.9}{43}{Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }}{44}{figure.caption.20}}
+\newlabel{fig:cdc_tw_comp_nat_user}{{4.10}{44}{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }}{45}{figure.caption.21}}
+\newlabel{fig:cdc_tw_comp_regs_ma4}{{4.11}{45}{Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Comparison with regard to CDC activity levels}{45}{subsection.4.1.3}}
+\newlabel{sec:comp_cdc_ac}{{4.1.3}{45}{Comparison with regard to CDC activity levels}{subsection.4.1.3}{}}
 \citation{cdc_surveillance_2016}
 \citation{cdc_surveillance_2016}
-\@writefile{brf}{\backcite{cdc_surveillance_2016}{{45}{4.1.2}{subsection.4.1.2}}}
-\@writefile{brf}{\backcite{cdc_surveillance_2016}{{45}{4.1.2}{subsection.4.1.2}}}
-\newlabel{fig:cdc_tw_comp_nat_ac_sick}{{4.12a}{46}{\relax }{figure.caption.22}{}}
-\newlabel{sub@fig:cdc_tw_comp_nat_ac_sick}{{a}{46}{\relax }{figure.caption.22}{}}
-\newlabel{fig:cdc_tw_comp_nat_ac_sick_user}{{4.12b}{46}{\relax }{figure.caption.22}{}}
-\newlabel{sub@fig:cdc_tw_comp_nat_ac_sick_user}{{b}{46}{\relax }{figure.caption.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison between weekly ILI activity levels reported by the CDC and calculated based on the Twitter data set. (a) activity levels based on relative number of sick tweets (b) activity levels based on relative number of sick users\relax }}{46}{figure.caption.22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on relative number of sick tweets per week\relax }}{47}{figure.caption.23}}
-\newlabel{fig:cdc_tw_comp_regs_ac_sick}{{4.13}{47}{Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on relative number of sick tweets per week\relax }{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on the relative number of sick users per week\relax }}{48}{figure.caption.24}}
-\newlabel{fig:cdc_tw_comp_regs_ac_sick_user}{{4.14}{48}{Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on the relative number of sick users per week\relax }{figure.caption.24}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Comparison on the state level}{50}{subsection.4.1.3}}
-\newlabel{sec:comp_cdc_state}{{4.1.3}{50}{Comparison on the state level}{subsection.4.1.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Comparison on the county level}{52}{subsection.4.1.4}}
-\newlabel{sec:comp_cdc_county}{{4.1.4}{52}{Comparison on the county level}{subsection.4.1.4}{}}
+\@writefile{brf}{\backcite{cdc_surveillance_2016}{{46}{4.1.3}{subsection.4.1.3}}}
+\@writefile{brf}{\backcite{cdc_surveillance_2016}{{46}{4.1.3}{subsection.4.1.3}}}
+\newlabel{fig:cdc_tw_comp_nat_ac_sick}{{4.12a}{47}{\relax }{figure.caption.22}{}}
+\newlabel{sub@fig:cdc_tw_comp_nat_ac_sick}{{a}{47}{\relax }{figure.caption.22}{}}
+\newlabel{fig:cdc_tw_comp_nat_ac_sick_user}{{4.12b}{47}{\relax }{figure.caption.22}{}}
+\newlabel{sub@fig:cdc_tw_comp_nat_ac_sick_user}{{b}{47}{\relax }{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison between weekly ILI activity levels reported by the CDC and calculated based on the Twitter data set. (a) activity levels based on relative number of sick tweets (b) activity levels based on relative number of sick users\relax }}{47}{figure.caption.22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on relative number of sick tweets per week\relax }}{48}{figure.caption.23}}
+\newlabel{fig:cdc_tw_comp_regs_ac_sick}{{4.13}{48}{Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on relative number of sick tweets per week\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on the relative number of sick users per week\relax }}{49}{figure.caption.24}}
+\newlabel{fig:cdc_tw_comp_regs_ac_sick_user}{{4.14}{49}{Comparison between regional weekly ILI activity levels reported by the CDC and calculated based on the relative number of sick users per week\relax }{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Comparison on the state level}{51}{subsection.4.1.4}}
+\newlabel{sec:comp_cdc_state}{{4.1.4}{51}{Comparison on the state level}{subsection.4.1.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Comparison on the county level}{53}{subsection.4.1.5}}
+\newlabel{sec:comp_cdc_county}{{4.1.5}{53}{Comparison on the county level}{subsection.4.1.5}{}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{53}{4.2}{section.4.2}}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Additional attempts to reproduce the findings froms \citep  {bodnar_data_2015}}{53}{section.4.2}}
-\newlabel{sec:methods_reproduce}{{4.2}{53}{Additional attempts to reproduce the findings froms \citep {bodnar_data_2015}}{section.4.2}{}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{53}{4.2}{section.4.2}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Attempt to reclassify raw Twitter data}{53}{subsection.4.2.1}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{53}{4.2.1}{subsection.4.2.1}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2}{section.4.2}}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Additional attempts to reproduce the findings froms \citep  {bodnar_data_2015}}{54}{section.4.2}}
+\newlabel{sec:methods_reproduce}{{4.2}{54}{Additional attempts to reproduce the findings froms \citep {bodnar_data_2015}}{section.4.2}{}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2}{section.4.2}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Attempt to reclassify raw Twitter data}{54}{subsection.4.2.1}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2.1}{subsection.4.2.1}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2.2}{subsection.4.2.2}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Attempt to reproduce the SIR model described in \citep  {bodnar_data_2015}}{54}{subsection.4.2.2}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2.2}{subsection.4.2.2}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{54}{4.2.2}{subsection.4.2.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{55}{4.2.2}{subsection.4.2.2}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Attempt to reproduce the SIR model described in \citep  {bodnar_data_2015}}{55}{subsection.4.2.2}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{55}{4.2.2}{subsection.4.2.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{55}{4.2.2}{subsection.4.2.2}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{56}{4.2.2}{subsection.4.2.2}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{56}{4.2.2}{subsection.4.2.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{57}{4.2.2}{subsection.4.2.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{57}{4.2.2}{subsection.4.2.2}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\newlabel{fig:SIR_comparison_original}{{4.15a}{57}{\relax }{figure.caption.25}{}}
-\newlabel{sub@fig:SIR_comparison_original}{{a}{57}{\relax }{figure.caption.25}{}}
-\newlabel{fig:SIR_comparison_CDC}{{4.15b}{57}{\relax }{figure.caption.25}{}}
-\newlabel{sub@fig:SIR_comparison_CDC}{{b}{57}{\relax }{figure.caption.25}{}}
-\newlabel{fig:SIR_comparison_full}{{4.15c}{57}{\relax }{figure.caption.25}{}}
-\newlabel{sub@fig:SIR_comparison_full}{{c}{57}{\relax }{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces Comparison between the SIR model depicted in \citep  {bodnar_data_2015} (a) and replications based on the official CDC ILI rates (b) and the full retrospective Twitter model (c).\relax }}{57}{figure.caption.25}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{57}{4.15}{figure.caption.25}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{57}{4.2.2}{figure.caption.25}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{57}{4.2.2}{figure.caption.25}}}
+\newlabel{fig:SIR_comparison_original}{{4.15a}{58}{\relax }{figure.caption.25}{}}
+\newlabel{sub@fig:SIR_comparison_original}{{a}{58}{\relax }{figure.caption.25}{}}
+\newlabel{fig:SIR_comparison_CDC}{{4.15b}{58}{\relax }{figure.caption.25}{}}
+\newlabel{sub@fig:SIR_comparison_CDC}{{b}{58}{\relax }{figure.caption.25}{}}
+\newlabel{fig:SIR_comparison_full}{{4.15c}{58}{\relax }{figure.caption.25}{}}
+\newlabel{sub@fig:SIR_comparison_full}{{c}{58}{\relax }{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces Comparison between the SIR model depicted in \citep  {bodnar_data_2015} (a) and replications based on the official CDC ILI rates (b) and the full retrospective Twitter model (c).\relax }}{58}{figure.caption.25}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.15}{figure.caption.25}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.2.2}{figure.caption.25}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.2.2}{figure.caption.25}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces National best-fit parameters for each year from the CDC's data (white) and the full retrospective model consisting of a retrospective AR(2) model based on the CDC data and the retrospective Twitter base model (grey)\relax }}{58}{table.caption.26}}
-\newlabel{tab:nationalparams_replicated}{{4.1}{58}{National best-fit parameters for each year from the CDC's data (white) and the full retrospective model consisting of a retrospective AR(2) model based on the CDC data and the retrospective Twitter base model (grey)\relax }{table.caption.26}{}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.2.2}{table.caption.26}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.2.3}{subsection.4.2.3}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \citep  {bodnar_data_2015}}{58}{subsection.4.2.3}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{58}{4.2.3}{subsection.4.2.3}}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces National best-fit parameters for each year from the CDC's data (white) and the full retrospective model consisting of a retrospective AR(2) model based on the CDC data and the retrospective Twitter base model (grey)\relax }}{59}{table.caption.26}}
+\newlabel{tab:nationalparams_replicated}{{4.1}{59}{National best-fit parameters for each year from the CDC's data (white) and the full retrospective model consisting of a retrospective AR(2) model based on the CDC data and the retrospective Twitter base model (grey)\relax }{table.caption.26}{}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{59}{4.2.2}{table.caption.26}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{59}{4.2.3}{subsection.4.2.3}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \citep  {bodnar_data_2015}}{59}{subsection.4.2.3}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{59}{4.2.3}{subsection.4.2.3}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\newlabel{fig:TwitterModel_comparison_original}{{4.16a}{60}{\relax }{figure.caption.27}{}}
-\newlabel{sub@fig:TwitterModel_comparison_original}{{a}{60}{\relax }{figure.caption.27}{}}
-\newlabel{fig:TwitterModel_comparison_base_model}{{4.16b}{60}{\relax }{figure.caption.27}{}}
-\newlabel{sub@fig:TwitterModel_comparison_base_model}{{b}{60}{\relax }{figure.caption.27}{}}
-\newlabel{fig:TwitterModel_comparison_AR2}{{4.16c}{60}{\relax }{figure.caption.27}{}}
-\newlabel{sub@fig:TwitterModel_comparison_AR2}{{c}{60}{\relax }{figure.caption.27}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Comparison between the full retrospective Twitter model depicted in \citep  {bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)\relax }}{60}{figure.caption.27}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{60}{4.16}{figure.caption.27}}}
-\newlabel{fig:TwitterModel_comparison}{{4.16}{60}{Comparison between the full retrospective Twitter model depicted in \citep {bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)\relax }{figure.caption.27}{}}
+\newlabel{fig:TwitterModel_comparison_original}{{4.16a}{61}{\relax }{figure.caption.27}{}}
+\newlabel{sub@fig:TwitterModel_comparison_original}{{a}{61}{\relax }{figure.caption.27}{}}
+\newlabel{fig:TwitterModel_comparison_base_model}{{4.16b}{61}{\relax }{figure.caption.27}{}}
+\newlabel{sub@fig:TwitterModel_comparison_base_model}{{b}{61}{\relax }{figure.caption.27}{}}
+\newlabel{fig:TwitterModel_comparison_AR2}{{4.16c}{61}{\relax }{figure.caption.27}{}}
+\newlabel{sub@fig:TwitterModel_comparison_AR2}{{c}{61}{\relax }{figure.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Comparison between the full retrospective Twitter model depicted in \citep  {bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)\relax }}{61}{figure.caption.27}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{61}{4.16}{figure.caption.27}}}
+\newlabel{fig:TwitterModel_comparison}{{4.16}{61}{Comparison between the full retrospective Twitter model depicted in \citep {bodnar_data_2015} (a) and replications consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b) and the retrospective Twitter base model (c)\relax }{figure.caption.27}{}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion}{61}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion}{63}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:discussion}{{5}{61}{Discussion}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}}{61}{section.5.1}}
-\newlabel{sec:disc_data_set}{{5.1}{61}{}{section.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Replication}{61}{section.5.2}}
-\newlabel{sec:disc_replication}{{5.2}{61}{Replication}{section.5.2}{}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{61}{5.2}{section.5.2}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{61}{5.2}{section.5.2}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{61}{section.5.3}}
+\newlabel{ch:discussion}{{5}{63}{Discussion}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}}{63}{section.5.1}}
+\newlabel{sec:disc_data_set}{{5.1}{63}{}{section.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Replication}{63}{section.5.2}}
+\newlabel{sec:disc_replication}{{5.2}{63}{Replication}{section.5.2}{}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{63}{5.2}{section.5.2}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{63}{5.2}{section.5.2}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{63}{section.5.3}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{62}{5.3}{section.5.3}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{62}{5.4}{section.5.4}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}The findings from \citep  {bodnar_data_2015} are based on a different data set}{62}{section.5.4}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{62}{5.4}{section.5.4}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.3}{section.5.3}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.4}{section.5.4}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}The findings from \citep  {bodnar_data_2015} are based on a different data set}{64}{section.5.4}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.4}{section.5.4}}}
 \citation{paul_worldwide_2015}
 \citation{bodnar_data_2015}
 \citation{paul_twitter_2014}
 \citation{aramaki_twitter_2011}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{63}{section.5.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{63}{section.5.6}}
-\@writefile{brf}{\backcite{paul_worldwide_2015}{{63}{5.6}{section.5.6}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{63}{5.6}{section.5.6}}}
-\@writefile{brf}{\backcite{paul_twitter_2014}{{63}{5.6}{section.5.6}}}
-\@writefile{brf}{\backcite{aramaki_twitter_2011}{{63}{5.6}{section.5.6}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{65}{section.5.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{65}{section.5.6}}
+\@writefile{brf}{\backcite{paul_worldwide_2015}{{65}{5.6}{section.5.6}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{65}{5.6}{section.5.6}}}
+\@writefile{brf}{\backcite{paul_twitter_2014}{{65}{5.6}{section.5.6}}}
+\@writefile{brf}{\backcite{aramaki_twitter_2011}{{65}{5.6}{section.5.6}}}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
 \citation{bodnar_data_2015}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.6}{section.5.6}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.6}{section.5.6}}}
-\@writefile{brf}{\backcite{bodnar_data_2015}{{64}{5.6}{section.5.6}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Missing parts}{64}{section.5.7}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{66}{5.6}{section.5.6}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{66}{5.6}{section.5.6}}}
+\@writefile{brf}{\backcite{bodnar_data_2015}{{66}{5.6}{section.5.6}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Missing parts}{66}{section.5.7}}
 \bibstyle{mywiley}
 \bibdata{Masterarbeit.bib}
 \bibcite{aarts2015estimating}{{1}{2015}{{Aarts {\it  et~al.}}}{{}}}
@@ -600,30 +620,33 @@
 \bibcite{ray_network_2016}{{101}{2016}{{Ray {\it  et~al.}}}{{}}}
 \bibcite{rehak_twitterbird_2014}{{102}{2014}{{Rehak}}{{}}}
 \bibcite{rolfes_estimated_2016}{{103}{2016}{{Rolfes {\it  et~al.}}}{{}}}
-\bibcite{rothman2012epidemiology}{{104}{2012}{{Rothman}}{{}}}
-\bibcite{salathe_digital_2012}{{105}{2012}{{Salathe {\it  et~al.}}}{{}}}
-\bibcite{salathe2013dynamics}{{106}{2013}{{Salath{\'e} {\it  et~al.}}}{{}}}
-\bibcite{schooler2014metascience}{{107}{2014}{{Schooler}}{{}}}
-\bibcite{scott_time_2017}{{108}{2017}{{Scott {\it  et~al.}}}{{}}}
-\bibcite{sentinella_2017}{{109}{2017}{{Sentinella}}{{}}}
-\bibcite{simonsen_infectious_2016}{{110}{2016}{{Simonsen {\it  et~al.}}}{{}}}
-\bibcite{sloan_who_2015}{{111}{2015}{{Sloan and Morgan}}{{}}}
-\bibcite{steiger2015advanced}{{112}{2015}{{Steiger {\it  et~al.}}}{{}}}
-\bibcite{stieglitz2012political}{{113}{2012}{{Stieglitz and Dang-Xuan}}{{}}}
-\bibcite{stroebe_alleged_2014}{{114}{2014}{{Stroebe and Strack}}{{}}}
-\bibcite{sul2014trading}{{115}{2014}{{Sul {\it  et~al.}}}{{}}}
-\bibcite{swani2014should}{{116}{2014}{{Swani {\it  et~al.}}}{{}}}
-\bibcite{econ_try_2016}{{117}{2016}{{The{\ }Economist}}{{}}}
-\bibcite{tumasjan2010predicting}{{118}{2010}{{Tumasjan {\it  et~al.}}}{{}}}
-\bibcite{tumasjan2011election}{{119}{2011}{{Tumasjan {\it  et~al.}}}{{}}}
-\bibcite{twitter_annual_2013}{{120}{2013}{{Twitter}}{{}}}
-\bibcite{twitter_annual_2017}{{121}{2017}{{Twitter}}{{}}}
-\bibcite{vidal2015using}{{122}{2015}{{Vidal {\it  et~al.}}}{{}}}
-\bibcite{vogt_authorization_2016}{{123}{2016}{{Vogt {\it  et~al.}}}{{}}}
-\bibcite{wang_regional_2016}{{124}{2016}{{Wang {\it  et~al.}}}{{}}}
-\bibcite{widener2014using}{{125}{2014}{{Widener and Li}}{{}}}
-\bibcite{wojcik_public_2014}{{126}{2014}{{W\IeC {\'o}jcik {\it  et~al.}}}{{}}}
-\bibcite{yong_psychology_2016}{{127}{2016}{{Yong}}{{}}}
-\bibcite{zhang2012predicting}{{128}{2012}{{Zhang {\it  et~al.}}}{{}}}
-\bibcite{zhao2009and}{{129}{2009}{{Zhao and Rosson}}{{}}}
-\bibcite{zimmer2014topology}{{130}{2014}{{Zimmer and Proferes}}{{}}}
+\bibcite{rossum_1995_python}{{104}{1995}{{Rossum}}{{}}}
+\bibcite{rothman2012epidemiology}{{105}{2012}{{Rothman}}{{}}}
+\bibcite{salathe_digital_2012}{{106}{2012}{{Salathe {\it  et~al.}}}{{}}}
+\bibcite{salathe2013dynamics}{{107}{2013}{{Salath{\'e} {\it  et~al.}}}{{}}}
+\bibcite{schooler2014metascience}{{108}{2014}{{Schooler}}{{}}}
+\bibcite{scott_time_2017}{{109}{2017}{{Scott {\it  et~al.}}}{{}}}
+\bibcite{sentinella_2017}{{110}{2017}{{Sentinella}}{{}}}
+\bibcite{simonsen_infectious_2016}{{111}{2016}{{Simonsen {\it  et~al.}}}{{}}}
+\bibcite{sloan_who_2015}{{112}{2015}{{Sloan and Morgan}}{{}}}
+\bibcite{sloan2013knowing}{{113}{2013}{{Sloan {\it  et~al.}}}{{}}}
+\bibcite{steiger2015advanced}{{114}{2015}{{Steiger {\it  et~al.}}}{{}}}
+\bibcite{stieglitz2012political}{{115}{2012}{{Stieglitz and Dang-Xuan}}{{}}}
+\bibcite{stroebe_alleged_2014}{{116}{2014}{{Stroebe and Strack}}{{}}}
+\bibcite{sul2014trading}{{117}{2014}{{Sul {\it  et~al.}}}{{}}}
+\bibcite{swani2014should}{{118}{2014}{{Swani {\it  et~al.}}}{{}}}
+\bibcite{econ_try_2016}{{119}{2016}{{The{\ }Economist}}{{}}}
+\bibcite{tumasjan2010predicting}{{120}{2010}{{Tumasjan {\it  et~al.}}}{{}}}
+\bibcite{tumasjan2011election}{{121}{2011}{{Tumasjan {\it  et~al.}}}{{}}}
+\bibcite{twitter_million_2011}{{122}{2011}{{Twitter}}{{}}}
+\bibcite{twitter_annual_2013}{{123}{2013}{{Twitter}}{{}}}
+\bibcite{twitter_annual_2017}{{124}{2017}{{Twitter}}{{}}}
+\bibcite{vidal2015using}{{125}{2015}{{Vidal {\it  et~al.}}}{{}}}
+\bibcite{vogt_authorization_2016}{{126}{2016}{{Vogt {\it  et~al.}}}{{}}}
+\bibcite{wang_regional_2016}{{127}{2016}{{Wang {\it  et~al.}}}{{}}}
+\bibcite{widener2014using}{{128}{2014}{{Widener and Li}}{{}}}
+\bibcite{wojcik_public_2014}{{129}{2014}{{W\IeC {\'o}jcik {\it  et~al.}}}{{}}}
+\bibcite{yong_psychology_2016}{{130}{2016}{{Yong}}{{}}}
+\bibcite{zhang2012predicting}{{131}{2012}{{Zhang {\it  et~al.}}}{{}}}
+\bibcite{zhao2009and}{{132}{2009}{{Zhao and Rosson}}{{}}}
+\bibcite{zimmer2014topology}{{133}{2014}{{Zimmer and Proferes}}{{}}}

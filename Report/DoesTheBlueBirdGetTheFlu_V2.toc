@@ -9,23 +9,24 @@
 \contentsline {section}{\numberline {2.4}On the ground validation of online diagnosis}{14}{section.2.4}
 \contentsline {chapter}{\numberline {3}Description of the data set}{21}{chapter.3}
 \contentsline {section}{\numberline {3.1}The starting point}{21}{section.3.1}
-\contentsline {section}{\numberline {3.2}Description of the \textit {sick} data set}{22}{section.3.2}
-\contentsline {section}{\numberline {3.3}Description of the \textit {all\_tweets} data set}{24}{section.3.3}
-\contentsline {chapter}{\numberline {4}Results}{33}{chapter.4}
-\contentsline {section}{\numberline {4.1}Comparison of CDC}{33}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Comparison with CDC data}{39}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Comparison with regard to CDC activity levels}{44}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Comparison on the state level}{50}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Comparison on the county level}{52}{subsection.4.1.4}
-\contentsline {section}{\numberline {4.2}Additional attempts to reproduce the findings froms \citep {bodnar_data_2015}}{53}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Attempt to reclassify raw Twitter data}{53}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Attempt to reproduce the SIR model described in \citep {bodnar_data_2015}}{54}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \citep {bodnar_data_2015}}{58}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Discussion}{61}{chapter.5}
-\contentsline {section}{\numberline {5.1}}{61}{section.5.1}
-\contentsline {section}{\numberline {5.2}Replication}{61}{section.5.2}
-\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{61}{section.5.3}
-\contentsline {section}{\numberline {5.4}The findings from \citep {bodnar_data_2015} are based on a different data set}{62}{section.5.4}
-\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{63}{section.5.5}
-\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{63}{section.5.6}
-\contentsline {section}{\numberline {5.7}Missing parts}{64}{section.5.7}
+\contentsline {section}{\numberline {3.2}Description of the \texttt {sick\_users} data set}{22}{section.3.2}
+\contentsline {section}{\numberline {3.3}Description of the \texttt {all\_tweets} data set}{29}{section.3.3}
+\contentsline {chapter}{\numberline {4}What does the classified Twitter data set reveal about the flu?}{33}{chapter.4}
+\contentsline {section}{\numberline {4.1}Can the Twitter classifier compete for gold?}{33}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Spatio-temporal patterns of Twitter usage}{34}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Comparison with CDC data}{40}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Comparison with regard to CDC activity levels}{45}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Comparison on the state level}{51}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Comparison on the county level}{53}{subsection.4.1.5}
+\contentsline {section}{\numberline {4.2}Additional attempts to reproduce the findings froms \citep {bodnar_data_2015}}{54}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Attempt to reclassify raw Twitter data}{54}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Attempt to reproduce the SIR model described in \citep {bodnar_data_2015}}{55}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \citep {bodnar_data_2015}}{59}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Discussion}{63}{chapter.5}
+\contentsline {section}{\numberline {5.1}}{63}{section.5.1}
+\contentsline {section}{\numberline {5.2}Replication}{63}{section.5.2}
+\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{63}{section.5.3}
+\contentsline {section}{\numberline {5.4}The findings from \citep {bodnar_data_2015} are based on a different data set}{64}{section.5.4}
+\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{65}{section.5.5}
+\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{65}{section.5.6}
+\contentsline {section}{\numberline {5.7}Missing parts}{66}{section.5.7}

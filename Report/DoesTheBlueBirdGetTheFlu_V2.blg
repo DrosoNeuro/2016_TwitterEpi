@@ -3,7 +3,7 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for "bodna_data_2015"
+Warning--I didn't find a database entry for "Rbase"
 Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty journal in bag_grippe_2016
@@ -17,48 +17,49 @@ Warning--empty journal in GFT_nextchapter_2015
 Warning--empty journal in kullmann2015biomedicine
 Warning--empty booktitle in liu_assessing_2017
 Warning--empty journal in rolfes_estimated_2016
+Warning--empty institution in rossum_1995_python
 Warning--empty journal in sentinella_2017
 Warning--empty journal in twitter_annual_2013
 Warning--empty journal in twitter_annual_2017
-You've used 130 entries,
+You've used 133 entries,
             1967 wiz_defined-function locations,
-            1164 strings with 31165 characters,
-and the built_in function-call counts, 54993 in all, are:
-= -- 5476
-> -- 2481
-< -- 82
-+ -- 884
-- -- 854
-* -- 4624
-:= -- 9571
-add.period$ -- 443
-call.type$ -- 130
-change.case$ -- 1073
-chr.to.int$ -- 124
-cite$ -- 146
-duplicate$ -- 1979
-empty$ -- 3488
-format.name$ -- 1022
-if$ -- 10806
+            1180 strings with 31737 characters,
+and the built_in function-call counts, 56030 in all, are:
+= -- 5575
+> -- 2533
+< -- 84
++ -- 902
+- -- 872
+* -- 4709
+:= -- 9770
+add.period$ -- 454
+call.type$ -- 133
+change.case$ -- 1098
+chr.to.int$ -- 127
+cite$ -- 150
+duplicate$ -- 2016
+empty$ -- 3548
+format.name$ -- 1043
+if$ -- 10999
 int.to.chr$ -- 7
 int.to.str$ -- 0
-missing$ -- 244
-newline$ -- 694
-num.names$ -- 390
-pop$ -- 812
+missing$ -- 248
+newline$ -- 711
+num.names$ -- 399
+pop$ -- 828
 preamble$ -- 1
-purify$ -- 1076
+purify$ -- 1100
 quote$ -- 0
-skip$ -- 1563
+skip$ -- 1591
 stack$ -- 0
-substring$ -- 3696
-swap$ -- 351
+substring$ -- 3735
+swap$ -- 353
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 774
-warning$ -- 16
-while$ -- 422
+type$ -- 792
+warning$ -- 17
+while$ -- 429
 width$ -- 0
-write$ -- 1745
-(There were 17 warnings)
+write$ -- 1787
+(There were 18 warnings)

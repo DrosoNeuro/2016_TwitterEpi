@@ -478,25 +478,25 @@ Applying the above-described autocorrelation model, Bodnar was able to achieve a
   \label{fig:cdc_fit_bodnar_thesis}
   \end{figure}
 
-In Section~\ref{sec:comparison_cdc} I am focusing on my attempts to analyse and compare the results from the Twitter classifier with the official flu data from the CDC and thus are focusing on results reproducbility. In Section~\ref{sec:methods_reproduce}, on the other hand, I describe my attempts to reproduce two figures and one table from \cite{bodnar_data_2015} by using the processed data and code used provided to me, i. e. it contains my efforts to ensure methods reproducibility. Finally, Chapter~\ref{ch:discussion} contains further remarks on the methods and results reproducibility of the findings in \cite{bodnar_data_2015} as well as additional comments regarding inferential reproducibility.
+In Section~\ref{sec:comparison_cdc}, I will focus, on my attempts to analyse and compare the results from the Twitter classifier with the official flu data from the CDC and thus are focusing on results reproducbility. In Section~\ref{sec:methods_reproduce}, on the other hand, I will describe my attempts to reproduce two figures and one table from \cite{bodnar_data_2015} by using the processed data and code used provided to me, i. e. it contains my efforts to ensure methods reproducibility. Finally, Chapter~\ref{ch:discussion} contains further remarks on the methods and results reproducibility of the findings in \cite{bodnar_data_2015} as well as additional comments regarding inferential reproducibility.
 
-Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_reproduce} contain an exhaustive attempt of achieving results and methods reproducibility, respectively. In addition, one might very well argue that true results reproducibility can only be tested by recollecting a Twitter data set of similar size, rewriting the Twitter classifier, and finally comparing the results from the classified tweets to the official CDC data. However, I argue that using the same classified data set used in \cite{bodnar_data_2015} still offers the possibility to test results reproducibility, namely by employing different statistical methods to compare the results from the Twitter classifier to the official CDC data. A mere methods reproducibility, on the other hand, would only focus on recreating the exact findings and figures from \cite{bodna_data_2015}.
+Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_reproduce} contain an exhaustive attempt of achieving results and methods reproducibility, respectively. In addition, one might very well argue that true results reproducibility can only be tested by recollecting a Twitter data set of similar size, rewriting the Twitter classifier, and finally comparing the results from the classified tweets to the official CDC data. However, I argue that using the same classified data set used in \cite{bodnar_data_2015} still offers the possibility to test results reproducibility, namely by employing different statistical methods to compare the results from the Twitter classifier to the official CDC data. A mere methods reproducibility, on the other hand, would only focus on recreating the exact findings and figures from \cite{bodnar_data_2015}.
 
 \thispagestyle{empty}
 \cleardoublepage
 
 \chapter{Description of the data set}
 \label{ch:data_set_description}
-In the following I will describe the basic characteristics of the data set used. If not mentioned otherwise, all manipulations of the data set were done using \citeppackages{Rbase}. I will cite each package in addition to Rbase I used, but since single packages are used for several functions, I will only cite when they are mentioned the first time. All functions and data sets are available at xy.
+In the this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{Rbase}, even though some aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In this thesis, I will cite each library and programming resource I used in order to show my deference to the intellectual property of each . However, since I used several libraries at multiple occasions for my work,  I will only cite them when they are mentioned the first time. All functions and data sets, including the Rpackages used for  are available at Github.
 
 \section{The starting point}
 
 At the beginning of my analysis, I was handed a data set with tweet ratings, subdivided into three different sets: 
 
 \begin{itemize}
-  \item \textbf{all\_tweets} contains the whole set of rated tweets (\ensuremath{2.8470397\times 10^{9}} rows)
-  \item \textbf{one\_hundred} contains the rated tweets of those users who sent at least 100 tweets (\ensuremath{4.2611004\times 10^{7}} rows)
-  \item \textbf{sick} contains the rated tweets of all those users who sent at least one sick tweet (\ensuremath{4.13165\times 10^{6}} rows)
+  \item \texttt{all\_tweets} contains the whole set of rated tweets with 2'847'039'672~tweets and )
+  \item \texttt{one\_hundred} contains the rated tweets of those users who sent at least 100 tweets (42'611'004~rows)
+  \item \texttt{sick\_users} contains the rated tweets of all those users who sent at least one sick tweet (4'131'650~rows)
 \end{itemize}
 
 Each of the sets contains a row per tweet with the following six columns: 
@@ -516,63 +516,84 @@ Each of the sets contains a row per tweet with the following six columns:
 \end{knitrout}
 
 \begin{itemize}
-  \item \textbf{userID} a unique identifier of each Twitter user in the data set
-  \item \textbf{longitude} geographical longitude in decimal degrees
-  \item \textbf{latitude} geographical latitude in decimal degrees
-  \item \textbf{time} UNIX timestamp marking the time when tweet was sent
-  \item \textbf{sick} binary variable indicating whether tweet was labelled as ``sick=1" or ``healthy=0" by the Twitter rating algorithms
-  \item \textbf{state} U.S. state (or District of Columbia) in which the tweet was sent
+  \item \texttt{userID} A unique identifier of each Twitter user in the data set
+  \item \texttt{longitude} Geographical longitude of the location in which the tweet was sent (in decimal degrees)
+  \item \texttt{latitude} Geographical latitude  of the location in which the tweet was sent (in decimal degrees)
+  \item \texttt{time} UNIX timestamp marking the time when tweet was sent
+  \item \texttt{sick} Binary variable indicating whether tweet was labelled as ``sick" (=1) or ``healthy" (=0) by the Twitter classifier
+  \item \textbf{state} Code for the U.S. state (or District of Columbia) in which the tweet was sent
 \end{itemize}
 
-I ignored the \textit{one\_hundred} data set and only analysed the other two sets. All data sets were handled using \citeppackages{datatable} or \citeppackages{bigmemory}.
+I ignored the \texttt{one\_hundred} data set and only analysed the other two sets. All data sets were handled using \citeppackages{datatable} or \citeppackages{bigmemory}.
 
-\section{Description of the \textit{sick} data set}
+\section{Description of the \texttt{sick\_users} data set}
 \label{sec:sick_user_exploratory}
 
 
+As mentioned above, the \texttt{sick\_users} data set should contain all tweets from those users who had at least one of their tweets labelled as ``sick" by the classifier.
 
-As mentioned above, the \textit{sick\_user} data set should contain all tweets from those users who had at least one of their tweets labelled as ``sick" by the classifier.\newline
+First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $-125$° to W $-66$° representing the longitudinal and N $25$° to N $50$° representing the latitudinal expansion of the window. This way, a total of $42'860$ entries were removed with $4'088'790$ entries remaining.
 
-First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the US mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $-125°$ to W $-66°$ representing the longitudinal and N $25°$ to N $50°$ representing the latitudinal expansion of the window. This way, a total of $42860$ entries were removed with $4088790$ entries remaining.\newline
+In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the statename as well as to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additionol control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific US state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
-In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the statename as well as to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additionol control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific US state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:code56})\newline
+Most of them either came to lie at the coastline or the Canadian-US-border and the Mexican-US-border, respectively. I removed a total of 180'290 tweets that were sent from either Canada or Mexico (see Figure~\ref{fig:canexico_and_removed}). In order to reassign the unassigned tweets from the coastline, I first changed the coordinates of the ``border cases" by 0.1 degrees longitude and latitude towards the center of the US main land (e.g. if a tweet was sent from northeastern Canadian border, I added 0.1 degrees to its longitude and subtracted 0.1 degrees from its latitude before re-running the code). Those tweets that were still unassigned received the same state name as majority of their neighbours within a 0.1$\times$0.1 degree window. This way, an additional 211'511 tweets were removed, most of them at the coastline or from the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
-Most of them came to lie either a the coastline or the Canadian-US-border and the Mexican-US-border, respectively. I removed a total of 180290 tweets that were sent from either Canada or Mexico (see Figure~\ref{fig:canexico_and_removed}). In order to reassign the unassigned tweets from the coastline, I first changed the coordinates of the ``border cases" by 0.1 degrees longitude and latitude towards the center of the US main land (e.g. if a tweet was sent from northeastern Canadian border, I added 0.1 degrees to its longitude and subtracted 0.1 degrees from its latitude before re-running the code). Those tweets that were still unassigned, received the same state name as majority of their neighbours within a 0.1x0.1 degree window. This way, a an additional 211511 tweets were removed, most of them at the coastline or from the ocean (see Figure~\ref{fig:canexico_and_removed}).\newline
+After pre-processing, the \texttt{sick\_users} data set was left with a with 3'696'989 tweets remaining. These tweets were sent by total of 213'426 users, meaning that on average, each user sent 17.32 tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only sligthly longer than in my case). Furthermore, the maximal number of tweets sent per user over the course of the 208 week period was 86, a very low number given the fact that there are twitter users out there who send over a hundred tweets \textit{per day} (see also Figure~\ref{fig:histogram_ID_tot} for distribution of the number of tweets sent per user in the \texttt{sick\_users} data set).\newpage
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
     \begin{subfigure}[t]{0.9\textwidth}
     \includegraphics[width=1\linewidth]{state56_sick_raw_df.png}
     \caption{}
-    \label{fig:code56}
   \end{subfigure}
   \begin{subfigure}[t]{0.9\textwidth}
   \includegraphics[width=1\linewidth]{CanexicoAndRemoved_sick_raw_df.png}
   \caption{}
-  \label{fig:canexico_and_removed}
   \end{subfigure}
-  \caption{(a) All tweets having ``state = 56" as code in the \textit{sick\_user} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \textit{sick\_user} data set. The green dots represent the tweets that had a ``state = 56" as  a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf{not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.}
+  \caption{(a) All tweets having ``state = 56" as code in the \texttt{sick\_users} data set. These tweets could not be assigned to to any specific US state (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any US state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt{sick\_users} data set. The green dots represent the tweets that had a ``state = 56" as  a code, i.e. that could not be assigned to any specific state in the original data set, but that could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textbf{not} have state code ``56", but failed to be assigned to a state by the polygon lookup I performed.}
+  \label{fig:canexico_and_removed}
   \end{figure}
 
-Afther pre-processing the \textit{sick\_user} data set was left with a with 3696989 tweets remaining. These tweets were sent by total of \ensuremath{2.13426\times 10^{5}}, meaning that on average, each user sent 17.3221116 tweets. This is in stark contrast to the number of tweets reported in \citep{bodnar_data_2015} (175.59 Tweets per user over the whole study period). A slight decrease in the average tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in average tweet number seems suspect (the time window analysed in \citep{bodnar_data_2015} was March 3rd 2011 to March 4th 2015, so only sligthly longer than in my case). Furthermore, the maximal number of tweets sent per user over the course of the 208 week period was 86, an incredibly low number given the fact that there twitter users out there who sent over a hundred tweets \textbf{per day} (see also Figure~\ref{fig:histogram_ID_tot}) for distribution of the number of tweets sent per user in the \textit{sick\_user} data set). Hence, I am led to believe that the \textit{sick\_user} data set does is not representative of rest of the data set, let alone the total corpus of tweets produced.\newline
-
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
     \includegraphics[width=1\textwidth]{user_activity_total_sick_raw_df.png}
-  \caption{Histogram of the number of tweets sent per user in the \textit{sick\_user} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)}
+  \caption{Histogram of the number of tweets sent per user in the \texttt{sick\_users} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). As can be seen, many users only sent a handful of tweets during this time, whereas the user with the highest tweet activity sent 86 tweets. Mean = 17.3221116 (solid line); median = 14 (dashed line)}
   \label{fig:histogram_ID_tot}
 \end{figure}
 
-In addition, the large majority of the users within the \textit{sick\_user} data set never sent a tweet that was labelled as ``sick" by the flu classifier (see Figure~\ref{fig:barplot_sick_df}). In fact, only \ensuremath{2.0647\times 10^{4}} out of \ensuremath{2.13426\times 10^{5}} (or 9.6740791\%) ever sent such a tweet.\newline Also, a total of 919 users \textit{only} sent tweets that were labelled as sick --- something that seems rather unlikely to happen. Finally, those \ensuremath{1.9728\times 10^{4}} users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (16.0096817 and 17.5342179, respectively. p = \ensuremath{2.2723211\times 10^{-83}} using a Mann-Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution (p = 0), something that can also easily be seen in Figure~\ref{fig:both_vs_healthy_only_hist}.
+\hfill
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{barplot_sick_raw_df.pdf}
-\caption{The total number of users who only sent tweets labelled as ``1 = sick" (919), users who sent at least one tweet labelled as ``1 = sick" and ``0 = healthy" (\ensuremath{1.9728\times 10^{4}}), and users who only sent tweets labelled as ``0 = healthy" (192779)}
+\caption{The total number of users who only sent tweets labelled as ``sick" (919), users who sent at least one tweet labelled as ``sick" and ``healthy" (\ensuremath{1.9728\times 10^{4}}), and users who only sent tweets labelled as ``healthy" (192779)}
 \label{fig:barplot_sick_df}
 \end{figure}
 
-\begin{figure}[h]
+Halfway through 2011, Twitter users sent approximately 200 million tweets per day or 6 billion tweets per month \citep{twitter_million_2011}. If we divide the latter number by the 151 million of Twitter users that were active on a monthly basis by the end of June 30$^\textit{th}$ \citep{twitter_annual_2013}, we get a mean of 39.74 tweets per user per month. Making the conservative assumption that this number remains constant and does not increase, we would expect a mean of 1907.29 tweets per user over the whole four year period between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015---much more than the 86 tweets sent by the most diligent Twitter user in the \texttt{sick\_users} data set.
+
+One explanation for this discrepancy to the tweet rates found in the \texttt{sick\_users} data set might be found in the fact that the data set only contains geotagged tweets which only represent 0.85 \% \citep{sloan2013knowing} of all tweets. 
+
+If we make the naïve assumption that geotagged tweets represent a subset of all tweets that is uniformly distributed over all Twitter users (in other words: it is assumed that each Twitter user adds geolocation to 0.85 \% of his tweets) we receive a mean tweet rate (2037.9 tweets per user in the \texttt{sick\_users} data set) that is comparable to the mean tweet rate of all Twitter uers (1907.29 tweets per user).
+
+However, \cite{sloan_who_2015} have shown in a recent study that only 58.4 \% of all users have location services enabled and only 3.1 \% of all users ever sent a geotagged tweet. Hence, the complete body of geotagged tweets is clustered heavily around a small subset of Twitter users, so that our assumption of the uniform distribution of geotagged tweets over all Twitters users does not hold
+
+Nevertheless, the information described above allows us the achieve an estimate of the total amount of tweets and users between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015 using the following formula:
+$$\text{tweet rate} = \frac{T_{\text{tot}}}{U_\text{tot}} = \frac{T_{\text{all\_tweets}} \cdot \frac{1}{0.0085}}{U_\text{all\_tweets} \cdot \frac{1}{0.031}} = \frac{T_{\text{sick\_users}} \cdot \frac{T_{\text{all\_tweets}}}{T_{\text{sick\_users}}} \cdot \frac{1}{0.0085}}{U_\text{sick\_users} \cdot \frac{U_{\text{all\_tweets}}}{U_{\text{sick\_users}}} \cdot \frac{1}{0.031}}$$
+
+Here, $T_\text{tot}$, $T_\text{all\_tweets}$, and $T_\text{sick\_users}$ depcict the number of tweets in the real world, the \texttt{all\_tweets} data set, and the \texttt{sick\_users} data set, respectively, wheras $U_\text{tot}$, $U_\text{all\_tweets}$, and $U_\text{sick\_users}$ denominate the number of Twitter users in the real world, the \texttt{all\_tweets} data set, and the \texttt{sick\_users} data set, respectively. 
+
+Applying this formula yields a mean tweet rate of xy tweets per users between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, which is considerably lower than our conservative estimate using the official Twitter data. Hence, I am led to believe that the \texttt{sick\_users} data set does is neither representative of rest of the data set, let alone the total corpus of tweets produced in the real world. This should not come as a suprise, since the \texttt{sick\_users} data set is supposed to contain the tweets of all those users who sent at least one tweet that was classified as ``sick" (Bodnar, personal communication).
+
+However, the large majority of the users within the \texttt{sick\_users} data set never sent a tweet that was labelled as ``sick" by the flu classifier (see Figure~\ref{fig:barplot_sick_df}). In fact, only 20'647 out of 213'426 (or 9.67\%) ever sent such a tweet.
+
+Also, a total of 919 users exclusively sent tweets that were labelled as sick---something that seems rather unlikely to happen. Finally, those 19'728 users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (16.01 and 17.53, respectively. $p$ = 0 using a Mann-Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution ($p$ =0), something that can also easily be seen in Figure~\ref{fig:both_vs_healthy_only_hist}.
+
+Hence, it is unclear how exactly the \texttt{sick\_users} data set was constructed, since it is neither a representative subset of the whole twitter data set (for that, the percentage for sick tweets is too high, see Section~\ref{sec:full_set}) nor does it exclusively contain tweets from users who had at least one of their tweets labelled as ``sick".
+
+Nevertheless, I used this data set as a basis to develop a basic grasp of the data set as well as to develop functions to analyse the data set in depth and to compare it with official flu data. However, I do not report any more results based on this data set, since the exact selection criteria used for this set are unclear and hence the inferences from it are not to be trusted. All following graphs, calculations and statistics are based on the \texttt{all\_tweets} data set.\newpage
+
+\begin{figure}[H]
 \centering
   \begin{subfigure}[b]{1\textwidth}
   \includegraphics[width=1\linewidth]{user_activity_both_sick_raw_df.png}
@@ -582,21 +603,21 @@ In addition, the large majority of the users within the \textit{sick\_user} data
   \includegraphics[width=1\linewidth]{user_activity_only_healthy_sick_raw_df.png}
   \caption{}
   \end{subfigure}
-  \caption{Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``1 = sick" and one tweet labelled as ``0 = healthy".  Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``1 = sick" by the classifier.  Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``1 = sick" and one tweet labelled ``0 = healthy")}
+  \caption{Histogram of numbers of tweets sent per user during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1). (a) contains only tweets from users who sent at least one tweet labelled as ``sick" and one tweet labelled as ``healthy".  Mean = 16.0096817 (solid line); median = 12 (dashed line) (b) contains only tweets from users who never sent a tweet that was labelled as ``sick" by the classifier.  Mean = 17.5342179 (solid line); median = 15 (dashed line). As can be seen, mode, median and mean of the number of tweets sent per user are significantly lower in (a) than in (b). Also, note that by construction (a) does not contain any user who only sent one tweet (since the users in this group are defined by having sent at last one tweet labelled ``sick" and one tweet labelled as ``healthy")}
   \label{fig:both_vs_healthy_only_hist}
 
 \end{figure}
 
-Hence, it is unclear how exactly the \textit{sick\_user} data set was constructed, since it is neither a representative subset of the whole twitter data set (for that, the percentage for sick tweets is too high, see Section~\ref{sec:full_set}) nor does it exclusively contain tweets from users who had at least one of their tweets labelled as ``1 = sick".
-
-Nevertheless, I used this data set as a basis to develop a basic grasp of the data set as well as to develop functions to analyse the data set in depth and to compare it with official flu data. However, I do not report any more results based on this data set, since the exact selection criteria used for this set are unclear and hence the inferences from it are not to be trusted. All following graphs, calculations and statistics are based on the full Twitter data set aggregated over weeks. 
-
-\section{Description of the \textit{all\_tweets} data set}
+\section{Description of the \texttt{all\_tweets} data set}
 \label{sec:full_set}
 
-In order to analyse the complete data set with all \ensuremath{2.8470397\times 10^{9}}, I transformed them into ``big.matrix" objects using the \citeppackages{bigmatrix} package, removed all tweets before 2011-03-05 and after 2015-07-11 and aggregated the remaining \ensuremath{2.764211\times 10^{9}} tweets with regard to states and weeks in which the tweets where sent. The cut-off date for each week corresponded to the dates the official CDC flu reports were published. All tweets within the seven day time window leading up to a specific data were assigned to said date, including the tweets sent on that date (For example, if tweet was sent on 2015-07-11, 2015-07-07 or 2015-07-05 it was assigned to 2015-07-11. However, if it was sent on 2015-07-04 it was assigned to the previous week ending on 2015-07-10).\newline
+The complete data set consisted of a total of 2'847'039'672 tweets and hence was larger than the set reported by \citep{bodnar_data_2015} which contained 2'732'174'105 tweets. This difference is simply due to the fac the tweets in my data set were collecte until July 2015, while the tweets analysed in \citep{bodnar_data_2015} were only collected up to March 2015.
 
-Since there are a total a total of 208 weeks between 2011-03-05 and 2015-07-11 and a total of 50 different state labels in the original data set (48 labels for states on the US mainland, 1 label for the District of Columbia and 1 label for the tweets that could not be assigned to any of the former 49 areas), I received a data set with 10400 rows after aggregation (one for each state-week-pair). Each row has the following six columns:
+In a first step, I removed all tweets before 2011-03-05 and after 2015-07-11 as well as outside the rough geographical window around the US mainland (W $-125$°, W $-66$°, N $25$° , N $50$° ) as described above, and aggregated the remaining 2'764'210'962 tweets and xy users with regard to states and weeks in which the tweets where sent, i. e. I calculated the number of tweets sent within a given week in a given state
+
+The cut-off date for each week corresponded to the dates the official CDC flu reports were published. All tweets within the seven day time window leading up to a specific data were assigned to said date, including the tweets sent on that date (For example, if tweet was sent on 2015-07-11, 2015-07-07 or 2015-07-05 it was assigned to 2015-07-11. However, if it was sent on 2015-07-04 it was assigned to the previous week ending on 2015-07-10).
+
+Since there are a total a total of 208 weeks between 2011-03-05 and 2015-07-11 and a total of 50 different state labels in the original data set (48 labels for states on the US mainland, 1 label for the District of Columbia and 1 label for the tweets that could not be assigned to any of the other 49 areas), I received a data set with 10'400 rows after aggregation (one for each state-week-pair). Each row has the following six columns:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -613,20 +634,17 @@ Since there are a total a total of 208 weeks between 2011-03-05 and 2015-07-11 a
 \end{knitrout}
 
 \begin{itemize}
-  \item \textbf{week} the week in which the aggregated tweets were sent
-  \item \textbf{state} the state in which the tweet were sent
-  \item \textbf{sick} total number of tweets that were labelled as ``sick" in the given week and state
-  \item \textbf{total} total number of tweets sent in the given week and state
-  \item \textbf{healthy} total number of tweets that were not labelled as ``sick" in the given week and state
-  \item \textbf{sick\_per} percentage of tweets labelled as sick among the total tweets sent in the given week and state
+  \item \texttt{week} The week in which the aggregated tweets were sent
+  \item \texttt{state} The state in which the tweet were sent
+  \item \texttt{sick} The total number of tweets that were labelled as ``sick" in the given week and state
+  \item \texttt{total} The total number of tweets sent in the given week and state
+  \item \texttt{healthy} The total number of tweets that were not labelled as ``sick" in the given week and state
+  \item \texttt{sick\_per} The percentage of tweets labelled as sick among the total tweets sent in the given week and state
 \end{itemize}
 
 
-The complete data set consisted of a total of \ensuremath{2.8470397\times 10^{9}} tweets and hence was larger than the set reported by \citep{bodnar_data_2015} which contained 2,732,174,105 tweets. This difference is simply due to the fac the tweets in my data set were collecte until July 2015, while the tweets analysed in \citep{bodnar_data_2015} were only collected up to March 2015.\newline
 
-In a first step, I removed all tweets before 2011-03-05 and after 2015-07-11 as well as outside the rough geographical window around the US mainland (W -125°, W -66°, N 25° , N 50° ) as described above, leaving \ensuremath{2.764211\times 10^{9}} tweets. \newline
-
-Next, I added the corresponding date to each week index and then aggregated the whole data set with regard to week and state code (i.e. calculated the number of tweets sent within a given week in a given state). In order to assign state names to state labels present in the data set, I used the label/name relationships established in the \textit{sick\_user} data set (see section~\ref{sec:sick_user_exploratory}). Since tweets with state code ``56" predominantly stemmed from the Mexico and Canada or other areas outside the U.S. mainland (see Figure~\ref{fig:code56}), I removed all corresponding state/week pairs from the aggregated data set (\ensuremath{2.2335232\times 10^{8}} tweets in total), resulting in a data set with 10192 rows and 16 columns (see below), containing a total of \ensuremath{2.6147111\times 10^{9}} tweets aggregated over states and weeks.
+Next, I added the corresponding date and state name to each week and state index, respectively. In order to assign state names to their respective state labels, I used the label/name relationships established in the \texttt{sick\_users} data set (see section~\ref{sec:sick_user_exploratory}). Since tweets with state code ``56" predominantly stemmed from the Mexico and Canada or other areas outside the U.S. mainland (see Figure~\ref{fig:canexico_and_removed}), I removed all corresponding state/week pairs from the aggregated data set (223'352'319 tweets in total), resulting in a data set with 10'192 rows and 16 columns (see below), containing a total of 2'614'711'121 tweets from xy users aggregated over states and weeks.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -642,15 +660,17 @@ Next, I added the corresponding date to each week index and then aggregated the 
 \end{kframe}
 \end{knitrout}
 
-There were a total amount of \ensuremath{1.189809\times 10^{6}} tweets labelled as ``sick", a number that is considerably larger than the \ensuremath{2.0894\times 10^{4}} tweets labelled as ``sick" in the \textit{sick\_user} data set. This further shows that that the latter does not contain the full subset of tweets labelled as ``sick". Relatively speaking, 0.0455044 \% of all tweets in the \textit{all\_tweets} data set were labelled as ``sick" (as opposed to 9.6740791 \% in the \textit{sick\_user data set}).\newline
+There were a total amount of 1'189'809 tweets labelled as ``sick", a number that is considerably larger than the 20'894 tweets labelled as ``sick" in the \texttt{sick\_users} data set. This further shows that that the latter does not contain the full subset of tweets labelled as ``sick". Relatively speaking, 0.05~\% of all tweets in the \texttt{all\_tweets} data set were labelled as ``sick" (as opposed to 9.67~\% in the \texttt{sick\_users} data set).
 
-The total amount of users who have sent at least one tweet labelled as sick during the study period was \ensuremath{2.7052\times 10^{4}}. Not that this is an upper estimate, since a user could be classified as ``sick" more than once between 2011-03-05 and 2015-07-11. Since my analysis rests on weekly aggregated data, I would not be able to differentiate between a user who is classified as sick two times and two individual users who are classified as sick once. However, this is only a problem when assessing the total number of tweeters over the whole study period --- it does not pose a problem when looking at the data categorised by weeks and/or states or at averaged data.\newline
+The total amount of users who have sent at least one tweet labelled as sick during the study period was 27'052. Note that this is an upper estimate, since a user could be classified as ``sick" more than once between 2011-03-05 and 2015-07-11. Since my analysis rests on weekly aggregated data, I was not be able to differentiate between a user who is classified as sick two times and two individual users who are classified as sick once. However, this is only a problem when assessing the total number of tweeters over the whole study period---it does not pose an obstacle when looking at the data categorised by weeks and/or states or at averaged data.
 
-What is peculiar, however, is the fact that the total number of sick users found in the twitter data set is considerably lower than the number reported in \citep{bodnar_data_2015} (182801 users labelled as> sick), despite the former being an upper estimate of the total number of individual sick users. At the other hand, the average number of individual users found in the data set during the first year (2011) for the whole country is \ensuremath{1.7538177\times 10^{5}}, while \citep{bodnar_data_2015} only reports a total of 45086 users being active during this year. Using the information that only around 0.85\% of all tweets are geotagged \citep{sloan_who_2015}, we can estimate the total number of Twitter users ative in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an average of \ensuremath{2.0633149\times 10^{7}} active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to \ensuremath{5.3042353\times 10^{6}} total active users in 2011 --- a number which is a far cry from the roughly 19 (March 2011) to 30 (December 2011) million of monthly active twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}.\newline
+What is peculiar, however, is the fact that the total number of sick users found in the Twitter data set is considerably lower than the number reported in \cite{bodnar_data_2015} {27'052 vs 182'801 users, respectively), despite the former being an upper estimate of the total number of individual sick users. On the other hand, the number of individual users found in the data set during the first year (2011) for the whole country is larger than the one reported by \cite{bodnar_data_2015}: 175'381.76744186045835 and 45'086, respectively.
 
-In addition, I could observe a very peculiar difference in the average tweet frequency between healthy and sick users. While healthy users sent an average of 31.4178087 tweets per week, sick users sent an average 45.9534869 tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann-Whitney U-Test, p = \ensuremath{7.3631306\times 10^{-23}}). Also, the average tweet rate of all users combined (31.422503) is six times smaller than the average tweet rate per user reported in \citep{bodnar_data_2015} (175.59). The median (32.5294692) tweet rate, however, is considerably higher than the median tweet rate reported in \citep{bodnar_data_2015} (10).\newline
+\textbf{Using the information that only around 0.85~\% of all tweets are geotagged \citep{sloan2013knowing} and 3.1~\% of users send geotagged tweets \citep{sloan2013knowing}, we can estimate the total number of Twitter users active in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an average of \ensuremath{2.0633149\times 10^{7}} active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to \ensuremath{5.3042353\times 10^{6}} total active users in 2011 --- a number which is a far cry from the roughly 19 (March 2011) to 30 (December 2011) million of monthly active twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}.}
 
-These points give reason to believe that the data used to build the ILI models reported in \citep{bodnar_data_2015} is not the same as the data I was analysing for this Master thesis.\newline
+In addition, I could observe a very peculiar difference in the average tweet frequency between healthy and sick users. While healthy users sent an average of 31.42 tweets per week, sick users sent an average 45.95 tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann-Whitney U-Test, $p$ =0). Also, the mean tweet rate of all users combined (31.42) is six times smaller than the mean tweet rate per user reported in \cite{bodnar_data_2015} (175.59). The median (32.53) tweet rate, however, is considerably higher than the median tweet rate reported in \cite{bodnar_data_2015} (10).
+
+These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I was analysing for this thesis.
 
 \begin{figure}[H]
 \centering
@@ -662,20 +682,32 @@ These points give reason to believe that the data used to build the ILI models r
 \thispagestyle{empty}
 \cleardoublepage
 
-\chapter{Results}
+\chapter{What does the classified Twitter data set reveal about the flu?}
 \label{ch:results}
 
+In the the first part of this chapter, I will describe the performance of the flu classifier compared to the weekly influenza rate estimates of the CDC (Section~\ref{sec:comparison_cdc}. In addition to this, I will critically assess the Twitter classifiers ability to predict the CDC's ILI reports as described in \cite{bodnar_data_2015}, in order to test which of the described findings are reproducible.
 
-\section{Comparison of CDC}
+In the second part of this chapter, I will present my attempts to faithfully reproduce two key figures and one table from \cite{bodnar_data_2015} by using the processed data and the code provided to me. This part will therefore shed light on the question whether the methodological and theoretical descriptions provided in \cite{bodnar_data_2015} as well as the available data and code basis are sufficient to ensure methods reproducibility.
+
+\section{Can the Twitter classifier compete for gold?}
 \label{sec:comparison_cdc}
-Figure~\ref{fig:tweets_seasonal_full} shows the total number of tweets sent per week relative to the total number of tweets sent in the study period. here is no obvious pattern discernible other than an increase in weekly tweets until the third quarter of 2014 when a sudden dip in tweet activity occurs. The activity pattern of the tweets labelled as ``0 = healthy" is almost indiscernible from the temporal pattern of the complete data set. When looking at the weekly amount of tweets labelled as ``1 = sick" one can see a different pattern: The weekly activity is fluctuating more strongly and shows clearly discernible peaks towards the end and the beginning of each year. This pattern turns out to be even more pronounced when correcting for the total amount of tweets sent per week.\newline
 
-A Kolmogorov-Smirnov test reveals that the weekly activity of the tweets labelled as ``1 = sick" is in fact significantly different from the weekly activity of the tweets labelled as ``0 = healthy" (p = 0.0264162 and p = 0 for the uncorrected and corrected weekly tweet counts). See Figure~\ref{fig:tweets_seasonal_healthy_sick} for a side-by-side comparison of both the uncorrected and corrected weekly tweet activity.\newline
+The CDC publishes weekly ILI reports containing the number of patients with ILI symptoms relative to the total number of patients in the more than 2'800 outpatient healthcare providers that are part of the U. S. Outpatient Influenza-like Illness Surveillance Network (ILINet). The reports provided by the ILINet are commonly regarded as the gold standard of epidemiological flu data, so comparing the performance of the flu classifier is an important first step to assess its validity. 
+
+However, since correctly diagnosing the flu can only be done through microbiological analysis, the CDC uses ``influenza-like illnesses (ILI)" as a proxy to assess the prevalence of influenza cases in the United States. ILI are defined as ``fever (temperature of 100°F [37.8°C] or greater) and a cough and/or a sore throat without a known cause other than influenza" \citep{cdc_surveillance_2016}. It is therefore important to note that I am not comparing the Twitter classifier's results to the number of flu cases in the U. S., but only to the number of registered ILI cases, i. e. a proxy of flu prevalence. But since the CDC's data are commonly very reliable and since the Twitter classifier itself does uses the content of single tweets as a proxy between sick and healthy users, these kinds of comparisons make sense. 
+
+Before doing so, however, I will provide additional descriptive statistics of the data set.
+
+\subsection{Spatio-temporal patterns of Twitter usage}
+
+Figure~\ref{fig:tweets_seasonal_full} shows the total number of tweets sent per week relative to the total number of tweets sent in the study period. here is no obvious pattern discernible other than an increase in weekly tweets until the third quarter of 2014 when a sudden dip in tweet activity occurs. The activity pattern of the tweets labelled as ``healthy" is almost indiscernible from the temporal pattern of the complete data set. When looking at the weekly amount of tweets labelled as ``sick" one can see a different pattern: The weekly activity is fluctuating more strongly and shows clearly discernible peaks towards the end and the beginning of each year. This pattern turns out to be even more pronounced when correcting for the total amount of tweets sent per week.\newline
+
+A Kolmogorov-Smirnov test reveals that the weekly activity of the tweets labelled as ``sick" is in fact significantly different from the weekly activity of the tweets labelled as ``healthy" ($p$ =0.0264162 and $p$ =0 for the uncorrected and corrected weekly tweet counts). See Figure~\ref{fig:tweets_seasonal_healthy_sick} for a side-by-side comparison of both the uncorrected and corrected weekly tweet activity.\newline
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{activity_total_date_Twitter_full_aggregated.png}
-\caption{Relative number of tweets sent per week in the \textit{all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).}
+\caption{Relative number of tweets sent per week in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).}
 \label{fig:tweets_seasonal_full}
 \end{figure}
 
@@ -702,13 +734,13 @@ A Kolmogorov-Smirnov test reveals that the weekly activity of the tweets labelle
   \includegraphics[width=1\linewidth]{activity_rel_sick_date_Twitter_full_aggregated.png}
   \caption{}
   \end{subfigure}
-  \caption{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``1 = sick" follow a markedly different temporal pattern.}
+  \caption{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per week. As can be seen, the tweets labelled as ``sick" follow a markedly different temporal pattern.}
   \label{fig:tweets_seasonal_healthy_sick}
 \end{figure}
 
 Next, I looked at the total amount of tweets sent in each state. As can be seen in Figure~\ref{fig:tweets_state_full} and in Figure~\ref{fig:tweets_state_full_scatter}, the relative distribution per state largely follows the relative distribution of the state population. Notable exceptions are Maryland and New Jersey, which were the origin of many more tweets than expected, as well as New York, from where considerably fewer tweets originated than would be expected with regard to its population.\newline
 
-When comparing the relative number of tweets labelled as ``0 = healthy" with those labelled as ``1 = sick", we can see slight differences in the distribution, which become even more accentuated when normalising with the total number of tweets per state (Figure~\ref{fig:tweets_state_healthy_sick}) However, the states with the most pronounced differences (District of Columbia, Montana, South Dakotam, North Carolina) are almost all states or districts, respectively, with a very low overall tweet count (North Carolina being the exception). A Chi-Squared Test for independence between the two distributions gives a p-value of 0.0800653. Repeating the calculations using number of Twitter users instead of number tweets yields similar results (Figure~\ref{fig:tweets_state_full_user}, Figure~\ref{fig:tweets_state_full_scatter_user}, Figure~\ref{fig:tweets_state_healthy_sick_user}; p = 0.0822911)
+When comparing the relative number of tweets labelled as ``healthy" with those labelled as ``sick", we can see slight differences in the distribution, which become even more accentuated when normalising with the total number of tweets per state (Figure~\ref{fig:tweets_state_healthy_sick}) However, the states with the most pronounced differences (District of Columbia, Montana, South Dakotam, North Carolina) are almost all states or districts, respectively, with a very low overall tweet count (North Carolina being the exception). A Chi-Squared Test for independence between the two distributions gives a p-value of 0.0800653. Repeating the calculations using number of Twitter users instead of number tweets yields similar results (Figure~\ref{fig:tweets_state_full_user}, Figure~\ref{fig:tweets_state_full_scatter_user}, Figure~\ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0822911)
 
 \begin{figure}[H]
 \centering
@@ -723,7 +755,7 @@ When comparing the relative number of tweets labelled as ``0 = healthy" with tho
   \caption{}
     \label{fig:tweets_state_full_user}
   \end{subfigure}
-\caption{Relative number of tweets sent (a) and Twitter users (b) per state in the \textit{all\_tweets} data set between 2011-03-05 and 2015-07-11 compared to each state's relative population size.}
+\caption{Relative number of tweets sent (a) and Twitter users (b) per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 compared to each state's relative population size.}
 \end{figure}
 
 \begin{figure}[H]
@@ -740,7 +772,7 @@ When comparing the relative number of tweets labelled as ``0 = healthy" with tho
   \label{fig:tweets_state_full_scatter_user}
   \end{subfigure}
 
-\caption{Relative number of tweets sent per state (a) and Twitter users (b) in the \textit{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size}
+\caption{Relative number of tweets sent per state (a) and Twitter users (b) in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size}
 \end{figure}
 
 \begin{figure}[H]
@@ -766,7 +798,7 @@ When comparing the relative number of tweets labelled as ``0 = healthy" with tho
   \includegraphics[width=1\linewidth]{activity_rel_sick_statename_Twitter_full_aggregated.png}
   \caption{}
   \end{subfigure}
-  \caption{Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only tweets labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``1 = sick" follow a somewhat different spatial pattern.}
+  \caption{Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``sick" follow a somewhat different spatial pattern.}
   \label{fig:tweets_state_healthy_sick}
 \end{figure}
 
@@ -793,7 +825,7 @@ When comparing the relative number of tweets labelled as ``0 = healthy" with tho
   \includegraphics[width=1\linewidth]{activity_rel_sick_user_statename_Twitter_full_aggregated.png}
   \caption{}
   \end{subfigure}
-  \caption{Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``0 = healthy"; (b) and (d) contain only users with at least one tweet labelled as ``1 = sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.}
+  \caption{Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only users with at least one tweet labelled as ``sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.}
   \label{fig:tweets_state_healthy_sick_user}
 \end{figure}
 
@@ -802,7 +834,7 @@ When comparing the relative number of tweets labelled as ``0 = healthy" with tho
 
 In order to assess the validity of the ILI predictions provided by the flu classifier, I compared the the results from the Twitter classifier with the official ILI reports from the CDC on the national, regional and state level(extracted using the ``cdcfluview" package \citeppackages{cdcfluview}).\newline
 
-In a first step, I simply compared the official CDC ILI percentage data on the national level with the the relative number of tweets labelled as ``1 = sick" per week and the relative number of sick users per week, respectively. As can be seen from Figure~\ref{fig:naive_comparison_CDC_twitter}, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data.
+In a first step, I simply compared the official CDC ILI percentage data on the national level with the the relative number of tweets labelled as ``sick" per week and the relative number of sick users per week, respectively. As can be seen from Figure~\ref{fig:naive_comparison_CDC_twitter}, the relative results from the Twitter classifer are an order of magnitude smaller than the official CDC data.
 
 \begin{figure}[H]
 \centering
@@ -840,7 +872,7 @@ In order to make them directly comparable to each other, I normalised both time 
   \caption{}
   \label{fig:cdc_tw_comp_nat_ma4}
   \end{subfigure}
-  \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``1 = sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother}
+  \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother}
 \end{figure}
 
 \begin{figure}[H]
@@ -869,7 +901,7 @@ In order to make them directly comparable to each other, I normalised both time 
   \caption{}
   %\label{cdc_tw_comp_nat_ma4_user}
   \end{subfigure}
-  \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``1 = sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother}
+  \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``sick" from the Twitter flu classifier (blue) during a specific week. The data has been normalised in order to make them comparable, i. e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period. (a) without smoothing (b) after applying a two-week moving average smoother (c) after applying a four-week moving average smoother}
   \label{fig:cdc_tw_comp_nat_user}
 \end{figure}
 
@@ -888,7 +920,7 @@ The CDC differentiates between ten different ILI activity levels which represent
 
 An activity level of 1 corresponds to values that are below the baseline, level 2 corresponds to an ILI percentage less than 1 standard deviation above the baseline, level 3 corresponds to ILI more than 1, but less than 2 standard deviations above the baseline, and so on, with an activity level of 10 corresponding to ILI 8 or more standard deviations above the baseline \citep{cdc_surveillance_2016}.\newline
   
-Since a similar threshold does not exist for the Twitter data, I simply used the relative number of tweets labelled as ``1 = sick" during weeks outside the flu season (June to September; seasonal flu activity can begin as early as October and continue to occur as late as May) as source to calculate yearly baseline values during off-season weeks. I then used these baseline values to calculate the weekly activity levels according to the rationale describe above. Figure~\ref{fig:cdc_tw_comp_nat_ac_sick} and Figure~\ref{fig:cdc_tw_comp_regs_ac_sick} shows the comparison on the national and regional level, respectively. I then did the same using the relative number of sick users (as opposed to sick tweets) instead (Figure~\ref{fig:cdc_tw_comp_nat_ac_sick_user} and Figures~\ref{fig:cdc_tw_comp_regs_ac_sick_user})\footnote{Note that the Twitter data available to me only spanned the time period between 2011 and 2015. In order to data comparable with the official CDC data, I only calculated the baseline based on the off-season weeks directly preceding a specific flu season (as opposed to calculating the baseline based on the off-season weeks of the three preceding weeks)}.\newline
+Since a similar threshold does not exist for the Twitter data, I simply used the relative number of tweets labelled as ``sick" during weeks outside the flu season (June to September; seasonal flu activity can begin as early as October and continue to occur as late as May) as source to calculate yearly baseline values during off-season weeks. I then used these baseline values to calculate the weekly activity levels according to the rationale describe above. Figure~\ref{fig:cdc_tw_comp_nat_ac_sick} and Figure~\ref{fig:cdc_tw_comp_regs_ac_sick} shows the comparison on the national and regional level, respectively. I then did the same using the relative number of sick users (as opposed to sick tweets) instead (Figure~\ref{fig:cdc_tw_comp_nat_ac_sick_user} and Figures~\ref{fig:cdc_tw_comp_regs_ac_sick_user})\footnote{Note that the Twitter data available to me only spanned the time period between 2011 and 2015. In order to data comparable with the official CDC data, I only calculated the baseline based on the off-season weeks directly preceding a specific flu season (as opposed to calculating the baseline based on the off-season weeks of the three preceding weeks)}.\newline
 
 \begin{figure}[H]
 \centering
@@ -933,7 +965,7 @@ To get a better understanding of the spatio-temporal pattern of ILI activity lev
 
 \subsection{Comparison on the state level}
 \label{sec:comp_cdc_state}
-In a next step, I tried to assess the performance of Twitter flu classifier by looking at state-level data. To do so, I again calculated activity levels for each state and week based on the relative amount of tweets labelled as ``1 = sick" and the relative number of users classified as ``1 = sick", respectively. Due to space reasons and since the fit with the CDC activity curves was worse than for the regional and national data, I did not include the individual time series to this report, but only the two videos showing the spatio-temporal differences in ILI activity levels. The first video contains the comparison with activity levels based on the relative amount of tweets labelled as ``1 = sick" in each state, while the second video contains the comparison based on the relative number of users classified as ``1 = sick" during as specific week and within a given state. Again, it is clear the activity levels based on the Twitter data fit the official CDC only poorly.\newline
+In a next step, I tried to assess the performance of Twitter flu classifier by looking at state-level data. To do so, I again calculated activity levels for each state and week based on the relative amount of tweets labelled as ``sick" and the relative number of users classified as ``sick", respectively. Due to space reasons and since the fit with the CDC activity curves was worse than for the regional and national data, I did not include the individual time series to this report, but only the two videos showing the spatio-temporal differences in ILI activity levels. The first video contains the comparison with activity levels based on the relative amount of tweets labelled as ``sick" in each state, while the second video contains the comparison based on the relative number of users classified as ``sick" during as specific week and within a given state. Again, it is clear the activity levels based on the Twitter data fit the official CDC only poorly.\newline
 
 \centering \href{run:vids/state_Twitter_cdc_diff_full_rel_sick.avi}{\includegraphics[scale=0.5]{vids/ScreenshotState.png}} 
 
@@ -1100,7 +1132,7 @@ This also the reason, however, for which I am fairly confident that the results 
 As written in the Chapter~\ref{ch:data_set_description}, there is ample evidence that the data set I used was not identical to the one used in \citep{bodnar_data_2015}. Basic statistical properties such as the average tweet rate, total number of sick users or total number of users were considerably different. One reason for this could be that the data set I analysed was processed by a different Twitter classifier. This is not too unlikely, since Todd Bodnar described several different flu classifiers in his thesis, of which apparently only one was used to fit to the official CDC data. Nevertheless, personal e-mail correspondance with Todd Bodnar in fact confirmed that the data set described in his thesis and the one stored in the data base dumps of the Salathé research group were in fact the same. In this case, the only explanation would be that the data set was inadvertently changed at some point after the end of this thesis.\newline
 
 \section{There are errors present in the Twitter flu classifier}
-This is an idea that I entertained early on and that was in fact the original starting point of this thesis: The attempt to replicate the Twitter flu classifier analysis in a first step in order to improve it in a second step.\newline
+This is an idea that I entertained early on and that was in fact the original starting point of this thesis: The attempt to replicate the Twitter flu classifier analysis in a first step in order to improve it in a second step.
 
 However, in order to assess the quality of and improve said Twitter flu classifier one would not only need access to it, but also get it up and running. Unforunately, I was unable to reclassify the Twitter data in order to confirm my assumptions due to missing / deprecated libraries and runtime errors in the Twitter classifer, respectively. Hence, debugging and updating the Twitter classifier should be a main goal for future replication attempts.\newline
 
@@ -1147,7 +1179,7 @@ Base packages: \textsf{stats, graphics, grDevices, utils, datasets, methods, bas
 
 Other packages: \textsf{data.table, knitr}
 
-This document was generated on August 14, 2017 at 14:21.
+This document was generated on August 15, 2017 at 04:50.
 
 
 
