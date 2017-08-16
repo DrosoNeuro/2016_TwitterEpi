@@ -154,7 +154,7 @@ plot_flu_states <- function(data,filename="animation.avi",nat_reg="state",diff=F
   leg_lab <- leg_lab[order(leg_lab)]
   
   #define colourramp
-  cr <- colour_ramp(c("white", "yellow","red"))
+  cr <- colour_ramp(c("white", "red"))
   legcols <- cr(seq(0,1,by=0.1))
   ani.options("interval"=0.5)
   }
@@ -324,13 +324,36 @@ plot_twitter_cdc_comp <- function(twitter_data,cdc_data,reg="National",smooth=1,
   wks <- twitter_data[group%in%reg,date]
   temp <- data.table(cdc,tw,wks)
   temp <- temp[!(is.na(tw)),]
-  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw/sum(tw))) + 
-    geom_line(colour="blue") + geom_point(colour="blue") +
-    geom_line(aes(y=cdc/sum(cdc)),colour="red") + 
-    geom_point(aes(y=cdc/sum(cdc)),colour="red") +
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw/sum(tw),colour = "Twitter")) + geom_point(aes(y=tw/sum(tw),colour = "Twitter")) +
+    geom_line(aes(y=cdc/sum(cdc),colour="CDC")) + 
+    geom_point(aes(y=cdc/sum(cdc),colour="CDC")) +
+    xlab(" ") + ylab("") + ggtitle(" ") +
+    theme(text = element_text(size=15)) +scale_y_continuous(labels=percent) +
+    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = c(0.1,0.9))
+  return(nat_plot)
+}
+
+plot_twitter_cdc_comp_reg <- function(twitter_data,cdc_data,reg="National",smooth=1,yrange=c(0,0.1),ctg="rel_sick",gr="region"){
+  ind_gr <- which(colnames(twitter_data)==gr)
+  ind_ctg <- which(colnames(twitter_data)==ctg)
+  colnames(twitter_data)[c(ind_gr,ind_ctg)] <- c("group","category")
+  ind_gr <- which(colnames(cdc_data)==gr)
+  colnames(cdc_data)[c(ind_gr)] <- c("group")
+  require("forecast")
+  cdc <- as.numeric(ma(cdc_data[group%in%reg,rel_sick],order=smooth))
+  tw <- as.numeric(ma(twitter_data[group%in%reg,category],order=smooth))
+  wks <- twitter_data[group%in%reg,date]
+  temp <- data.table(cdc,tw,wks)
+  temp <- temp[!(is.na(tw)),]
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw/sum(tw),colour = "Twitter")) +
+    geom_line(aes(y=cdc/sum(cdc),colour="CDC")) + 
     xlab(" ") + ylab("") + ggtitle(reg) +
-    theme(text = element_text(size=20)) +scale_y_continuous(labels=percent) +
-    coord_cartesian(ylim=yrange)
+    theme(text = element_text(size=15)) +scale_y_continuous(labels=percent) +
+    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = "none")
   return(nat_plot)
 }
 
@@ -340,12 +363,31 @@ plot_twitter_cdc_comp_ac_level <- function(twitter_data,cdc_data,reg="National",
   wks <- joined$date
   cdc <- joined$activity_level.y
   temp <- data.table(cdc,tw,wks)
-  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
-    geom_line(colour="blue") + geom_point(colour="blue") +
-    geom_line(aes(y=cdc),colour="red") + 
-    geom_point(aes(y=cdc),colour="red") +
-    xlab(" ") + ylab("Activity level") + ggtitle(reg) +
-    theme(text = element_text(size=20)) + scale_y_discrete(limits = seq(0,10))
-    coord_cartesian(ylim=yrange)
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw,colour = "Twitter")) + geom_point(aes(y=tw,colour = "Twitter")) +
+    geom_line(aes(y=cdc,colour="CDC")) + 
+    geom_point(aes(y=cdc,colour="CDC")) +
+    xlab(" ") + ylab("") + ggtitle(" ") +
+    theme(text = element_text(size=15)) +scale_y_discrete(limits = seq(0,10)) +
+    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = c(0.1,0.9))
   return(nat_plot)
 }
+
+
+plot_twitter_cdc_comp_ac_level_reg <- function(twitter_data,cdc_data,reg="National",yrange=c(0,10)){
+  joined <- merge(twitter_data,cdc_data,by="date")
+  tw <- joined$activity_level.x
+  wks <- joined$date
+  cdc <- joined$activity_level.y
+  temp <- data.table(cdc,tw,wks)
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw,colour = "Twitter")) +
+    geom_line(aes(y=cdc,colour="CDC"))  +
+    xlab(" ") + ylab("") + ggtitle(reg) +
+    theme(text = element_text(size=15)) +scale_y_discrete(limits = seq(0,10)) +
+    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = "none")
+  return(nat_plot)
+}
+

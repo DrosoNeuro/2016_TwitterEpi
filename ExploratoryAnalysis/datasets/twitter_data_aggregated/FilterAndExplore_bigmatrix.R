@@ -111,7 +111,7 @@ for (i in files_to_process){
   yrange <- c(0,0.15)
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total")
   pdf(file="plots/ScatterTweetPop.pdf",width=10,height=10)
-  par(cex=1.4)
+  par(cex=1.5)
   plot(state_ac$category~state_ac$pop,lty="solid",pch=19,xlab = "Relative population",ylab="Relative tweet number",
        xlim=c(0,0.15),ylim=c(0,0.15))
   abline(lm(state_ac$category~state_ac$pop))
@@ -128,7 +128,7 @@ for (i in files_to_process){
   #on log scale
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total")
   pdf(file="plots/ScatterTweetPop_log.pdf",width=10,height=10)
-  par(cex=1.4)
+  par(cex=1.5)
   plot(log(state_ac$category)~log(state_ac$pop),lty="solid",pch=19,xlab = "Log(relative population)",ylab="Log(relative tweet number)",
        xlim=c(-8,-2),ylim=c(-8,-2))
   statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
@@ -161,7 +161,7 @@ for (i in files_to_process){
   #do the same for users
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total_user")
   pdf(file="plots/ScatterTweetPop_user.pdf",width=10,height=10)
-  par(cex=1.4)
+  par(cex=1.5)
   plot(state_ac$category~state_ac$pop,lty="solid",pch=19,xlab = "Relative population",ylab="Relative user number",
        xlim=c(0,0.15),ylim=c(0,0.15))
   statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
@@ -182,7 +182,7 @@ for (i in files_to_process){
   
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total_user")
   pdf(file="plots/ScatterTweetPop_user_log.pdf",width=10,height=10)
-  par(cex=1.4)
+  par(cex=1.5)
   plot(log(state_ac$category)~log(state_ac$pop),lty="solid",pch=19,xlab = "Log(relative population)",ylab="Log(relative user number)",
        xlim=c(-8,-2),ylim=c(-8,-2))
   statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
@@ -247,13 +247,18 @@ for (i in files_to_process){
   wks <- df_nat_reg[region=="National",date]
   temp <- data.table(cdc,tw,wks)
   temp <- temp[!(is.na(tw)),]
-  pdf(file="plots/cdc_twitter_comp_nat_raw.pdf",width=10)
-  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
-    geom_line(colour="blue") + geom_point(colour="blue") +
-    geom_line(aes(y=cdc/100),colour="red") + 
-    geom_point(aes(y=cdc/100),colour="red") +
-    xlab(" ") + ylab("") + ggtitle("National") +
-    theme(text = element_text(size=20)) + scale_y_continuous(labels=percent)# +
+  pdf(file="plots/cdc_twitter_comp_nat_raw.pdf",width=10,height=5)
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw*10,colour = "Twitter")) + geom_point(aes(y=tw*10,colour = "Twitter")) +
+    geom_line(aes(y=cdc/100,colour="CDC")) + 
+    geom_point(aes(y=cdc/100,colour="CDC")) +
+    scale_colour_manual(values=c("red","blue")) +
+    xlab(" ") + ylab("") +
+    theme(text = element_text(size=15)) + 
+    scale_y_continuous(sec.axis = sec_axis(~./10, name = "Sick tweet rate (Twitter)" )) + 
+    labs(y= "ILI rate (CDC)",colour="Data source")+
+    theme(legend.position = c(0.1,0.9))
+  # +
     #coord_cartesian(ylim=yrange)
   print(nat_plot)
   dev.off()
@@ -264,29 +269,34 @@ for (i in files_to_process){
   temp <- data.table(cdc,tw,wks)
   temp <- temp[!(is.na(tw)),]
   
-  pdf(file="plots/cdc_twitter_comp_nat_raw_user.pdf",width=10)
-  nat_plot <- ggplot(data = temp,aes(x=wks,y=tw)) + 
-    geom_line(colour="blue") + geom_point(colour="blue") +
-    geom_line(aes(y=cdc/100),colour="red") + 
-    geom_point(aes(y=cdc/100),colour="red") +
-    xlab(" ") + ylab("") + ggtitle("National") +
-    theme(text = element_text(size=20)) +scale_y_continuous(labels=percent)# +
+  pdf(file="plots/cdc_twitter_comp_nat_raw_user.pdf",width=10,height=5)
+  nat_plot <- ggplot(data = temp,aes(x=wks)) + 
+    geom_line(aes(y=tw*10,colour = "Twitter")) + geom_point(aes(y=tw*10,colour = "Twitter")) +
+    geom_line(aes(y=cdc/100,colour="CDC")) + 
+    geom_point(aes(y=cdc/100,colour="CDC")) +
+    scale_colour_manual(values=c("red","blue")) +
+    xlab(" ") + ylab("") +
+    theme(text = element_text(size=15)) + 
+    scale_y_continuous(sec.axis = sec_axis(~./10, name = "Sick user rate (Twitter)" )) + 
+    labs(y= "ILI rate (CDC)",colour="Data source")+
+    theme(legend.position = c(0.1,0.9))
+  # +
   #coord_cartesian(ylim=yrange)
   print(nat_plot)
   dev.off()
-  
+   
   #comparing normalised values
   yrange <- c(0,0.025)
   ctg <- "rel_sick"
-  pdf(file="plots/cdc_twitter_comp_nat_ma1.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma1.pdf",width=10,height=5)
   p1 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=1,yrange=yrange,ctg=ctg,gr="region")
   print(p1)
   dev.off()
-  pdf(file="plots/cdc_twitter_comp_nat_ma2.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma2.pdf",width=10,height=5)
   p2 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=2,yrange=yrange,ctg=ctg,gr="region")
   print(p2)
   dev.off()
-  pdf(file="plots/cdc_twitter_comp_nat_ma4.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma4.pdf",width=10,height=5)
   p3 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=3,yrange=yrange,ctg=ctg,gr="region")
   print(p3)
   dev.off()
@@ -295,7 +305,7 @@ for (i in files_to_process){
   regs <- unique(cdc_data_nat_reg$region)
   regs <- regs[regs!="National"]  
   for (i in 1:length(regs)){
-    pl <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg=regs[i],smooth=4,yrange=yrange,ctg=ctg,gr="region")
+    pl <- plot_twitter_cdc_comp_reg(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg=regs[i],smooth=4,yrange=yrange,ctg=ctg,gr="region")
     reg_list[[i]] <- pl
   }
   
@@ -315,15 +325,15 @@ for (i in files_to_process){
   
   #do the same for user based statistics
   ctg <- "rel_sick_user"
-  pdf(file="plots/cdc_twitter_comp_nat_ma1_user.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma1_user.pdf",width=10,height=5)
   p1 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=1,yrange=yrange,ctg=ctg,gr="region")
   print(p1)
   dev.off()
-  pdf(file="plots/cdc_twitter_comp_nat_ma2_user.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma2_user.pdf",width=10,height=5)
   p2 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=2,yrange=yrange,ctg=ctg,gr="region")
   print(p2)
   dev.off()
-  pdf(file="plots/cdc_twitter_comp_nat_ma4_user.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_ma4_user.pdf",width=10,height=5)
   p3 <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg="National",smooth=3,yrange=yrange,ctg=ctg,gr="region")
   print(p3)
   dev.off()
@@ -384,11 +394,11 @@ for (i in files_to_process){
   reg_rel_sick_user <- summarise_flu2(df_nat_reg[!(region=="National")],cdc_data_nat_reg[!(region=="National")],path="plots/",
                  nat_reg="regional",tag="full",ctg="rel_sick_user")
   
-  pdf(file="plots/cdc_twitter_comp_nat_activity_sick.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_activity_sick.pdf",width=10,height=5)
   plot_twitter_cdc_comp_ac_level(nat_rel_sick[[1]],nat_rel_sick[[2]],reg="National",yrange=c(0,10))
   dev.off()
   
-  pdf(file="plots/cdc_twitter_comp_nat_activity_sick_user.pdf",width=10)
+  pdf(file="plots/cdc_twitter_comp_nat_activity_sick_user.pdf",width=10,height=5)
   plot_twitter_cdc_comp_ac_level(nat_rel_sick_user[[1]],nat_rel_sick_user[[2]],reg="National",yrange=c(0,10))
   dev.off()
   
@@ -398,7 +408,7 @@ for (i in files_to_process){
   for (i in 1:length(regs)){
     temp1 <- reg_rel_sick[[1]][statename==regs[i],]
     temp2 <- reg_rel_sick[[2]][statename==regs[i]]
-    pl <- plot_twitter_cdc_comp_ac_level(temp1,temp2,reg=regs[i],yrange=c(0,10))
+    pl <- plot_twitter_cdc_comp_ac_level_reg(temp1,temp2,reg=regs[i],yrange=c(0,10))
     reg_list[[i]] <- pl
   }
   
@@ -409,7 +419,7 @@ for (i in files_to_process){
   for (i in 1:length(regs)){
     temp1 <- reg_rel_sick_user[[1]][statename==regs[i],]
     temp2 <- reg_rel_sick_user[[2]][statename==regs[i]]
-    pl <- plot_twitter_cdc_comp_ac_level(temp1,temp2,reg=regs[i],yrange=c(0,10))
+    pl <- plot_twitter_cdc_comp_ac_level_reg(temp1,temp2,reg=regs[i],yrange=c(0,10))
     reg_list[[i]] <- pl
   }
   
