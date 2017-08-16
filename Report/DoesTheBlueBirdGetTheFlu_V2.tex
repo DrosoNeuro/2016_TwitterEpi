@@ -703,15 +703,17 @@ Before doing so, however, I will provide additional descriptive statistics of th
 
 \subsection{Spatio-temporal patterns of Twitter usage}
 
-Figure~\ref{fig:tweets_seasonal_full} shows the total number of tweets sent per week relative to the total number of tweets sent in the study period. here is no obvious pattern discernible other than an increase in weekly tweets until the third quarter of 2014 when a sudden dip in tweet activity occurs. The activity pattern of the tweets labelled as ``healthy" is almost indiscernible from the temporal pattern of the complete data set. When looking at the weekly amount of tweets labelled as ``sick" one can see a different pattern: The weekly activity is fluctuating more strongly and shows clearly discernible peaks towards the end and the beginning of each year. This pattern turns out to be even more pronounced when correcting for the total amount of tweets sent per week.
+Figure~\ref{fig:tweets_seasonal_full} shows the total number of tweets sent per week relative to the total number of tweets sent in the study period. here is no obvious pattern discernible other than an increase in weekly tweets until the third quarter of 2014 when a sudden dip in tweet activity occurs. The activity pattern of the tweets labelled as ``healthy" is almost indiscernible from the temporal pattern of the complete data set. When looking at the weekly amount of tweets labelled as ``sick" one can see a different pattern: The weekly activity is fluctuating more strongly and shows clearly discernible peaks towards the end and the beginning of each year. This pattern turns out to be even more pronounced when correcting for the total amount of tweets sent per week. 
 
 A Kolmogorov-Smirnov test reveals that the weekly activity of the tweets labelled as ``sick" is in fact significantly different from the weekly activity of the tweets labelled as ``healthy" ($p$ = 0.0264 and $p$ = 0 for the normalised and not normalised weekly tweet counts, respectively). As can be seen in Figure~\ref{fig:tweets_seasonal_healthy_sick} the tweets labelled as ``sick" follow a markedly different temporal pattern than those labelled as ``healthy". Also, the distribution of the latter is virtually indistinguishable from the distribution of the total amount of tweets.
+
+Repeating the calculations describe above using number of Twitter users instead of number of tweets yields similar results (see Figure~\ref{fig:tweets_seasonal_healthy_sick_user}; $p$ = 0 and $p$ = 0 for the normalised and not normalised weekly user activity, respectively), However, using Twitter users instead of single tweets as basis for the aggregation reduces the weekly fluctuations of the weekly ``sick" rates considerably (see Section~\ref{sec:comp_cdc} for further discussion.)
 
 Next, I looked at the total amount of tweets sent in each state. As can be seen in Figures~\ref{fig:tweets_state_full}, \ref{fig:tweets_state_full_scatter}, and \ref{fig:tweets_state_full_scatter_log} the relative distribution per state largely follows the relative distribution of the state population. Notable exceptions are Maryland, New Jersey, West Virginia, and Delaware, which were the origin of many more tweets than expected, as well as New York, Idaho, Montana, District of Columbia, Wyoming, and Vermont, from where considerably fewer tweets originated than would be expected with regard to its population.
 
 When comparing the relative number of tweets labelled as ``healthy" with those labelled as ``sick", we can see slight differences in the distribution, which become even more accentuated when normalising with the total number of tweets per state (Figure~\ref{fig:tweets_state_healthy_sick}) However, the states with the most pronounced differences (District of Columbia, Montana, South Dakotam, North Carolina) are almost all states or districts, respectively, with a very low overall tweet count (North Carolina being the exception). A Chi-Squared Test for independence between the two distributions gives a $p$-value of 0.0801. 
 
-Repeating the calculations using number of Twitter users instead of number of tweets yields similar results (see Figures~\ref{fig:tweets_state_full_user}, \ref{fig:tweets_state_full_scatter_user}, \ref{fig:tweets_state_full_scatter_user_log}, and \ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0823).\newpage
+Repeating the calculations described above using number of Twitter users instead of number of tweets yields similar results (Figures~\ref{fig:tweets_state_full_user}, \ref{fig:tweets_state_full_scatter_user}, \ref{fig:tweets_state_full_scatter_user_log}, and \ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0823).\newpage
 
 \begin{figure}[H]
 \centering
@@ -733,8 +735,25 @@ Repeating the calculations using number of Twitter users instead of number of tw
   \includegraphics[width=1\linewidth]{13_activity_healthy_date_Twitter_full_aggregatedoverlay.pdf}
   \caption{}
   \end{subfigure}
-  \caption{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent per week without normalisation. The black lines indicate the relative number of sick or healthy tweets sent per week normalised by the total amount of tweets sent in that week.}
+  \caption{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets labelled as ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent per week without normalisation. The black lines indicate the relative number of sick or healthy tweets sent per week normalised by the total amount of tweets sent in that week.}
   \label{fig:tweets_seasonal_healthy_sick}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf}
+  \caption{}
+  \end{subfigure}
+  
+  \bigskip 
+
+    \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{13B_activity_healthy_user_date_Twitter_full_aggregatedoverlay.pdf}
+  \caption{}
+  \end{subfigure}
+  \caption{Histograms of numbers of the tweets sent per week during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets labelled as ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent per week without normalisation. The black lines indicate the relative number of sick or healthy tweets sent per week normalised by the total amount of tweets sent in that week.}
+  \label{fig:tweets_seasonal_healthy_sick_user}
 \end{figure}
 
 \begin{figure}[H]
@@ -789,55 +808,32 @@ Repeating the calculations using number of Twitter users instead of number of tw
 
 \begin{figure}[H]
 \centering
-  \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_healthy_statename_Twitter_full_aggregated.png}
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf}
   \caption{}
   \end{subfigure}
 \hfill
-  \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_sick_statename_Twitter_full_aggregated.png}
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf}
   \caption{}
   \end{subfigure}
   
-  \bigskip 
-
-    \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_rel_healthy_statename_Twitter_full_aggregated.png}
-  \caption{}
-  \end{subfigure}
-  \hfill
-    \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_rel_sick_statename_Twitter_full_aggregated.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histograms of numbers of the tweets sent in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only tweets labelled as ``sick" by the classifier. The lower two histograms were normalised by the total amount of tweets sent per state As can be seen, the tweets labelled as ``sick" follow a somewhat different spatial pattern.}
+  \caption{Histograms of numbers of tweets sent from eeach state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets labelled as ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent in each state without normalisation. The black lines indicate the relative number of sick or healthy tweets sent in each state normalised by the total amount of tweets sent that state.}
   \label{fig:tweets_state_healthy_sick}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-  \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_healthy_user_statename_Twitter_full_aggregated.png}
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf}
   \caption{}
   \end{subfigure}
 \hfill
-  \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_sick_user_statename_Twitter_full_aggregated.png}
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{23_activity_healthy_user_statename_Twitter_full_aggregatedoverlay.pdf}
   \caption{}
   \end{subfigure}
-  
-  \bigskip 
-
-    \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_rel_healthy_user_statename_Twitter_full_aggregated.png}
-  \caption{}
-  \end{subfigure}
-  \hfill
-    \begin{subfigure}[t]{0.49\textwidth}
-  \includegraphics[width=1\linewidth]{activity_rel_sick_user_statename_Twitter_full_aggregated.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histograms of number of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) and (c) contain only tweets labelled as ``healthy"; (b) and (d) contain only users with at least one tweet labelled as ``sick" by the classifier. The lower two histograms were normalised by the total number of user active per state. As can be seen, the users who were ``diagnosed" as ``sick" at some point by the classifier, follow almost the same spatial pattern.}
+  \caption{Histograms of numbers of users active in each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only users who sent at least one tweet labelled as ``sick"; (b) shows only users who were never classified as ``sick" during the whole study period. The grey bars indicate the relative number of sick or healthy users active in each state without normalisation. The black lines indicate the relative number of sick or healthy users active in each state normalised by the total amount of tweets sent in that week.}
   \label{fig:tweets_state_healthy_sick_user}
 \end{figure}
 
@@ -1256,7 +1252,7 @@ Base packages: \textsf{stats, graphics, grDevices, utils, datasets, methods, bas
 
 Other packages: \textsf{data.table, knitr}
 
-This document was generated on August 16, 2017 at 10:56.
+This document was generated on August 16, 2017 at 11:45.
 
 
 
