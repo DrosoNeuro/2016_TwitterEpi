@@ -31,7 +31,7 @@ user_activity <- function(datatable,tag,xrange=c(0,100),yrange=c(0,0.06)){#datat
   #create histogram & density plot using raw counts
   pdf(file=filenames,width=10,height=5)
   activity_plot <- activity_plot + geom_segment(aes(x=avg,y=0,xend=avg,yend=yrange[2]),linetype="solid") + geom_segment(aes(x=med,y=0,xend=med,yend=yrange[2]),linetype="dashed") + #geom_density(alpha=.2, fill="#FF6666") +
-    xlab('Number of tweets') + ylab("Proportion of users") + 
+    xlab('Number of tweets per user') + ylab("Proportion of users") + 
     theme(text = element_text(size=15))  # Overlay with transparent density plot
   # sick_plot <- ggplot(data =  user_ac_sick, aes(x = user_ac_sick[,N]))+ 
   #   geom_histogram(aes(y=..density..), colour="black",fill="white",binwidth=1,boundary=0) + geom_density(alpha=.2, fill="#FF6666") +ggtitle(paste0('user activity_',tag))+
@@ -49,17 +49,53 @@ state_week_activity <- function(datatable,tag,yrange=c(0,0.06),gr="date",ctg="si
   setkey(datatable,"group")
   agg_cat <- as.data.table(aggregate(category~group,data=datatable,FUN=sum))
 
-  filenames <- paste0("plots/activity_",ctg,"_",gr,"_",tag,".png")
+  filenames <- paste0("plots/activity_",ctg,"_",gr,"_",tag,".pdf")
   #create histogram & density plot using raw counts
-  png(filename=filenames,width=1000,height=500)
-  activity_plot <- ggplot(data =  agg_cat,aes(x=group,y=category)) + 
-    geom_bar(stat="identity",aes(y = category/sum(category))) + scale_y_continuous(labels=percent,limits=yrange) +
-    xlab(" ") +ylab("Proportion") + theme(text = element_text(size=20),axis.text.x=element_text(angle=90,vjust = 0.5,hjust=1))
+  pdf(file=filenames,width=10,height=5)
+  if (gr =="date"){
+    activity_plot <- ggplot(data =  agg_cat,aes(x=group,y=category)) + 
+      geom_bar(stat="identity",aes(y = category/sum(category))) + scale_y_continuous(labels=percent,limits=yrange) +
+      xlab(" ") +ylab("Proportion") + theme(text = element_text(size=15)) 
+  } else {
+    activity_plot <- ggplot(data =  agg_cat,aes(x=group,y=category)) + 
+      geom_bar(stat="identity",aes(y = category/sum(category))) + scale_y_continuous(labels=percent,limits=yrange) +
+      xlab(" ") +ylab("Proportion") + theme(text = element_text(size=15),axis.text.x=element_text(angle=90,vjust = 0.5,hjust=1))
+  }
   print(activity_plot)
   dev.off()
   y_values <- agg_cat$category/sum(agg_cat$category)
   return(y_values)
 }
+
+state_week_activity2 <- function(datatable,tag,yrange=c(0,0.06),gr="date",ctg="sick",ctg2="rel_sick"){
+  ind_gr <- which(colnames(datatable)==gr)
+  ind_ctg <- which(colnames(datatable)==ctg)
+  ind_ctg2 <- which(colnames(datatable)==ctg2)
+  colnames(datatable)[c(ind_gr,ind_ctg,ind_ctg2)] <- c("group","category","category2")
+  setkey(datatable,"group")
+  agg_cat <- as.data.table(aggregate(category~group,data=datatable,FUN=sum))
+  agg_cat2 <- as.data.table(aggregate(category2~group,data=datatable,FUN=sum))
+  
+  filenames <- paste0("plots/activity_",ctg,"_",gr,"_",tag,"overlay.pdf")
+  #create histogram & density plot using raw counts
+  pdf(file=filenames,width=10,height=5)
+  if (gr =="date"){
+    activity_plot <- ggplot(data =  agg_cat,aes(x=group,y=category)) + 
+      geom_bar(stat="identity",aes(y = category/sum(category)),colour="grey",fill="grey") + scale_y_continuous(labels=percent,limits=yrange) +
+      xlab(" ") +ylab("Proportion") + theme(text = element_text(size=15)) + 
+      geom_line(data= agg_cat2,aes(x=group,y=category2/sum(category2)),colour="black",size=1.5)
+  } else {
+    activity_plot <- ggplot(data =  agg_cat,aes(x=group,y=category)) + 
+      geom_bar(stat="identity",aes(y = category/sum(category)),colour="grey",fill="grey") + scale_y_continuous(labels=percent,limits=yrange) +
+      xlab(" ") +ylab("Proportion") + theme(text = element_text(size=15),axis.text.x=element_text(angle=90,vjust = 0.5,hjust=1)) +
+      geom_point(data= agg_cat2,aes(x=group,y=category2/sum(category2)),colour="black",size=5,stroke=7,shape="--")
+  }
+  print(activity_plot)
+  dev.off()
+  y_values <- agg_cat$category/sum(agg_cat$category)
+  return(y_values)
+}
+
 
 state_activity <- function(datatable,tag,yrange=c(0,0.06),ctg="sick"){
   require(usmap)
@@ -77,15 +113,15 @@ state_activity <- function(datatable,tag,yrange=c(0,0.06),ctg="sick"){
   agg_cat[,pop:=pop/sum(pop)]
 
   agg_cat.m <- melt(agg_cat,id.vars="statename")
-  filenames <- paste0("plots/activity_",ctg,"_state_",tag,".png")
+  filenames <- paste0("plots/activity_",ctg,"_state_",tag,".pdf")
   #create histogram & density plot using raw counts
-  png(filename=filenames,width=1000,height=500)
+  pdf(file=filenames,width=10,height=5)
   activity_plot <- ggplot(data =  agg_cat.m,aes(x=statename,y=value)) + 
     geom_bar(stat="identity",position="dodge",aes(fill=factor(variable))) + 
     scale_fill_manual(name="",labels=c("% Tweets", "% Population"),values=c("blue","red"))+ 
     scale_y_continuous(labels=percent,limits=yrange) +
     xlab(" ") +ylab("Proportion") + 
-    theme(text = element_text(size=20),axis.text.x=element_text(angle=90,vjust = 0.5,hjust=1))
+    theme(text = element_text(size=15),axis.text.x=element_text(angle=90,vjust = 0.5,hjust=1))
   print(activity_plot)
   dev.off()
   return(agg_cat)
