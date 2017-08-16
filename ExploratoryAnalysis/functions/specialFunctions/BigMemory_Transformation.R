@@ -443,6 +443,29 @@ aggregate_bigmatrix4 <- function(df,name){
   return(tot_dt)
 }
 
+aggregate_bigmatrix_users <- function(df){
+  options(bigmemory.allow.dimnames=TRUE)
+  #calculate total number of sick per state
+  # nrows <- length(wks)*length(states_of_interest)
+  # cols <- c("sick","tot","healthy","state","week","user_sick","user_tot")
+  # ncols <- length(cols)
+  # df_aggregated <- filebacked.big.matrix(nrow=nrows,ncol=ncols,
+  #                                        backingfile=paste0(name,"_aggregated.bin"),
+  #                                        descriptor = paste0(name,"_aggregated.desc"),
+  #                                        backingpath=out_path)
+  # df_agg_desc <- describe(df_aggregated)
+  # colnames(df_aggregated) <- cols
+  #df_desc <- describe(df)
+
+  dist_user <- bigtabulate(df,ccols=1) #1 if using unpruned, 5 if using pruned
+  tweets_per_user <- as.data.table(dist_user)
+  tweets_per_user <- cbind(as.numeric(names(dist_user)),tweets_per_user)
+  colnames(tweets_per_user) <- c("userID","tweets_per_user")
+
+  return(tweets_per_user)
+}
+
+
 setwd("pruned2")
 descs <- list.files(".",pattern=".*pruned\\.desc")
 
@@ -465,7 +488,7 @@ df_full_agg <- data.table(state=numeric(),week=numeric(),
                           sick_user=numeric(),total_user=numeric())
 for(i in 1:length(names)){
   cat("\n round",i,"\n")
-  start.tim <- Sys.time()
+  start.time <- Sys.time()
   name <- names[i]
   temp <- attach.big.matrix(dget(descs[i]))
   df <- deepcopy(temp)
@@ -489,7 +512,33 @@ save(df_full_agg,file="Twitter_full_aggregated.RData")
 # #only uncomment if using doparallel in combinatino with aggregate_bigmatrix3 
 # stopCluster(cl)
 
+setwd("..")
+descs <- list.files(".",pattern="*.desc")
 
+df_user_agg <- data.table(userID=numeric(),tweets_per_user=numeric())
+
+for(i in 1:length(names)){
+  cat("\n round",i,"\n")
+  start.tim <- Sys.time()
+  name <- names[i]
+  temp <- attach.big.matrix(dget(descs[i]))
+  df <- deepcopy(temp)
+  #df <- attach.big.matrix(dget("test.desc"))
+  #df <- as.big.matrix(df[1:100000,],backingfile="test2.bin",descriptorfile="test2.desc")
+  temp_dt <- aggregate_bigmatrix_users(df)
+  df_user_agg <- rbind(df_user_agg,temp_dt)
+  stop.tim <- Sys.time()
+  print(stop.tim-start.tim)
+  gc()
+}
+
+df_user_agg <- as.data.table(aggregate(tweets_per_user ~ userID,data=df_user_agg,FUN=sum))
+df_user_agg_pruned <- df_user_agg
+save(df_user_agg_pruned,file="tweets_per_user_pruned.RData")
+
+df_user_agg <- as.data.table(aggregate(tweets_per_user ~ userID,data=df_user_agg,FUN=sum))
+
+save(df_user_agg,file="tweets_per_user.RData")
 
 # for(j in 1:length(states_of_interest)){
 #   ind <- (i-1)*length(states_of_interest)+j

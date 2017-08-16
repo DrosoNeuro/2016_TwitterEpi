@@ -40,6 +40,12 @@ Adrover, C., Bodnar, T., Huang, Z., Telenti, A., and Salath{\'e}, M. (2015).
   sentiments using twitter.
 \newblock {\em JMIR public health and surveillance}, {\bf1}, .
 
+\bibitem[Amrhein {\it et~al.}, 2017]{amrhein_earth_2017}
+Amrhein, V., Korner-Nievergelt, F., and Roth, T. (2017).
+\newblock The earth is flat ( \textit{p} {\textgreater} 0.05): significance
+  thresholds and the crisis of unreplicable research.
+\newblock {\em PeerJ}, {\bf5},  e3544.
+
 \bibitem[Anema {\it et~al.}, 2014]{anema_digital_2014}
 Anema, A., Kluberg, S., Wilson, K., Hogg, R.~S., Khan, K., Hay, S.~I., Tatem,
   A.~J., and Brownstein, J.~S. (2014).
@@ -94,6 +100,11 @@ Baker, M. (2016b).
 Baker, M. (2016c).
 \newblock Reproducibility: seek out stronger science.
 \newblock {\em Nature}, {\bf537},  703--704.
+
+\bibitem[Banks, 2011]{banks_reproducible_2011}
+Banks, D. (2011).
+\newblock Reproducible research: {A} range of response.
+\newblock {\em Statistics, Politics, and Policy}, {\bf2},  4.
 
 \bibitem[Bauer, 2016]{bauer_timeonline_2016}
 Bauer, R. (2016).
@@ -154,6 +165,13 @@ Bollen, J., Mao, H., and Pepe, A. (2011a).
 Bollen, J., Mao, H., and Zeng, X. (2011b).
 \newblock Twitter mood predicts the stock market.
 \newblock {\em Journal of computational science}, {\bf2},  1--8.
+
+\bibitem[Bornmann and Mutz, 2015]{bornmann2015growth}
+Bornmann, L. and Mutz, R. (2015).
+\newblock Growth rates of modern science: A bibliometric analysis based on the
+  number of publications and cited references.
+\newblock {\em Journal of the Association for Information Science and
+  Technology}, {\bf66},  2215--2222.
 
 \bibitem[Braithwaite {\it et~al.}, 2016]{braithwaite2016validating}
 Braithwaite, S.~R., Giraud-Carrier, C., West, J., Barnes, M.~D., and Hanson,
@@ -241,15 +259,29 @@ Casadevall, A. and Fang, F.~C. (2010).
 \newblock {\em Infection and Immunity}, {\bf78},  4972--4975.
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
-  2016]{cdc_surveillance_2016}
-Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016).
+  2016a]{cdc_enterovirus_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016a).
+\newblock Non-{Polio} {Enterovirus}.
+\newblock \url{https://www.cdc.gov/non-polio-enterovirus/about/symptoms.html}.
+\newblock [Online; accessed 14-August-2017].
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  2016b]{cdc_surveillance_2016}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2016b).
 \newblock Overview of influenza surveillance in the united states.
 \newblock \url{https://www.cdc.gov/flu/weekly/overview.htm}.
 \newblock [Online; accessed 24-June-2017].
 
 \bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
-  2017]{cdc_flu_2017}
-Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017).
+  2017a]{cdc_rhinovirus_2017}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017a).
+\newblock Common {Colds}: {Protect} {Yourself} and {Others}.
+\newblock \url{https://www.cdc.gov/features/rhinoviruses/index.html}.
+\newblock [Online; accessed 14-August-2017].
+
+\bibitem[Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention,
+  2017b]{cdc_flu_2017}
+Centers{\ }for{\ }Disease{\ }Control{\ }and{\ }Prevention (2017b).
 \newblock The flu: What to do if you get sick.
 \newblock \url{https://www.cdc.gov/flu/takingcare.htm}.
 \newblock [Online; accessed 12-August-2017].
@@ -391,6 +423,11 @@ Google{\ }Flu{\ }Trends{\ }Team (2015).
   \url{https://research.googleblog.com/2015/08/the-next-chapter-for-flu-trends.html}.
 \newblock [Online; accessed 20-July-2017].
 
+\bibitem[Heikkinen and J{\"a}rvinen, 2003]{heikkinen2003common}
+Heikkinen, T. and J{\"a}rvinen, A. (2003).
+\newblock The common cold.
+\newblock {\em The Lancet}, {\bf361},  51--59.
+
 \bibitem[Hermida, 2013]{hermida2013journalism}
 Hermida, A. (2013).
 \newblock \# journalism: Reconfiguring journalism research about twitter, one
@@ -408,6 +445,17 @@ Hufnagel, L., Brockmann, D., and Geisel, T. (2004).
 \newblock Forecast and control of epidemics in a globalized world.
 \newblock {\em Proceedings of the National Academy of Sciences of the United
   States of America}, {\bf101},  15124--15129.
+
+\bibitem[Ioannidis, 2005]{ioannidis_why_2005}
+Ioannidis, J. P.~A. (2005).
+\newblock Why {Most} {Published} {Research} {Findings} {Are} {False}.
+\newblock {\em PLoS Medicine}, {\bf2},  e124.
+
+\bibitem[Kass {\it et~al.}, 2016]{kass_ten_2016}
+Kass, R.~E., Caffo, B.~S., Davidian, M., Meng, X.-L., Yu, B., and Reid, N.
+  (2016).
+\newblock Ten {Simple} {Rules} for {Effective} {Statistical} {Practice}.
+\newblock {\em PLOS Comput Biol}, {\bf12},  e1004961.
 
 \bibitem[Kenett and Shmueli, 2015]{kenett2015clarifying}
 Kenett, R.~S. and Shmueli, G. (2015).
@@ -585,6 +633,11 @@ Paul, M.~J., Dredze, M., and Broniatowski, D. (2014).
 \newblock Twitter {Improves} {Influenza} {Forecasting}.
 \newblock {\em PLoS Currents}.
 
+\bibitem[Peng, 2006]{peng_reproducible_2006}
+Peng, R.~D. (2006).
+\newblock Reproducible {Epidemiologic} {Research}.
+\newblock {\em American Journal of Epidemiology}, {\bf163},  783--789.
+
 \bibitem[Peng, 2009]{peng_reproducible_2009}
 Peng, R.~D. (2009).
 \newblock Reproducible research and {Biostatistics}.
@@ -596,6 +649,12 @@ Poblete, B., Garcia, R., Mendoza, M., and Jaimes, A. (2011).
   world.
 \newblock In {\em Proceedings of the 20th ACM international conference on
   Information and knowledge management},   1025--1030. ACM.
+
+\bibitem[Pons-Salort {\it et~al.}, 2015]{pons2015epidemiology}
+Pons-Salort, M., Parker, E.~P., and Grassly, N.~C. (2015).
+\newblock The epidemiology of non-polio enteroviruses: recent advances and
+  outstanding questions.
+\newblock {\em Current opinion in infectious diseases}, {\bf28},  479--487.
 
 \bibitem[Prinz {\it et~al.}, 2011]{prinz_believe_2011}
 Prinz, F., Schlange, T., and Asadullah, K. (2011).
@@ -615,6 +674,11 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
   infectious disease transmission.
 \newblock {\em Journal of Biomedical Informatics}, {\bf64},  44--54.
 
+\bibitem[R{\ }{Core}{\ }{Team}, 2017]{rbase_2017}
+R{\ }{Core}{\ }{Team} (2017).
+\newblock R: {A} {Language} and {Environment} for {Statistical} {Computing}.
+\newblock Technical report, Vienna, Austria.
+
 \bibitem[Rehak, 2014]{rehak_twitterbird_2014}
 Rehak, M. (2014).
 \newblock Who made that {Twitter} bird?
@@ -632,6 +696,11 @@ Rolfes, M.~A., Foppa, I.~M., Garg, S., Flannery, B., Brammer, L., Singleton,
   {States}.
 \newblock \url{https://www.cdc.gov/flu/about/disease/2015-16.htm}.
 \newblock [Online; accessed 13-August-2017].
+
+\bibitem[Rossum, 1995]{rossum_1995_python}
+Rossum, G. (1995).
+\newblock Python {Reference} {Manual}.
+\newblock Technical report, Amsterdam, The Netherlands, The Netherlands.
 
 \bibitem[Rothman, 2012]{rothman2012epidemiology}
 Rothman, K.~J. (2012).
@@ -681,6 +750,13 @@ Sloan, L. and Morgan, J. (2015).
   {Relationship} between {Demographic} {Characteristics} and the {Use} of
   {Geoservices} and {Geotagging} on {Twitter}.
 \newblock {\em PLoS ONE}, {\bf10}, .
+
+\bibitem[Sloan {\it et~al.}, 2013]{sloan2013knowing}
+Sloan, L., Morgan, J., Housley, W., Williams, M., Edwards, A., Burnap, P., and
+  Rana, O. (2013).
+\newblock Knowing the tweeters: Deriving sociologically relevant demographics
+  from twitter.
+\newblock {\em Sociological research online}, {\bf18},  7.
 
 \bibitem[Steiger {\it et~al.}, 2015]{steiger2015advanced}
 Steiger, E., Albuquerque, J.~P., and Zipf, A. (2015).
@@ -733,6 +809,14 @@ Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2011).
   political landscape.
 \newblock {\em Social science computer review}, {\bf29},  402--418.
 
+\bibitem[Twitter, 2011]{twitter_million_2011}
+Twitter (2011).
+\newblock 200 million {Tweets} per day.
+\newblock {\em Twitter {Blog}}.
+\newblock
+  \url{https://blog.twitter.com/official/en_us/a/2011/200-million-tweets-per-day.html}.
+\newblock [Online; accessed 14-August-2017].
+
 \bibitem[Twitter, 2013]{twitter_annual_2013}
 Twitter (2013).
 \newblock Annual {Report} 2013.
@@ -752,6 +836,12 @@ Vidal, L., Ares, G., Mach{\'\i}n, L., and Jaeger, S.~R. (2015).
 \newblock Using twitter data for food-related consumer research: A case study
   on “what people say when tweeting about different eating situations”.
 \newblock {\em Food Quality and Preference}, {\bf45},  58--69.
+
+\bibitem[Vogt {\it et~al.}, 2016]{vogt_authorization_2016}
+Vogt, L., Reichlin, T.~S., Nathues, C., and Würbel, H. (2016).
+\newblock Authorization of {Animal} {Experiments} {Is} {Based} on {Confidence}
+  {Rather} than {Evidence} of {Scientific} {Rigor}.
+\newblock {\em PLOS Biology}, {\bf14},  e2000598.
 
 \bibitem[Wang {\it et~al.}, 2016]{wang_regional_2016}
 Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.

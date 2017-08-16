@@ -80,6 +80,10 @@ for (i in files_to_process){
   df_processed$rel_healthy <- df_processed$healthy/df_processed$total
   weekly_healthy_rel <- state_week_activity(df_processed,tag,yrange=yrange,gr="date",ctg="rel_healthy")
   
+  #overlay relative and absolute values
+  weekly_sick_overlay <- state_week_activity2(df_processed,tag,yrange=yrange,gr="date",ctg="sick",ctg2="rel_sick")
+  weekly_healthy_overlay <- state_week_activity2(df_processed,tag,yrange=yrange,gr="date",ctg="healthy",ctg2="rel_healthy")
+  
   #calculate statistics of weekly activity
   ks_sick_healthy_seasonal_rel <- ks.test(weekly_sick_rel,weekly_healthy_rel,exact=F)
   ks_sick_healthy_seasonal_abs <- ks.test(weekly_sick,weekly_healthy,exact=F)
@@ -93,6 +97,11 @@ for (i in files_to_process){
   df_processed$rel_healthy_user <- df_processed$healthy_user/df_processed$total_user
   weekly_healthy_rel_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="date",ctg="rel_healthy_user")
   
+  #overlay relative and absolute values
+  weekly_sick_overlay_user <- state_week_activity2(df_processed,tag,yrange=yrange,gr="date",ctg="sick_user",ctg2="rel_sick_user")
+  weekly_healthy_overlay_user <- state_week_activity2(df_processed,tag,yrange=yrange,gr="date",ctg="healthy_user",ctg2="rel_healthy_user")
+  
+  
   #calculate statistics of weekly activity for users
   ks_sick_healthy_seasonal_rel_user <- ks.test(weekly_sick_rel_user,weekly_healthy_rel_user,exact=F)
   ks_sick_healthy_seasonal_abs_user <- ks.test(weekly_sick_user,weekly_healthy_user,exact=F)
@@ -101,13 +110,41 @@ for (i in files_to_process){
   #plot histogram of state activity
   yrange <- c(0,0.15)
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total")
-  png(filename="plots/ScatterTweetPop.png",width=800,height=800)
+  pdf(file="plots/ScatterTweetPop.pdf",width=10,height=10)
+  par(cex=1.4)
   plot(state_ac$category~state_ac$pop,lty="solid",pch=19,xlab = "Relative population",ylab="Relative tweet number",
        xlim=c(0,0.15),ylim=c(0,0.15))
-  state_ac[!(statename %in% c("new york","maryland","new jersey","texas","california","florida")),statename:= ""]
   abline(lm(state_ac$category~state_ac$pop))
-  text(state_ac$category~state_ac$pop,labels=state_ac$statename,pos=3)
+  statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
+  statenames2[!(statenames %in% c("maryland"))] <- ""
+  statenames4[!(statenames %in% c("new jersey","new york"))] <- ""
+  abline(lm(log(state_ac$category)~log(state_ac$pop)))
+  text(state_ac$category~state_ac$pop,labels=statenames4,pos=4)
+  text(state_ac$category~state_ac$pop,labels=statenames2,pos=2)
   dev.off()
+  
+  scatter_tweet_coeff <- lm(state_ac$category~state_ac$pop)$coefficients
+  
+  #on log scale
+  state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total")
+  pdf(file="plots/ScatterTweetPop_log.pdf",width=10,height=10)
+  par(cex=1.4)
+  plot(log(state_ac$category)~log(state_ac$pop),lty="solid",pch=19,xlab = "Log(relative population)",ylab="Log(relative tweet number)",
+       xlim=c(-8,-2),ylim=c(-8,-2))
+  statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
+  statenames1[!(statenames %in% c("wyoming"))] <- ""
+  statenames2[!(statenames %in% c("west virginia","delaware","maryland"))] <- ""
+  statenames3[!(statenames %in% c("new jersey","vermont"))] <- ""
+  statenames4[!(statenames %in% c("district of columbia","idaho","new york","montana"))] <- ""
+  abline(lm(log(state_ac$category)~log(state_ac$pop)))
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames3,pos=3)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames1,pos=1)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames4,pos=4)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames2,pos=2)
+  dev.off()
+  
+  scatter_tweet_coeff_log <- lm(log(state_ac$category)~log(state_ac$pop))$coefficients
+  
   
   state_healthy <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="healthy")
   state_sick <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="sick")
@@ -117,17 +154,56 @@ for (i in files_to_process){
   #calculate statistics of state_activity
   chi_sick_healthy_state <- chisq.test(state_sick*sum(df_processed$sick),state_healthy*sum(df_processed$healthy))
   
+  #overlay relative and absolute values
+  state_healthy_overlay <- state_week_activity2(df_processed,tag,yrange=yrange,gr="statename",ctg="healthy",ctg2="rel_healthy")
+  state_sick_overlay <- state_week_activity2(df_processed,tag,yrange=yrange,gr="statename",ctg="sick",ctg2="rel_sick")
+  
   #do the same for users
   state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total_user")
-  png(filename="plots/ScatterTweetPop_user.png",width=800,height=800)
+  pdf(file="plots/ScatterTweetPop_user.pdf",width=10,height=10)
+  par(cex=1.4)
   plot(state_ac$category~state_ac$pop,lty="solid",pch=19,xlab = "Relative population",ylab="Relative user number",
        xlim=c(0,0.15),ylim=c(0,0.15))
-  state_ac[!(statename %in% c("new york","maryland","new jersey","texas","california","florida")),statename:= ""]
+  statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
+  statenames1[!(statenames %in% c(""))] <- ""
+  statenames2[!(statenames %in% c("maryland"))] <- ""
+  statenames3[!(statenames %in% c("california","texas","florida","new york"))] <- ""
+  statenames4[!(statenames %in% c("north carolina","new jersey"))] <- ""
   abline(lm(state_ac$category~state_ac$pop))
-  text(state_ac$category~state_ac$pop,labels=state_ac$statename,pos=3)
+  text(state_ac$category~state_ac$pop,labels=statenames3,pos=3)
+  text(state_ac$category~state_ac$pop,labels=statenames1,pos=1)
+  text(state_ac$category~state_ac$pop,labels=statenames4,pos=4)
+  text(state_ac$category~state_ac$pop,labels=statenames2,pos=2)
   dev.off()
   
-  state_healthy_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="healthy_user")
+  scatter_user_coeff <- lm(state_ac$category~state_ac$pop)$coefficients
+  
+  #on log scale
+  
+  state_ac <- state_activity(df_processed,tag,yrange=yrange,ctg="total_user")
+  pdf(file="plots/ScatterTweetPop_user_log.pdf",width=10,height=10)
+  par(cex=1.4)
+  plot(log(state_ac$category)~log(state_ac$pop),lty="solid",pch=19,xlab = "Log(relative population)",ylab="Log(relative user number)",
+       xlim=c(-8,-2),ylim=c(-8,-2))
+  statenames <- statenames1 <- statenames2 <- statenames3 <- statenames4 <- state_ac$statename
+  statenames1[!(statenames %in% c(""))] <- ""
+  statenames2[!(statenames %in% c("delaware","west virginia","maryland","nevada","california"))] <- ""
+  statenames3[!(statenames %in% c("new jersey","florida"))] <- ""
+  statenames4[!(statenames %in% c("district of columbia","wyoming","vermont","idaho",
+                                  "north carolina","new york","wisconsin","montana","texas"))] <- ""
+  abline(lm(log(state_ac$category)~log(state_ac$pop)))
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames3,pos=3)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames1,pos=1)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames4,pos=4)
+  text(log(state_ac$category)~log(state_ac$pop),labels=statenames2,pos=2)
+  dev.off()
+  
+  scatter_user_coeff_log <- lm(log(state_ac$category)~log(state_ac$pop))$coefficients
+  
+  save(list=c("scatter_tweet_coeff","scatter_tweet_coeff_log",
+              "scatter_user_coeff","scatter_user_coeff_log"),file=paste0("processed/scatter_coefficients_",tag,".RData"))
+
+    state_healthy_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="healthy_user")
   state_sick_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="sick_user")
   state_sick_rel_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="rel_sick_user")
   state_healthy_rel_user <- state_week_activity(df_processed,tag,yrange=yrange,gr="statename",ctg="rel_healthy_user")
@@ -135,6 +211,9 @@ for (i in files_to_process){
   #calculate statistics of state_activity
   chi_sick_healthy_state_user <- chisq.test(state_sick_user*sum(df_processed$sick_user),state_healthy_user*sum(df_processed$healthy_user))
   
+  #overlay relative and absolute values
+  state_healthy_overlay_user <- state_week_activity2(df_processed,tag,yrange=yrange,gr="statename",ctg="healthy_user",ctg2="rel_healthy_user")
+  state_sick_overlay_user <- state_week_activity2(df_processed,tag,yrange=yrange,gr="statename",ctg="sick_user",ctg2="rel_sick_user")
   
   #create new data set with data aggregated over regions and national
   region_list <- list("Region 1" = c("connecticut","maine","massachusetts","new hampshire", "rhode island","vermont"),
@@ -276,7 +355,7 @@ for (i in files_to_process){
   avg_tw_tot <- df_nat_reg[region=="National",total/total_user]
   diff_wilcox_avg_tw <- wilcox.test(avg_tw_sick, avg_tw_healthy,
                                           exact=T)
-  pdf(file="plots/avg_tw_sick_healthy.pdf",width=10)
+  pdf(file="plots/avg_tw_sick_healthy.pdf",width=10,height=5)
   dat <- data.table(wks=as.Date(df_nat_reg[region=="National",date]),
                     avg_tw_healthy=avg_tw_healthy,
                     avg_tw_sick=avg_tw_sick,
@@ -284,7 +363,7 @@ for (i in files_to_process){
   diff_avg_tw_plot <- ggplot(data=dat,aes(x=wks,y=avg_tw_tot)) + geom_line(linetype="solid",colour="blue") + 
     geom_line(aes(y=avg_tw_sick),linetype="dotted",colour="deepskyblue2") + geom_line(aes(y=avg_tw_healthy), linetype="dashed",colour="deepskyblue2") +
     xlab(" ") + ylab("Average number of tweets per user") +
-    theme(text = element_text(size=20))
+    theme(text = element_text(size=15))
   print(diff_avg_tw_plot)
   dev.off()
   

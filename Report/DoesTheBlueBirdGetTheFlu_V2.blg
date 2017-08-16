@@ -3,63 +3,67 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for "ioannidis_why_2005"
-Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "cdcfluview"
+Warning--I didn't find a database entry for "Bodnar"
 Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty journal in bag_grippe_2016
 Warning--empty journal in bag_lagebericht_2017
 Warning--empty journal in bag_influenza_2017
 Warning--empty journal in cacioppo_social_2015
+Warning--empty journal in cdc_enterovirus_2016
 Warning--empty journal in cdc_surveillance_2016
+Warning--empty journal in cdc_rhinovirus_2017
 Warning--empty journal in cdc_flu_2017
 Warning--empty journal in dfg_reproduzierbarkeit_2017
 Warning--empty journal in GFT_nextchapter_2015
 Warning--empty journal in kullmann2015biomedicine
 Warning--empty booktitle in liu_assessing_2017
+Warning--empty institution in rbase_2017
 Warning--empty journal in rolfes_estimated_2016
+Warning--empty institution in rossum_1995_python
 Warning--empty journal in sentinella_2017
 Warning--empty journal in twitter_annual_2013
 Warning--empty journal in twitter_annual_2017
-You've used 123 entries,
+You've used 138 entries,
             1967 wiz_defined-function locations,
-            1129 strings with 29947 characters,
-and the built_in function-call counts, 52255 in all, are:
-= -- 5210
-> -- 2373
-< -- 78
-+ -- 846
-- -- 818
-* -- 4374
-:= -- 9083
-add.period$ -- 422
-call.type$ -- 123
-change.case$ -- 1020
-chr.to.int$ -- 117
-cite$ -- 139
-duplicate$ -- 1888
-empty$ -- 3299
-format.name$ -- 977
-if$ -- 10279
-int.to.chr$ -- 7
+            1206 strings with 32455 characters,
+and the built_in function-call counts, 57676 in all, are:
+= -- 5743
+> -- 2585
+< -- 88
++ -- 924
+- -- 888
+* -- 4838
+:= -- 10069
+add.period$ -- 471
+call.type$ -- 138
+change.case$ -- 1132
+chr.to.int$ -- 130
+cite$ -- 158
+duplicate$ -- 2079
+empty$ -- 3660
+format.name$ -- 1066
+if$ -- 11313
+int.to.chr$ -- 9
 int.to.str$ -- 0
-missing$ -- 230
-newline$ -- 659
-num.names$ -- 369
-pop$ -- 784
+missing$ -- 256
+newline$ -- 738
+num.names$ -- 414
+pop$ -- 850
 preamble$ -- 1
-purify$ -- 1023
+purify$ -- 1133
 quote$ -- 0
-skip$ -- 1496
+skip$ -- 1637
 stack$ -- 0
-substring$ -- 3476
-swap$ -- 344
+substring$ -- 3843
+swap$ -- 355
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 732
-warning$ -- 16
-while$ -- 399
+type$ -- 822
+warning$ -- 20
+while$ -- 443
 width$ -- 0
-write$ -- 1654
-(There were 18 warnings)
+write$ -- 1854
+(There were 22 warnings)
