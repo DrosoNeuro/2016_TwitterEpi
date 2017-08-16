@@ -342,7 +342,7 @@ for (i in files_to_process){
   regs <- unique(cdc_data_nat_reg$region)
   regs <- regs[regs!="National"]  
   for (i in 1:length(regs)){
-    pl <- plot_twitter_cdc_comp(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg=regs[i],smooth=4,yrange=yrange,ctg=ctg,gr="region")
+    pl <- plot_twitter_cdc_comp_reg(twitter_data= df_nat_reg,cdc_data=cdc_data_nat_reg,reg=regs[i],smooth=4,yrange=yrange,ctg=ctg,gr="region")
     reg_list[[i]] <- pl
   }
   
