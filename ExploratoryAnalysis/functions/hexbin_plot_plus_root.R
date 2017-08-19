@@ -361,7 +361,7 @@ hexbin_plot_plus <- function(datatable,summary=FALSE,tag,coord=c(-125,-66,25,50)
   
   ##create hexbins for sub_set data----
 
-  pdf(paste0(path,'HexbinPlots_',tag,xbins,'.pdf'), onefile=TRUE,width=12,height=7)
+  pdf(paste0(path,'HexbinPlots_',tag,xbins,'.pdf'), onefile=TRUE,width=10,height=5)
   plotter(datatable,coord=coord,subset_tag="full set",root=root)
   if (is.list(summary)){
     plotter(datatable,coord=coord,subset_tag="sick & healthy users",sub_set=summary$both_position,root=root)

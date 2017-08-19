@@ -1,0 +1,20 @@
+This is a summary of an email exchange between Servan Grüninger (SG) & Todd Bodnar (TB)
+
+2017.06.27
+TB: For fitting the regional curves to sir, check out the attached  cdc_year. The curves folder should contain both the raw data and the model output.
+
+2017.07.02
+SG: How did you calculate the final predictions (e.g. from the file prediction_r_results.csv). I couldn't associate these files to any of the code snippets you sent me. 
+
+2017.07.02
+TB: I'm looking for the code for that but it might have just been a copy/paste job. I think you can recreate it by:
+
+cdc offset - the base cdc data (offset because the report time for it is lagged, I'd guess)
+predictions base - the % of twitter users classified as ill based on the base model
+predictions auto coor - do a simple auto coorelation of the cdc offset data
+predictions auto coor 2 - do a simple auto coorelation of the cdc data with the two previous week's worth of data
+predictions both -  do a simple auto coorelation of the cdc offset data *and* predictions_base (possibly no offset for base, since it's "real time")
+predictions both 2 -  do a simple auto coorelation of the cdc offset data for the last two weeks *and* predictions_base (possibly no offset for base, since it's "real time")
+
+predictions -> for week n, build a model with only data from weeks 0 to n-1, since that's all we'd have at week n
+full -> also include future data in the model building, which would be what we'd expect predictions * to asymptotically approach as n -> infinity.
