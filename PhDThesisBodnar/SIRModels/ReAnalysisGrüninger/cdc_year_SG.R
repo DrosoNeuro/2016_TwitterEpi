@@ -59,7 +59,8 @@ fit3 <- fitSIR(year3,rnaught_center=2.5)
 
 fit_all <- fitSIR(alldata)
 
-pdf("SIR_model_cdc_data_25.pdf",width=8,height=4.5)
+
+pdf("SIR_model_cdc_data_25.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients")
 lines(seq(1,45),fit1$SIRmodel.I)
 lines(seq(45,93),fit2$SIRmodel.I)
@@ -69,6 +70,11 @@ lines(seq(1,45),fit_all[[7]],lty="dashed")
 lines(seq(45,93),fit_all[[11]],lty="dashed")
 lines(seq(93,148),fit_all[[15]],lty="dashed")
 dev.off()
+
+#usingggplot
+
+
+
 
 gammas_cdc_25 <- c(fit1$gamma,fit2$gamma,fit3$gamma,fit_all$gamma)
 betas_cdc_25 <- c(fit1$beta,fit2$beta,fit3$beta,fit_all$beta)
@@ -89,7 +95,7 @@ fit_full3 <- fitSIR(year3,rnaught_center=2)
 fit_full_all <- fitSIR(alldata,rnaught_center = 2)
 
 
-pdf("SIR_model_full_model_25.pdf",width=8,height=4.5)
+pdf("SIR_model_full_model_25.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients")
 lines(seq(1,45),fit_full1$SIRmodel.I)
 lines(seq(45,93),fit_full2$SIRmodel.I)
@@ -121,8 +127,7 @@ fit_full_base3 <- fitSIR(year3,rnaught_center=2,gamma_center = 1/2)
 
 fit_full_base_all <- fitSIR(alldata,rnaught_center = 2,gamma_center = 1/2)
 
-
-pdf("SIR_model_full_base_model_100_colorised.pdf",width=8,height=4.5)
+pdf("SIR_model_full_base_model_50_colorised.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients",type="l",col="red")
 lines(full_base,col="blue")
 lines(seq(1,45),fit_full_base1$SIRmodel.I)
@@ -134,7 +139,36 @@ lines(seq(45,93),fit_full_base_all[[11]],lty="dashed")
 lines(seq(93,148),fit_full_base_all[[15]],lty="dashed")
 dev.off()
 
-pdf("SIR_model_full_both_25_colorised.pdf",width=8,height=4.5)
+cdc_dt <- data.table(wks=1:148,cdc=cdc_offset)
+base_dt <- data.table(wks=1:148,mod=full_base)
+
+yearly_dt1 <- data.table(wks=1:45,sick=fit_full_base1$SIRmodel.I)
+yearly_dt2 <- data.table(wks=45:93,sick=fit_full_base2$SIRmodel.I)
+yearly_dt3 <- data.table(wks=93:148,sick=fit_full_base3$SIRmodel.I)
+
+comb_dt1 <- data.table(wks=1:45,sick=fit_full_base_all[[7]])
+comb_dt2 <- data.table(wks=45:93,sick=fit_full_base_all[[11]])
+comb_dt3 <- data.table(wks=93:148,sick=fit_full_base_all[[15]])
+
+pdf("SIR_model_full_base_model_50_colorised.pdf",width=10,height=5)
+model_comparison <- ggplot(data = cdc_dt,aes(x=wks)) + 
+  geom_line(aes(y=cdc,colour = "CDC")) +
+  geom_line(data=base_dt,aes(x=wks,y=mod,colour="Twitter base model")) +
+  geom_line(data=yearly_dt1,aes(x=wks,y=sick)) + 
+  geom_line(data=yearly_dt2,aes(x=wks,y=sick)) +
+  geom_line(data=yearly_dt3,aes(x=wks,y=sick)) +
+  geom_line(data=comb_dt1,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt2,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt3,aes(x=wks,y=sick),linetype="dashed") +
+  xlab(" ") + ylab("") +
+  theme(text = element_text(size=15))+scale_colour_manual(values=c("Twitter base model" ="blue","CDC"="red"))+
+  labs(y= "(Estimated) ILI rate",colour=NULL)+
+  theme(legend.position = c(0,1),legend.justification = c(0, 1))
+print(model_comparison)
+dev.off()
+
+
+pdf("SIR_model_full_both_25_colorised.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients",type="l",col="red")
 lines(full_both,col="blue")
 lines(seq(1,45),fit_full1$SIRmodel.I)
@@ -144,6 +178,34 @@ lines(seq(93,147),fit_full3$SIRmodel.I)
 lines(seq(1,45),fit_full_all[[7]],lty="dashed")
 lines(seq(45,93),fit_full_all[[11]],lty="dashed")
 lines(seq(93,147),fit_full_all[[15]],lty="dashed")
+dev.off()
+
+cdc_dt <- data.table(wks=1:148,cdc=cdc_offset)
+base_dt <- data.table(wks=1:147,mod=full_both)
+
+yearly_dt1 <- data.table(wks=1:45,sick=fit_full1$SIRmodel.I)
+yearly_dt2 <- data.table(wks=45:93,sick=fit_full2$SIRmodel.I)
+yearly_dt3 <- data.table(wks=93:147,sick=fit_full3$SIRmodel.I)
+
+comb_dt1 <- data.table(wks=1:45,sick=fit_full_all[[7]])
+comb_dt2 <- data.table(wks=45:93,sick=fit_full_all[[11]])
+comb_dt3 <- data.table(wks=93:147,sick=fit_full_all[[15]])
+
+pdf("SIR_model_full_both_25_colorised.pdf",width=10,height=5)
+model_comparison <- ggplot(data = cdc_dt,aes(x=wks)) + 
+  geom_line(aes(y=cdc,colour = "CDC")) +
+  geom_line(data=base_dt,aes(x=wks,y=mod,colour="Twitter full model")) +
+  geom_line(data=yearly_dt1,aes(x=wks,y=sick)) + 
+  geom_line(data=yearly_dt2,aes(x=wks,y=sick)) +
+  geom_line(data=yearly_dt3,aes(x=wks,y=sick)) +
+  geom_line(data=comb_dt1,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt2,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt3,aes(x=wks,y=sick),linetype="dashed") +
+  xlab(" ") + ylab("") +
+  theme(text = element_text(size=15))+scale_colour_manual(values=c("Twitter full model" ="blue","CDC"="red"))+
+  labs(y= "(Estimated) ILI rate",colour=NULL)+
+  theme(legend.position = c(0,1),legend.justification = c(0, 1))
+print(model_comparison)
 dev.off()
 
 
@@ -162,7 +224,7 @@ fit_full_AR2_3 <- fitSIR(year3,rnaught_center=2,gamma_center = 1/2)
 fit_full_AR2_all <- fitSIR(alldata,rnaught_center = 2,gamma_center = 1/2)
 
 
-pdf("SIR_model_full_AR2_100_colorised.pdf",width=8,height=4.5)
+pdf("SIR_model_full_AR2_100_colorised.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients",type="l",col="red")
 lines(full_AR2,col="blue")
 lines(seq(1,45),fit_full_AR2_1$SIRmodel.I)
@@ -174,6 +236,38 @@ lines(seq(45,93),fit_full_AR2_all[[11]],lty="dashed")
 lines(seq(93,147),fit_full_AR2_all[[15]],lty="dashed")
 dev.off()
 
+cdc_dt <- data.table(wks=1:148,cdc=cdc_offset)
+base_dt <- data.table(wks=1:147,mod=full_AR2)
+
+yearly_dt1 <- data.table(wks=1:45,sick=fit_full_AR2_1$SIRmodel.I)
+yearly_dt2 <- data.table(wks=45:93,sick=fit_full_AR2_2$SIRmodel.I)
+yearly_dt3 <- data.table(wks=93:147,sick=fit_full_AR2_3$SIRmodel.I)
+
+comb_dt1 <- data.table(wks=1:45,sick=fit_full_AR2_all[[7]])
+comb_dt2 <- data.table(wks=45:93,sick=fit_full_AR2_all[[11]])
+comb_dt3 <- data.table(wks=93:147,sick=fit_full_AR2_all[[15]])
+
+pdf("SIR_model_full_AR2_25_colorised.pdf",width=10,height=5)
+model_comparison <- ggplot(data = cdc_dt,aes(x=wks)) + 
+  geom_line(aes(y=cdc,colour = "CDC")) +
+  geom_line(data=base_dt,aes(x=wks,y=mod,colour="CDC AR(2) model")) +
+  geom_line(data=yearly_dt1,aes(x=wks,y=sick)) + 
+  geom_line(data=yearly_dt2,aes(x=wks,y=sick)) +
+  geom_line(data=yearly_dt3,aes(x=wks,y=sick)) +
+  geom_line(data=comb_dt1,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt2,aes(x=wks,y=sick),linetype="dashed") +
+  geom_line(data=comb_dt3,aes(x=wks,y=sick),linetype="dashed") +
+  xlab(" ") + ylab("") +
+  theme(text = element_text(size=15))+scale_colour_manual(values=c("CDC AR(2) model" ="blue","CDC"="red"))+
+  labs(y= "(Estimated) ILI rate",colour=NULL)+
+  theme(legend.position = c(0,1),legend.justification = c(0, 1))
+print(model_comparison)
+dev.off()
+
+#export model datasets
+save(list=c("cdc_dt","full_both","fit_full1","fit_full2","fit_full3","fit_full_all",
+            "full_AR2","fit_full_AR2_1","fit_full_AR2_2","fit_full_AR2_3","fit_full_AR2_all",
+            "fit_full_base1","fit_full_base2","fit_full_base3","fit_full_all"),file="Models.RData")
 
 
 
@@ -210,7 +304,7 @@ yearly_bodnar <- calc_curves(gammas_bodnar,betas_bodnar,T)
 combined_bodnar <- calc_curves(gammas_bodnar,betas_bodnar,F)
 
 yearly_grun <- calc_curves(gammas_full_25,betas_full_25,T)
-combined_grun <- calc_curves(gammas_full_25,betas_full_25,T)
+combined_grun <- calc_curves(gammas_full_25,betas_full_25,F)
 
 pdf("SIR_model_full_model_25_comparison_yearly.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients",col="red",type="l")
@@ -223,6 +317,32 @@ lines(seq(45,93),yearly_grun[[7]],col="blue")
 lines(seq(93,147),yearly_grun[[11]],col="blue")
 dev.off()
 
+cdc_dt <- data.table(wks=1:148,cdc=cdc_offset)
+bod_yearly_dt1 <- data.table(wks=1:45,sick=yearly_bodnar[[3]])
+bod_yearly_dt2 <- data.table(wks=45:93,sick=yearly_bodnar[[7]])
+bod_yearly_dt3 <- data.table(wks=93:147,sick=yearly_bodnar[[11]])
+
+grun_yearly_dt1 <- data.table(wks=1:45,sick=yearly_grun[[3]])
+grun_yearly_dt2 <- data.table(wks=45:93,sick=yearly_grun[[7]])
+grun_yearly_dt3 <- data.table(wks=93:147,sick=yearly_grun[[11]])
+
+pdf("SIR_model_full_model_25_comparison_yearly.pdf",width=10,height=5)
+sir_full_comparison <- ggplot(data = cdc_dt,aes(x=wks)) + 
+  geom_line(aes(y=cdc,colour = "CDC")) +
+  geom_line(data=bod_yearly_dt1,aes(x=wks,y=sick,colour="SIR Bodnar")) + 
+  geom_line(data=bod_yearly_dt2,aes(x=wks,y=sick,colour="SIR Bodnar")) +
+  geom_line(data=bod_yearly_dt3,aes(x=wks,y=sick,colour="SIR Bodnar")) +
+  geom_line(data=grun_yearly_dt1,aes(x=wks,y=sick,colour="SIR Grüninger")) +
+  geom_line(data=grun_yearly_dt2,aes(x=wks,y=sick,colour="SIR Grüninger")) +
+  geom_line(data=grun_yearly_dt3,aes(x=wks,y=sick,colour="SIR Grüninger")) +
+  xlab(" ") + ylab("") +
+  theme(text = element_text(size=15))+scale_colour_manual(values=c("SIR Grüninger" ="blue","SIR Bodnar"="cyan","CDC"="red"))+
+  labs(y= "(Estimated) ILI rate",colour=NULL)+
+  theme(legend.position = c(0,1),legend.justification = c(0, 1))
+print(sir_full_comparison)
+dev.off()
+
+
 pdf("SIR_model_full_model_25_comparison_combined.pdf",width=10,height=5)
 plot(cdc_offset,xlab="Week",ylab="Relative amount of ILI patients",col="red",type="l")
 
@@ -234,6 +354,32 @@ lines(seq(1,45),combined_grun[[3]],col="blue",lty="dashed")
 lines(seq(45,93),combined_grun[[7]],col="blue",lty="dashed")
 lines(seq(93,147),combined_grun[[11]],col="blue",lty="dashed")
 dev.off()
+
+cdc_dt <- data.table(wks=1:148,cdc=cdc_offset)
+bod_comb_dt1 <- data.table(wks=1:45,sick=combined_bodnar[[3]])
+bod_comb_dt2 <- data.table(wks=45:93,sick=combined_bodnar[[7]])
+bod_comb_dt3 <- data.table(wks=93:147,sick=combined_bodnar[[11]])
+
+grun_comb_dt1 <- data.table(wks=1:45,sick=combined_grun[[3]])
+grun_comb_dt2 <- data.table(wks=45:93,sick=combined_grun[[7]])
+grun_comb_dt3 <- data.table(wks=93:147,sick=combined_grun[[11]])
+
+pdf("SIR_model_full_model_25_comparison_combined.pdf",width=10,height=5)
+sir_full_comparison <- ggplot(data = cdc_dt,aes(x=wks)) + 
+  geom_line(aes(y=cdc,colour = "CDC")) +
+geom_line(data=bod_comb_dt1,aes(x=wks,y=sick,colour="SIR Bodnar"),linetype="dashed") + 
+  geom_line(data=bod_comb_dt2,aes(x=wks,y=sick,colour="SIR Bodnar"),linetype="dashed") +
+  geom_line(data=bod_comb_dt3,aes(x=wks,y=sick,colour="SIR Bodnar"),linetype="dashed") +
+  geom_line(data=grun_comb_dt1,aes(x=wks,y=sick,colour="SIR Grüninger"),linetype="dashed") +
+  geom_line(data=grun_comb_dt2,aes(x=wks,y=sick,colour="SIR Grüninger"),linetype="dashed") +
+  geom_line(data=grun_comb_dt3,aes(x=wks,y=sick,colour="SIR Grüninger"),linetype="dashed") +
+  xlab(" ") + ylab("") +
+  theme(text = element_text(size=15)) +scale_colour_manual(values=c("SIR Grüninger" ="blue","SIR Bodnar"="cyan","CDC"="red"))+
+  labs(y= "(Estimated) ILI rate",colour=NULL)+
+  theme(legend.position = c(0,1),legend.justification = c(0, 1))
+print(sir_full_comparison)
+dev.off()
+
 
 
 #testin whether same ratio of beta and gamma yields same result (it doesn't)

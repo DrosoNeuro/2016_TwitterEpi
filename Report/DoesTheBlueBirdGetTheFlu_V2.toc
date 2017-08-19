@@ -14,13 +14,13 @@
 \contentsline {chapter}{\numberline {4}What does the classified Twitter data set reveal about the flu?}{35}{chapter.4}
 \contentsline {section}{\numberline {4.1}Can the Twitter classifier compete for gold?}{35}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Spatio-temporal patterns of Twitter usage}{36}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Comparing the flu classifier results with CDC ILI rates}{46}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Comparing classifier results with CDC activity levels}{53}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Comparing classifier results and ILI rates on the state level}{60}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the county level}{61}{subsection.4.1.5}
-\contentsline {section}{\numberline {4.2}Attempts to reproduce key figures and findings from \cite {bodnar_data_2015}}{63}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{63}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{64}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.1.2}Comparing the flu classifier results with CDC ILI rates}{38}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Comparing classifier results with CDC activity levels}{46}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Comparing classifier results and ILI rates on the state level}{59}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the county level}{60}{subsection.4.1.5}
+\contentsline {section}{\numberline {4.2}Attempts to reproduce key figures and findings from \cite {bodnar_data_2015}}{62}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{62}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{63}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \cite {bodnar_data_2015}}{69}{subsection.4.2.3}
 \contentsline {chapter}{\numberline {5}Discussion and outlook}{73}{chapter.5}
 \contentsline {section}{\numberline {5.1}Has ``Larry the Bird" deserved our trust?}{73}{section.5.1}

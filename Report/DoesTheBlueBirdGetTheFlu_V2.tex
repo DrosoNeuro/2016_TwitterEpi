@@ -120,7 +120,7 @@
   left=25mm,
   right=25mm,
   bottom=24mm,
-  headsep=10mm, %26
+  headsep=13mm, %26
   footskip=15mm
 }
 
@@ -392,7 +392,7 @@ They then screened the tweets in both categories for the occurrence or absence o
 
 In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``healthy" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curver (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=.9\textwidth]{01_ROC_classification_seed.png}
   \caption{The receiver operating characteristic (ROC) of classifiers that use hand chosen key words (left) and algorithmically chosen keywords (right) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features. Taken from \cite{bodnar_ground_2014}.}
@@ -419,7 +419,7 @@ Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR mode
   \end{align}
 Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($I_{\gamma, \beta}$ and the official CDC data ($I_{\text{CDC}}$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}). 
 
-\begin{table}[H]
+\begin{table}[htbp!]
 \centering
 \caption{National best-fit parameters for each year from the CDC's data (white) and Twitter data (grey); taken from \cite{bodnar_data_2015}.}
 \begin{tabular}{l l l l l}
@@ -445,14 +445,14 @@ I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(
   \end{align}
 Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). Note that it is unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. An e-mail requesting clarification of this has been sent, but a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=1\textwidth]{02_todd_bodnar_SIR.png}
   \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters. The discontinuities stem from recalculating the SIR models for each year with the ILI rates from the Twitter classifier as a starting point for each year. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis_SIR}
   \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=0.9\textwidth,height=0.6\textwidth]{03_cdc_fit_bodnar_thesis.png}
   \caption{Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) compared to the CDC's reported ILI rates (circles) for the whole United States. From \cite{bodnar_data_2015}.}
@@ -524,14 +524,14 @@ Most of them either came to lie at the coastline or the Canadian-U.S.-border and
 
 After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 tweets remaining. These tweets were sent by a total of 213'426 users, meaning that on average, each user sent 17.32 tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only sligthly longer than in my case). As can be in Figure~\ref{fig:histogram_ID_tot} a large part of the Twitter users in the \texttt{sick\_users} data set only sent one or two tweets over the whole study period. Furthermore, the maximal number of tweets sent per user over the course of the 208 week time window was 86, a very low number given the fact that there are Twitter users out there who send over a hundred tweets \textit{per day}.\clearpage
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=1\textwidth]{4A_HexbinContinent.pdf}
   \caption{Spatial distribution of tweets in the \texttt{sick\_users} data set, aggregated in 12'405 hexagon cells in grid dimensions 148 vertically by 301 horizontally. The black circles correspond to cities with more than 300'000 inhabitants. Note that the colour label does not follow a linear scale. Due to larged difference in the minimal and maximal number of tweets in each bin, I performed a root transformation on the data using the tenth root.}
   \label{fig:hexbincontinent}
   \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \begin{subfigure}[t]{0.8\textwidth}
     \includegraphics[width=1\linewidth]{04_state56_sick_raw_df.png}
@@ -545,7 +545,7 @@ After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 
   \label{fig:canexico_and_removed}
   \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=1\textwidth]{06_user_activity_total_sick_raw_df.pdf}
   \caption{Histogram of the number of tweets sent per user in the \texttt{sick\_users} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 tweet). Mean = 17.32 (solid line); median = 14 (dashed line).}
@@ -554,7 +554,7 @@ After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 
 
 \hfill
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{07_barplot_sick_raw_df.pdf}
 \caption{The total number of users who only sent tweets labelled as ``sick" (919), users who sent at least one tweet labelled as ``sick" and ``healthy" (19'728), and users who only sent tweets labelled as ``healthy" (192'779).}
@@ -585,7 +585,7 @@ Hence, it is unclear how exactly the \texttt{sick\_users} data set was construct
 
 Nevertheless, I used this data set as a basis to develop a basic grasp of the data set as well as to develop functions to analyse the data set in depth and to compare it with official flu data. However, I do not report any more results based on this data set, since the exact selection criteria used for this set are unclear and hence the inferences from it are not to be trusted. All following graphs, calculations and statistics are based on the \texttt{all\_tweets} data set.\clearpage
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[b]{1\textwidth}
   \includegraphics[width=1\linewidth]{08_user_activity_both_sick_raw_df.pdf}
@@ -666,7 +666,7 @@ Also, the unadjusted mean tweet rate of all users combined (31.42) is six times 
 
 Finally, by applying Equation~\ref{eq:3} described in Section~\ref{sec:sick_user_exploratory}, we can estimate the adjusted mean (114.6 tweets per user) and median (118.64 tweets per user) of the Twitter rate of the whole Twitter population in 2011, as well the mean tweet rate for sick (167.6 tweets per user) and healthy (114.58 tweets per user) subpopulation, respectively.\clearpage
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{10_avg_tw_sick_healthy.pdf}
 \caption{The unadjusted mean number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue), and total users (solid blue), respectively.}
@@ -706,14 +706,14 @@ When comparing the relative number of tweets labelled as ``healthy" with those l
 
 Repeating the calculations described above using the number of Twitter users instead of the number of tweets yields similar results (Figures~\ref{fig:tweets_state_full_user}, \ref{fig:tweets_state_full_scatter_user}, \ref{fig:tweets_state_full_scatter_user_log}, and \ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0823).\clearpage
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{11_activity_total_date_Twitter_full_aggregated.pdf}
 \caption{Relative number of tweets sent per week in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).}
 \label{fig:tweets_seasonal_full}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf}
@@ -730,7 +730,7 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_seasonal_healthy_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf}
@@ -747,7 +747,7 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_seasonal_healthy_sick_user}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{14_activity_total_state_Twitter_full_aggregated.pdf}
@@ -764,7 +764,7 @@ Repeating the calculations described above using the number of Twitter users ins
 \label{fig:tweets_state}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
  \begin{subfigure}[t]{0.6\textwidth}
   \includegraphics[width=1\linewidth]{16_ScatterTweetPop.pdf}
@@ -781,7 +781,7 @@ Repeating the calculations described above using the number of Twitter users ins
 \caption{Relative number of tweets sent per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logartihmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.95 in (a) and intercept = 0.58 and slope = 1.16 in (b), respectively.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
  \begin{subfigure}[t]{0.6\textwidth}
   \includegraphics[width=1\linewidth]{18_ScatterTweetPop_user.pdf}
@@ -798,7 +798,7 @@ Repeating the calculations described above using the number of Twitter users ins
 \caption{Relative number of Twitter users per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logartihmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.98 in (a) and intercept = 0.3 and slope = 1.09 in (b), respectively.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf}
@@ -814,7 +814,7 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_state_healthy_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf}
@@ -838,7 +838,7 @@ In a first step, I simply compared the official CDC ILI percentage data on the n
 
 In order to make them directly comparable to each other, I normalised both time series by the total sum of relative tweets numbers and ILI percentages, respectively. Hence, the percentual values shown in Figure~\ref{fig:cdc_tw_comp_nat_ma1} do not represent weekly ILI percentage, but rather the percentual proportion of the relative number of tweets and the ILI percentages, respectively, of a given week within the whole 208 week study period (In other words: The percentages of each week add up to a 100\%, just like the histogram values shown in Figures~\ref{fig:tweets_seasonal_healthy_sick_user}--\ref{fig:tweets_seasonal_full}). Since the fluctuations in the Twitter data were very high, I plotted the data again after applying a two-week (Figure~\ref{fig:cdc_tw_comp_nat_ma2}) and four-week (Figure~\ref{fig:cdc_tw_comp_nat_ma4}) moving average smoother, using the ``forecast" package \citep{forecast}. This reduced the overall fluctuations a bit, but did not particularly improve the fit with the CDC curve. I did the same for each of the ten CDC flu surveillance regions (Figure~\ref{fig:cdc_tw_comp_regs_ma4}). The situation improves slightly if we use the relative amount of sick users per week (as opposed to the relative amount of sick tweets per week), as can be seen  from Figures~\ref{fig:cdc_tw_comp_nat_user_ma1}, \ref{fig:cdc_tw_comp_nat_user} and \ref{fig:cdc_tw_comp_regs_ma4_user}. In both cases, however, the correlation between the relative ILI estimates based on Twitter data and the official CDC data were abysmal (Spearman's Rho was 0.0077 and 0.0077 for tweet- and user-based four-week average curves, respectively). 
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{24_cdc_twitter_comp_nat_raw.pdf}
@@ -853,14 +853,14 @@ In order to make them directly comparable to each other, I normalised both time 
   \label{fig:naive_comparison_CDC_twitter}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \includegraphics[width=1\linewidth]{26_cdc_twitter_comp_nat_ma1.pdf}
   \caption{}
   \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i.e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period.}
     \label{fig:cdc_tw_comp_nat_ma1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{27_cdc_twitter_comp_nat_ma2.pdf}
@@ -877,21 +877,21 @@ In order to make them directly comparable to each other, I normalised both time 
   \label{fig:cdc_tw_comp_nat_tot}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{29_cdc_twitter_comp_regs_ma4.pdf}
 \caption{Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.}
 \label{fig:cdc_tw_comp_regs_ma4}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \includegraphics[width=1\linewidth]{30_cdc_twitter_comp_nat_ma1_user.pdf}
   \caption{}
   \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``sick" from the Twitter flu classifier (blue) during a specific week The data has been normalised in order to make them comparable, i.e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period.}
     \label{fig:cdc_tw_comp_nat_user_ma1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{31_cdc_twitter_comp_nat_ma2_user.pdf}
@@ -908,7 +908,7 @@ In order to make them directly comparable to each other, I normalised both time 
   \label{fig:cdc_tw_comp_nat_user}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{33_cdc_twitter_comp_regs_ma4_user.pdf}
 \caption{Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.}
@@ -925,7 +925,7 @@ An activity level of 1 corresponds to values that are below the baseline, level 
   
 Since a similar threshold does not exist for the Twitter data, I simply used the relative number of tweets labelled as ``sick" during weeks outside the flu season (June to September; seasonal flu activity can begin as early as October and continue to occur as late as May) as source to calculate yearly baseline values during off-season weeks. I then used these baseline values to calculate the weekly activity levels according to the rationale describe above. Figure~\ref{fig:cdc_tw_comp_nat_ac_sick} and Figure~\ref{fig:cdc_tw_comp_regs_ac_sick} shows the comparison on the national and regional level, respectively. I then did the same using the relative number of sick users (as opposed to sick tweets) instead (Figure~\ref{fig:cdc_tw_comp_nat_ac_sick_user} and Figures~\ref{fig:cdc_tw_comp_regs_ac_sick_user}). Note that the Twitter data available to me only spanned the time period between 2011 and 2015. In order not too lose too many years worth of data to the baseline calculation, I only calculated the baseline based on the off-season weeks directly preceding a specific flu season (as opposed to calculating the baseline based on the off-season weeks of the three preceding weeks).\clearpage
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{34_cdc_twitter_comp_nat_activity_sick.pdf}
@@ -942,14 +942,14 @@ Since a similar threshold does not exist for the Twitter data, I simply used the
   \caption{Comparison between the weekly ILI activity levels reported by the CDC and the activity levels calculated based on the Twitter data set. (a) Twitter activity levels based on the relative number of sick tweets (b) Twitter activity levels calculated based on the relative number of sick users}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \includegraphics[width=1\linewidth]{36_cdc_twitter_comp_regs_activity_sick.pdf}
   \caption{Comparison between the regional weekly ILI activity levels reported by the CDC and the activity levels calculated based on the relative number of sick tweets per week.}
     \label{fig:cdc_tw_comp_regs_ac_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \includegraphics[width=1\linewidth]{37_cdc_twitter_comp_regs_activity_sick_user.pdf}
   \caption{Comparison between the regional weekly ILI activity levels reported by the CDC and the activity levels calculated based on the relative number of sick users per week.}
@@ -961,7 +961,7 @@ To get a better understanding of the spatio-temporal pattern of ILI activity lev
 \begin{center}
 \href{run:vids/1_cdc_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/1_cdc_flu_regio.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{ILI activity levels as provided by the CDC for the 10 surveillance regions. Red corresponds to activity level 10, while light yellow corresponds to activity level 1, which indicate the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
     \label{fig:cdc_flu_regio}
@@ -970,7 +970,7 @@ To get a better understanding of the spatio-temporal pattern of ILI activity lev
 \begin{center}
 \href{run:vids/2_twitter_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/2_twitter_flu_regio.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{Flu activity levels as calculated based on the relative number of Twitter users classified as ``sick" in each week aggregated within each of the 10 surveillance regions. Dark blue corresponds to activity level 10, while light blue corresponds to activity level 1, which indicate the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
     \label{fig:twitter_flu_regio}
@@ -981,7 +981,7 @@ In order to directly compare the CDC and Twitter flu activity levels, I subtract
 \begin{center}
 \href{run:vids/3_cdc_twitter_diff_user_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/3_cdc_twitter_diff_user_regio.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the CDC and those calculated based on the relative amount of sick Twitter users in each corresponding region and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_regio}
@@ -994,7 +994,7 @@ In a next step, I tried to assess the performance of Twitter flu classifier by l
 \begin{center}
 \href{run:vids/4_cdc_twitter_diff_user_state.avi}{\includegraphics[width=0.9\linewidth]{vids/4_cdc_twitter_diff_user_state.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the CDC and those calculated based on the relative amount of sick Twitter users in each corresponding state and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_state}
@@ -1009,7 +1009,7 @@ Below, you can see the spatio-temporal comparison of the performance of the Twit
 \begin{center}
 \href{run:vids/5_cdc_twitter_diff_user_jersey.avi}{\includegraphics[width=0.9\linewidth]{vids/5_cdc_twitter_diff_user_jersey.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of New Jersey. White means that the official and Twitter activity levels are exactly the same, red means that the state of New Jersey reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_jersey}
@@ -1018,7 +1018,7 @@ Below, you can see the spatio-temporal comparison of the performance of the Twit
 \begin{center}
 \href{run:vids/6_cdc_twitter_diff_user_oregon.avi}{\includegraphics[width=0.9\linewidth]{vids/6_cdc_twitter_diff_user_oregon.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of Oregon. White means that the official and Twitter activity levels are exactly the same, red means that the state of Oregon reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_oregon}
@@ -1068,11 +1068,13 @@ First, I built the SIR model based on the CDC data, since this was the most stra
 
 Therefore, I went on to fit the very same SIR model that is shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}. To do so, I needed to know which data the model was built on. I extracted the three starting coordinates of the yearly curves shown in the figure and compared them with the data provided to me by Todd. It turned out that the starting coordinates of the curve only matched the values from the full retrospective Twitter model (i.e. retrospective AR(2) model based on the CDC data combined with the retrospective Twitter base model), so I built my second SIR model based on these values. As can be seen from Figure~\ref{fig:SIR_comparison_full}, the resulting yearly and combined ILI curves are virtually indistinguishable from the ones shown in \cite{bodnar_data_2015}.
 
-It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015}---even though the model curves seem to match. As can be seen from Table~\ref{tab:nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably from the ones depicted in Table~\ref{tab:nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. Hence, it is safe to assume that those values do \textit{not} represent the values that were used to calculate the curves shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.
+It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015}---even though the model curves seem to match. As can be seen from Table~\ref{tab:nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably from the ones depicted in Table~\ref{tab:nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. At the same time, however, the curves that result when creating an SIR model based on the values in Table~\ref{tab:nationalparams_replicated} and the \texttt{full\_both2} data provided to me are virtually indistinguishable from the curves depicted in \cite{bodnar_data_2015}, i.e. in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}. This implies that the $\beta$ and $\gamma$ values reported in \cite{bodnar_data_2015} are not the ones that were used to create Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.
 
- \begin{table}[H]
+In order to corroborate this assumption, I recreated SIR model curves based on the values reported in Table~\ref{tab:nationalparams} and compared them to the SIR model curves resulting from the values in Table~\ref{tab:nationalparams_replicated}, which are depicted in cyan and blue, respectively, in Figure~\ref{fig:40A_40B_remodeling_comparison}. The comparison reveals a marked difference between the two model curves and makes clear that the model curves based on the recreated values in Table~\ref{tab:nationalparams_replicated} are much more similar to the original curves depicted in in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} than the model curves based on the values from \cite{bodnar_data_2015} depicted in Table~\ref{tab:nationalparams}.
+
+ \begin{table}[htbp!]
 \centering
-\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter base model data described in \cite{bodnar_data_2015} (grey).}
+\caption{Combined and yearly best-fit parameters for the SIR model I recalculated based on the CDC's data (white) and the Twitter base model data (grey) provided to me by Bodnar (personal communication).}
 \begin{tabular}{l l l l l}
  Year & \(\gamma\) & \(\beta\) & RSS\\ \hline
 & 0.3962286 & 0.4446748  & \ensuremath{4.0608281\times 10^{-4}}   \\ 
@@ -1087,9 +1089,7 @@ It is very peculiar, however, that the model parameters which I calculated for t
 \label{tab:nationalparams_replicated}
 \end{table}
 
-\clearpage
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.png}
@@ -1099,13 +1099,13 @@ It is very peculiar, however, that the model parameters which I calculated for t
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{38_SIR_model_cdc_data_25.pdf}
   \caption{}
-  \label{fig:SIR_comparison_CDC}
   \end{subfigure}
   \caption{Comparison between the SIR model depicted in \cite{bodnar_data_2015} (a) and a replication based on the official CDC ILI rates (b).}
+  \label{fig:SIR_comparison_CDC}
   %\label{fig:SIR_comparison}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.png}
@@ -1119,31 +1119,47 @@ It is very peculiar, however, that the model parameters which I calculated for t
   \label{fig:SIR_comparison_full}
   \end{subfigure}
   \caption{Comparison between the SIR model depicted in \citep{bodnar_data_2015} (a) and a replication based on the full retrospective Twitter model (c).}
-  \label{fig:TwitterModel_comparison}
+    \label{fig:SIR_comparison_CDC_full_model}
 \end{figure}
 
-In addition, it is important to note again that the data used to calculate the SIR models is \textit{not} equivalent to the raw results of the Twitter classifier. In fact, the SIR models described above are built on the full retrospective model data which includes the information from the Twitter classifier as well as information from an AR(2) model based on the official CDC data. This stands in contrast to the report in \cite{bodnar_data_2015}, where the SIR models are depicted as being based on the information from the Twitter classifier only. However, this cannot be the case. Figure~\ref{fig:TwitterModel_comparison} clearly shows that the SIR model built solely on the data from the Twitter base model is clearly distinct from the SIR models built on the full retrospective model data.  
-
-\subsection{Attempt to reproduce the AR model described in \cite{bodnar_data_2015}}
-Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis}. The graph is described as the ``comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles)", therefory implying that the dashed and solid lines are produced based on the data from the Twitter classifier alone. However, this is clearly not the case. Figure~\ref{fig:TwitterModel_comparison_original} shows a reproduction of the original graph depicted in \citep{bodnar_data_2015}, including SIR model fits. However, this reproduction is based on the retrospective \textit{full} model, i.e. the model including information from the Twitter base model as well as from the AR(2) model based on the CDC data. In fact, if we only look at the data from the Twitter base model (Figure~\ref{fig:TwitterModel_comparison_base}), we can see that the fit with the official CDC data is much worse. Also, Figure~\ref{fig:TwitterModel_comparison_ar} shows that a simple AR(2) model based on the official CDC data achieves a model fit that is almost as good as the one from the full model which includes additional information from the Twitter base model.
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
+  \includegraphics[width=1\linewidth]{40A_SIR_model_full_model_25_comparison_yearly.pdf}
   \caption{}
   \end{subfigure}
   
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{41_SIR_model_full_AR2_100_colorised.pdf}
+  \includegraphics[width=1\linewidth]{40B_SIR_model_full_model_25_comparison_combined.pdf}
   \caption{}
-  \label{fig:TwitterModel_comparison_base_model}
+  \end{subfigure}
+  \caption{SIR model curves using yearly (a) and combined (b) paramaters to model the ILI prevalence throughout one year. Red indicates the official ILI rates from the CDC, while cyan and blue show the SIR model curves based on the parameters reported in \cite{bodnar_data_2015} and the ones recalculated by me, respectively, based on the very same data (i.e. the \texttt{full\_both2} values).}
+  \label{fig:40A_40B_remodeling_comparison}
+  %\label{fig:SIR_comparison}
+\end{figure}
+
+\subsection{Attempt to reproduce the AR model described in \cite{bodnar_data_2015}}
+It is important to note once again that the data used to calculate the SIR models in \cite{bodnar_data_2015} are \textit{not} equivalent the \texttt{full\_base} data, which are supposed to represent the raw output from the Twitter classifier according to Bodnar (personal communication). In fact, the SIR models described above are built on the full retrospective model data which includes the information from the Twitter classifier as well as information from an AR(2) model based on the official CDC data. This stands in contrast to the report in \cite{bodnar_data_2015}, where the SIR models are depicted as being based on the information from the Twitter classifier only. However, as I have shown in the previous section, this cannot be the case and it is neither the case for the results shown in Figure~\ref{fig:cdc_fit_bodnar_thesis}.
+
+The graph is described as the ``comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles)", therefory implying that the dashed and solid lines are produced based on the data from the Twitter classifier alone. However, this is clearly not the case. Figure~\ref{fig:TwitterModel_original} shows a reproduction of the original graph depicted in \citep{bodnar_data_2015}, including SIR model fits. However, this reproduction is based on the retrospective \textit{full} model, i.e. the model corresponding to the \texttt{full\_both2} data and including information from the Twitter base model as well as from the AR(2) model based on the CDC data. If we only look at the data from the Twitter base model (Figure~\ref{fig:TwitterModel_comparison_base}), we can see that the fit with the official CDC data is worse and that the corresponding SIR model is also decidedly different from the SIR model based on the \texttt{full\_both2} values. Also, Figure~\ref{fig:TwitterModel_comparison_ar} shows that a simple AR(2) model based on the official CDC data achieves a model fit that is almost as good as the one from the full model which includes additional information from the Twitter base model.
+
+\begin{figure}[htbp!]
+\centering
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
+  \caption{}
+  \label{fig:TwitterModel_original}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{41_SIR_model_full_AR2_25_colorised.pdf}
+  \caption{}
   \end{subfigure}
   \caption{Comparison between the full retrospective Twitter model depicted in \cite{bodnar_data_2015} (a) and a replication consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b). The black lines indicate the results of the corresponding SIR models using yearly (solid) and combined (yearly) parameters.}
   \label{fig:TwitterModel_comparison_ar}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
@@ -1151,9 +1167,8 @@ Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bo
   \end{subfigure}
   
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{42_SIR_model_full_base_model_100_colorised.pdf}
+  \includegraphics[width=1\linewidth]{42_SIR_model_full_base_model_50_colorised.pdf}
   \caption{}
-  \label{fig:TwitterModel_comparison_AR2}
   \end{subfigure}
   \caption{Comparison between the full retrospective Twitter model depicted in \cite{bodnar_data_2015} (a) and a replication consisting of the retrospective Twitter base model (b). The black lines indicate the results of the corresponding best-fit SIR models using yearly (solid) and combined (yearly) parameters.}
   \label{fig:TwitterModel_comparison_base}
@@ -1201,9 +1216,9 @@ However, there are also many cold viruses that predominantly spread during the s
 Hence, the off-season peaks of the Twitter classifier in 2011, 2012, 2013, and 2014 could be caused by other infectious diseases that exhibit similar symptoms to that of the flu. Further assessments of the validity of the flu classifier should take this into account, for example by comparing its performance with the surveillance data of other infectious disease capable of causing ILI symptoms.
 
 \subsection{Autoregression trumps Twitter data}
-As \cite{paul_twitter_2014} noted, autoregressive models are very strong baseline models to forecast ILI prevalence---better than only using Twitter for this task. The same can also be observed in Figure~\ref{fig:TwitterModel_comparison}. A simple retrospective AR(2) model based only on CDC ILI rates (b) is able to reproduce the true CDC rates almost completely and shows a considerably stronger correlation then the Twitter base model (c). As already explained in Section~\ref{sec:on_the_ground}, the Twitter base model is not equivalent with the raw results from the Twitter classifier, but most likely consists of these results combined with additional sources information. 
+As \cite{paul_twitter_2014} noted, autoregressive models are very strong baseline models to forecast ILI prevalence---better than only using Twitter for this task. This can also be observed in Figures~\ref{fig:TwitterModel_comparison_base} and \ref{fig:TwitterModel_comparison_ar}, which show that a simple retrospective AR(2) correlates much better with the official CDC ILI rates than the Twitter base model. As already explained in Section~\ref{sec:on_the_ground}, the Twitter base model is not equivalent with the raw results from the Twitter classifier, but most likely consists of these results combined with additional sources information. 
 
-However, Twitter data can still be of use, especially when it comes to nowcast ILI rates, i.e. to assess the current prevalence of influenza-like symptoms based on the preliminary CDC data that has been published \citep{paul_worldwide_2015}. This can also be seen in Figure~\ref{fig:TwitterModel_comparison}, where the AR(2) model based on CDC data combined with the Twitter baseline model (a) shows slightly better results than the AR(2) model alone (b). 
+However, Twitter data can still be of use, especially when it comes to nowcast ILI rates, i.e. to assess the current prevalence of influenza-like symptoms based on the preliminary CDC data that has been published \citep{paul_worldwide_2015}. This can also be seen in Figures~\ref{fig:TwitterModel_comparison_ar} and ~\ref{fig:TwitterModel_comparison_base}, which show that the the CDC AR(2) combined with the Twitter baseline model provide slightly better results than the AR(2) model alone, respectively. 
 
 It should be noted that most disease models, including the ones described in this thesis, are using \textit{revised} CDC data which are already corrected for mistakes by the CDC \citep{paul_twitter_2014}. However, Twitter data might be much more useful when used with the unrevised data instead. As \cite{aramaki_twitter_2011} report, Twitter data is most useful for the early detection of influenza epidemics, increasing the speed of flu surveillance and the reliability of the uncorrected ILI data from the CDC. 
 
@@ -1281,7 +1296,7 @@ Base packages: \textsf{stats, graphics, grDevices, utils, datasets, methods, bas
 
 Other packages: \textsf{data.table, knitr}
 
-This document was generated on August 19, 2017 at 14:55.
+This document was generated on August 19, 2017 at 23:56.
 
 
 

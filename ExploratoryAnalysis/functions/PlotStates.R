@@ -330,8 +330,8 @@ plot_twitter_cdc_comp <- function(twitter_data,cdc_data,reg="National",smooth=1,
     geom_point(aes(y=cdc/sum(cdc),colour="CDC")) +
     xlab(" ") + ylab("") + ggtitle(" ") +
     theme(text = element_text(size=15)) +scale_y_continuous(labels=percent) +
-    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
-    theme(legend.position = c(0.1,0.9))
+    coord_cartesian(ylim=yrange) +  labs(colour=NULL) +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = c(0,1),legend.justification = c(0, 1))
   return(nat_plot)
 }
 
@@ -369,8 +369,8 @@ plot_twitter_cdc_comp_ac_level <- function(twitter_data,cdc_data,reg="National",
     geom_point(aes(y=cdc,colour="CDC")) +
     xlab(" ") + ylab("") + ggtitle(" ") +
     theme(text = element_text(size=15)) +scale_y_discrete(limits = seq(0,10)) +
-    coord_cartesian(ylim=yrange) +  labs(colour="Data source") +scale_colour_manual(values=c("red","blue")) +
-    theme(legend.position = c(0.1,0.9))
+    coord_cartesian(ylim=yrange) +  labs(colour=NULL) +scale_colour_manual(values=c("red","blue")) +
+    theme(legend.position = c(0,1),legend.justification = c(0, 1))
   return(nat_plot)
 }
 

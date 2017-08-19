@@ -16,9 +16,9 @@ for(step in 0:steps)
 bestfiterror = 99999
 gamma_center_adjusted = log(gamma_center, 3)
 
-gammas = 3^seq(gamma_center_adjusted - 10*5^-step, gamma_center_adjusted + 10*5^-step, length.out = 100)
+gammas = 3^seq(gamma_center_adjusted - 10*5^-step, gamma_center_adjusted + 10*5^-step, length.out = 25)
 
-Rnaughts = seq(max(1.0,rnaught_center - 10*2^-(1+step)),rnaught_center + 10*2^-(1+step),length.out=100)
+Rnaughts = seq(max(1.0,rnaught_center - 10*2^-(1+step)),rnaught_center + 10*2^-(1+step),length.out=25)
 
 for(gamma in gammas)
 {

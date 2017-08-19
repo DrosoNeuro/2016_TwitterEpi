@@ -256,8 +256,8 @@ for (i in files_to_process){
     xlab(" ") + ylab("") +
     theme(text = element_text(size=15)) + 
     scale_y_continuous(sec.axis = sec_axis(~./10, name = "Sick tweet rate (Twitter)" )) + 
-    labs(y= "ILI rate (CDC)",colour="Data source")+
-    theme(legend.position = c(0.1,0.9))
+    labs(y= "ILI rate (CDC)",colour=NULL)+
+    theme(legend.position = c(0,1),legend.justification = c(0, 1))
   # +
     #coord_cartesian(ylim=yrange)
   print(nat_plot)
@@ -278,8 +278,8 @@ for (i in files_to_process){
     xlab(" ") + ylab("") +
     theme(text = element_text(size=15)) + 
     scale_y_continuous(sec.axis = sec_axis(~./10, name = "Sick user rate (Twitter)" )) + 
-    labs(y= "ILI rate (CDC)",colour="Data source")+
-    theme(legend.position = c(0.1,0.9))
+    labs(y= "ILI rate (CDC)",colour=NULL)+
+    theme(legend.position = c(0,1),legend.justification = c(0, 1))
   # +
   #coord_cartesian(ylim=yrange)
   print(nat_plot)
