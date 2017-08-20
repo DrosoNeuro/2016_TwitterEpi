@@ -881,6 +881,15 @@ Twitter (2017).
   \url{https://investor.twitterinc.com/common/download/download.cfm?companyid=AMDA-2F526X&fileid=935049&filekey=05E6E71E-D609-4A17-A8BD-B621324A950D&filename=TWTR_2016_Annual_Report.pdf}.
   [Online; accessed 12-August-2017].
 
+\bibitem[{United}{\ }{States}{\ }{Department}{\ }of{\ }{Health}{\ }and{\
+  }{Human}{\ }{Services}, 2014]{hhs_offices_2014}
+{United}{\ }{States}{\ }{Department}{\ }of{\ }{Health}{\ }and{\ }{Human}{\
+  }{Services} (2014).
+\newblock Regional offices.
+\newblock
+  \url{https://www.hhs.gov/about/agencies/iea/regional-offices/index.html}.
+  [Online; accessed 13-August-2017].
+
 \bibitem[Vidal {\it et~al.}, 2015]{vidal2015using}
 Vidal, L., Ares, G., Mach{\'\i}n, L., and Jaeger, S.~R. (2015).
 \newblock Using twitter data for food-related consumer research: A case study
@@ -915,6 +924,17 @@ Widener, M.~J. and Li, W. (2014).
 \newblock Using geolocated twitter data to monitor the prevalence of healthy
   and unhealthy food references across the us.
 \newblock {\em Applied Geography}, {\bf54},  189--197.
+
+\bibitem[Wood, 2006]{mgcv_2006}
+Wood, S. (2006).
+\newblock {\em Generalized Additive Models: An Introduction with R}.
+\newblock Chapman and Hall/CRC.
+
+\bibitem[Wood, 2016]{mgcv_2016}
+Wood, S.~N. (2016).
+\newblock Just {Another} {Gibbs} {Additive} {Modeler}: {Interfacing} {JAGS} and
+  {mgcv}.
+\newblock {\em Journal of Statistical Software}, {\bf75},  1--15.
 
 \bibitem[Wójcik {\it et~al.}, 2014]{wojcik_public_2014}
 Wójcik, O.~P., Brownstein, J.~S., Chunara, R., and Johansson, M.~A. (2014).
