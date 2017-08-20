@@ -1,5 +1,5 @@
 require("maps")
-require("datatable")
+require("data.table")
 
 #function to identify the state a specific tweet was sent from
 state_lookup <- function(datatable,target=c("state","."),dist=1000,dg=0.01,exact=F){
@@ -69,8 +69,8 @@ state_lookup <- function(datatable,target=c("state","."),dist=1000,dg=0.01,exact
   
   if (target[1]=="county"){
     #function to find closest county to unassigned tweet's locations
-    require(geosphere)
-    require(dplyr)
+    require("geosphere")
+    require("dplyr")
     DistFun <- function(ID,datatable){
       TMP <- datatable[ID,]
       TMP1 <- distGeo(TMP[,.(longitude,latitude)],datatable[,.(longitude,latitude)])

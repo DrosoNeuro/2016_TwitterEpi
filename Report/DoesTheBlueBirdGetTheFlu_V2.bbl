@@ -114,6 +114,12 @@ Bauer, R. (2016).
   \url{https://blogs.worldbank.org/publicsphere/media-revolutions-time-spent-online-continues-rise}.
   [Online; accessed 12-August-2017].
 
+\bibitem[Becker {\it et~al.}, 2016]{maps_2016}
+Becker, R.~A., Wilks, A.~R., Brownrigg, R., Minka, T.~P., and Deckmyn, A.
+  (2016).
+\newblock {\em maps: {Draw} {Geographical} {Maps}}.
+\newblock R package version 3.1.1.
+
 \bibitem[Begley, 2013]{begley_six_2013}
 Begley, C.~G. (2013).
 \newblock Six red flags for suspect work.
@@ -253,6 +259,12 @@ Carey, B. (2015b).
   \url{https://www.nytimes.com/2015/06/16/science/retractions-coming-out-from-under-science-rug.html}.
   [Online; accessed 13-August-2017].
 
+\bibitem[Carr {\it et~al.}, 2016]{hexbin_2016}
+Carr, D., ported~by Nicholas Lewin-Koh, Maechler, M., and contains copies of
+  lattice functions written~by Deepayan~Sarkar (2016).
+\newblock {\em hexbin: {Hexagonal} {Binning} {Routines}}.
+\newblock R package version 1.27.1.
+
 \bibitem[Casadevall and Fang, 2010]{casadevall_reproducible_2010}
 Casadevall, A. and Fang, F.~C. (2010).
 \newblock Reproducible {Science}.
@@ -328,7 +340,7 @@ Culotta, A. (2010).
 
 \bibitem[Dowle and Srinivasan, 2017]{datatable}
 Dowle, M. and Srinivasan, A. (2017).
-\newblock {\em data.table: Extension of `data.frame`}.
+\newblock {\em data.table: {Extension} of `data.frame`}.
 \newblock R package version 1.10.4.
 
 \bibitem[Earp and Trafimow, 2015]{earp_replication_2015}
@@ -344,6 +356,12 @@ Eichstaedt, J.~C., Schwartz, H.~A., Kern, M.~L., Park, G., Labarthe, D.~R.,
 \newblock Psychological language on twitter predicts county-level heart disease
   mortality.
 \newblock {\em Psychological Science}, {\bf26},  159--169.
+
+\bibitem[Emerson and Kane, 2016]{biganalytics_2016}
+Emerson, J.~W. and Kane, M.~J. (2016).
+\newblock {\em biganalytics: {Utilities} for 'big.matrix' {Objects} from
+  {Package} 'bigmemory'}.
+\newblock R package version 1.1.14.
 
 \bibitem[Engber, 2016]{engber_broken_2016}
 Engber, D. (2016).
@@ -439,6 +457,11 @@ Hermida, A. (2013).
   tweet at a time.
 \newblock {\em Digital Journalism}, {\bf1},  295--313.
 
+\bibitem[Hijmans, 2016]{geosphere_2016}
+Hijmans, R.~J. (2016).
+\newblock {\em geosphere: {Spherical} {Trigonometry}}.
+\newblock R package version 1.5-5.
+
 \bibitem[Himelboim {\it et~al.}, 2013]{himelboim2013birds}
 Himelboim, I., McCreery, S., and Smith, M. (2013).
 \newblock Birds of a feather tweet together: Integrating network and content
@@ -463,8 +486,14 @@ Ioannidis, J. P.~A. (2005).
 
 \bibitem[Kane {\it et~al.}, 2013]{bigmemory}
 Kane, M.~J., Emerson, J., and Weston, S. (2013).
-\newblock Scalable strategies for computing with massive data.
+\newblock {Scalable} {Strategies} for {Computing} with {Massive} {Data}.
 \newblock {\em Journal of Statistical Software}, {\bf55},  1--19.
+
+\bibitem[Kane and Emerson, 2016]{bigtabulate_2016}
+Kane, M.~J. and Emerson, J.~W. (2016).
+\newblock {\em bigtabulate: {Table}, {Apply}, and {Split} {Functionality} for
+  {Matrix} and 'big.matrix' {Objects}}.
+\newblock R package version 1.1.5.
 
 \bibitem[Kass {\it et~al.}, 2016]{kass_ten_2016}
 Kass, R.~E., Caffo, B.~S., Davidian, M., Meng, X.-L., Yu, B., and Reid, N.
@@ -724,8 +753,8 @@ Rothman, K.~J. (2012).
 
 \bibitem[Rudis, 2016]{cdcfluview}
 Rudis, B. (2016).
-\newblock {\em cdcfluview: Retrieve U.S. Flu Season Data from the CDC FluView
-  Portal}.
+\newblock {\em cdcfluview: {Retrieve} {U.}{S.} {Flu} {Season} {Data} from the
+  {CDC} FluView Portal}.
 \newblock R package version 0.5.1.
 
 \bibitem[Salathe {\it et~al.}, 2012]{salathe_digital_2012}
@@ -871,6 +900,16 @@ Wang, F., Wang, H., Xu, K., Raymond, R., Chon, J., Fuller, S., and Debruyn, A.
   {Data}.
 \newblock {\em Journal of Medical Systems}, {\bf40}, .
 
+\bibitem[Wickham, 2009]{ggplot2_2009}
+Wickham, H. (2009).
+\newblock {\em ggplot2: {Elegant} {Graphics} for {Data} {Analysis}}.
+\newblock Springer-Verlag New York.
+
+\bibitem[Wickham and Francois, 2016]{dplyr_2016}
+Wickham, H. and Francois, R. (2016).
+\newblock {\em dplyr: {A} {Grammar} of {Data} {Manipulation}}.
+\newblock R package version 0.5.0.
+
 \bibitem[Widener and Li, 2014]{widener2014using}
 Widener, M.~J. and Li, W. (2014).
 \newblock Using geolocated twitter data to monitor the prevalence of healthy
@@ -882,6 +921,12 @@ Wójcik, O.~P., Brownstein, J.~S., Chunara, R., and Johansson, M.~A. (2014).
 \newblock Public health for the people: participatory infectious disease
   surveillance in the digital age.
 \newblock {\em Emerging themes in epidemiology}, {\bf11},  7.
+
+\bibitem[Xie {\it et~al.}, 2015]{animation_2015}
+Xie, Y., Mueller, C., Yu, L., and Zhu, W. (2015).
+\newblock {\em animation: {A} {Gallery} of {Animations} in {Statistics} and
+  {Utilities} to {Create} {Animations}}.
+\newblock R package version 2.4.
 
 \bibitem[Yong, 2016]{yong_psychology_2016}
 Yong, E. (2016).

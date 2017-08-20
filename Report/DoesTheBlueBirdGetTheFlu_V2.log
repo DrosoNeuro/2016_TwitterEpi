@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.30)  20 AUG 2017 03:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.30)  20 AUG 2017 09:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1000,28 +1000,47 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-]pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.254 \end{abstract}
-                     [1]pdfTeX warning (ext4): destination with the same identi
-fier (name{page.ii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.257 \cleardoublepage
-                       [2
+]
+Overfull \hbox (18.34212pt too wide) in paragraph at lines 262--291
+\OT1/cmr/m/n/10.95 Trans-for-ma-tions. arXiv:1508.06749. Tech-ni-cal \TS1/cmr/m
+/n/10.95 ¨ \OT1/cmr/m/n/10.95 re-port, v2. URL http://arxiv.org/abs/1508.06749)
+,
+ []
 
-]pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
+pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.291 
+       [1]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.59999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.262 \end{abstract}
-                     [1]pdfTeX warning (ext4): destination with the same identi
-fier (name{page.ii}) has been already used, duplicate ignored
+l.294 \end{abstract}
+                     [2]
+Underfull \hbox (badness 10000) in paragraph at lines 305--306
+
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.265 \cleardoublepage
+l.316 \end{abstract}
+                     [1
+
+]pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.319 \cleardoublepage
                        [2
 
 ] (./DoesTheBlueBirdGetTheFlu_V2.toc
@@ -1040,17 +1059,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write5
 \openout5 = `DoesTheBlueBirdGetTheFlu_V2.toc'.
 
-
-
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 13.59999pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[4]
+ [4]
 Chapter 1.
 
-Overfull \hbox (1.64227pt too wide) in paragraph at lines 282--283
+Overfull \hbox (1.64227pt too wide) in paragraph at lines 336--337
 []\OT1/cmr/m/n/10.95 Hence, novel meth-ods to com-ple-ment tra-di-tional epi-de
 mi-o-log-i-cal in-for-ma-tion might be needed
  []
@@ -1062,7 +1074,7 @@ Underfull \vbox (badness 3019) has occurred while \output is active []
 
 
 ]
-Overfull \hbox (9.81844pt too wide) in paragraph at lines 285--286
+Overfull \hbox (9.81844pt too wide) in paragraph at lines 339--340
 []\OT1/cmr/m/n/10.95 Most high-income coun-tries have well-established In-fluen
 za surveil-
  []
@@ -1086,36 +1098,36 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 1400) has occurred while \output is active []
 
  [13]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 399.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 453.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 399.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 453.
  [14]
-<./fig/01_ROC_classification_seed.png, id=736, 1377.145pt x 734.745pt>
+<./fig/01_ROC_classification_seed.png, id=748, 1377.145pt x 734.745pt>
 File: ./fig/01_ROC_classification_seed.png Graphic file (type png)
 
 <use ./fig/01_ROC_classification_seed.png>
 Package pdftex.def Info: ./fig/01_ROC_classification_seed.png used on input lin
-e 405.
+e 459.
 (pdftex.def)             Requested size: 409.71692pt x 218.59775pt.
  [15 <./fig/01_ROC_classification_seed.png>] [16] <./fig/02_todd_bodnar_SIR.png
-, id=770, 1143.27126pt x 509.905pt>
+, id=782, 1143.27126pt x 509.905pt>
 File: ./fig/02_todd_bodnar_SIR.png Graphic file (type png)
 
 <use ./fig/02_todd_bodnar_SIR.png>
-Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 458.
+Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 512.
 (pdftex.def)             Requested size: 455.24411pt x 203.04028pt.
 
-<./fig/03_cdc_fit_bodnar_thesis.png, id=775, 1234.6125pt x 922.44624pt>
+<./fig/03_cdc_fit_bodnar_thesis.png, id=787, 1234.6125pt x 922.44624pt>
 File: ./fig/03_cdc_fit_bodnar_thesis.png Graphic file (type png)
 
 <use ./fig/03_cdc_fit_bodnar_thesis.png>
 Package pdftex.def Info: ./fig/03_cdc_fit_bodnar_thesis.png used on input line 
-465.
+519.
 (pdftex.def)             Requested size: 409.7217pt x 273.14677pt.
  [17] [18 <./fig/02_todd_bodnar_SIR.png> <./fig/03_cdc_fit_bodnar_thesis.png>] 
 [19] [20
@@ -1123,58 +1135,54 @@ Package pdftex.def Info: ./fig/03_cdc_fit_bodnar_thesis.png used on input line
 ]
 Chapter 3.
 
-Overfull \hbox (42.2531pt too wide) in paragraph at lines 490--491
+Overfull \hbox (42.2531pt too wide) in paragraph at lines 546--547
 []\OT1/cmtt/m/n/10.95 one[]hundred \OT1/cmr/m/n/10.95 con-tains the rated tweet
 s of those users who sent at least 100 tweets (42'611'004 tweets) 
  []
 
-Package color Info: Redefining color shadecolor on input line 497.
+Package color Info: Redefining color shadecolor on input line 553.
 [21
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 521.
- [22]
-Underfull \vbox (badness 1377) has occurred while \output is active []
-
- [23]
-[24] <./fig/4A_HexbinContinent.pdf, id=860, 722.7pt x 361.35pt>
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 577.
+ [22] [23] [24] <./fig/4A_HexbinContinent.pdf, id=895, 722.7pt x 361.35pt>
 File: ./fig/4A_HexbinContinent.pdf Graphic file (type pdf)
 
 <use ./fig/4A_HexbinContinent.pdf>
-Package pdftex.def Info: ./fig/4A_HexbinContinent.pdf used on input line 537.
+Package pdftex.def Info: ./fig/4A_HexbinContinent.pdf used on input line 595.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/04_state56_sick_raw_df.png, id=861, 1806.75pt x 1003.75pt>
+<./fig/04_state56_sick_raw_df.png, id=908, 1806.75pt x 1003.75pt>
 File: ./fig/04_state56_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/04_state56_sick_raw_df.png>
-Package pdftex.def Info: ./fig/04_state56_sick_raw_df.png used on input line 54
-5.
+Package pdftex.def Info: ./fig/04_state56_sick_raw_df.png used on input line 60
+3.
 (pdftex.def)             Requested size: 364.19667pt x 202.32399pt.
 
-<./fig/05_CanexicoAndRemoved_sick_raw_df.png, id=862, 1806.75pt x 1003.75pt>
+<./fig/05_CanexicoAndRemoved_sick_raw_df.png, id=909, 1806.75pt x 1003.75pt>
 File: ./fig/05_CanexicoAndRemoved_sick_raw_df.png Graphic file (type png)
 
 <use ./fig/05_CanexicoAndRemoved_sick_raw_df.png>
 Package pdftex.def Info: ./fig/05_CanexicoAndRemoved_sick_raw_df.png used on in
-put line 549.
+put line 607.
 (pdftex.def)             Requested size: 364.19667pt x 202.32399pt.
 
-<./fig/06_user_activity_total_sick_raw_df.pdf, id=863, 722.7pt x 361.35pt>
+<./fig/06_user_activity_total_sick_raw_df.pdf, id=910, 722.7pt x 361.35pt>
 File: ./fig/06_user_activity_total_sick_raw_df.pdf Graphic file (type pdf)
 
 <use ./fig/06_user_activity_total_sick_raw_df.pdf>
 Package pdftex.def Info: ./fig/06_user_activity_total_sick_raw_df.pdf used on i
-nput line 558.
+nput line 616.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/07_barplot_sick_raw_df.pdf, id=864, 722.7pt x 361.35pt>
+<./fig/07_barplot_sick_raw_df.pdf, id=911, 722.7pt x 361.35pt>
 File: ./fig/07_barplot_sick_raw_df.pdf Graphic file (type pdf)
 
 <use ./fig/07_barplot_sick_raw_df.pdf>
-Package pdftex.def Info: ./fig/07_barplot_sick_raw_df.pdf used on input line 56
-7.
+Package pdftex.def Info: ./fig/07_barplot_sick_raw_df.pdf used on input line 62
+5.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
 Underfull \vbox (badness 1910) has occurred while \output is active []
@@ -1184,82 +1192,77 @@ Underfull \vbox (badness 1910) has occurred while \output is active []
  <./fig/4A_HexbinContinent.pdf>] [26 <./fig/04_state56_sick_raw_df.png> <./fig/
 05_CanexicoAndRemoved_sick_raw_df.png (PNG copy)>] [27 <./fig/06_user_activity_
 total_sick_raw_df.pdf> <./fig/07_barplot_sick_raw_df.pdf>] [28] [29]
-<./fig/08_user_activity_both_sick_raw_df.pdf, id=925, 722.7pt x 361.35pt>
+<./fig/08_user_activity_both_sick_raw_df.pdf, id=973, 722.7pt x 361.35pt>
 File: ./fig/08_user_activity_both_sick_raw_df.pdf Graphic file (type pdf)
 
 <use ./fig/08_user_activity_both_sick_raw_df.pdf>
 Package pdftex.def Info: ./fig/08_user_activity_both_sick_raw_df.pdf used on in
-put line 599.
+put line 657.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/09_user_activity_only_healthy_sick_raw_df.pdf, id=926, 722.7pt x 361.35p
+<./fig/09_user_activity_only_healthy_sick_raw_df.pdf, id=974, 722.7pt x 361.35p
 t>
 File: ./fig/09_user_activity_only_healthy_sick_raw_df.pdf Graphic file (type pd
 f)
  <use ./fig/09_user_activity_only_healthy_sick_raw_df.pdf>
 Package pdftex.def Info: ./fig/09_user_activity_only_healthy_sick_raw_df.pdf us
-ed on input line 603.
+ed on input line 661.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
-
-
-LaTeX Warning: Reference `tab:data_set_diff' on page 30 undefined on input line
- 614.
-
-[30
+ [30
 
  <./fig/08_user_activity_both_sick_raw_df.pdf> <./fig/09_user_activity_only_hea
 lthy_sick_raw_df.pdf>] [31]
-Package color Info: Redefining color shadecolor on input line 647.
+Package color Info: Redefining color shadecolor on input line 706.
  [32]
-Package color Info: Redefining color shadecolor on input line 672.
+Package color Info: Redefining color shadecolor on input line 731.
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 674--674
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 733--733
 []\OT1/cmtt/m/n/10.95 ##    week state sick  total healthy     sick_per        
     statename       date 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 675--675
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 734--734
 []\OT1/cmtt/m/n/10.95 ## 1:   23    34    1  86616   86615 1.154521e-05        
     wisconsin 2011-08-13[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 676--676
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 735--735
 []\OT1/cmtt/m/n/10.95 ## 2:  194    43    2  69629   69627 2.872366e-05        
      nebraska 2014-11-22[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 677--677
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 736--736
 []\OT1/cmtt/m/n/10.95 ## 3:  155    16    0 140482  140482 0.000000e+00        
      delaware 2014-02-22[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 678--678
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 737--737
 []\OT1/cmtt/m/n/10.95 ## 4:   67    24  686 181757  181071 3.774270e-03        
      kentucky 2012-06-16[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 679--679
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 738--738
 []\OT1/cmtt/m/n/10.95 ## 5:   40    28    0 101685  101685 0.000000e+00        
     tennessee 2011-12-10[] 
  []
 
 
-Overfull \hbox (10.3996pt too wide) in paragraph at lines 680--680
+Overfull \hbox (10.3996pt too wide) in paragraph at lines 739--739
 []\OT1/cmtt/m/n/10.95 ## 6:   17     0    0  10142   10142 0.000000e+00 distric
 t of columbia 2011-07-02[] 
  []
 
-[33] [34] <./fig/10_avg_tw_sick_healthy.pdf, id=985, 722.7pt x 361.35pt>
+[33] [34] <./fig/10_avg_tw_sick_healthy.pdf, id=1035, 722.7pt x 361.35pt>
 File: ./fig/10_avg_tw_sick_healthy.pdf Graphic file (type pdf)
 
 <use ./fig/10_avg_tw_sick_healthy.pdf>
-Package pdftex.def Info: ./fig/10_avg_tw_sick_healthy.pdf used on input line 70
-1.
+Package pdftex.def Info: ./fig/10_avg_tw_sick_healthy.pdf used on input line 76
+0.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
  [35
 
@@ -1271,151 +1274,151 @@ Chapter 4.
 [37
 
 ] [38] [39]
-<./fig/11_activity_total_date_Twitter_full_aggregated.pdf, id=1045, 722.7pt x 3
+<./fig/11_activity_total_date_Twitter_full_aggregated.pdf, id=1094, 722.7pt x 3
 61.35pt>
 File: ./fig/11_activity_total_date_Twitter_full_aggregated.pdf Graphic file (ty
 pe pdf)
  <use ./fig/11_activity_total_date_Twitter_full_aggregated.pdf>
 Package pdftex.def Info: ./fig/11_activity_total_date_Twitter_full_aggregated.p
-df used on input line 741.
+df used on input line 800.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf, id=1046, 722.7
+<./fig/12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf, id=1095, 722.7
 pt x 361.35pt>
 File: ./fig/12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf Graphic fi
 le (type pdf)
 
 <use ./fig/12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/12_activity_sick_date_Twitter_full_aggregatedove
-rlay.pdf used on input line 749.
+rlay.pdf used on input line 808.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/13_activity_healthy_date_Twitter_full_aggregatedoverlay.pdf, id=1047, 72
+<./fig/13_activity_healthy_date_Twitter_full_aggregatedoverlay.pdf, id=1096, 72
 2.7pt x 361.35pt>
 File: ./fig/13_activity_healthy_date_Twitter_full_aggregatedoverlay.pdf Graphic
  file (type pdf)
 
 <use ./fig/13_activity_healthy_date_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/13_activity_healthy_date_Twitter_full_aggregated
-overlay.pdf used on input line 756.
+overlay.pdf used on input line 815.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf, id=1048,
+<./fig/12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf, id=1097,
  722.7pt x 361.35pt>
 File: ./fig/12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf Grap
 hic file (type pdf)
 
 <use ./fig/12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/12B_activity_sick_user_date_Twitter_full_aggrega
-tedoverlay.pdf used on input line 766.
+tedoverlay.pdf used on input line 825.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
 <./fig/13B_activity_healthy_user_date_Twitter_full_aggregatedoverlay.pdf, id=10
-49, 722.7pt x 361.35pt>
+98, 722.7pt x 361.35pt>
 File: ./fig/13B_activity_healthy_user_date_Twitter_full_aggregatedoverlay.pdf G
 raphic file (type pdf)
 
 <use ./fig/13B_activity_healthy_user_date_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/13B_activity_healthy_user_date_Twitter_full_aggr
-egatedoverlay.pdf used on input line 773.
+egatedoverlay.pdf used on input line 832.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/14_activity_total_state_Twitter_full_aggregated.pdf, id=1050, 722.7pt x 
+<./fig/14_activity_total_state_Twitter_full_aggregated.pdf, id=1099, 722.7pt x 
 361.35pt>
 File: ./fig/14_activity_total_state_Twitter_full_aggregated.pdf Graphic file (t
 ype pdf)
  <use ./fig/14_activity_total_state_Twitter_full_aggregated.pdf>
 Package pdftex.def Info: ./fig/14_activity_total_state_Twitter_full_aggregated.
-pdf used on input line 783.
+pdf used on input line 842.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/15_activity_total_user_state_Twitter_full_aggregated.pdf, id=1051, 722.7
+<./fig/15_activity_total_user_state_Twitter_full_aggregated.pdf, id=1100, 722.7
 pt x 361.35pt>
 File: ./fig/15_activity_total_user_state_Twitter_full_aggregated.pdf Graphic fi
 le (type pdf)
 
 <use ./fig/15_activity_total_user_state_Twitter_full_aggregated.pdf>
 Package pdftex.def Info: ./fig/15_activity_total_user_state_Twitter_full_aggreg
-ated.pdf used on input line 789.
+ated.pdf used on input line 848.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/16_ScatterTweetPop.pdf, id=1052, 722.7pt x 722.7pt>
+<./fig/16_ScatterTweetPop.pdf, id=1101, 722.7pt x 722.7pt>
 File: ./fig/16_ScatterTweetPop.pdf Graphic file (type pdf)
 
 <use ./fig/16_ScatterTweetPop.pdf>
-Package pdftex.def Info: ./fig/16_ScatterTweetPop.pdf used on input line 800.
+Package pdftex.def Info: ./fig/16_ScatterTweetPop.pdf used on input line 859.
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
-<./fig/17_ScatterTweetPop_log.pdf, id=1053, 722.7pt x 722.7pt>
+<./fig/17_ScatterTweetPop_log.pdf, id=1102, 722.7pt x 722.7pt>
 File: ./fig/17_ScatterTweetPop_log.pdf Graphic file (type pdf)
 
 <use ./fig/17_ScatterTweetPop_log.pdf>
-Package pdftex.def Info: ./fig/17_ScatterTweetPop_log.pdf used on input line 80
-6.
+Package pdftex.def Info: ./fig/17_ScatterTweetPop_log.pdf used on input line 86
+5.
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
 
-LaTeX Warning: Float too large for page by 15.90039pt on input line 812.
+LaTeX Warning: Float too large for page by 15.90039pt on input line 871.
 
-<./fig/18_ScatterTweetPop_user.pdf, id=1054, 722.7pt x 722.7pt>
+<./fig/18_ScatterTweetPop_user.pdf, id=1103, 722.7pt x 722.7pt>
 File: ./fig/18_ScatterTweetPop_user.pdf Graphic file (type pdf)
 
 <use ./fig/18_ScatterTweetPop_user.pdf>
 Package pdftex.def Info: ./fig/18_ScatterTweetPop_user.pdf used on input line 8
-17.
+76.
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
-<./fig/19_ScatterTweetPop_user_log.pdf, id=1055, 722.7pt x 722.7pt>
+<./fig/19_ScatterTweetPop_user_log.pdf, id=1104, 722.7pt x 722.7pt>
 File: ./fig/19_ScatterTweetPop_user_log.pdf Graphic file (type pdf)
 
 <use ./fig/19_ScatterTweetPop_user_log.pdf>
 Package pdftex.def Info: ./fig/19_ScatterTweetPop_user_log.pdf used on input li
-ne 823.
+ne 882.
 (pdftex.def)             Requested size: 273.14923pt x 273.15117pt.
 
 
-LaTeX Warning: Float too large for page by 15.90039pt on input line 829.
+LaTeX Warning: Float too large for page by 15.90039pt on input line 888.
 
 
-<./fig/20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf, id=1056, 
+<./fig/20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf, id=1105, 
 722.7pt x 361.35pt>
 File: ./fig/20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf Graph
 ic file (type pdf)
 
 <use ./fig/20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/20_activity_sick_statename_Twitter_full_aggregat
-edoverlay.pdf used on input line 834.
+edoverlay.pdf used on input line 893.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf, id=105
-7, 722.7pt x 361.35pt>
+<./fig/21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf, id=110
+6, 722.7pt x 361.35pt>
 File: ./fig/21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf Gr
 aphic file (type pdf)
 
 <use ./fig/21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/21_activity_healthy_statename_Twitter_full_aggre
-gatedoverlay.pdf used on input line 839.
+gatedoverlay.pdf used on input line 898.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
 <./fig/22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf, id=1
-058, 722.7pt x 361.35pt>
+107, 722.7pt x 361.35pt>
 File: ./fig/22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf 
 Graphic file (type pdf)
 
 <use ./fig/22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf>
 Package pdftex.def Info: ./fig/22_activity_sick_user_statename_Twitter_full_agg
-regatedoverlay.pdf used on input line 850.
+regatedoverlay.pdf used on input line 909.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
 <./fig/23_activity_healthy_user_statename_Twitter_full_aggregatedoverlay.pdf, i
-d=1059, 722.7pt x 361.35pt>
+d=1108, 722.7pt x 361.35pt>
 File: ./fig/23_activity_healthy_user_statename_Twitter_full_aggregatedoverlay.p
 df Graphic file (type pdf)
 
 <use ./fig/23_activity_healthy_user_statename_Twitter_full_aggregatedoverlay.pd
 f>
 Package pdftex.def Info: ./fig/23_activity_healthy_user_statename_Twitter_full_
-aggregatedoverlay.pdf used on input line 855.
+aggregatedoverlay.pdf used on input line 914.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
  [40
 
@@ -1431,84 +1434,84 @@ df>] [44 <./fig/16_ScatterTweetPop.pdf> <./fig/17_ScatterTweetPop_log.pdf>] [45
 /21_activity_healthy_statename_Twitter_full_aggregatedoverlay.pdf>]
 [47 <./fig/22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf> 
 <./fig/23_activity_healthy_user_statename_Twitter_full_aggregatedoverlay.pdf>]
-<./fig/24_cdc_twitter_comp_nat_raw.pdf, id=1193, 722.7pt x 361.35pt>
+<./fig/24_cdc_twitter_comp_nat_raw.pdf, id=1242, 722.7pt x 361.35pt>
 File: ./fig/24_cdc_twitter_comp_nat_raw.pdf Graphic file (type pdf)
 
 <use ./fig/24_cdc_twitter_comp_nat_raw.pdf>
 Package pdftex.def Info: ./fig/24_cdc_twitter_comp_nat_raw.pdf used on input li
-ne 874.
+ne 933.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/25_cdc_twitter_comp_nat_raw_user.pdf, id=1194, 722.7pt x 361.35pt>
+<./fig/25_cdc_twitter_comp_nat_raw_user.pdf, id=1243, 722.7pt x 361.35pt>
 File: ./fig/25_cdc_twitter_comp_nat_raw_user.pdf Graphic file (type pdf)
 
 <use ./fig/25_cdc_twitter_comp_nat_raw_user.pdf>
 Package pdftex.def Info: ./fig/25_cdc_twitter_comp_nat_raw_user.pdf used on inp
-ut line 879.
+ut line 938.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/26_cdc_twitter_comp_nat_ma1.pdf, id=1195, 722.7pt x 361.35pt>
+<./fig/26_cdc_twitter_comp_nat_ma1.pdf, id=1244, 722.7pt x 361.35pt>
 File: ./fig/26_cdc_twitter_comp_nat_ma1.pdf Graphic file (type pdf)
 
 <use ./fig/26_cdc_twitter_comp_nat_ma1.pdf>
 Package pdftex.def Info: ./fig/26_cdc_twitter_comp_nat_ma1.pdf used on input li
-ne 887.
+ne 946.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/27_cdc_twitter_comp_nat_ma2.pdf, id=1196, 722.7pt x 361.35pt>
+<./fig/27_cdc_twitter_comp_nat_ma2.pdf, id=1245, 722.7pt x 361.35pt>
 File: ./fig/27_cdc_twitter_comp_nat_ma2.pdf Graphic file (type pdf)
 
 <use ./fig/27_cdc_twitter_comp_nat_ma2.pdf>
 Package pdftex.def Info: ./fig/27_cdc_twitter_comp_nat_ma2.pdf used on input li
-ne 896.
+ne 955.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/28_cdc_twitter_comp_nat_ma4.pdf, id=1197, 722.7pt x 361.35pt>
+<./fig/28_cdc_twitter_comp_nat_ma4.pdf, id=1246, 722.7pt x 361.35pt>
 File: ./fig/28_cdc_twitter_comp_nat_ma4.pdf Graphic file (type pdf)
 
 <use ./fig/28_cdc_twitter_comp_nat_ma4.pdf>
 Package pdftex.def Info: ./fig/28_cdc_twitter_comp_nat_ma4.pdf used on input li
-ne 902.
+ne 961.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/29_cdc_twitter_comp_regs_ma4.pdf, id=1198, 722.7pt x 722.7pt>
+<./fig/29_cdc_twitter_comp_regs_ma4.pdf, id=1247, 722.7pt x 722.7pt>
 File: ./fig/29_cdc_twitter_comp_regs_ma4.pdf Graphic file (type pdf)
 
 <use ./fig/29_cdc_twitter_comp_regs_ma4.pdf>
 Package pdftex.def Info: ./fig/29_cdc_twitter_comp_regs_ma4.pdf used on input l
-ine 912.
+ine 971.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
-<./fig/30_cdc_twitter_comp_nat_ma1_user.pdf, id=1199, 722.7pt x 361.35pt>
+<./fig/30_cdc_twitter_comp_nat_ma1_user.pdf, id=1248, 722.7pt x 361.35pt>
 File: ./fig/30_cdc_twitter_comp_nat_ma1_user.pdf Graphic file (type pdf)
 
 <use ./fig/30_cdc_twitter_comp_nat_ma1_user.pdf>
 Package pdftex.def Info: ./fig/30_cdc_twitter_comp_nat_ma1_user.pdf used on inp
-ut line 918.
+ut line 977.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/31_cdc_twitter_comp_nat_ma2_user.pdf, id=1200, 722.7pt x 361.35pt>
+<./fig/31_cdc_twitter_comp_nat_ma2_user.pdf, id=1249, 722.7pt x 361.35pt>
 File: ./fig/31_cdc_twitter_comp_nat_ma2_user.pdf Graphic file (type pdf)
 
 <use ./fig/31_cdc_twitter_comp_nat_ma2_user.pdf>
 Package pdftex.def Info: ./fig/31_cdc_twitter_comp_nat_ma2_user.pdf used on inp
-ut line 927.
+ut line 986.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/32_cdc_twitter_comp_nat_ma4_user.pdf, id=1201, 722.7pt x 361.35pt>
+<./fig/32_cdc_twitter_comp_nat_ma4_user.pdf, id=1250, 722.7pt x 361.35pt>
 File: ./fig/32_cdc_twitter_comp_nat_ma4_user.pdf Graphic file (type pdf)
 
 <use ./fig/32_cdc_twitter_comp_nat_ma4_user.pdf>
 Package pdftex.def Info: ./fig/32_cdc_twitter_comp_nat_ma4_user.pdf used on inp
-ut line 933.
+ut line 992.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/33_cdc_twitter_comp_regs_ma4_user.pdf, id=1202, 722.7pt x 722.7pt>
+<./fig/33_cdc_twitter_comp_regs_ma4_user.pdf, id=1251, 722.7pt x 722.7pt>
 File: ./fig/33_cdc_twitter_comp_regs_ma4_user.pdf Graphic file (type pdf)
 
 <use ./fig/33_cdc_twitter_comp_regs_ma4_user.pdf>
 Package pdftex.def Info: ./fig/33_cdc_twitter_comp_regs_ma4_user.pdf used on in
-put line 943.
+put line 1002.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
  [48] [49 <./fig/24_cdc_twitter_comp_nat_raw.pdf> <./fig/25_cdc_twitter_comp_na
 t_raw_user.pdf>] [50 <./fig/26_cdc_twitter_comp_nat_ma1.pdf>] [51 <./fig/27_cdc
@@ -1516,38 +1519,38 @@ _twitter_comp_nat_ma2.pdf> <./fig/28_cdc_twitter_comp_nat_ma4.pdf>] [52 <./fig/
 29_cdc_twitter_comp_regs_ma4.pdf>] [53 <./fig/30_cdc_twitter_comp_nat_ma1_user.
 pdf>] [54 <./fig/31_cdc_twitter_comp_nat_ma2_user.pdf> <./fig/32_cdc_twitter_co
 mp_nat_ma4_user.pdf>] [55 <./fig/33_cdc_twitter_comp_regs_ma4_user.pdf>]
-<./fig/34_cdc_twitter_comp_nat_activity_sick.pdf, id=1311, 722.7pt x 361.35pt>
+<./fig/34_cdc_twitter_comp_nat_activity_sick.pdf, id=1360, 722.7pt x 361.35pt>
 File: ./fig/34_cdc_twitter_comp_nat_activity_sick.pdf Graphic file (type pdf)
 
 <use ./fig/34_cdc_twitter_comp_nat_activity_sick.pdf>
 Package pdftex.def Info: ./fig/34_cdc_twitter_comp_nat_activity_sick.pdf used o
-n input line 961.
+n input line 1020.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/35_cdc_twitter_comp_nat_activity_sick_user.pdf, id=1312, 722.7pt x 361.3
+<./fig/35_cdc_twitter_comp_nat_activity_sick_user.pdf, id=1361, 722.7pt x 361.3
 5pt>
 File: ./fig/35_cdc_twitter_comp_nat_activity_sick_user.pdf Graphic file (type p
 df)
  <use ./fig/35_cdc_twitter_comp_nat_activity_sick_user.pdf>
 Package pdftex.def Info: ./fig/35_cdc_twitter_comp_nat_activity_sick_user.pdf u
-sed on input line 967.
+sed on input line 1026.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/36_cdc_twitter_comp_regs_activity_sick.pdf, id=1313, 722.7pt x 722.7pt>
+<./fig/36_cdc_twitter_comp_regs_activity_sick.pdf, id=1362, 722.7pt x 722.7pt>
 File: ./fig/36_cdc_twitter_comp_regs_activity_sick.pdf Graphic file (type pdf)
 
 <use ./fig/36_cdc_twitter_comp_regs_activity_sick.pdf>
 Package pdftex.def Info: ./fig/36_cdc_twitter_comp_regs_activity_sick.pdf used 
-on input line 977.
+on input line 1036.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
 
-<./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf, id=1314, 722.7pt x 722.
+<./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf, id=1363, 722.7pt x 722.
 7pt>
 File: ./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf Graphic file (type 
 pdf)
  <use ./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf>
 Package pdftex.def Info: ./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf 
-used on input line 984.
+used on input line 1043.
 (pdftex.def)             Requested size: 455.24411pt x 455.24826pt.
  [56
 
@@ -1555,18 +1558,22 @@ used on input line 984.
 at_activity_sick_user.pdf>] [57 <./fig/36_cdc_twitter_comp_regs_activity_sick.p
 df>]
 [58 <./fig/37_cdc_twitter_comp_regs_activity_sick_user.pdf>]
-<vids/1_cdc_flu_regio.png, id=1352, 1003.75pt x 602.25pt>
+
+Package natbib Warning: Citation `mgcv_2015mgcv_2016' on page 59 undefined on i
+nput line 1048.
+
+<vids/1_cdc_flu_regio.png, id=1408, 1003.75pt x 602.25pt>
 File: vids/1_cdc_flu_regio.png Graphic file (type png)
 
 <use vids/1_cdc_flu_regio.png>
-Package pdftex.def Info: vids/1_cdc_flu_regio.png used on input line 992.
+Package pdftex.def Info: vids/1_cdc_flu_regio.png used on input line 1053.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
-<vids/2_twitter_flu_regio.png, id=1354, 1003.75pt x 602.25pt>
+<vids/2_twitter_flu_regio.png, id=1410, 1003.75pt x 602.25pt>
 File: vids/2_twitter_flu_regio.png Graphic file (type png)
 
 <use vids/2_twitter_flu_regio.png>
-Package pdftex.def Info: vids/2_twitter_flu_regio.png used on input line 1001.
+Package pdftex.def Info: vids/2_twitter_flu_regio.png used on input line 1062.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1574,198 +1581,198 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [59
 
  <./vids/1_cdc_flu_regio.png>]
-<vids/3_cdc_twitter_diff_user_regio.png, id=1364, 1003.75pt x 602.25pt>
+<vids/3_cdc_twitter_diff_user_regio.png, id=1421, 1003.75pt x 602.25pt>
 File: vids/3_cdc_twitter_diff_user_regio.png Graphic file (type png)
 
 <use vids/3_cdc_twitter_diff_user_regio.png>
 Package pdftex.def Info: vids/3_cdc_twitter_diff_user_regio.png used on input l
-ine 1012.
+ine 1073.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [60 <./vids/2_twitter_flu_regio.png>]
-<vids/4_cdc_twitter_diff_user_state.png, id=1372, 1003.75pt x 602.25pt>
+<vids/4_cdc_twitter_diff_user_state.png, id=1429, 1003.75pt x 602.25pt>
 File: vids/4_cdc_twitter_diff_user_state.png Graphic file (type png)
 
 <use vids/4_cdc_twitter_diff_user_state.png>
 Package pdftex.def Info: vids/4_cdc_twitter_diff_user_state.png used on input l
-ine 1025.
+ine 1086.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
 Underfull \vbox (badness 4001) has occurred while \output is active []
 
  [61 <./vids/3_cdc_twitter_diff_user_regio.png>] [62 <./vids/4_cdc_twitter_diff
-_user_state.png>] <vids/5_cdc_twitter_diff_user_jersey.png, id=1387, 1003.75pt 
+_user_state.png>] <vids/5_cdc_twitter_diff_user_jersey.png, id=1444, 1003.75pt 
 x 602.25pt>
 File: vids/5_cdc_twitter_diff_user_jersey.png Graphic file (type png)
 
 <use vids/5_cdc_twitter_diff_user_jersey.png>
 Package pdftex.def Info: vids/5_cdc_twitter_diff_user_jersey.png used on input 
-line 1040.
+line 1101.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
-<vids/6_cdc_twitter_diff_user_oregon.png, id=1389, 1003.75pt x 602.25pt>
+<vids/6_cdc_twitter_diff_user_oregon.png, id=1446, 1003.75pt x 602.25pt>
 File: vids/6_cdc_twitter_diff_user_oregon.png Graphic file (type png)
 
 <use vids/6_cdc_twitter_diff_user_oregon.png>
 Package pdftex.def Info: vids/6_cdc_twitter_diff_user_oregon.png used on input 
-line 1049.
+line 1110.
 (pdftex.def)             Requested size: 409.71692pt x 245.83054pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 1057.
+(hyperref)                removing `\begingroup' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 1057.
+(hyperref)                removing `\<let>-command' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 1057.
+(hyperref)                removing `\NAT@ctype' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 1057.
+(hyperref)                removing `\z@' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1057.
+(hyperref)                removing `\let' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1057.
+(hyperref)                removing `\let' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 1057.
+(hyperref)                removing `\new@ifnextchar' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1057.
+(hyperref)                removing `subscript' on input line 1118.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1057.
+(hyperref)                removing `subscript' on input line 1118.
 
 [63 <./vids/5_cdc_twitter_diff_user_jersey.png> <./vids/6_cdc_twitter_diff_user
 _oregon.png>] [64]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 1068.
+(hyperref)                removing `\begingroup' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 1068.
+(hyperref)                removing `\<let>-command' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 1068.
+(hyperref)                removing `\NAT@ctype' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 1068.
+(hyperref)                removing `\z@' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1068.
+(hyperref)                removing `\let' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1068.
+(hyperref)                removing `\let' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 1068.
+(hyperref)                removing `\new@ifnextchar' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1068.
+(hyperref)                removing `subscript' on input line 1129.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1068.
+(hyperref)                removing `subscript' on input line 1129.
 
 [65] [66]
 File: ./fig/02_todd_bodnar_SIR.png Graphic file (type png)
  <use ./fig/02_todd_bodnar_SIR.png>
-Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 1125.
+Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 1186.
 (pdftex.def)             Requested size: 455.24411pt x 203.04028pt.
 
-<./fig/38_SIR_model_cdc_data_25.pdf, id=1466, 578.16pt x 325.215pt>
+<./fig/38_SIR_model_cdc_data_25.pdf, id=1522, 578.16pt x 325.215pt>
 File: ./fig/38_SIR_model_cdc_data_25.pdf Graphic file (type pdf)
 
 <use ./fig/38_SIR_model_cdc_data_25.pdf>
 Package pdftex.def Info: ./fig/38_SIR_model_cdc_data_25.pdf used on input line 
-1130.
+1191.
 (pdftex.def)             Requested size: 455.24411pt x 256.07343pt.
 File: ./fig/02_todd_bodnar_SIR.png Graphic file (type png)
  <use ./fig/02_todd_bodnar_SIR.png>
-Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 1141.
+Package pdftex.def Info: ./fig/02_todd_bodnar_SIR.png used on input line 1202.
 (pdftex.def)             Requested size: 455.24411pt x 203.04028pt.
 
-<./fig/39_SIR_model_full_model_25.pdf, id=1471, 578.16pt x 325.215pt>
+<./fig/39_SIR_model_full_model_25.pdf, id=1527, 578.16pt x 325.215pt>
 File: ./fig/39_SIR_model_full_model_25.pdf Graphic file (type pdf)
 
 <use ./fig/39_SIR_model_full_model_25.pdf>
 Package pdftex.def Info: ./fig/39_SIR_model_full_model_25.pdf used on input lin
-e 1147.
+e 1208.
 (pdftex.def)             Requested size: 455.24411pt x 256.07343pt.
 
-<./fig/40A_SIR_model_full_model_25_comparison_yearly.pdf, id=1476, 722.7pt x 36
+<./fig/40A_SIR_model_full_model_25_comparison_yearly.pdf, id=1532, 722.7pt x 36
 1.35pt>
 File: ./fig/40A_SIR_model_full_model_25_comparison_yearly.pdf Graphic file (typ
 e pdf)
  <use ./fig/40A_SIR_model_full_model_25_comparison_yearly.pdf>
 Package pdftex.def Info: ./fig/40A_SIR_model_full_model_25_comparison_yearly.pd
-f used on input line 1158.
+f used on input line 1219.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/40B_SIR_model_full_model_25_comparison_combined.pdf, id=1477, 722.7pt x 
+<./fig/40B_SIR_model_full_model_25_comparison_combined.pdf, id=1533, 722.7pt x 
 361.35pt>
 File: ./fig/40B_SIR_model_full_model_25_comparison_combined.pdf Graphic file (t
 ype pdf)
  <use ./fig/40B_SIR_model_full_model_25_comparison_combined.pdf>
 Package pdftex.def Info: ./fig/40B_SIR_model_full_model_25_comparison_combined.
-pdf used on input line 1163.
+pdf used on input line 1224.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 1171.
+(hyperref)                removing `\begingroup' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 1171.
+(hyperref)                removing `\<let>-command' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 1171.
+(hyperref)                removing `\NAT@ctype' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 1171.
+(hyperref)                removing `\z@' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1171.
+(hyperref)                removing `\let' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1171.
+(hyperref)                removing `\let' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 1171.
+(hyperref)                removing `\new@ifnextchar' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1171.
+(hyperref)                removing `subscript' on input line 1232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1171.
+(hyperref)                removing `subscript' on input line 1232.
 
 
 Underfull \vbox (badness 2005) has occurred while \output is active []
@@ -1774,35 +1781,35 @@ Underfull \vbox (badness 2005) has occurred while \output is active []
 [68 <./fig/38_SIR_model_cdc_data_25.pdf>] [69 <./fig/39_SIR_model_full_model_25
 .pdf>] [70 <./fig/40A_SIR_model_full_model_25_comparison_yearly.pdf> <./fig/40B
 _SIR_model_full_model_25_comparison_combined.pdf>]
-<./fig/40_SIR_model_full_both_25_colorised.pdf, id=1536, 722.7pt x 361.35pt>
+<./fig/40_SIR_model_full_both_25_colorised.pdf, id=1592, 722.7pt x 361.35pt>
 File: ./fig/40_SIR_model_full_both_25_colorised.pdf Graphic file (type pdf)
 
 <use ./fig/40_SIR_model_full_both_25_colorised.pdf>
 Package pdftex.def Info: ./fig/40_SIR_model_full_both_25_colorised.pdf used on 
-input line 1179.
+input line 1240.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/41_SIR_model_full_AR2_25_colorised.pdf, id=1537, 722.7pt x 361.35pt>
+<./fig/41_SIR_model_full_AR2_25_colorised.pdf, id=1593, 722.7pt x 361.35pt>
 File: ./fig/41_SIR_model_full_AR2_25_colorised.pdf Graphic file (type pdf)
 
 <use ./fig/41_SIR_model_full_AR2_25_colorised.pdf>
 Package pdftex.def Info: ./fig/41_SIR_model_full_AR2_25_colorised.pdf used on i
-nput line 1185.
+nput line 1246.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 File: ./fig/40_SIR_model_full_both_25_colorised.pdf Graphic file (type pdf)
 
 <use ./fig/40_SIR_model_full_both_25_colorised.pdf>
 Package pdftex.def Info: ./fig/40_SIR_model_full_both_25_colorised.pdf used on 
-input line 1195.
+input line 1256.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
 
-<./fig/42_SIR_model_full_base_model_50_colorised.pdf, id=1542, 722.7pt x 361.35
+<./fig/42_SIR_model_full_base_model_50_colorised.pdf, id=1598, 722.7pt x 361.35
 pt>
 File: ./fig/42_SIR_model_full_base_model_50_colorised.pdf Graphic file (type pd
 f)
  <use ./fig/42_SIR_model_full_base_model_50_colorised.pdf>
 Package pdftex.def Info: ./fig/42_SIR_model_full_base_model_50_colorised.pdf us
-ed on input line 1200.
+ed on input line 1261.
 (pdftex.def)             Requested size: 455.24411pt x 227.62413pt.
  [71] [72 <./fig/40_SIR_model_full_both_25_colorised.pdf> <./fig/41_SIR_model_f
 ull_AR2_25_colorised.pdf>] [73 <./fig/42_SIR_model_full_base_model_50_colorised
@@ -1815,49 +1822,41 @@ Chapter 5.
 ] [76] [77] [78] [79]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 1288.
+(hyperref)                removing `\begingroup' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 1288.
+(hyperref)                removing `\<let>-command' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 1288.
+(hyperref)                removing `\NAT@ctype' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 1288.
+(hyperref)                removing `\z@' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1288.
+(hyperref)                removing `\let' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 1288.
+(hyperref)                removing `\let' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 1288.
+(hyperref)                removing `\new@ifnextchar' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1288.
+(hyperref)                removing `subscript' on input line 1349.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1288.
+(hyperref)                removing `subscript' on input line 1349.
 
-[80]
-
-LaTeX Warning: Reference `eq:0' on page 81 undefined on input line 1302.
-
-
-Package natbib Warning: Citation `bodnar_2data_bodnar' on page 81 undefined on 
-input line 1302.
-
-[81] [82] (./DoesTheBlueBirdGetTheFlu_V2.bbl
+[80] [81] [82] (./DoesTheBlueBirdGetTheFlu_V2.bbl
 Underfull \hbox (badness 1803) in paragraph at lines 22--22
 []\OT1/cmr/m/n/10.95 Achenbach, J. (2015a).  Many sci-en-tific stud-ies can't b
 e repli-cated. That's a prob-
@@ -1902,7 +1901,7 @@ nse / 2016 / 04 / the _ reproducibility _
  []
 
 
-Underfull \hbox (badness 1895) in paragraph at lines 140--140
+Underfull \hbox (badness 1895) in paragraph at lines 146--146
 \OT1/cmr/m/it/10.95 Vox\OT1/cmr/m/n/10.95 .  [][]$\OT1/cmtt/m/n/10.95 https : /
  / www . vox . com / science -[] and -[] health / 2017 / 1 / 23 / 14324326 / re
 plication -[]
@@ -1912,49 +1911,49 @@ plication -[]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [84]
-Underfull \hbox (badness 2057) in paragraph at lines 205--205
+Underfull \hbox (badness 2057) in paragraph at lines 211--211
 []\OT1/cmr/m/n/10.95 Bundesamt f^^?ur Gesund-heit  (2016).  Saisonale grippe: A
 ntworten auf h^^?aufige Fra-
  []
 
 
-Underfull \hbox (badness 1024) in paragraph at lines 205--205
+Underfull \hbox (badness 1024) in paragraph at lines 211--211
 \OT1/cmr/m/n/10.95 gen.  [][]$\OT1/cmtt/m/n/10.95 https : / / www . bag . admin
  . ch / dam / bag / de / dokumente / mt / infektionskrankheiten /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--212
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 []\OT1/cmr/m/n/10.95 Bundesamt f^^?ur Gesund-heit  (2017a).  Saisonale grippe -
  Lage-bericht Schweiz.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--212
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
 [][]$\OT1/cmtt/m/n/10.95 https : / / www . bag . admin . ch / bag / de / home /
  themen / mensch -[] gesundheit / uebertragbare -[]
  []
 
 
-Underfull \hbox (badness 2073) in paragraph at lines 212--212
+Underfull \hbox (badness 2073) in paragraph at lines 218--218
 \OT1/cmtt/m/n/10.95 krankheiten / infektionskrankheiten -[] a -[] z / grippe . 
 html$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed 12-August-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--219
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []\OT1/cmr/m/n/10.95 Bundesamt f^^?ur Gesund-heit  (2017b).  Saisonale grippe (
 in-fluenza).  [][]$\OT1/cmtt/m/n/10.95 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--219
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 \OT1/cmtt/m/n/10.95 / / www . bag . admin . ch / bag / de / home / themen / men
 sch -[] gesundheit / uebertragbare -[]
  []
 
 
-Underfull \hbox (badness 2073) in paragraph at lines 219--219
+Underfull \hbox (badness 2073) in paragraph at lines 225--225
 \OT1/cmtt/m/n/10.95 krankheiten / infektionskrankheiten -[] a -[] z / grippe . 
 html$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed 12-August-
  []
@@ -1963,13 +1962,13 @@ html$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed 12-August-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [85]
-Underfull \hbox (badness 2512) in paragraph at lines 255--255
+Underfull \hbox (badness 2512) in paragraph at lines 261--261
 []\OT1/cmr/m/n/10.95 Carey, B. (2015b).  Sci-ence, Now Un-der Scrutiny It-self.
   \OT1/cmr/m/it/10.95 The New York Times\OT1/cmr/m/n/10.95 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
 [][]$\OT1/cmtt/m/n/10.95 https : / / www . nytimes . com / 2015 / 06 / 16 / sci
 ence / retractions -[] coming -[] out -[] from -[]
  []
@@ -1978,47 +1977,47 @@ ence / retractions -[] coming -[] out -[] from -[]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [86]
-Underfull \hbox (badness 1253) in paragraph at lines 355--355
+Underfull \hbox (badness 1253) in paragraph at lines 373--373
 []\OT1/cmr/m/n/10.95 Engber, D. (2016).  Can-cer Re-search Is Bro-ken.  \OT1/cm
 r/m/it/10.95 Slate\OT1/cmr/m/n/10.95 .  [][]$\OT1/cmtt/m/n/10.95 {http : / / ww
 w . slate . com} /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--355
+Underfull \hbox (badness 10000) in paragraph at lines 373--373
 \OT1/cmtt/m/n/10.95 articles / health _ and _ science / future _ tense / 2016 /
  04 / biomedicine _ facing _ a _ worse _
  []
 
 
-Underfull \hbox (badness 1688) in paragraph at lines 355--355
+Underfull \hbox (badness 1688) in paragraph at lines 373--373
 \OT1/cmtt/m/n/10.95 replication _ crisis _ than _ the _ one _ plaguing _ psycho
 logy . html$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed 13-
- []
-
-
-Underfull \hbox (badness 4291) in paragraph at lines 398--398
-[]\OT1/cmr/m/n/10.95 German Re-search Foun-da-tion (2017).  Repli-ca-bil-ity of
- Re-search Re-sults.  [][]$\OT1/cmtt/m/n/10.95 http :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
-\OT1/cmtt/m/n/10.95 / / www . dfg . de / download / pdf / dfg _ im _ profil / r
-eden _ stellungnahmen / 2017 / 170425 _
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 398--398
-\OT1/cmtt/m/n/10.95 stellungnahme _ replizierbarkeit _ forschungsergebnisse _ e
-n . pdf$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [87]
-Underfull \hbox (badness 3471) in paragraph at lines 430--430
+Underfull \hbox (badness 4291) in paragraph at lines 416--416
+[]\OT1/cmr/m/n/10.95 German Re-search Foun-da-tion (2017).  Repli-ca-bil-ity of
+ Re-search Re-sults.  [][]$\OT1/cmtt/m/n/10.95 http :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+\OT1/cmtt/m/n/10.95 / / www . dfg . de / download / pdf / dfg _ im _ profil / r
+eden _ stellungnahmen / 2017 / 170425 _
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+\OT1/cmtt/m/n/10.95 stellungnahme _ replizierbarkeit _ forschungsergebnisse _ e
+n . pdf$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 448--448
 \OT1/cmtt/m/n/10.95 googleblog . com / 2015 / 08 / the -[] next -[] chapter -[]
  for -[] flu -[] trends . html$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed
  []
@@ -2036,94 +2035,93 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [91]
-Underfull \hbox (badness 10000) in paragraph at lines 820--820
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [92]
+Underfull \hbox (badness 10000) in paragraph at lines 849--849
 \OT1/cmtt/m/n/10.95 com / news / science -[] and -[] technology / 21690020 -[] 
 reproducibility -[] should -[] be -[] sciences -[]
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [92]
-Underfull \hbox (badness 10000) in paragraph at lines 847--847
+Underfull \hbox (badness 10000) in paragraph at lines 876--876
 \OT1/cmtt/m/n/10.95 2F526X / 4733143221x0x742484 / A418947A -[] E065 -[] 4822 -
 [] 8BD4 -[] 00FA8EB4E795 / Twitter _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 854--854
+Underfull \hbox (badness 10000) in paragraph at lines 883--883
 \OT1/cmtt/m/n/10.95 download . cfm ? companyid = AMDA -[] 2F526X & fileid = 935
 049 & filekey = 05E6E71E -[] D609 -[] 4A17 -[]
  []
 
 
-Underfull \hbox (badness 7869) in paragraph at lines 854--854
+Underfull \hbox (badness 7869) in paragraph at lines 883--883
 \OT1/cmtt/m/n/10.95 A8BD -[] B621324A950D & filename = TWTR _ 2016 _ Annual _ R
 eport . pdf$[][]\OT1/cmr/m/n/10.95 . [On-line; ac-cessed 12-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 893--893
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [93]
+Underfull \hbox (badness 10000) in paragraph at lines 938--938
 [][]$\OT1/cmtt/m/n/10.95 https : / / www . theatlantic . com / science / archiv
 e / 2016 / 03 / psychologys -[] replication -[]
  []
 
+) [94]
+Package color Info: Redefining color shadecolor on input line 1387.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1389.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [95
 
- [93])
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 1321.
 
+]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1333.
-[94]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1333.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1470.
+[96]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1470.
  (./DoesTheBlueBirdGetTheFlu_V2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1333.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1333.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1470.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1470.
 
 Package rerunfilecheck Info: File `DoesTheBlueBirdGetTheFlu_V2.out' has not cha
 nged.
-(rerunfilecheck)             Checksum: 3DBA0FA4C74B59E1AD2BD98174A8C18F;3372.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1333.
+(rerunfilecheck)             Checksum: CD19975A86038B0E8B9C7388DB6E2B0E;3420.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1470.
  ) 
 Here is how much of TeX's memory you used:
- 11170 strings out of 494953
- 181692 string characters out of 6180977
- 262432 words of memory out of 5000000
- 13891 multiletter control sequences out of 15000+600000
- 23644 words of font info for 62 fonts, out of 8000000 for 9000
+ 11224 strings out of 494953
+ 182745 string characters out of 6180977
+ 267165 words of memory out of 5000000
+ 13938 multiletter control sequences out of 15000+600000
+ 19644 words of font info for 56 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,12n,48p,1719b,715s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,12n,48p,1719b,716s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/drosoneuro/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk>{/us
 r/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
-uhvr8a.pfb>
-Output written on DoesTheBlueBirdGetTheFlu_V2.pdf (102 pages, 2627731 bytes).
+/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/helvetic/uhvr8a.pfb>
+Output written on DoesTheBlueBirdGetTheFlu_V2.pdf (104 pages, 2615174 bytes).
 PDF statistics:
- 1945 PDF objects out of 2073 (max. 8388607)
- 1689 compressed objects within 17 object streams
- 323 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2008 PDF objects out of 2073 (max. 8388607)
+ 1744 compressed objects within 18 object streams
+ 334 named destinations out of 1000 (max. 500000)
+ 554 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -3,7 +3,7 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
 The style file: mywiley.bst
 Database file #1: Masterarbeit.bib.bib
-Warning--I didn't find a database entry for "bodnar_2data_bodnar"
+Warning--I didn't find a database entry for "mgcv_2015mgcv_2016"
 Warning--empty journal in bodnar_data_2015
 Warning--empty booktitle in bodnar_ground_2014
 Warning--empty journal in bag_grippe_2016
@@ -24,45 +24,45 @@ Warning--empty institution in rossum_1995_python
 Warning--empty journal in sentinella_2017
 Warning--empty journal in twitter_annual_2013
 Warning--empty journal in twitter_annual_2017
-You've used 142 entries,
+You've used 150 entries,
             1967 wiz_defined-function locations,
-            1216 strings with 33721 characters,
-and the built_in function-call counts, 58740 in all, are:
-= -- 5816
-> -- 2636
-< -- 91
-+ -- 940
-- -- 904
-* -- 4948
-:= -- 10249
-add.period$ -- 453
-call.type$ -- 142
-change.case$ -- 1158
-chr.to.int$ -- 134
-cite$ -- 162
-duplicate$ -- 2131
-empty$ -- 3750
-format.name$ -- 1090
-if$ -- 11506
+            1248 strings with 34930 characters,
+and the built_in function-call counts, 61297 in all, are:
+= -- 6051
+> -- 2763
+< -- 96
++ -- 982
+- -- 946
+* -- 5148
+:= -- 10721
+add.period$ -- 477
+call.type$ -- 150
+change.case$ -- 1211
+chr.to.int$ -- 142
+cite$ -- 170
+duplicate$ -- 2235
+empty$ -- 3912
+format.name$ -- 1146
+if$ -- 11979
 int.to.chr$ -- 9
 int.to.str$ -- 0
-missing$ -- 260
-newline$ -- 728
-num.names$ -- 426
-pop$ -- 899
+missing$ -- 262
+newline$ -- 768
+num.names$ -- 450
+pop$ -- 957
 preamble$ -- 1
-purify$ -- 1161
+purify$ -- 1222
 quote$ -- 0
-skip$ -- 1678
+skip$ -- 1762
 stack$ -- 0
-substring$ -- 3923
-swap$ -- 361
+substring$ -- 4019
+swap$ -- 376
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 846
+type$ -- 892
 warning$ -- 20
-while$ -- 455
+while$ -- 471
 width$ -- 0
-write$ -- 1844
+write$ -- 1940
 (There were 21 warnings)

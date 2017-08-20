@@ -250,7 +250,47 @@ Zurich, 2017
 %\pagebreak
 
 \begin{abstract}
-Coming soon...
+Digital data in general have repeatedly shown their value for disease detection and surveillance. Social networks like Twitter promise to be a particularly rich source of epidemiological information, because they give researchers intimate access to a users health status, habits, and behaviour. 
+
+However, most of the resulting epidemiological models only use population-level information and correlate this with traditional disease record. This approach is prone to overfitffing and thus needs to be complemented with an alternative approach, in which individual-level disease status can be linked to individual level social media verhalten. This master thesis assesses the validity of a Twitter flu classifier, which was trained on data for which individual-level disease state of Twitter users available \citep{bodnar_ground_2014}. I assessed the performance of this classifier when applied to over 2.8 billion geotagged tweets from U.S. mainland by comparing its results with the official flu estimates from the Centers of Disease Control and Prevention (CDC). In addition, I attempted to reproduce key elements of a similar assessement already performed by \cite{bodnar_data_2015}. 
+
+
+appincorporating individual-level disease information about Twitter users to build a comprehensive flu classifier. However, since the classifier has never been tested on a national level, this thesis will do so. 
+
+I can show that the Twitter classifier can identify the peaks of the flu season with acceptable accuracy. However, the fit with the official CDC is very. In addition, i was not able to reproduce most of the findings reported in \cite{bodnar_data_2015}.
+
+The purpose of this master thesis is to use the parametric bootstrap resampling method for doing statistical
+model inference on transformation models. Based on previous research completed by Hothorn et al. in 2015
+(Hothorn, T., Most, L., and B ¨ uhlmann, P. (2015). Most Likely Transformations. arXiv:1508.06749. Technical ¨
+report, v2. URL http://arxiv.org/abs/1508.06749), this project utilizes the implementation of maximum
+likelihood-based estimation for transformation models. The framework of conditional transformation models
+as well as the bootstrap resampling method is profoundly explained within this thesis.
+To practically illustrate the use of these approaches, the in R publicly available data set from the German
+Breast Cancer Study Group-2 (GBSG2) trials was used. A conditional transformation model estimates the
+conditional distribution of the response variable Y defined from the GBSG2 data set. Consequently, the parametric
+bootstrap resampling method can be applied to draw B new response variables Y
+?
+1
+, . . . ,Y
+?
+B
+from the
+conditional distribution function. This procedure resulted in B new conditional transformation models, which
+were subsequently used for the parametric bootstrap inference. We used log-likelihood ratio statistics as a
+likelihood based measurement for comparing the bootstrap generated model to the original transformation
+model. The statistical inference of the bootstrap generated transformation models was carried out in two
+ways: first, on the model parameters and the distribution thereof; and second, on the data specific prediction
+functions, e.g. the density function, the empirical cumulative distribution function, the survivor function, etc.
+Furthermore, this research has shown that the degrees of freedom of the Chi-squared distributed log-likelihood
+ratio statistics are not defined as they are expected to be. Regarding the not as expected log-likelihood ratio
+statistics distribution, this thesis does not definitively provide a solution, however, simulations have been included
+to prove the presumption that a correction of the degrees of freedom in instances of multiply occurring
+model coefficients is essential. In conclusion, the results of this thesis advance the understanding of graphical
+model inference of the model parameters of a conditional transformation model as well as the inference of the
+conditional transformation model itself
+
+
+
 \end{abstract}
 
 \thispagestyle{empty}
@@ -258,7 +298,21 @@ Coming soon...
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
-I would like to thank my two supervisors, Prof. Dr. Reinhard Furrer and Prof. Dr. Marcel Salathé for their academic guidance and critical feedback as well as for the intellectual freedom I was allowed to experience. I thank the Digital Epidemiology lab and its members for free coffee, entertaining group meetings, and stimulating conversations - I'll be back! And I thank my fiancée for taking the time to my rants about malfunctioning code-snippets and error-message-conundrums.
+I would like to thank my two supervisors, Prof. Dr. Reinhard Furrer and Prof. Dr. Marcel Salathé for their academic guidance and critical feedback as well as for the intellectual freedom I was allowed to experience. I thank the Digital Epidemiology lab and its members for plenty of free coffee, entertaining group meetings, and stimulating conversations. 
+
+In addition, I thank the Swiss Study Foundation, the Canton of Schaffhausen, the Werner Siemens Foundation, and the Ernst Göhner Foundation for their financial and ideational support. It has empowered me and given me the freedom to conduct my studies the way I wanted.
+
+Finally, I thank my mother, my other mother, my other brothers, and my friends for reminding me that there is an alternative to books, computer screens, and bad posture. And most importantly, I thank my fiancée for her patience, for laughing about, but mostly with me, and for pretending to care for my rants about malfunctioning code-snippets and unsolvable error-message-conundrums.\newline
+
+\raggedleft{Biel, 2017
+
+Servan Grüninger}
+
+\vfill
+
+\begin{center}
+``Good statistics is like strong coffee: Bitter at times, but always sobering."
+\end{center}
 \end{abstract}
 
 \thispagestyle{empty}
@@ -417,7 +471,7 @@ Bodnar applied the algorithm in the above-described fashion to a set of 15'560'3
 
 In a next step, Bodnar created a Kermack--McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
 \begin{align}
-\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma. label{eq:0}
+\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma. \label{eq:0}
 \end{align}
 $S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official influenza-like illness (ILI) rates from the Centers for Disease Control (CDC) in Atlanta using a multi-grid search method. Note that estimates about flu prevalence are usually made using ILI rates as basis, not confirmed flu cases (see Section~\ref{sec:comparison_cdc} for more details.)
 
@@ -478,7 +532,9 @@ Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_
 
 \chapter{(Almost) big data: How to analyse 2.8 billion tweets}
 \label{ch:data_set_description}
-In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though some aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite each library I have used for the data aggregation and analysis. However, since I used several libraries at multiple occasions for my work, I will only cite them when they are mentioned the first time. In order to provide a maximum of reproducibility, all libraries, data sets, custom-written functions, and their output are made avaialable on Github including a detailled description of the exact version of the libraries that were used for the creation of the findings presented in this thesis.
+In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though a few aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite those packages which I have used most frequently or which were crucial for my data aggregation and analysis. In Chapter~\ref{ch:postscript} you can additionally find an exhaustive list of all packages I used for this thesis, including the exact version number.
+
+In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made avaialable on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Chapter~\ref{ch:postscript} for, more information  the Github repository).
 
 \section{The nature of the data beast}
 \label{sec:starting}
@@ -516,7 +572,7 @@ Each of the sets contains a row per tweet with the following six columns:
   \item \texttt{state} The code for the U.S. state (or District of Columbia) in which the tweet was sent
 \end{itemize}
 
-I ignored the \texttt{one\_hundred} data set and only analysed the other two sets. All data sets were handled using the packages ``datatable" \citep{datatable} or ``bigmemory" \citep{bigmemory}.
+I ignored the \texttt{one\_hundred} data set and only analysed the other two sets. All data sets were handled, analysed, and visualised using the packages ``data.table" \citep{datatable}, ``bigmemory" \citep{bigmemory}, ``bigtabulate" \citep{bigtabulate_2016}, ``biganalytics" \citep{biganalytics_2016}, ``stats" \citep{rbase_2017}, and ``ggplot2" \citep{ggplot2_2009}.
 
 \section{Description of the \texttt{sick\_users} data set}
 \label{sec:sick_user_exploratory}
@@ -526,7 +582,9 @@ As mentioned above, the \texttt{sick\_users} data set should contain all tweets 
 
 First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the U.S. mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $-125$° to W $-66$° representing the longitudinal and N $25$° to N $50$° representing the latitudinal expansion of the window. This way, a total of $42'860$ entries were removed with $4'088'790$ entries remaining. As Figure~\ref{fig:hexbincontinent} shows, most of these tweets were clustered around cities, suburban areas and other population-dense regions of the U.S. You can also see that a considerable amount of the collected tweets was not sent from the United States, but from Mexico or Canada.
 
-In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the name of the states and to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additional control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific U.S. state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:canexico_and_removed}).
+In the next step, I ran a custom-written function using a polygon lookup using the ``R"-packages ``maps" \citep{maps_2016}, ``geosphere" \citep{geosphere_2016}, and ``dplyr" \citep{dplyr_2016}. The function takes the coordinates of each tweet and compares it to the polygons of the U.S. states in order to determine the name of the state from which this tweet was sent or to remove it if it could not be assigned to any specific state. 
+
+Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additional control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific U.S. state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
 Most of them either came to lie at the coastline or the Canadian-U.S.-border and the Mexican-U.S.-border, respectively. I removed a total of 180'290 tweets that were sent from either Canada or Mexico (see Figure~\ref{fig:canexico_and_removed}). In order to reassign the unassigned tweets from the coastline, I first changed the coordinates of the ``border cases" by 0.1 degrees longitude and latitude towards the center of the U.S. main land (e.g. if a tweet was sent from northeastern Canadian border, I added 0.1 degrees to its longitude and subtracted 0.1 degrees from its latitude before re-running the code). Those tweets that were still unassigned received the same state name as the majority of their neighbours within a 0.1$\times$0.1 degree window. This way, an additional 211'511 tweets were removed, most of them at the coastline or from the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
@@ -535,7 +593,7 @@ After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 
 \begin{figure}[htbp!]
   \centering
     \includegraphics[width=1\textwidth]{4A_HexbinContinent.pdf}
-  \caption{Spatial distribution of tweets in the \texttt{sick\_users} data set, aggregated in 12'405 hexagon cells in grid dimensions 148 vertically by 301 horizontally. The black circles correspond to cities with more than 300'000 inhabitants. Note that the colour label does not follow a linear scale. Due to larged difference in the minimal and maximal number of tweets in each bin, I performed a root transformation on the data using the tenth root.}
+  \caption{Spatial distribution of tweets in the \texttt{sick\_users} data set, aggregated in 12'405 hexagon cells in grid dimensions 148 vertically by 301 horizontally. The black circles correspond to cities with more than 300'000 inhabitants. Note that the colour label does not follow a linear scale. Due to larged difference in the minimal and maximal number of tweets in each bin, I performed a root transformation on the data using the tenth root. The plot was produced using the ``R"-packages ``hexbin" \citep{hexbin_2016}, ``maps" \citep{maps_2016}, and ``grid" \cite{rbase_2017}.}
   \label{fig:hexbincontinent}
   \end{figure}
 
@@ -611,7 +669,7 @@ Nevertheless, I used this data set as a basis to develop a basic grasp of the da
 \section{Description of the \texttt{all\_tweets} data set}
 \label{sec:full_set}
 
-The complete data set consisted of a total of 2'847'039'672 tweets sent by 16'015'981. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion). An overview over all differences between the two data sets as well over key statistical indicators of the \texttt{all\_users} data set is given in Table~\ref{tab:data_set_diff}.
+The complete data set consisted of a total of 2'847'039'672 tweets sent by 16'015'981. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion). An overview over all differences between the two data sets as well as over key statistical indicators of the \texttt{all\_users} data set is given in Table~\ref{tab:data_set_diff}.
 
 \begin{table}[htbp!]
 \centering
@@ -635,6 +693,7 @@ max. \# of tweets per user, 2011--2015 &  1'119'384 & 1'413'568 & raw data set\\
 min. \# of tweets per user, 2011--2015 & 1 & 1 & raw data set\\
 \cellcolor{grey}min. \# of tweets per user, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}1 & \cellcolor{grey}pruned data set\\
 \end{tabular}
+\label{tab:data_set_diff}
 \end{table}
 
 In a first step, I removed all tweets before 2011-03-05 and after 2015-07-11 as well as outside the rough geographical window around the U.S. mainland (W $-125$°, W $-66$°, N $25$° , N $50$° ) as described above, and aggregated the remaining 2'764'210'962 tweets and 15'229'049 users with regard to states and weeks in which the tweets where sent, i.e. I calculated the number of tweets sent within a given week in a given state.
@@ -986,7 +1045,9 @@ Since a similar threshold does not exist for the Twitter data, I simply used the
     \label{fig:cdc_tw_comp_regs_ac_sick_user}
 \end{figure}\clearpage
 
-To get a better understanding of the spatio-temporal pattern of ILI activity levels, I additionally built a function that would take CDC ILI data as well as classified Twitter data and build a map of flu activity over time. Below, you can see the two videos showing the activity levels based on the ILI rates provided by the CDC and the flu rates indicated by the Twitter classifier, respectively. Video~\ref{fig:cdc_flu_regio} contains a visualisation of the ILI activation levels provided by the CDC and serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Video~\ref{fig:twitter_flu_regio} also shows regional activity levels, but the results from the Twitter classifier. 
+To get a better understanding of the spatio-temporal pattern of ILI activity levels, I additionally built a function that would take CDC ILI data as well as classified Twitter data and build a map of flu activity over time. The function was built using the ``R"-packages ``maps" \citep{maps_2016}, ``mgcv" \citep{mgcv_2015mgcv_2016}, ``animation" \citep{animation_2015}, and ``grid" \citep{rbase_2017}. 
+
+Below, you can see the two videos showing the activity levels based on the ILI rates provided by the CDC and the flu rates indicated by the Twitter classifier, respectively. Video~\ref{fig:cdc_flu_regio} contains a visualisation of the ILI activation levels provided by the CDC and serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Video~\ref{fig:twitter_flu_regio} also shows regional activity levels, but with the results from the Twitter classifier. 
 
 \begin{center}
 \href{run:vids/1_cdc_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/1_cdc_flu_regio.png}}
@@ -1299,7 +1360,7 @@ However, in order to assess the quality of and improve said Twitter flu classifi
 \section{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}
 In my eyes, this is the most likely explanation for the abysmal fit between the Twitter data and the official CDC data. In fact, \citep{paul_worldwide_2015} report that autoregressive models of CDC data are very strong baseline models and in general better than Twitter models alone. This shows that Twitter cannot predict CDC ILI rates on its own but should rather be used as an additional source of information to complement already existng estimates and reduce the error. As I have shown in Chapter~\ref{ch:results}, this is also true for the Twitter data used in \citep{bodnar_data_2015}: The Twitter base model alone was not able to fit the official CDC data tightly and was clearly outperformed by a simple AR(2) model based on the official CDC data. 
 
-In fact, \citep{bodnar_data_2015} fitted two kinds of models based on the results from the Twitter flu classifier in order: A linear regression model, including autoregressive information from the CDC ILI data (see Equation~\ref{eq:2}), and an SIR model (see Equations~\ref{eq:0}). However, the SIR model reported in \cite{bodnar_data_2015} and depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} was not based on the output of the Twitter classifier, but rather on the results from the linear regression model described in Equation~\ref{eq:2}, partially defeating the purpose of having a classifier independent of population level data. In addition, the results I was able to receive from the Twitter classifier results were an order of magnitude smaller than both the official CDC data and the Twitter \texttt{base\_full} model data provided to my by Bodnar (personal communication). It is therefore unclear how exactly the Twitter classifier data reported in \cite{bodnar_2data_bodnar} came about. 
+In fact, \citep{bodnar_data_2015} fitted two kinds of models based on the results from the Twitter flu classifier in order: A linear regression model, including autoregressive information from the CDC ILI data (see Equation~\ref{eq:2}), and an SIR model (see Equations~\ref{eq:0}). However, the SIR model reported in \cite{bodnar_data_2015} and depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} was not based on the output of the Twitter classifier, but rather on the results from the linear regression model described in Equation~\ref{eq:2}, partially defeating the purpose of having a classifier independent of population level data. In addition, the results I was able to receive from the Twitter classifier results were an order of magnitude smaller than both the official CDC data and the Twitter \texttt{base\_full} model data provided to my by Bodnar (personal communication). It is therefore unclear how exactly the Twitter classifier data reported in \cite{bodnar_data_2015} came about. 
 
 In any case, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are problematic. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for the figures and tables in \cite{bodnar_data_2015}, many discrepancies are found. Also, it seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
 
@@ -1314,20 +1375,96 @@ In any case, the discrepancies between the model fits described in \citep{bodnar
 %\bibliography{Consulting}
 %\printbibliography
 
-\vfill
+\cleardoublepage
 
-\footnotesize
 
-{\bf \prog{R} version and packages used to generate this report:}
+\chapter*{Postscript}
+\label{ch:postscript}
+\addcontentsline{toc}{chapter}{\bfseries{Postscript}}
+\thispagestyle{plain}\markboth{Postscript}{Postscript}
 
-\prog{R} version: \textsf{R version 3.4.1 (2017-06-30)}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{print}\hlstd{(} \hlkwd{sessionInfo}\hlstd{(),} \hlkwc{locale}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## R version 3.4.1 (2017-06-30)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.2 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/libblas/libblas.so.3.6.0
+## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
+## 
+## attached base packages:
+##  [1] parallel  grid      compiler  stats     graphics  grDevices utils    
+##  [8] datasets  methods   base     
+## 
+## other attached packages:
+##  [1] usmap_0.2.0            tseries_0.10-37        sfsmisc_1.1-1         
+##  [4] openWAR_0.2.3.9001     mosaic_0.14.4          Matrix_1.2-10         
+##  [7] mosaicData_0.14.0      MASS_7.3-45            maps_3.1.1            
+## [10] geosphere_1.5-5        forecast_7.3           timeDate_3012.100     
+## [13] zoo_1.7-14             dplyr_0.5.0            doParallel_1.0.10     
+## [16] iterators_1.0.8        deSolve_1.14           XML_3.98-1.5          
+## [19] vcd_1.4-3              timezone_0.1           proj4_1.0-8           
+## [22] tabulizer_0.1.24       stringr_1.1.0          scales_0.4.1          
+## [25] rworldxtra_1.01        rworldmap_1.3-6        rvest_0.3.2           
+## [28] xml2_1.1.1             R.utils_2.5.0          R.oo_1.21.0           
+## [31] R.methodsS3_1.7.1      rgeos_0.3-22           RCurl_1.95-4.8        
+## [34] bitops_1.0-6           qdap_2.2.5             RColorBrewer_1.1-2    
+## [37] qdapTools_1.3.1        qdapRegex_0.7.2        qdapDictionaries_1.0.6
+## [40] profvis_0.3.3          png_0.1-7              plotrix_3.6-4         
+## [43] pdftools_1.2           pageviews_0.3.0        mgcv_1.8-17           
+## [46] nlme_3.1-131           maptools_0.8-41        sp_1.2-4              
+## [49] lubridate_1.6.0        lattice_0.20-35        hexbin_1.27.1         
+## [52] gtable_0.2.0           gridExtra_2.2.1        gridBase_0.4-7        
+## [55] ggplot2_2.2.1          ggdendro_0.1-20        gganimate_0.1         
+## [58] feather_0.3.1          devtools_1.12.0        chron_2.3-49          
+## [61] cdcfluview_0.5.1       bit64_0.9-5            bit_1.1-12            
+## [64] bigtabulate_1.1.5      biganalytics_1.1.14    biglm_0.9-1           
+## [67] DBI_0.5-1              foreach_1.4.3          bigalgebra_0.8.4      
+## [70] bigmemory_4.5.19       bigmemory.sri_0.1.3    animation_2.4         
+## [73] data.table_1.10.4      knitr_1.15.1          
+## 
+## loaded via a namespace (and not attached):
+##  [1] backports_1.0.5     spam_1.4-0          Hmisc_4.0-2        
+##  [4] plyr_1.8.4          igraph_1.0.1        lazyeval_0.2.0     
+##  [7] splines_3.4.1       openNLP_0.2-6       digest_0.6.12      
+## [10] htmltools_0.3.5     gender_0.5.1        gdata_2.17.0       
+## [13] magrittr_1.5        checkmate_1.8.2     memoise_1.0.0      
+## [16] xlsx_0.5.7          tm_0.6-2            cluster_2.0.6      
+## [19] readr_1.0.0         wordcloud_2.5       Sxslt_0.91-4       
+## [22] colorspace_1.3-2    jsonlite_1.2        survival_2.40-1    
+## [25] V8_1.2              Rcpp_0.12.12        htmlTable_1.9      
+## [28] foreign_0.8-69      Formula_1.2-1       htmlwidgets_0.8    
+## [31] httr_1.2.1          acepack_1.4.1       rJava_0.9-8        
+## [34] openNLPdata_1.5.3-2 nnet_7.3-12         venneuler_1.1-0    
+## [37] reshape2_1.4.2      munsell_0.4.3       tools_3.4.1        
+## [40] evaluate_0.10       purrr_0.2.2         slam_0.1-40        
+## [43] curl_2.3            tibble_1.2          stringi_1.1.2      
+## [46] highr_0.6           fields_8.10         tabulizerjars_0.9.2
+## [49] lmtest_0.9-34       R6_2.2.0            latticeExtra_0.6-28
+## [52] KernSmooth_2.23-15  codetools_0.2-15    reports_0.1.4      
+## [55] gtools_3.5.0        assertthat_0.1      xlsxjars_0.6.1     
+## [58] withr_1.0.2         fracdiff_1.4-2      hms_0.3            
+## [61] quadprog_1.5-5      rpart_4.1-10        tidyr_0.6.1        
+## [64] NLP_0.1-9           base64enc_0.1-3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
-Base packages: \textsf{stats, graphics, grDevices, utils, datasets, methods, base}
-
-Other packages: \textsf{data.table, knitr}
-
-This document was generated on August 20, 2017 at 03:24.
-
+% \vfill
+% \footnotesize
+% 
+% {\bf \prog{R} version and packages used to generate this report:}
+% 
+% \prog{R} version: \textsf{sessionInfo()$R.version$version.string}
+% 
+% Base packages: \textsf{paste(sessionInfo()$basePkgs, collapse = ", ")}
+% 
+% Other packages: \textsf{paste(names(sessionInfo()$otherPkgs), collapse = ", ")}
 
 
 \end{document}
