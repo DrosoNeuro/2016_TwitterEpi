@@ -213,6 +213,14 @@ Coming soon...
 \thispagestyle{empty}
 \cleardoublepage
 
+\renewcommand{\abstractname}{Acknowledgements}
+\begin{abstract}
+I would like to thank my two supervisors, Prof. Dr. Reinhard Furrer and Prof. Dr. Marcel Salathé for their academic guidance and critical feedback as well as for the intellectual freedom I was allowed to experience. I thank the Digital Epidemiology lab and its members for free coffee, entertaining group meetings, and stimulating conversations - I'll be back! And I thank my fiancée for taking the time to my rants about malfunctioning code-snippets and error-message-conundrums.
+\end{abstract}
+
+\thispagestyle{empty}
+\cleardoublepage
+
 % \maketitle
 \tableofcontents
 \cleardoublepage
@@ -252,7 +260,7 @@ In the digital age, everybody leaves traces. And thanks to the vast amount of di
 
 For example, Google tried to use search queries in order to predict the spread and the intensity of the flu in certain countries \citep{ginsberg_detecting_2009}. Retrospective analysis of Google search queries and online media reports showed that these data sources could have been used to detect the Ebola epidemic of 2014/2015 quicker and with more sensitivity \citep{anema_digital_2014, milinovich_role_2015}. And finally, Wikipedia page views proved to be reliable predictors to model the epidemiology of such different diseases as dengue fever, influenza, cholera, HIV/AIDS, or tuberculosis \citep{generous_global_2014}. 
 
-Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}. Finally, there exist a vast range of participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogenous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.
+Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}. Finally, there exist a vast range of participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms, or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogenous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.
 
 And it does not stop with digital data alone. Many of the approaches outlined above can be combined with and extended by other biologically or clinically relevant data such as high-throughput sequence data, clinical visits, pharmaceutical prescriptions, or clinical symptoms, in order to allow for a more accurate description of the mechanisms of disease spread, the pathogens involved, and the treatments administered \citep{ray_network_2016}.
 
@@ -366,7 +374,7 @@ Bodnar applied the algorithm in the above-described fashion to a set of 15'560'3
 
 In a next step, Bodnar created a Kermack--McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
 \begin{align}
-\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.
+\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma. label{eq:0}
 \end{align}
 $S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official influenza-like illness (ILI) rates from the Centers for Disease Control (CDC) in Atlanta using a multi-grid search method. Note that estimates about flu prevalence are usually made using ILI rates as basis, not confirmed flu cases (see Section~\ref{sec:comparison_cdc} for more details.)
 
@@ -400,7 +408,7 @@ Based on the values given in Table~\ref{tab:nationalparams}, he could then calcu
   \begin{align}
 I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d. \label{eq:2}
   \end{align}
-Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). Note that it is unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. An e-mail requesting clarification of this has been sent, but a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
+Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). It is as of yet unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. However, Bodnar confirmed that the ``Twitter base model" is indeed supposed to contain the raw output from the Twitter classifier (personal communication). However, I was not able to retrieve the model paramaters $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
 
 \begin{figure}[htbp!]
   \centering
@@ -587,8 +595,35 @@ Nevertheless, I used this data set as a basis to develop a basic grasp of the da
 <<load aggregated full set, echo=F, include=F,eval=T,cache=F>>=
 load("SampleData/Twitter_full_aggregated.RData")
 load("SampleData/num_user_tot.RData")
+load("SampleData/processed_Twitter_full_aggregated.RData")
+load("SampleData/summary_processed_Twitter_full_aggregated.RData")
+load("SampleData/scatter_coefficients_Twitter_full_aggregated.RData")
 @
-The complete data set consisted of a total of \Sexpr{l(ntweets[1])} tweets sent by \Sexpr{l(num_user_before)}. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion).
+The complete data set consisted of a total of \Sexpr{l(ntweets[1])} tweets sent by \Sexpr{l(num_user_before)}. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion). An overview over all differences between the two data sets as well over key statistical indicators of the \texttt{all\_users} data set is given in Table~\ref{tab:data_set_diff}.
+
+\begin{table}[htbp!]
+\centering
+\caption{Key differences between the data sets reported in \cite{bodnar_data_2015} and the one I analysed. Values in white and grey-coloured rows are based on the raw and pruned data set, respectively.}
+\begin{tabular}{l l l l l}
+ & Bodnar  & Grüninger & \\ \hline
+\# of users  & 15'560'328 & \Sexpr{l(num_user_before)} & raw data set  \\
+\cellcolor{grey}\# of users, pruned & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{l(num_user_after)} & \cellcolor{grey}pruned data set\\
+\# of tweets  & 2'732'174'105 & \Sexpr{l(ntweets[1])} & raw data set  \\ 
+\cellcolor{grey}\# of tweets  & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{l(ntweets_full_pruned)} & \cellcolor{grey}pruned data set \\
+\cellcolor{grey}\# of sick users, 2011--2015 & \cellcolor{grey}182'801 & \cellcolor{grey}\Sexpr{l(tot_sick_user)} & \cellcolor{grey}pruned data set  \\
+\cellcolor{grey}\# of users, 2011 & \cellcolor{grey}45'086 & \cellcolor{grey}\Sexpr{format(round(avg_tot_user_2011,0),digits=6,big.mark="'")} & \cellcolor{grey}pruned data set\\
+mean tweet rate, 2011--2015 & 175.59 & \Sexpr{r2(mean_tweet_before)} & raw data set\\
+\cellcolor{grey}mean tweet rate, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{r2(mean_tweet_after)} & \cellcolor{grey}pruned data set \\
+\cellcolor{grey}mean tweet rate, weekly & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{r2(mean(avg_tw_tot))} & \cellcolor{grey}pruned data set\\
+median tweet rate, 2011--2015 & 10 & \Sexpr{r2(median_tweet_before)} & raw data set\\
+\cellcolor{grey}median tweet rate, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{r2(median_tweet_after)} & \cellcolor{grey}pruned data set\\
+\cellcolor{grey}median tweet rate, weekly & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{r2(median(avg_tw_tot))} & \cellcolor{grey}pruned data set\\
+max. \# of tweets per user, 2011--2015 &  1'119'384 & \Sexpr{l(max_tweet_before)} & raw data set\\
+\cellcolor{grey}max. \# of tweets per user, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{l(max_tweet_after)} & \cellcolor{grey}pruned data set\\
+min. \# of tweets per user, 2011--2015 & 1 & \Sexpr{l(min_tweet_before)} & raw data set\\
+\cellcolor{grey}min. \# of tweets per user, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}\Sexpr{l(min_tweet_after)} & \cellcolor{grey}pruned data set\\
+\end{tabular}
+\end{table}
 
 In a first step, I removed all tweets before \Sexpr{time_window[[1]]} and after \Sexpr{time_window[[2]]} as well as outside the rough geographical window around the U.S. mainland (W $\Sexpr{coord_USA[1]}$°, W $\Sexpr{coord_USA[2]}$°, N $\Sexpr{coord_USA[3]}$° , N $\Sexpr{coord_USA[4]}$° ) as described above, and aggregated the remaining \Sexpr{l(ntweets_full_pruned)} tweets and \Sexpr{l(num_user_after)} users with regard to states and weeks in which the tweets where sent, i.e. I calculated the number of tweets sent within a given week in a given state.
 
@@ -610,12 +645,6 @@ df_agg_sample[[2]]
   \item \texttt{sick\_per} The percentage of tweets labelled as sick among the total tweets sent in the given week and state
 \end{itemize}
 
-<<Load processed data,echo=FALSE,include=FALSE,eval=TRUE,cache=FALSE,errors=TRUE>>=
-load("SampleData/processed_Twitter_full_aggregated.RData")
-load("SampleData/summary_processed_Twitter_full_aggregated.RData")
-load("SampleData/scatter_coefficients_Twitter_full_aggregated.RData")
-@
-
 Next, I added the corresponding date and state name to each week and state index, respectively. In order to assign state names to their respective state labels, I used the label/name relationships established in the \texttt{sick\_users} data set (see section~\ref{sec:sick_user_exploratory}). Since tweets with state code ``56" predominantly stemmed from the Mexico and Canada or other areas outside the U.S. mainland (see Figure~\ref{fig:canexico_and_removed}), I removed all corresponding state/week pairs from the aggregated data set (\Sexpr{l(n_removed)} tweets in total), resulting in a data set with \Sexpr{l(rows_after)} rows and \Sexpr{length(df_processed[1,])} columns (see below), containing a total of \Sexpr{l(sum(df_processed$total))} tweets from \Sexpr{l(num_user_after)} users aggregated over states and weeks.
 
 <<Print Sample Data - Aggregated Full Set - Full,echo=FALSE,include=TRUE,eval=TRUE,cache=FALSE,errors=TRUE>>=
@@ -629,11 +658,11 @@ The total amount of users who have sent at least one tweet labelled as sick duri
 
 What is peculiar, however, is the fact that the total number of sick users found in the Twitter data set over the whole study period is considerably lower than the number reported in \cite{bodnar_data_2015} (\Sexpr{l(tot_sick_user)} vs. 182'801 users, respectively), despite the former being an upper estimate of the total number of individual sick users. On the other hand, the number of individual users found in the data set during the first year (2011) for the whole country is larger than the one reported by \cite{bodnar_data_2015}: \Sexpr{format(round(avg_tot_user_2011,0),digits=6,big.mark="'")} and 45'086, respectively.
 
-Using the information that only 3.1~\% of all users send geotagged tweets \citep{sloan2013knowing}, we can estimate the total number of Twitter users that were active in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an estimated average of \Sexpr{format(round(avg_tot_user_2011/0.031,digits=0),big.mark="'",digits = 9)} active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to \Sexpr{format(round(45086/0.031,digits=0),big.mark="'",digits=7)} total active users in 2011. Both numbers are a far cry from the roughly 19 (March 2011) to 30 (December 2011) million of monthly active Twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}, even though part of this discrepancy might be explained by the first two months of 2011 are missing from the collection of the Twitter data sets Bodnar and I were working on.
+Using the information that only 3.1~\% of all users send geotagged tweets \citep{sloan2013knowing}, we can estimate the total number of Twitter users that were active in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an estimated average of \Sexpr{format(round(avg_tot_user_2011/0.031,digits=0),big.mark="'",digits = 9)} active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to \Sexpr{format(round(45086/0.031,digits=0),big.mark="'",digits=7)} total active users in 2011. Both numbers are a far cry from the roughly 19 (March 2011) to 30 (December 2011) million of monthly active Twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}, even though part of this discrepancy might be explained by the first two months of 2011 are missing from the collection of the Twitter data sets Bodnar and I were working on.These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I analysed for this thesis.
 
-In addition, I could observe a very peculiar difference in the mean tweet frequency between healthy and sick users. While healthy users had an unadjusted mean tweet rate of \Sexpr{r2(mean(avg_tw_healthy))} tweets per week, sick users had an unadjusted mean tweet rate of \Sexpr{r2(mean(avg_tw_sick))} tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann--Whitney U-Test, $p$ =\Sexpr{r2(diff_wilcox_avg_tw$p.value)}).
+In addition, I could observe a very peculiar difference in the mean tweet frequency between healthy and sick users. While healthy users had an unadjusted mean tweet rate of \Sexpr{r2(mean(avg_tw_healthy))} tweets per week, sick users had an unadjusted mean tweet rate of \Sexpr{r2(mean(avg_tw_sick))} tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann--Whitney U-Test, $p$ =\Sexpr{r2(diff_wilcox_avg_tw$p.value)}). 
 
-Also, the unadjusted mean tweet rate of all users combined (\Sexpr{r2(mean(avg_tw_tot))}) is six times smaller than the mean tweet rate per user reported in \cite{bodnar_data_2015} (175.59). The unadjusted median tweet rate (\Sexpr{r2(median(avg_tw_tot))}), however, is considerably higher than the median tweet rate reported in \cite{bodnar_data_2015} (10). These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I analysed for this thesis.
+Also, the unadjusted mean tweet rate per week of all users combined (\Sexpr{r2(mean(avg_tw_tot))}) is six times smaller than the mean tweet rate over the whole study period (\Sexpr{r2(mean_tweet_after)}). The same holds true for the unadjusted median tweet rate (\Sexpr{r2(median(avg_tw_tot))} tweets per user per week vs. \Sexpr{r2(median_tweet_after)} tweets per user over the whole study period). These differences make intuitive sence, since
 
 Finally, by applying Equation~\ref{eq:3} described in Section~\ref{sec:sick_user_exploratory}, we can estimate the adjusted mean (\Sexpr{r2(mean(avg_tw_tot/(0.0085/0.031)))} tweets per user) and median (\Sexpr{r2(median(avg_tw_tot/(0.0085/0.031)))} tweets per user) of the Twitter rate of the whole Twitter population in 2011, as well the mean tweet rate for sick (\Sexpr{r2(mean(avg_tw_sick/(0.0085/0.031)))} tweets per user) and healthy (\Sexpr{r2(mean(avg_tw_healthy/(0.0085/0.031)))} tweets per user) subpopulation, respectively.\clearpage
 
@@ -1027,7 +1056,7 @@ In order to recreate the figures mentioned above, I used the data available in t
   \item \texttt{full\_both2} Retrospective AR(2) model based on the ``cdcoffset" data combined with the values from the retrospective Twitter base model
 \end{itemize}
 
-For the predictive models, only values between weeks $0$ and $t-1$ were used for model building, for the retrospective models the complete available data was used. As mentioned above, as of this point I do not know how the predictive or retrospective Twitter model relates to the results from the Twitter classifier. An email requesting additional information is pending response.
+For the predictive models, only values between weeks $0$ and $t-1$ were used for model building, for the retrospective models the complete available data was used. According to Bodnar \texttt{full\_base} column corresponds to the weekly aggregated results of the Twitter classifier (personal communication).
 
 I started with the replication of Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} and the corresponding parameters. I did so by using the grid-search method described in \cite{bodnar_data_2015}: 
 
@@ -1240,9 +1269,9 @@ However, in order to assess the quality of and improve said Twitter flu classifi
 \section{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}
 In my eyes, this is the most likely explanation for the abysmal fit between the Twitter data and the official CDC data. In fact, \citep{paul_worldwide_2015} report that autoregressive models of CDC data are very strong baseline models and in general better than Twitter models alone. This shows that Twitter cannot predict CDC ILI rates on its own but should rather be used as an additional source of information to complement already existng estimates and reduce the error. As I have shown in Chapter~\ref{ch:results}, this is also true for the Twitter data used in \citep{bodnar_data_2015}: The Twitter base model alone was not able to fit the official CDC data tightly and was clearly outperformed by a simple AR(2) model based on the official CDC data. 
 
-In fact, \citep{bodnar_data_2015} fitted an SIR model to the results from the Twitter flu classifier in order to compare results. However, he reported that the model had to be refitted for every individual year based on the official CDC data (again, defeating the purpose of having a classifier independent of population level data). Also, the model fit was much lower (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}) and in no way comparable to the extraordinary fit shown in Figure~\ref{fig:cdc_fit_bodnar_thesis}). In the meantime, I received the code used to fit the SIR model as well as the data used to produce Figure~\ref{fig:cdc_fit_bodnar_thesis}. As of yet, it is unclear to me how exactly this data was produced based on the model parameters fitted in the SIR model. An answer to a follow-up e-mail to Todd Bodnar with regard to this is currently pending.
+In fact, \citep{bodnar_data_2015} fitted two kinds of models based on the results from the Twitter flu classifier in order: A linear regression model, including autoregressive information from the CDC ILI data (see Equation~\ref{eq:2}), and an SIR model (see Equations~\ref{eq:0}). However, the SIR model reported in \cite{bodnar_data_2015} and depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} was not based on the output of the Twitter classifier, but rather on the results from the linear regression model described in Equation~\ref{eq:2}, partially defeating the purpose of having a classifier independent of population level data. In addition, the results I was able to receive from the Twitter classifier results were an order of magnitude smaller than both the official CDC data and the Twitter \texttt{base\_full} model data provided to my by Bodnar (personal communication). It is therefore unclear how exactly the Twitter classifier data reported in \cite{bodnar_2data_bodnar} came about. 
 
-In any case, however, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are worrying. Whatever the reason, it is clear that the information from the Twitter classifier on its own cannot be used to reliably predict CDC ILI rates. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for the figures and tables in \cite{bodnar_data_2015}, many discrepancies are found. It seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
+In any case, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are problematic. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for the figures and tables in \cite{bodnar_data_2015}, many discrepancies are found. Also, it seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
 
 \clearpage
 % \nocite{R}
