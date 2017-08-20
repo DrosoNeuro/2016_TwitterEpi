@@ -303,7 +303,11 @@ I would like to thank my two supervisors, Prof. Dr. Reinhard Furrer and Prof. Dr
 
 In addition, I thank the Swiss Study Foundation, the Canton of Schaffhausen, the Werner Siemens Foundation, and the Ernst Göhner Foundation for their financial and ideational support. It has empowered me and given me the freedom to conduct my studies the way I wanted.
 
+<<<<<<< HEAD
 Finally, I thank my mother, my other mother, my other brothers, and my friends for reminding me that there is an alternative to books, computer screens, and bad posture. And most importantly, I thank my fiancée for her patience, for laughing about, but mostly with me, and for pretending to care about my rants about malfunctioning code-snippets and unsolvable error-message-conundrums.\newline
+=======
+Finally, I thank my mother, my other mother, my other brothers, and my friends for reminding me that there is an alternative to books, computer screens, and bad posture. And most importantly, I thank my fiancée for her patience, for laughing about, but mostly with me, and for pretending to care for my rants about malfunctioning code-snippets and unsolvable error-message-conundrums.\newline
+>>>>>>> b010c4fae96b754191a20a98e0b662ab4e56ecc2
 
 \raggedleft{Biel, 2017
 
@@ -533,9 +537,15 @@ Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_
 
 \chapter{(Almost) big data: How to analyse 2.8 billion tweets}
 \label{ch:data_set_description}
+<<<<<<< HEAD
 In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though a few aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite those packages which I have used most frequently or which were crucial for my data aggregation and analysis. In addition, Appendix~\ref{app:packages} provides the reader with an exhaustive list of all packages I used for this thesis, including the exact version number.
 
 In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made avaialable on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Chapter~\ref{app:github} for more information  the Github repository).
+=======
+In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though a few aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite those packages which I have used most frequently or which were crucial for my data aggregation and analysis. In Chapter~\ref{ch:postscript} you can additionally find an exhaustive list of all packages I used for this thesis, including the exact version number.
+
+In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made avaialable on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Chapter~\ref{ch:postscript} for, more information  the Github repository).
+>>>>>>> b010c4fae96b754191a20a98e0b662ab4e56ecc2
 
 \section{The nature of the data beast}
 \label{sec:starting}
@@ -1377,6 +1387,7 @@ In any case, the discrepancies between the model fits described in \citep{bodnar
 %\printbibliography
 
 \cleardoublepage
+<<<<<<< HEAD
 
 \begin{appendices}
 \chapter{R-Packages}
@@ -1474,6 +1485,97 @@ In any case, the discrepancies between the model fits described in \citep{bodnar
 \label{app:github}
 
 In order to provide the reader with all the informationen needed to reproduce the findings reported in this thesis and to build upon it, all code files, processed data sets, and figures are publicly available on Github (\url{https://github.com/salathegroup/2016_TwitterEpi}). However, due to limited storage space and size limitations on Github, the raw files are not available. People interested in working with the original data can get in touch with EPFL's \href{https://www.digitalepidemiologylab.org/}{Digital Epidemiology Lab}.
+=======
+
+
+\chapter*{Postscript}
+\label{ch:postscript}
+\addcontentsline{toc}{chapter}{\bfseries{Postscript}}
+\thispagestyle{plain}\markboth{Postscript}{Postscript}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{print}\hlstd{(} \hlkwd{sessionInfo}\hlstd{(),} \hlkwc{locale}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## R version 3.4.1 (2017-06-30)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.2 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/libblas/libblas.so.3.6.0
+## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
+## 
+## attached base packages:
+##  [1] parallel  grid      compiler  stats     graphics  grDevices utils    
+##  [8] datasets  methods   base     
+## 
+## other attached packages:
+##  [1] usmap_0.2.0            tseries_0.10-37        sfsmisc_1.1-1         
+##  [4] openWAR_0.2.3.9001     mosaic_0.14.4          Matrix_1.2-10         
+##  [7] mosaicData_0.14.0      MASS_7.3-45            maps_3.1.1            
+## [10] geosphere_1.5-5        forecast_7.3           timeDate_3012.100     
+## [13] zoo_1.7-14             dplyr_0.5.0            doParallel_1.0.10     
+## [16] iterators_1.0.8        deSolve_1.14           XML_3.98-1.5          
+## [19] vcd_1.4-3              timezone_0.1           proj4_1.0-8           
+## [22] tabulizer_0.1.24       stringr_1.1.0          scales_0.4.1          
+## [25] rworldxtra_1.01        rworldmap_1.3-6        rvest_0.3.2           
+## [28] xml2_1.1.1             R.utils_2.5.0          R.oo_1.21.0           
+## [31] R.methodsS3_1.7.1      rgeos_0.3-22           RCurl_1.95-4.8        
+## [34] bitops_1.0-6           qdap_2.2.5             RColorBrewer_1.1-2    
+## [37] qdapTools_1.3.1        qdapRegex_0.7.2        qdapDictionaries_1.0.6
+## [40] profvis_0.3.3          png_0.1-7              plotrix_3.6-4         
+## [43] pdftools_1.2           pageviews_0.3.0        mgcv_1.8-17           
+## [46] nlme_3.1-131           maptools_0.8-41        sp_1.2-4              
+## [49] lubridate_1.6.0        lattice_0.20-35        hexbin_1.27.1         
+## [52] gtable_0.2.0           gridExtra_2.2.1        gridBase_0.4-7        
+## [55] ggplot2_2.2.1          ggdendro_0.1-20        gganimate_0.1         
+## [58] feather_0.3.1          devtools_1.12.0        chron_2.3-49          
+## [61] cdcfluview_0.5.1       bit64_0.9-5            bit_1.1-12            
+## [64] bigtabulate_1.1.5      biganalytics_1.1.14    biglm_0.9-1           
+## [67] DBI_0.5-1              foreach_1.4.3          bigalgebra_0.8.4      
+## [70] bigmemory_4.5.19       bigmemory.sri_0.1.3    animation_2.4         
+## [73] data.table_1.10.4      knitr_1.15.1          
+## 
+## loaded via a namespace (and not attached):
+##  [1] backports_1.0.5     spam_1.4-0          Hmisc_4.0-2        
+##  [4] plyr_1.8.4          igraph_1.0.1        lazyeval_0.2.0     
+##  [7] splines_3.4.1       openNLP_0.2-6       digest_0.6.12      
+## [10] htmltools_0.3.5     gender_0.5.1        gdata_2.17.0       
+## [13] magrittr_1.5        checkmate_1.8.2     memoise_1.0.0      
+## [16] xlsx_0.5.7          tm_0.6-2            cluster_2.0.6      
+## [19] readr_1.0.0         wordcloud_2.5       Sxslt_0.91-4       
+## [22] colorspace_1.3-2    jsonlite_1.2        survival_2.40-1    
+## [25] V8_1.2              Rcpp_0.12.12        htmlTable_1.9      
+## [28] foreign_0.8-69      Formula_1.2-1       htmlwidgets_0.8    
+## [31] httr_1.2.1          acepack_1.4.1       rJava_0.9-8        
+## [34] openNLPdata_1.5.3-2 nnet_7.3-12         venneuler_1.1-0    
+## [37] reshape2_1.4.2      munsell_0.4.3       tools_3.4.1        
+## [40] evaluate_0.10       purrr_0.2.2         slam_0.1-40        
+## [43] curl_2.3            tibble_1.2          stringi_1.1.2      
+## [46] highr_0.6           fields_8.10         tabulizerjars_0.9.2
+## [49] lmtest_0.9-34       R6_2.2.0            latticeExtra_0.6-28
+## [52] KernSmooth_2.23-15  codetools_0.2-15    reports_0.1.4      
+## [55] gtools_3.5.0        assertthat_0.1      xlsxjars_0.6.1     
+## [58] withr_1.0.2         fracdiff_1.4-2      hms_0.3            
+## [61] quadprog_1.5-5      rpart_4.1-10        tidyr_0.6.1        
+## [64] NLP_0.1-9           base64enc_0.1-3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+% \vfill
+% \footnotesize
+% 
+% {\bf \prog{R} version and packages used to generate this report:}
+% 
+% \prog{R} version: \textsf{sessionInfo()$R.version$version.string}
+% 
+% Base packages: \textsf{paste(sessionInfo()$basePkgs, collapse = ", ")}
+% 
+% Other packages: \textsf{paste(names(sessionInfo()$otherPkgs), collapse = ", ")}
+>>>>>>> b010c4fae96b754191a20a98e0b662ab4e56ecc2
 
 The Github repository contains the following main folders: 
 

@@ -492,7 +492,7 @@ Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_
 \label{ch:data_set_description}
 In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though a few aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite those packages which I have used most frequently or which were crucial for my data aggregation and analysis. In addition, Appendix~\ref{app:packages} provides the reader with an exhaustive list of all packages I used for this thesis, including the exact version number.
 
-In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made avaialable on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Chapter~\ref{app:github} for more information  the Github repository).
+In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made avaialable on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Chapter~\ref{app:github} for more information about the Github repository).
 
 \section{The nature of the data beast}
 \label{sec:starting}
