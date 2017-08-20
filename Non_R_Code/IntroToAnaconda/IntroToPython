@@ -1,2 +1,0 @@
-check for all functions within a module: dir(module) (http://stackoverflow.com/questions/139180/listing-all-functions-in-a-python-module)
-

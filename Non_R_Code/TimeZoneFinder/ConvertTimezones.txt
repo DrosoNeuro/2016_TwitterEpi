@@ -1,2 +1,0 @@
-https://github.com/MrMinimal64/timezonefinder (is not working)
-https://github.com/pegler/pytzwhere (is working)
