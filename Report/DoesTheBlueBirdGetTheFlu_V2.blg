@@ -1,0 +1,67 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: DoesTheBlueBirdGetTheFlu_V2.aux
+The style file: mywiley.bst
+Database file #1: Masterarbeit.bib.bib
+Warning--empty journal in bodnar_data_2015
+Warning--empty booktitle in bodnar_ground_2014
+Warning--empty journal in bag_grippe_2016
+Warning--empty journal in bag_lagebericht_2017
+Warning--empty journal in bag_influenza_2017
+Warning--empty journal in cacioppo_social_2015
+Warning--empty journal in cdc_enterovirus_2016
+Warning--empty journal in cdc_surveillance_2016
+Warning--empty journal in cdc_rhinovirus_2017
+Warning--empty journal in cdc_flu_2017
+Warning--empty journal in dfg_reproduzierbarkeit_2017
+Warning--empty journal in GFT_nextchapter_2015
+Warning--empty journal in kullmann2015biomedicine
+Warning--empty booktitle in liu_assessing_2017
+Warning--empty journal in murrell_grid_2007
+Warning--empty journal in rolfes_estimated_2016
+Warning--empty journal in sentinella_2017
+Warning--empty journal in twitter_annual_2013
+Warning--empty journal in twitter_annual_2017
+Warning--empty journal in hhs_offices_2014
+You've used 156 entries,
+            1967 wiz_defined-function locations,
+            1275 strings with 35690 characters,
+and the built_in function-call counts, 63551 in all, are:
+= -- 6291
+> -- 2811
+< -- 103
++ -- 996
+- -- 960
+* -- 5331
+:= -- 11101
+add.period$ -- 493
+call.type$ -- 156
+change.case$ -- 1247
+chr.to.int$ -- 148
+cite$ -- 176
+duplicate$ -- 2321
+empty$ -- 4091
+format.name$ -- 1168
+if$ -- 12434
+int.to.chr$ -- 9
+int.to.str$ -- 0
+missing$ -- 274
+newline$ -- 796
+num.names$ -- 468
+pop$ -- 980
+preamble$ -- 1
+purify$ -- 1259
+quote$ -- 0
+skip$ -- 1824
+stack$ -- 0
+substring$ -- 4248
+swap$ -- 385
+text.length$ -- 20
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 926
+warning$ -- 20
+while$ -- 500
+width$ -- 0
+write$ -- 2014
+(There were 20 warnings)

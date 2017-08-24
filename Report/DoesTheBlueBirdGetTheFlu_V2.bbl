@@ -35,7 +35,7 @@ Achrekar, H., Gandhe, A., Lazarus, R., Yu, S.-H., and Liu, B. (2011).
   {Workshops} ({INFOCOM} {WKSHPS})},   702--707.
 
 \bibitem[Adrover {\it et~al.}, 2015]{adrover2015identifying}
-Adrover, C., Bodnar, T., Huang, Z., Telenti, A., and Salath{\'e}, M. (2015).
+Adrover, C., Bodnar, T., Huang, Z., Telenti, A., and Salathé, M. (2015).
 \newblock Identifying adverse effects of {H}{I}{V} drug treatment and
   associated sentiments using {Twitter}.
 \newblock {\em JMIR public health and surveillance}, {\bf1}, .
@@ -730,7 +730,8 @@ Ray, B., Ghedin, E., and Chunara, R. (2016).
 \bibitem[R{\ }{Core}{\ }{Team}, 2017]{rbase_2017}
 R{\ }{Core}{\ }{Team} (2017).
 \newblock R: {A} {Language} and {Environment} for {Statistical} {Computing}.
-\newblock Technical report, Vienna, Austria.
+\newblock Technical report, R Foundation for Statistical Computing, Vienna,
+  Austria.
 
 \bibitem[Rehak, 2014]{rehak_twitterbird_2014}
 Rehak, M. (2014).
@@ -753,7 +754,8 @@ Rolfes, M.~A., Foppa, I.~M., Garg, S., Flannery, B., Brammer, L., Singleton,
 \bibitem[Rossum, 1995]{rossum_1995_python}
 Rossum, G. (1995).
 \newblock Python {Reference} {Manual}.
-\newblock Technical report, Amsterdam, The Netherlands, The Netherlands.
+\newblock Technical report, CWI (Centre for Mathematics and Computer Science),
+  Amsterdam, The Netherlands.
 
 \bibitem[Rothman, 2012]{rothman2012epidemiology}
 Rothman, K.~J. (2012).
@@ -766,15 +768,15 @@ Rudis, B. (2016).
   {CDC} FluView Portal}.
 \newblock R package version 0.5.1.
 
-\bibitem[Salathe {\it et~al.}, 2012]{salathe_digital_2012}
-Salathe, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,
+\bibitem[Salathé {\it et~al.}, 2012]{salathe_digital_2012}
+Salathé, M., Bengtsson, L., Bodnar, T.~J., Brewer, D.~D., Brownstein, J.~S.,
   Buckee, C., Campbell, E.~M., Cattuto, C., Khandelwal, S., Mabry, P.~L., and
   {others} (2012).
 \newblock Digital epidemiology.
 \newblock {\em PLoS Computational Biology}, {\bf8},  e1002616.
 
-\bibitem[Salath{\'e} {\it et~al.}, 2013]{salathe2013dynamics}
-Salath{\'e}, M., Vu, D.~Q., Khandelwal, S., and Hunter, D.~R. (2013).
+\bibitem[Salathé {\it et~al.}, 2013]{salathe2013dynamics}
+Salathé, M., Vu, D.~Q., Khandelwal, S., and Hunter, D.~R. (2013).
 \newblock The dynamics of health behavior sentiments on a large online social
   network.
 \newblock {\em EPJ Data Science}, {\bf2},  4.
