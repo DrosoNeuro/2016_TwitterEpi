@@ -1,0 +1,143 @@
+This is BibTeX, Version 0.99d (TeX Live 2012)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ToddBodnar-Dissertation.aux
+A level-1 auxiliary file: introduction/intro.aux
+A level-1 auxiliary file: twitterFitting/paper.aux
+A level-1 auxiliary file: diagnosis/Bodnar_www2014.aux
+A level-1 auxiliary file: longitude/main.aux
+A level-1 auxiliary file: retweets/main.aux
+A level-1 auxiliary file: conclusions/main.aux
+A level-1 auxiliary file: diagnosis/appendix.aux
+A level-1 auxiliary file: longitude/regional_r0_table.aux
+A level-1 auxiliary file: longitude/all_regional_curves.aux
+A level-1 auxiliary file: retweets/comparison_appendix.aux
+The style file: GLG-bibstyle.bst
+Database file #1: bodnarLibraryFull.bib
+Repeated entry---line 1158 of file bodnarLibraryFull.bib
+ : @article{Salathe:2012ez
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1302 of file bodnarLibraryFull.bib
+ : @article{Salathe:2011gr
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1787 of file bodnarLibraryFull.bib
+ : @article{Marquet:2005tb
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3095 of file bodnarLibraryFull.bib
+ : @inproceedings{Culotta:2010hx
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3879 of file bodnarLibraryFull.bib
+ : @article{Porter:1980dd
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4121 of file bodnarLibraryFull.bib
+ : @article{Goel:2010jf
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4190 of file bodnarLibraryFull.bib
+ : @inproceedings{Biro:2008wd
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4344 of file bodnarLibraryFull.bib
+ : @inproceedings{Bodnar:2013we
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4740 of file bodnarLibraryFull.bib
+ : @article{Olson:2013bo
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5790 of file bodnarLibraryFull.bib
+ : @article{Grubs:1969ab
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6068 of file bodnarLibraryFull.bib
+ : @article{Frossyniotis:2004wx
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6544 of file bodnarLibraryFull.bib
+ : @article{Olson:2013bo
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6801 of file bodnarLibraryFull.bib
+ : @article{Todorovski:2003hk
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7089 of file bodnarLibraryFull.bib
+ : @article{Butler:2013uh
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7520 of file bodnarLibraryFull.bib
+ : @article{Bodnar:2013we
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7559 of file bodnarLibraryFull.bib
+ : @article{Lamb:2013to
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7903 of file bodnarLibraryFull.bib
+ : @article{Porter:1980dd
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8283 of file bodnarLibraryFull.bib
+ : @article{yang2015inference
+ :                           ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in world2006communicable
+Warning--empty pages in Huang:2013ed
+Warning--empty journal in Balcan:2009ub
+Warning--empty pages in bakshy2014www
+Warning--empty journal in Suh:2010uw
+Warning--empty journal in Ofek:ug
+Warning--empty journal in read2013determining
+Warning--empty pages in Krause:2012uz
+Warning--empty journal in Biro:2008wd
+Warning--empty journal in Anonymous:iQRVCsVz
+Warning--empty pages in Osborne2011rt
+Warning--empty journal in Dou:2012vy
+Warning--empty pages in Burger:2011wl
+Warning--empty pages in anti2008krause
+You've used 141 entries,
+            2552 wiz_defined-function locations,
+            1414 strings with 35043 characters,
+and the built_in function-call counts, 73420 in all, are:
+= -- 4926
+> -- 2565
+< -- 117
++ -- 717
+- -- 576
+* -- 5634
+:= -- 7299
+add.period$ -- 278
+call.type$ -- 141
+change.case$ -- 1
+chr.to.int$ -- 0
+cite$ -- 155
+duplicate$ -- 8122
+empty$ -- 7225
+format.name$ -- 697
+if$ -- 16785
+int.to.chr$ -- 0
+int.to.str$ -- 141
+missing$ -- 1498
+newline$ -- 441
+num.names$ -- 143
+pop$ -- 2091
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 2451
+stack$ -- 0
+substring$ -- 3730
+swap$ -- 5680
+text.length$ -- 117
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 14
+while$ -- 457
+width$ -- 144
+write$ -- 1274
+(There were 18 error messages)

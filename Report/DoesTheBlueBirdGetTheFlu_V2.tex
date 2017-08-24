@@ -58,9 +58,10 @@
 \usepackage{alltt}
 
 \usepackage{verbatim}
-\usepackage[vmargin=3cm, hmargin=2cm]{geometry}
-\usepackage{url}
+% \usepackage[vmargin=3cm, hmargin=2cm]{geometry}
+\RequirePackage[hyphens]{url}
 \usepackage[colorlinks=true,pdftex]{hyperref} 
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{color}
 \usepackage{amsmath, amssymb}
@@ -70,9 +71,11 @@
 \usepackage{longtable}
 \usepackage{lscape}
 \usepackage{subcaption}
+\usepackage[toc,page]{appendix}
+\usepackage{needspace}
 
 
-\usepackage[authoryear,round]{natbib}
+\usepackage[authoryear,round,sectionbib]{natbib} %sectionbib option lets bibliography start right after text
 \usepackage[resetlabels]{multibib}
 \newcites{packages}{Software packages} %to cite R packages & software
 %\usepackage[backend=bibtex]{biblatex}
@@ -83,7 +86,6 @@
 %\usepackage[sc]{mathpazo}
 \linespread{1.05} 
 \definecolor{grey}{rgb}{.95,.95,.95}
-\renewcommand{\baselinestretch}{1.1}
 
 
 % And Arial for the rest
@@ -116,11 +118,11 @@
 
 \geometry{%
   a4paper,
-  top=36mm,
+  top=24mm,
   left=25mm,
   right=25mm,
   bottom=24mm,
-  headsep=26mm,
+  headsep=13mm, %26
   footskip=15mm
 }
 
@@ -129,54 +131,22 @@
 % Personalized layout
 \newcommand{\name}{Servan Grüninger}
 \newcommand{\mail}{servan.grueninger@gmail.com}
-\newcommand{\versiondate}{\today}
+\newcommand{\versiondate}{2017}
 \newcommand{\supervisor}{Prof. Dr. Reinhard Furrer (UZH) \& Prof. Dr. Marcel Salathé (EPFL)}
 \newcommand{\bigtitle}{Does the Blue Bird Get the Flu?}
 \newcommand{\subtitle}{Using Twitter for Flu Surveillance}
 % =======================================
-
-\newcommand{\web}{www.math.uzh.ch/biostat}
-\newcommand{\grp}{Master Program in Biostatistics}
+% 
+% \newcommand{\web}{www.math.uzh.ch/biostat}
+\newcommand{\grp}{Master Thesis in Biostatistics}
 
 \newcommand{\inst}{University of Zurich}
-\newcommand{\img}{\includegraphics[height=17mm, width = 53mm]{gfx/uzh_logo_e_pos}}
+% \newcommand{\img}{\includegraphics[height=17mm, width = 53mm]{gfx/uzh_logo_e_pos}}
 \newcommand{\of}{of\xspace}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-\newcommand{\mytitle}[3]{
-\begin{center}
-\vspace*{-2.1cm}
+\newcommand{\mytitle}[3]{}
 
-\HRule
-
-\vspace*{0.4cm}
-
-
-
-\vspace*{0.4cm} \HRule
-
-\bigskip
-
-\textsf{\LARGE #1} \vspace*{0.5cm}
-
-\Large{#2}
-
-\medskip
-
-\large{Author: \name \ (\textit{\mail})}
-
-\medskip
-
-\large{Supervision: \supervisor}
-
-\medskip
-
-Version \of \versiondate
-
-\end{center}
-
-\medskip
-}
 
 
 %Headers and footers
@@ -191,6 +161,16 @@ Version \of \versiondate
 \fancyhead[le, lo]{\textrm{\grp}}
 \fancyhead[re, ro]{\textrm{\inst}}
 }
+
+\fancypagestyle{plain}{%
+\fancyhf{}%clear header and footer
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[LE, RO]{\thepage}
+\fancyfoot[LO, RE]{\textrm{\name}}
+\fancyfoot[re, ro]{\textrm{\versiondate}}
+}
+
 
 % =======================================
 % bibliography
@@ -207,6 +187,7 @@ Version \of \versiondate
 
 
 % =======================================
+%change layout for the rest of document
 
 % =======================================
 % my latex commands
@@ -247,12 +228,12 @@ supervised by
 
 \vspace*{1cm}
 
-Prof. Reinhard Furrer\\
-Prof. Marcel Salathé (EPFL)
+Prof. Dr. Reinhard Furrer (UZH)\\
+Prof. Dr. Marcel Salathé (EPFL)
 
 \vfill
 
-Zurich, August 2017
+Zurich, 2017
 \end{center}
 \renewcommand\familydefault{\rmdefault}\normalfont%
 %\renewcommand{\baselinestretch}{1.0}\rm 
@@ -270,9 +251,34 @@ Zurich, August 2017
 %\hrule
 %\pagebreak
 
-\begin{abstract}
-Coming soon...
-\end{abstract}
+\chapter*{Abstract}
+Digital data have repeatedly proved their value for disease detection and surveillance. Social networks like Twitter promise to be a particularly rich source of epidemiological information, because they give researchers intimate access to a user's health status, habits, and behaviour. 
+
+However, most of the resulting epidemiological models use only population-level data and correlate these with traditional disease records. This approach is prone to overfitting and thus needs to be complemented with an alternative approach, in which individual-level disease status can be linked to individual-level social media behaviour. This master thesis assesses the validity of a Twitter flu classifier that was trained on data for which the individual-level disease state of Twitter users was available \cite{bodnar_ground_2014}. I assessed the performance of this classifier when applied to a large data set of about 2.8 billion geotagged tweets from U.S. mainland by comparing its results with the official flu estimates from the Centers of Disease Control and Prevention (CDC) as well as with results of similar study performed by \cite{bodnar_data_2015}. 
+
+In the following, I provide a detailed description of the statistical characteristics of the classified Twitter data set provided to me. I also show that the Twitter classifier identifies the peaks of flu seasons between 2011 and 2015 with some accuracy, but is unable to accurately model the behaviour of the CDC's flu estimates throughout the year. My results also deviate considerably from the ones reported in \cite{bodnar_data_2015}, hinting at discrepancies in the underlying Twitter data sets and the methods used for the respective analyses, or implying missing information and errors in reporting. Attempts to reproduce key figures and tables from \cite{bodnar_data_2015} failed, too, and uncovered inaccuracies and gaps in reporting.
+
+In conclusion, the results of my analysis of the classified Twitter data set and my partial reproduction of \cite{bodnar_data_2015} showed that the Twitter classifier on its own does not provide enough information to serve as an accurate estimator of flu trends---neither pro- nor retrospectively. However, it might allow for faster and more accurate influenza surveillance, when used in conjunction with traditional surveillance methods or when fed into more sophisticated disease models. Further research should focus on improving the performance of the classifier's output and testing its reliability in different spatio-temporal settings.
+
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter*{Acknowledements}
+I thank my two supervisors, Prof. Dr. Reinhard Furrer and Prof. Dr. Marcel Salathé for their academic guidance and critical feedback as well as for the intellectual freedom I was able to enjoy during my thesis. I thank the Digital Epidemiology lab and its members for stimulating conversations, an extraordinary lab retreat, and plenty of free coffee.
+
+In addition, I thank the Swiss Study Foundation, the Canton of Schaffhausen, the Werner Siemens Foundation, and the Ernst Göhner Foundation for their financial and ideational support. It has empowered me and given me the freedom to conduct my studies the way I wanted.
+
+Finally, I thank my mother, my other mother, my other brothers and my friends for reminding me that there is an alternative to books, computer screens, and bad posture. And most importantly, I thank my fiancee for her patience, for laughing about, but mostly with me, and for pretending to care about my rants about malfunctioning code snippets and unsolvable error message conundrums.\newline
+
+\begin{flushright}
+Biel, 2017,\\
+Servan Grüninger
+\end{flushright}
+\vfill
+
+\begin{center}
+``Good statistics is like strong coffee: bitter at times, but always sobering."
+\end{center}
 
 \thispagestyle{empty}
 \cleardoublepage
@@ -300,7 +306,7 @@ Hence, novel methods to complement traditional epidemiological information might
 \item [No stigma attached] Influenza is ``socially accepted", in that Influenza patients are not stigmatised and it is not taboo to talk openly about it (in fact, getting sick with the flu is a very common content of small talk and news articles)
 \item [Relevant for public health ] Even though the flu is common, it is far from harmless. As outlined above, the flu poses a serious threat to the health of hundreds of thousands of people in Switzerland alone. Hence, better surveillance method would allow for better preventive and therapeutic measures.
 \item [Large body of pre-existing research] Partially due to the reasons outlined above, there exists extensive research about the prevention and treatment of the flu as well as about its etiology, transmission paths, pathophysiology, and virological characteristics. These information serve as excellent basis for epidemiological research
-\item [Thriving research community] Many researchers are working on understanding, preventing, and combatting the flu on different levels, offering ample opportunities for collaborations.
+\item [Thriving research community] Many researchers are working on understanding, preventing, and combating the flu on different levels, offering ample opportunities for collaborations.
 \end{description}
 
 \section{Complementary epidemiology}
@@ -316,18 +322,18 @@ In the digital age, everybody leaves traces. And thanks to the vast amount of di
 
 For example, Google tried to use search queries in order to predict the spread and the intensity of the flu in certain countries \citep{ginsberg_detecting_2009}. Retrospective analysis of Google search queries and online media reports showed that these data sources could have been used to detect the Ebola epidemic of 2014/2015 quicker and with more sensitivity \citep{anema_digital_2014, milinovich_role_2015}. And finally, Wikipedia page views proved to be reliable predictors to model the epidemiology of such different diseases as dengue fever, influenza, cholera, HIV/AIDS, or tuberculosis \citep{generous_global_2014}. 
 
-Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}. Finally, there exist a vast range of participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogenous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.
+Other services such as ``Health Map" aggregate search engine queries, online news reports, official information from national and international health agencies as well as user eyewitness reports in order to keep track of a wider range of disease outbreaks all over the world \citep{brownstein_surveillance_2008,freifeld_healthmap:_2008}. Finally, there exist a vast range of participatory disease surveillance system, such as ``FrontlineSMS", ``Usahidi", ``GeoChat", ``Asthmapolis", ``Outbreaks Near Me",``Influenzanet", ``FluTracking",``Reporta", ``Dengue na Web", ``SaludBoricua", or ``Flu near you", which use SMS, voice messages, smartphone apps, web forms, or e-mail in order to collect data from and disseminate epidemiological information to afflicted populations \citep{freifeld_participatory_2010,chunara_flu_2013,wojcik_public_2014,chunara_estimating_2015}. In addition, these forms of ``participatory epidemiology" can also help in adding social and economic context to health-related data, defining the research goals and questions, improving the work-flow, or synthesising heterogeneous sources of data \citep{bach_participatory_2017,liu_assessing_2017}.
 
 And it does not stop with digital data alone. Many of the approaches outlined above can be combined with and extended by other biologically or clinically relevant data such as high-throughput sequence data, clinical visits, pharmaceutical prescriptions, or clinical symptoms, in order to allow for a more accurate description of the mechanisms of disease spread, the pathogens involved, and the treatments administered \citep{ray_network_2016}.
 
 For the scope of this thesis, I am focusing on one particularly potent source of information: social media data.
 
 \section{What can ``Larry the Bird" tell us about the flu?}
-Social media offers the possibility to directly measure a user's sentiments and behaviours via his posts and interactions with other users---information that can be highly valuable from an epidemiological point of view. If somebody is suffering from the flu, her behaviour undoubtedly changes: She behaves more lethargicly, stays in bed, and might complain about her symptoms in the presence of family, friends, or work colleagues. Even people on Twitter or Facebook can exhibit ``disease symptoms" which can be diagnosed. A tweet, in which somebody is complaining about having fever, joint aches, and a cough can be a tell-tale sign of the flu. Similarly, somebody who tweets that all his colleagues were absent from work due to the flu, gives researchers precious and above-all fast warning about an incoming flu wave.
+Social media offers the possibility to directly measure a user's sentiments and behaviours via his posts and interactions with other users---information that can be highly valuable from an epidemiological point of view. If somebody is suffering from the flu, her behaviour undoubtedly changes: She behaves more lethargically, stays in bed, and might complain about her symptoms in the presence of family, friends, or work colleagues. Even people on Twitter or Facebook can exhibit ``disease symptoms" which can be diagnosed. A tweet, in which somebody is complaining about having fever, joint aches, and a cough can be a tell-tale sign of the flu. Similarly, somebody who tweets that all his colleagues were absent from work due to the flu, gives researchers precious and above-all fast warning about an incoming flu wave.
 
-Given that social media is often used to share information about one's personal well-being and/or feeling and takes up an increasing amount of time of many people \citep{bauer_timeonline_2016,scott_time_2017,asano_socialmediatime_2017}, it is to be expected that behavioural changes due to a disease can also be detected by analysing the social media behaviour of the people afflicted. Either because said people are explicitely informing their peers about their current affliction or because the frequency or other implicit aspects of their social media behaviour changes. All these changes ca, in theory, be detected on the population level if researchers get access to data sets that are large enough.
+Given that social media is often used to share information about one's personal well-being and/or feeling and takes up an increasing amount of time of many people \citep{bauer_timeonline_2016,scott_time_2017,asano_socialmediatime_2017}, it is to be expected that behavioural changes due to a disease can also be detected by analysing the social media behaviour of the people afflicted. Either because said people are explicitly informing their peers about their current affliction or because the frequency or other implicit aspects of their social media behaviour changes. All these changes ca, in theory, be detected on the population level if researchers get access to data sets that are large enough.
 
-However, using social media for epidemiological surveillance is deeply hampered by one crucial fact: Most social media plattforms do not offer access to user's profiles. The profiles of most social media users are either completely inaccessible to the public (e.g. Whatsapp, Snapchat, FB-Messenger) or only accessible if the user allows it (Facebook, Instagram). But even if profiles are publicly available, they are often not easily accessible and aggregatable for research purposes due to the strict rules of the application programming interfaces (APIs) provided by the respectiv companies.
+However, using social media for epidemiological surveillance is deeply hampered by one crucial fact: Most social media platforms do not offer access to user's profiles. The profiles of most social media users are either completely inaccessible to the public (e.g. Whatsapp, Snapchat, FB-Messenger) or only accessible if the user allows it (Facebook, Instagram). But even if profiles are publicly available, they are often not easily accessible and aggregatable for research purposes due to the strict rules of the application programming interfaces (APIs) provided by the respective companies.
 
 ``Larry the Bird", as Twitter's trademark mascot is affectionately called by its creators \citep{rehak_twitterbird_2014}, is a notable exception to this. Due to the ease-of-access to the Twitter-API as well as due to the fact, that tweets often contain a direct expression of sentiment of some sort, researchers can gain access to millions of tweets sent out every day \citep{twitter_annual_2017}. The source of information is so rich, in fact, that it has spawned a variety of studies in wide range of disciplines, such as political science \citep{tumasjan2010predicting,tumasjan2011election,stieglitz2012political,newman2016tracking}, business \citep{swani2014should,chae2015insights}, economics \citep{bollen2011twitter,bollen2011modeling,zhang2012predicting,sul2014trading}, sociology \citep{poblete2011all,himelboim2013birds,mccormick2015using}, communication science \citep{zhao2009and,marwick2011tweet,himelboim2013birds,hermida2013journalism}, psychology \citep{chen2011tweet,golbeck2011predicting,qiu2012you,eichstaedt2015psychological,braithwaite2016validating}, nutrition science \citep{widener2014using,vidal2015using, abbar2015you}, or medicine \citep{salathe2013dynamics,love2013twitter,nwosu2014social,adrover2015identifying,eichstaedt2015psychological,mowery2017feature}, even though studies from the computer and information sciences studies are clearly in the majority \citep{lee2013real,zimmer2014topology,steiger2015advanced}. 
 
@@ -346,6 +352,7 @@ It would be prudent then, to validate any keywords that might indicate disease s
 This is what \cite{bodnar_ground_2014} have done. They built a flu classification model on tweets from users of which they knew the disease state up to the temporal resolution of a month. That is, they had the possibility to build their model knowing which one of the observed Twitter users were sick and which were not within a specific month. Hence, they did not only correlate tweet content with population-level, but could directly assign a Twitter user's timeline with his or her disease state. 
 
 However, this Twitter flu classifier (see Section~\ref{sec:on_the_ground} for details) has only been trained and tested on a very small data set so far. Hence, the first goal of this thesis is to assess the validity of the classifier using 2.8 billion geotagged tweets collected from users on the U.S. mainland over the course of four years (Chapter~\ref{ch:results}) and to make suggestions on how its performance might be improved (Chapter~\ref{ch:discussion}).
+\cleardoublepage
 
 \chapter{The challenge of reproducibility}
 \label{ch:reproducibility}
@@ -365,15 +372,15 @@ In other words, \cite{peng_reproducible_2009} sees reproducibility given if one 
 
 These distinctions have also been adopted by the American Statistical Association, which calls a study reproducible, ``if you can take the original data and the computer code used to analyze the data and reproduce all of the numerical findings from the study". Replicability is defined as ``the act of repeating an entire study, independently of the original investigator without the use of original data (but generally using the same methods)" \citep{broman_recommendation_2017}.
 
-However, \cite{kenett2015clarifying} differentiate between repeatability, reproducibility, and replicability and point out that the nomenclature can vary in meaning across different fields. They suggest ``that these terms can be clarified by considering the intended generalisation of the study", since all three terms ``are aimed at assuring generalizability, but the generalizability is typically of different types". Within this framework, a repeatable finding can be recreated by keeping every aspect of the original study or analysis constant (including exactly the same methods, codes, locations, experimentors etc.); reproducible findings can be recreated by different researchers in different locations, but by using the methods and data sources from the original study; and replicable findings can be recreated by different researchers in different locations with different (i.e. recollected) data and sometimes by using different methods, too. For example, the PDF-version of this thesis can be rebuilt by running the corresponding RNW-file (repeatability), while the findings described therein shoulb be reproducible by using the data and codes provided in the Github-repository (reproducibility) or even by recollecting the data and rewriting the codes (replicability). In other words, repeatable research is least and replicable research is most generalisable.
+However, \cite{kenett2015clarifying} differentiate between repeatability, reproducibility, and replicability, and point out that the nomenclature can vary in meaning across different fields. They suggest ``that these terms can be clarified by considering the intended generalisation of the study", since all three terms ``are aimed at assuring generalizability, but the generalizability is typically of different types". Within this framework, a repeatable finding can be recreated by keeping every aspect of the original study or analysis constant (including exactly the same methods, codes, locations, experimenters etc.); reproducible findings can be recreated by different researchers in different locations, but by using the methods and data sources from the original study; and replicable findings can be recreated by different researchers in different locations with different (i.e. recollected) data and sometimes by using different methods, too. For example, the PDF-version of this thesis can be rebuilt by running the corresponding RNW-file (repeatability), while the findings described therein should be reproducible by using the data and codes provided in the Github-repository (reproducibility) or even by recollecting the data and rewriting the codes (replicability). In other words, repeatable research is least and replicable research is most generalisable.
 
 Finally, \cite{goodman_what_2016} point out that the concept of reproducible research originally emerged in the computational sciences with a clear-cut definition, namely to ``permit the reader of a paper to see the entire processing trail from the raw data and code to figures and tables", even though, nowadays, ``a wide range of issues [are] subsumed under the rubric of reproducibility: design, reporting, analysis, interpretation, and corroborating studies (that is, replication)". However, instead of upholding the existing, but muddled distinction between repeatability, reproducibility, and replicability, they offer a new terminology in order to subsume everything under the concept of reproducibility. That is, they differentiate between methods reproducibility, results reproducibility, and inferential reproducibility. 
 
 Methods reproducibility corresponds to the most common interpretation of reproducibility, namely ``the ability to implement, as exactly as possible, the experimental and computational procedures, with the same data and tools, to obtain the same results." Results reproducibility corresponds to replicability and is ``the production of corroborating results in a new study, having followed the same experimental methods". Inferential reprodudicibility, however, is different from the concepts described so far and refers to ``the drawing of qualitatively similar conclusions from either an independent replication of a study or a reanalysis of the original study".
 
-I believe that distinction given by \cite{goodman_what_2016} is the most straightforward and exhaustive categorisation of different forms of reproducibility. Even the concept of repeatability can be subsumed under this categorisation, namely as an especially stringent case of methods reproducibility. Most importantly, however, this categorisation makes it clear that methods, results, and inferential reproducibility can occur independently from each other, something that is often forgotten in the discussions about reproducibility. In particular, methods reproducibility can be fulfilled even though results and inferential reproducibility are absent---e.g. if a finding based on Twitter user data can be perfectly recreated using the original raw data and codes, but fails replication when collecting data from a different set of Twitter users. The same holds true for results reproducibility, which can exist independently of methods reproducibility---e.g. if the raw data and code of the original study are not provided, but replication is possible by recollecting the data using the methods described in the study---and inferential reproducibility---e.g. if the original results can be replicated but still warrant a different interpretation because of theoretical or methodological discrepancies. Finally, inferential reproducibility can be fulfilled even in the absence of methods and results reproducibility---e.g. when the raw data and code of the original study are missing, while the replication of the study based on the described methods shows an attenuated (or exarcebated) effect with the same directionality as the original study.
+I believe that distinction given by \cite{goodman_what_2016} is the most straightforward and exhaustive categorisation of different forms of reproducibility. Even the concept of repeatability can be subsumed under this categorisation, namely as an especially stringent case of methods reproducibility. Most importantly, however, this categorisation makes it clear that methods, results, and inferential reproducibility can occur independently from each other, something that is often forgotten in the discussions about reproducibility. In particular, methods reproducibility can be fulfilled even though results and inferential reproducibility are absent---e.g. if a finding based on Twitter user data can be perfectly recreated using the original raw data and codes, but fails replication when collecting data from a different set of Twitter users. The same holds true for results reproducibility, which can exist independently of methods reproducibility---e.g. if the raw data and code of the original study are not provided, but replication is possible by recollecting the data using the methods described in the study---and inferential reproducibility---e.g. if the original results can be replicated but still warrant a different interpretation because of theoretical or methodological discrepancies. Finally, inferential reproducibility can be fulfilled even in the absence of methods and results reproducibility---e.g. when the raw data and code of the original study are missing, while the replication of the study based on the described methods shows an attenuated (or exacerbated) effect with the same directionality as the original study.
 
-For the remainder of this thesis I will therefore adopt the definitons of \cite{goodman_what_2016} and distinguish between methods, results, and inferential reproducibility, respectively.
+For the remainder of this thesis I will therefore adopt the definitions of \cite{goodman_what_2016} and distinguish between methods, results, and inferential reproducibility, respectively.
 
 \section{Ensuring reproducibility: easier said than done}
 (Results) reproducibility is often called the ``hallmark" \citep{aarts2015estimating,munafo_manifesto_2017} or ``bedrock" \citep{casadevall_reproducible_2010} of science. After all, what good are scientific findings if they are only valid for the time and place they were originally created? Not much, if we ought to believe the most fervent harbingers of scientific doom.
@@ -382,13 +389,13 @@ In fact, the inability to reproduce or replicate many key scientific findings in
 
 The discussion does not remain within the realms of academia, either, but has already spilled into the pages and websites of mass media outlets, causing a deluge of articles that are further fuelling the discussion about the ``reproducibility crisis" \citep{lehrer_truth_2010,carey_psychology_2015,carey_scrutiny_2015,achenbach_many_2015,achenbach_reproducibility_2015,yong_psychology_2016,engber_broken_2016,baker_crisis_2016,econ_try_2016,feilden_most_2017,belluz_cancer_2017,meyer_fix_2017}.
 
-It should be noted, however, that (results) reproducibility is neither a necessary nor a sufficient criterion for good science. There are many areas of science (e.g. evolutionary biology, paleontology, geology, climatology astronomy), which make empirical claims about the world based on good scientific practice, but which still fail to be reproducible---simply because it is impossible to replicate dinosaurs marching on earth, vulcanoes erupting, or suns exploding, to just name a few examples \citep{dfg_reproduzierbarkeit_2017}. Many of these disciplines should strive for methods and inferential reproducibility, but they cannot be blamed for failing the test for results reproducibility. 
+It should be noted, however, that (results) reproducibility is neither a necessary nor a sufficient criterion for good science. There are many areas of science (e.g. evolutionary biology, paleontology, geology, climatology astronomy), which make empirical claims about the world based on good scientific practice, but which still fail to be reproducible---simply because it is impossible to replicate dinosaurs marching on earth, volcanoes erupting, or suns exploding, to just name a few examples \citep{dfg_reproduzierbarkeit_2017}. Many of these disciplines should strive for methods and inferential reproducibility, but they cannot be blamed for failing the test for results reproducibility. 
 
 In experimental research, however, the lack of results reproducibility must give raise to much more concern, even though it should not come as a surprise either. Practices such as multiple comparisons, data mining, $p$-hacking, selective outcome reporting, or hypothesising after the results are known (HARKing), can hamper all three forms of reproducibility and regularly occur in daily research even without the researchers exhibiting any nefarious motivations \citep{goodman_what_2016}. In addition, cognitive and methodical biases such as confirmation, hindsight, framing, or belief bias, and selection, reporting, attrition, recall, or observer bias, respectively, can hamper all three forms of reproducibiliy as well and are commonplace in scientific practice \citep{munafo_manifesto_2017}.
 
 But even when following every methodological, statistical, and scientific rule to the book in order to boost reproducibility as much as possible, findings can be non-reproducible---at least with regard to results and inferential reproducibility---thanks to the standard null hypothesis testing framework, an unfortunate methodological hybrid between the hypothesis testing concept of R. A. Fisher on one hand and the one of Neyman--Pearson on the other \citep{amrhein_earth_2017}. Within this framework, researchers pit their own hypothesis against the Null hypothesis by conducting a significance test, which reveals the probability of receiving a result that is at least as extreme as the one the researchers have received---under the assumption that the Null hypothesis is true. This probability (the $p$-value) is than compared with an arbitrarily defined threshold (e.g. 0.05), either leading to the verdict that the findings are significantly different from the Null ($p < 0.05$) or not significant enough ($p >= 0.05$) for the Null to be rejected. Thus, even under perfect condition without no scientific misconduct whatsoever, we would still expect that 5 \% of all tests against true Null hypotheses turn out to be (falsely) significant. 
 
-This, in combination with publication bias (the preferential publication of statisticallly significant findings in scientific journals) and the inherent uncertainties of scientific research leads to a strong over-representation of false positive research findings in the scientific literature \citep{ioannidis_why_2005}, thereby hampering results reproducibility. And even if the Null hypothesis has been rejected correctly, inferential reproducibility can still be an issue, because scientists often use the rejection of the Null as a sign of support for their alternative hypothesis---even though a significance test is not enough to tell whether this alternative hypothesis is more or less likely to be true than the Null hypothesis. To this, additional information, statistical testing, and inferential reasoning is necessary.
+This, in combination with publication bias (the preferential publication of statistically significant findings in scientific journals) and the inherent uncertainties of scientific research leads to a strong over-representation of false positive research findings in the scientific literature \citep{ioannidis_why_2005}, thereby hampering results reproducibility. And even if the Null hypothesis has been rejected correctly, inferential reproducibility can still be an issue, because scientists often use the rejection of the Null as a sign of support for their alternative hypothesis---even though a significance test is not enough to tell whether this alternative hypothesis is more or less likely to be true than the Null hypothesis. To this, additional information, statistical testing, and inferential reasoning is necessary.
 
 \section{Putting emphasis on methods reproducibility}
 As outlined above, ensuring reproducibility is a daunting task that can only be tackled by a multitude of measures and joint efforts from researchers and research institutions. 
@@ -401,7 +408,7 @@ Even in the best of worlds, scientific research cannot follow the textbook of go
 
 One important aspect of ensuring reproducible research are detailed and complete reports on the experimental and statistical procedures, the study design, potential confounders, techniques, and methods used, study protocols, statistical designs and further important elements that might be necessary to fully reproduce a scientific finding \citep{kass_ten_2016}. Also, it is of paramount importance that researchers publish data and code as complete and accessible as legally and ethically possible and provide clear and concise descriptions of their work flow \citep{peng_reproducible_2006}.
 
-In the spirit of the issues raised above, this thesis serves a second and third important goal: It is the attempt to test some findings from \cite{bodnar_data_2015} for reproducibility as well as to ensure methods reproducibility for this thesis itself. In addition, the first goal, outlined in Chapter~\ref{ch:intro} and consisting in the validation of the Twitter flu classifier from \cite{bodnar_ground_2014}, can be regarded as an attempt in reproducibility as well, namely results and inferential reproducibility. Hence, the data, analyses, and discussions presented in the following chapters will focus on the methods, results, and inferential reproducibility of the findings from \cite{bodnar_ground_2014} and \cite{bodna_data_2015}.
+Hence, this thesis serves a second and third important goal: It is the attempt to test some findings from \cite{bodnar_data_2015} for reproducibility as well as to ensure methods reproducibility for this thesis itself. In addition, the first goal, outlined in Chapter~\ref{ch:intro} and consisting in the validation of the Twitter flu classifier from \cite{bodnar_ground_2014}, can be regarded as an attempt in reproducibility as well, namely results and inferential reproducibility. Hence, the data, analyses, and discussions presented in the following chapters will focus on the methods, results, and inferential reproducibility of the findings from \cite{bodnar_ground_2014} and \cite{bodnar_data_2015}.
 
 \section[On the ground validation of online diagnosis]{On the ground validation of online diagnosis with Twitter and medical records}
 \label{sec:on_the_ground}
@@ -411,9 +418,9 @@ The researchers collected a total of 37'599 tweets from the 104 accounts mention
 
 They then screened the tweets in both categories for the occurrence or absence of a set of keywords \{flu, influenza, sick, cough, cold, medicine, fever\}. The predictive power of these seven words were then tested by applying five different classification methods: J48 (a Java implementation of the C4.5 algorithm), naive Bayes, logistic regression, Naive Bayes, random forest, and support vector machine (SVM). All classification methods failed to reliably correlate the keywords with a Twitter user's disease status (see Figure~\ref{fig:ROC_classification_seed}).
 
-In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``healthy" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curver (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
+In a second step, the researchers also applied simple bag-of-words techniques to identify relevant keywords, namely by finding the 12'393 most common keywords, ranking them according to their predictive power with regard to Influenza and finally choosing the top 10, 100, or 1000 keywords on this ordered list. The predictive power of the keywords (and thus the ordering of the list) was calculated by classifying the users as either being ``sick" or ``healthy" in a given month and then comparing said classification with the real disease status. The classification was again done using the five methods mentioned above, whereas the naive Bayes classifier performed best with a classification accuracy of 89.72\% and an area under the curve (AUC) of 0.8544 when using the top 100 keywords (see Figure~\ref{fig:ROC_classification_seed}).
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=.9\textwidth]{01_ROC_classification_seed.png}
   \caption{The receiver operating characteristic (ROC) of classifiers that use hand chosen key words (left) and algorithmically chosen keywords (right) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line), and 1000 (dotted line) were selected as features. Taken from \cite{bodnar_ground_2014}.}
@@ -430,9 +437,9 @@ Bodnar applied the algorithm in the above-described fashion to a set of 15'560'3
 
 In a next step, Bodnar created a Kermack--McKendrick SIR model based on the results of the classifier \citep{martcheva2015introduction}:
 \begin{align}
-\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma.
+\frac{dS}{dt} = -SI\beta, \qquad \frac{dI}{dt} = -SI\beta - I\gamma, \qquad \frac{dR}{dt} = I\gamma. \label{eq:0}
 \end{align}
-$S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilites from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official influenza-like illness (ILI) rates from the Centers for Disease Control (CDC) in Atlanta using a multi-grid search method. Note that estimates about flu prevalence are usually made using ILI rates as basis, not confirmed flu cases (see Section~\ref{sec:comparison_cdc} for more details.)
+$S$, $I$, and $R$ represent the relative frequencies of susceptible, exposed, and recovered individuals, respectively, whereas $\beta$ and $\gamma$ are the transition probabilities from being susceptible to having the disease and from having the disease to recovering from it, respectively. To determine the values of $\beta$ and $\gamma$, Bodnar fitted the SIR model based on the data from the Twitter classifier to the official influenza-like illness (ILI) rates from the Centers for Disease Control (CDC) in Atlanta using a multi-grid search method. Note that estimates about flu prevalence are usually made using ILI rates as basis, not confirmed flu cases (see Section~\ref{sec:comparison_cdc} for more details.)
 
 Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR model minimised the residual sum of squares (RSS):
   \begin{align}
@@ -440,9 +447,16 @@ Values for $\beta$ and $\gamma$ were chosen such that the corresponding SIR mode
   \end{align}
 Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people showing ILI symptoms based on the SIR model ($I_{\gamma, \beta}$ and the official CDC data ($I_{\text{CDC}}$), respectively. By doing so, he calculated the optimal values of $\beta$ and $\gamma$ for each flu season as well as for the whole study period combined (see Table~\ref{tab:nationalparams}). 
 
-\begin{table}[H]
+Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.
+
+Based on the values given in Table~\ref{tab:nationalparams}, he could then calculate yearly ILI estimates for the flu seasons of 2011--2012, 2012--2013, and 2013--2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}). In addition, he fitted an autocorrelation model using the results from the Twitter base model and the official CDC data: 
+  \begin{align}
+I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d. \label{eq:2}
+  \end{align}
+Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). It is as of yet unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. However, Bodnar confirmed that the ``Twitter base model" is indeed supposed to contain the raw output from the Twitter classifier (personal communication). However, I was not able to retrieve the model parameters $a$, $b$, and $c$, since I only received a file with the model results, but not the parameter specifications.
+\begin{table}[htbp!]
 \centering
-\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter data (grey); taken from \cite{bodnar_data_2015}.}
+\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter data (grey). Taken from \cite{bodnar_data_2015}.}
 \begin{tabular}{l l l l l}
 
  Year & \(\gamma\) & \(\beta\) & RSS\\ \hline
@@ -458,25 +472,18 @@ Here, $t$ denotes the time in weeks, while $I$ denotes the percentage of people 
 \label{tab:nationalparams}
 \end{table}
 
-Note that in \cite{bodnar_data_2015} it is written that an optimal $S(0)$ was also estimated using the multi-grid search method. However, in the R-code provided to me $S(0)$ was simply defined as $1-I(0)$, where $I(0)$ is the relative number of Twitter users classified as ``sick" during the first week of the time window the SIR-model was built on.
 
-Based on the values given in Table~\ref{tab:nationalparams}, he could then calculate yearly ILI estimates for the flu seasons of 2011--2012, 2012--2013, and 2013--2014 (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}). In addition, he fitted an autocorrelation model using the results from the Twitter base model and the official CDC data: 
-  \begin{align}
-I_{\text{full}}(t + 1) = a \cdot I_{\text{CDC}}(t - 1) + b \cdot I_{\text{CDC}}(t) + c \cdot I_{\text{Twitter}}(t) + d. \label{eq:2}
-  \end{align}
-Here, $t$ denotes the time in weeks, $I_{\text{CDC}}$ depicts the official ILI percentages from the CDC (lagged by two and one weeks, respectively), and $I_{\text{Twitter}}$ denotes the ILI percentages received from the Twitter base model (Bodnar, personal communication). Note that it is unclear whether the ``Twitter base model" is supposed to consist of the raw results from the Twitter classifier or contains these raw results combined with additional information. An e-mail requesting clarification of this has been sent, but a clear description of how the Twitter base model was calculated is still missing. Also, I am still missing the values for $a$, $b$, and $c$, since I only received a file with the model results, but not the paramater specifications.
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
-    \includegraphics[width=1\textwidth]{02_todd_bodnar_SIR.png}
+    \includegraphics[width=1\textwidth]{02_todd_bodnar_SIR.pdf}
   \caption{The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters. The discontinuities stem from recalculating the SIR models for each year with the ILI rates from the Twitter classifier as a starting point for each year. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis_SIR}
   \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
-    \includegraphics[width=0.9\textwidth,height=0.6\textwidth]{03_cdc_fit_bodnar_thesis.png}
-  \caption{Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) compared to the CDC's reported ILI rates (circles) for the whole United States. From \cite{bodnar_data_2015}.}
+    \includegraphics[width=0.9\textwidth]{03_cdc_fit_bodnar_thesis.png}
+  \caption{Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) compared to the CDC's reported ILI rates (circles) for the whole U.S.. From \cite{bodnar_data_2015}.}
   \label{fig:cdc_fit_bodnar_thesis}
   \end{figure}
   
@@ -491,7 +498,9 @@ Note that neither Section~\ref{sec:comparison_cdc} nor Section~\ref{sec:methods_
 
 \chapter{(Almost) big data: How to analyse 2.8 billion tweets}
 \label{ch:data_set_description}
-In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though some aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite each library I have used for the data aggregation and analysis. However, since I used several libraries at multiple occasions for my work, I will only cite them when they are mentioned the first time. In order to provide a maximum of reproducibility, all libraries, data sets, custom-written functions, and their output are made avaialable on Github including a detailled description of the exact version of the libraries that were used for the creation of the findings presented in this thesis.
+In this chapter, I will describe the basic characteristics of the data set used by me in this thesis. The largest part of the data aggregation, rectification, and analysis was done using statistical programming language ``R" \citep{rbase_2017}, even though a few aggregation and transformation steps were also done using the Python programming language \citep{rossum_1995_python}. In the following, I will cite those packages which I have used most frequently or which were crucial for my data aggregation and analysis. In addition, Appendix~\ref{app:packages} provides the reader with an exhaustive list of all packages I used for this thesis, including the exact version number.
+
+In addition, all packages, data sets, custom-written functions, their output and any additional information that might be important to understand or reproduce this work are made available on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github}. See Appendix~\ref{app:github} for more information about the structure of the Github repository.
 
 \section{The nature of the data beast}
 \label{sec:starting}
@@ -504,6 +513,7 @@ At the beginning of my analysis, I was handed a data set with tweet ratings, sub
   \item \texttt{sick\_users} contains the rated tweets of all those users who sent at least one sick tweet (4'131'650~tweets)
 \end{itemize}
 
+\clearpage
 Each of the sets contains a row per tweet with the following six columns: 
 
 \begin{knitrout}
@@ -529,7 +539,7 @@ Each of the sets contains a row per tweet with the following six columns:
   \item \texttt{state} The code for the U.S. state (or District of Columbia) in which the tweet was sent
 \end{itemize}
 
-I ignored the \texttt{one\_hundred} data set and only analysed the other two sets. All data sets were handled using the packages ``datatable" \citep{datatable} or ``bigmemory" \citep{bigmemory}.
+I ignored the \texttt{one\_hundred} data set and only analysed the other two sets. All data sets were handled, analysed, and visualised using the packages ``data.table" \citep{datatable}, ``bigmemory" \citep{bigmemory}, ``bigtabulate" \citep{bigtabulate_2016}, ``biganalytics" \citep{biganalytics_2016}, ``stats" \citep{rbase_2017}, and ``ggplot2" \citep{ggplot2_2009}.
 
 \section{Description of the \texttt{sick\_users} data set}
 \label{sec:sick_user_exploratory}
@@ -537,29 +547,38 @@ I ignored the \texttt{one\_hundred} data set and only analysed the other two set
 
 As mentioned above, the \texttt{sick\_users} data set should contain all tweets from those users who had at least one of their tweets labelled as ``sick" by the classifier.
 
-First, I preprocessed and filtered the data set in order to remove all those tweets that were sent from outside the U.S. mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $-125$° to W $-66$° representing the longitudinal and N $25$° to N $50$° representing the latitudinal expansion of the window. This way, a total of $42'860$ entries were removed with $4'088'790$ entries remaining.
+First, I pre-processed and filtered the data set in order to remove all those tweets that were sent from outside the U.S. mainland (e.g. from the northern Mexico or southern Canada) or were otherwise incorrectly geolocated (e.g. having coordinates which locate the tweeter in the middle of the ocean). To do so, I excluded all tweets lying outside a rough rectangular window with W $-125$° to W $-66$° representing the longitudinal and N $25$° to N $50$° representing the latitudinal expansion of the window. This way, a total of $42'860$ entries were removed with $4'088'790$ entries remaining. As Figure~\ref{fig:hexbincontinent} shows, most of these tweets were clustered around cities, suburban areas and other population-dense regions of the U.S. You can also see that a considerable amount of the collected tweets was not sent from the United States, but from Mexico or Canada.
 
-In the next step, I ran a custom-written function using a polygon lookup based on the coordinates of each tweet to determine the name of the states and to remove all those tweets which could not be assigned to any specific state. Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additional control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analyis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific U.S. state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:canexico_and_removed}).
+In the next step, I ran a custom-written function using a polygon look-up using the ``R"-packages ``maps" \citep{maps_2016}, ``geosphere" \citep{geosphere_2016}, and ``dplyr" \citep{dplyr_2016}. The function takes the coordinates of each tweet and compares it to the polygons of the U.S. states in order to determine the name of the state from which this tweet was sent or to remove it if it could not be assigned to any specific state. 
+
+Of course, one might wonder why I did not just use the state code already present in the data set to assign each tweet to its respective state. There are two reasons for this: First, I did not have any reference table relating the state codes to the respective state names. Second, the polygon serves as an additional control for the reliability of the data set. If state codes could not clearly be assigned to a specific state, this would mean that the codes could not be used as reference for future analysis. Luckily, this doesn't seem to be the case. Each state code could clearly be assigned to a specific U.S. state with the sole exception of state code ``56", which comprised all those tweets that came to lie on a state or country border, were sent from Mexico or Canada, or were geolocated to the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
 Most of them either came to lie at the coastline or the Canadian-U.S.-border and the Mexican-U.S.-border, respectively. I removed a total of 180'290 tweets that were sent from either Canada or Mexico (see Figure~\ref{fig:canexico_and_removed}). In order to reassign the unassigned tweets from the coastline, I first changed the coordinates of the ``border cases" by 0.1 degrees longitude and latitude towards the center of the U.S. main land (e.g. if a tweet was sent from northeastern Canadian border, I added 0.1 degrees to its longitude and subtracted 0.1 degrees from its latitude before re-running the code). Those tweets that were still unassigned received the same state name as the majority of their neighbours within a 0.1$\times$0.1 degree window. This way, an additional 211'511 tweets were removed, most of them at the coastline or from the ocean (see Figure~\ref{fig:canexico_and_removed}).
 
-After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 tweets remaining. These tweets were sent by a total of 213'426 users, meaning that on average, each user sent 17.32 tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only sligthly longer than in my case). As can be in Figure~\ref{fig:histogram_ID_tot} a large part of the Twitter users in the \texttt{sick\_users} data set only sent one or two tweets over the whole study period. Furthermore, the maximal number of tweets sent per user over the course of the 208 week time window was 86, a very low number given the fact that there are Twitter users out there who send over a hundred tweets \textit{per day}.\newpage
+After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 tweets remaining. These tweets were sent by a total of 213'426 users, meaning that on average, each user sent 17.32 tweets. This is in stark contrast to the mean number of tweets reported in \cite{bodnar_data_2015} (175.59 tweets per user over the whole study period). A slight decrease in the mean tweet number should be expected due to the fact that I discarded those tweets outside the designate time or geographical window. However, a tenfold decrease in mean tweet number seems suspect (the time window analysed in \cite{bodnar_data_2015} was March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, so only slightly longer than in my case). As can be in Figure~\ref{fig:histogram_ID_tot} a large part of the Twitter users in the \texttt{sick\_users} data set only sent one or two tweets over the whole study period. Furthermore, the maximal number of tweets sent per user over the course of the 208 week time window was 86, a very low number given the fact that there are Twitter users out there who send over a hundred tweets \textit{per day}.
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
-    \begin{subfigure}[t]{0.9\textwidth}
+    \includegraphics[width=1\textwidth]{4A_HexbinContinent.pdf}
+  \caption{Spatial distribution of tweets in the \texttt{sick\_users} data set, aggregated in 12'405 hexagon cells in grid dimensions 148 vertically by 301 horizontally. The black circles correspond to cities with more than 300'000 inhabitants. Note that the colour label does not follow a linear scale. Due to large differences in the minimal and maximal number of tweets in each bin, I performed a root transformation on the data using the tenth root. The plot was produced using the ``R"-packages ``hexbin" \citep{hexbin_2016}, ``maps" \citep{maps_2016}, and ``grid" \citep{murrell_integrating_2003,murrell_grid_2007,zhou_fun_2010}.}
+  \label{fig:hexbincontinent}
+  \end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+    \begin{subfigure}[t]{0.8\textwidth}
     \includegraphics[width=1\linewidth]{04_state56_sick_raw_df.png}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.9\textwidth}
+  \begin{subfigure}[t]{0.8\textwidth}
   \includegraphics[width=1\linewidth]{05_CanexicoAndRemoved_sick_raw_df.png}
   \caption{}
   \end{subfigure}
-  \caption{(a) All tweets in the \texttt{sick\_users} data set whose \texttt{state} variable is coded as ``56", i.e. all tweets that could not be assigned to any specific U.S. state. (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any U.S. state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt{sick\_users} data set. The green dots represent the tweets that whose \texttt{state} was coded as ``56" as  a code, but which could be recovered by the polygon lookup I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textit{not} have a \texttt{state} code other than ``56", but failed to be assigned to a state by the polygon lookup I performed.}
+  \caption{(a) All tweets in the \texttt{sick\_users} data set whose \texttt{state} variable is coded as ``56", i.e. all tweets that could not be assigned to any specific U.S. state. (b) Tweets whose origins was determined to be in Canada or Mexico (brown) or which could not be assigned to any U.S. state (blue, mainly from the coastline or the ocean) and thus were removed from the \texttt{sick\_users} data set. The green dots represent the tweets that whose \texttt{state} was coded as ``56" as  a code, but which could be recovered by the polygon look-up I performed. Note that the set of tweets shown in (b) is bigger than the set of tweets with state code ``56". This is because some tweets were removed that did \textit{not} have a \texttt{state} code other than ``56", but failed to be assigned to a state by the polygon look-up I performed.}
   \label{fig:canexico_and_removed}
   \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \centering
     \includegraphics[width=1\textwidth]{06_user_activity_total_sick_raw_df.pdf}
   \caption{Histogram of the number of tweets sent per user in the \texttt{sick\_users} data set during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 tweet). Mean = 17.32 (solid line); median = 14 (dashed line).}
@@ -568,7 +587,7 @@ After pre-processing, the \texttt{sick\_users} data set was left with 3'696'989 
 
 \hfill
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{07_barplot_sick_raw_df.pdf}
 \caption{The total number of users who only sent tweets labelled as ``sick" (919), users who sent at least one tweet labelled as ``sick" and ``healthy" (19'728), and users who only sent tweets labelled as ``healthy" (192'779).}
@@ -589,17 +608,15 @@ Nevertheless, the information described above allows us to calculate an estimate
   \end{align}
 
 Here, $T_\text{tot}$ and $T_\text{geotagged}$ depict the number of tweets in the real world and the number of tweets in the geotagged subsample, respectively, whereas $U_\text{tot}$ and $U_\text{geotagged}$ denominate the number of Twitter users in the real world and in the geotagged subsample, respectively. 
-Applying this formula yields a mean tweet rate of 63.17 tweets per user in the \texttt{sick\_users} data set between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, which is higher then the unadjusted tweet rate per user in the \texttt{sick\_users} data set, but still remains considerably lower than the conservative estimate of the real-world tweet rate based on the official Twitter data. Hence, I am led to believe that the \texttt{sick\_users} data set is neither representative of rest of the data set, let alone the total corpus of tweets produced in the real world. This should not come as a suprise, since the \texttt{sick\_users} data set is supposed to contain the tweets of all those users who sent at least one tweet that was classified as ``sick" (Bodnar, personal communication).
+Applying this formula yields a mean tweet rate of 63.17 tweets per user in the \texttt{sick\_users} data set between March $3^\textit{rd}$ 2011 to March $4^\textit{th}$ 2015, which is higher then the unadjusted tweet rate per user in the \texttt{sick\_users} data set, but still remains considerably lower than the conservative estimate of the real-world tweet rate based on the official Twitter data. Hence, I am led to believe that the \texttt{sick\_users} data set is neither representative of rest of the data set, let alone the total corpus of tweets produced in the real world. This should not come as a surprise, since the \texttt{sick\_users} data set is supposed to contain the tweets of all those users who sent at least one tweet that was classified as ``sick" (Bodnar, personal communication).
 
 However, the large majority of the users within the \texttt{sick\_users} data set never sent a tweet that was labelled as ``sick" by the flu classifier (see Figure~\ref{fig:barplot_sick_df}). In fact, only 20'647 out of 213'426 (or 9.67\%) ever sent such a tweet.
 
-Also, a total of 919 users exclusively sent tweets that were labelled as sick---something that seems rather unlikely to happen. Finally, those 19'728 users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (16.01 and 17.53, respectively. $p$ = 0 using a Mann-Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution ($p$ =0), something that can also easily be observed in Figure~\ref{fig:both_vs_healthy_only_hist}.
+Also, a total of 919 users exclusively sent tweets that were labelled as sick---something that seems rather unlikely to happen. Finally, those 19'728 users who sent both ``sick" and ``healthy" tweets had a significantly lower average tweet rate than those users who only sent ``healthy" tweets (16.01 and 17.53, respectively. $p$ = 0 using a Mann--Whitney U-Test). In fact, a Kolmogorov-Smirnov test indicates that the two subsets do not even follow the same probability distribution ($p$ =0), something that can also easily be observed in Figure~\ref{fig:both_vs_healthy_only_hist}.
 
-Hence, it is unclear how exactly the \texttt{sick\_users} data set was constructed, since it is neither a representative subset of the whole Twitter data set (for that, the percentage for sick tweets is too high, see Section~\ref{sec:full_set}) nor does it exclusively contain tweets from users who had at least one of their tweets labelled as ``sick".
+Hence, it is unclear how exactly the \texttt{sick\_users} data set was constructed, since it is neither a representative subset of the whole Twitter data set (for that, the percentage for sick tweets is too high, see Section~\ref{sec:full_set}) nor does it exclusively contain tweets from users who had at least one of their tweets labelled as ``sick". Nevertheless, I used this data set as a basis to develop a basic grasp of the data set as well as to develop functions to analyse the data set in depth and to compare it with official flu data. However, I do not report any more results based on this data set, since the exact selection criteria used for this set are unclear and hence the inferences from it are not to be trusted. All following graphs, calculations and statistics are based on the \texttt{all\_tweets} data set.\clearpage
 
-Nevertheless, I used this data set as a basis to develop a basic grasp of the data set as well as to develop functions to analyse the data set in depth and to compare it with official flu data. However, I do not report any more results based on this data set, since the exact selection criteria used for this set are unclear and hence the inferences from it are not to be trusted. All following graphs, calculations and statistics are based on the \texttt{all\_tweets} data set.\newpage
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[b]{1\textwidth}
   \includegraphics[width=1\linewidth]{08_user_activity_both_sick_raw_df.pdf}
@@ -617,9 +634,34 @@ Nevertheless, I used this data set as a basis to develop a basic grasp of the da
 \section{Description of the \texttt{all\_tweets} data set}
 \label{sec:full_set}
 
-The complete data set consisted of a total of 2'847'039'672 tweets sent by 15'229'049. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion).
+The complete data set consisted of a total of 2'847'039'672 tweets sent by 16'015'981. Hence, it contained more tweets sent by fewer users than the data set reported by \cite{bodnar_data_2015} which consisted of 2'732'174'105 tweets sent by 15'560'328 users. The difference in the number of tweets might simply stem from the fact that the tweets in my data set were collected until July 2015, while the tweets analysed in \cite{bodnar_data_2015} were only collected up to March 2015. However, the stark reduction in the number of users is puzzling and hints at the possibility that I was working with a different data set (also see Section~\ref{sec:diff_data_set} for further discussion). An overview over all differences between the two data sets as well as over key statistical indicators of the \texttt{all\_users} data set is given in Table~\ref{tab:data_set_diff}.
 
-In a first step, I removed all tweets before 2011-03-05 and after 2015-07-11 as well as outside the rough geographical window around the U.S. mainland (W $-125$°, W $-66$°, N $25$° , N $50$° ) as described above, and aggregated the remaining 2'764'210'962 tweets and 15'229'049 users with regard to states and weeks in which the tweets where sent, i.e. I calculated the number of tweets sent within a given week in a given state.
+\begin{table}[htbp!]
+\centering
+\caption{Key differences between the data sets reported in \cite{bodnar_data_2015} and the one I analysed. Values in white and grey-coloured rows are based on the raw and pruned data set, respectively.}
+\begin{tabular}{l l l l l}
+ & Bodnar  & Grüninger & \\ \hline
+\# of users  & 15'560'328 & 16'015'981 & raw data set  \\
+\cellcolor{grey}\# of users, pruned & \cellcolor{grey}-- & \cellcolor{grey}15'229'049 & \cellcolor{grey}pruned data set\\
+\# of tweets  & 2'732'174'105 & 2'847'039'672 & raw data set  \\ 
+\cellcolor{grey}\# of tweets  & \cellcolor{grey}-- & \cellcolor{grey}2'764'210'962 & \cellcolor{grey}pruned data set \\
+\cellcolor{grey}\# of sick users, 2011--2015 & \cellcolor{grey}182'801 & \cellcolor{grey}27'052 & \cellcolor{grey}pruned data set  \\
+\cellcolor{grey}\# of users, 2011 & \cellcolor{grey}45'086 & \cellcolor{grey}175'382 & \cellcolor{grey}pruned data set\\
+mean tweet rate, 2011--2015 & 175.59 & 177.76 & raw data set\\
+\cellcolor{grey}mean tweet rate, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}181.51 & \cellcolor{grey}pruned data set \\
+\cellcolor{grey}mean tweet rate, weekly & \cellcolor{grey}-- & \cellcolor{grey}31.42 & \cellcolor{grey}pruned data set\\
+median tweet rate, 2011--2015 & 10 & 9 & raw data set\\
+\cellcolor{grey}median tweet rate, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}9 & \cellcolor{grey}pruned data set\\
+\cellcolor{grey}median tweet rate, weekly & \cellcolor{grey}-- & \cellcolor{grey}32.53 & \cellcolor{grey}pruned data set\\
+max. \# of tweets per user, 2011--2015 &  1'119'384 & 1'413'568 & raw data set\\
+\cellcolor{grey}max. \# of tweets per user, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}1'413'568 & \cellcolor{grey}pruned data set\\
+min. \# of tweets per user, 2011--2015 & 1 & 1 & raw data set\\
+\cellcolor{grey}min. \# of tweets per user, 2011--2015 & \cellcolor{grey}-- & \cellcolor{grey}1 & \cellcolor{grey}pruned data set\\
+\end{tabular}
+\label{tab:data_set_diff}
+\end{table}
+
+In a first step, I removed all tweets before 2011-03-05 and after 2015-07-11 as well as outside the rough geographical window around the U.S. mainland (W $-125$°, W $-66$°, N $25$° , N $50$°) as described above, and aggregated the remaining 2'764'210'962 tweets and 15'229'049 users with regard to states and weeks in which the tweets where sent, i.e. I calculated the number of tweets sent within a given week in a given state.
 
 The cut-off date for each week corresponded to the dates the official CDC flu reports were published. All tweets within the seven day time window leading up to a specific data were assigned to said date, including the tweets sent on that date. For example, if a tweet was sent on 2015-07-11, 2015-07-07 or 2015-07-05 it was assigned to 2015-07-11. However, if it was sent on 2015-07-04 it was assigned to the previous week ending on 2015-07-10.
 
@@ -648,9 +690,7 @@ Since there are a total of 208 weeks between 2011-03-05 and 2015-07-11 and a tot
   \item \texttt{sick\_per} The percentage of tweets labelled as sick among the total tweets sent in the given week and state
 \end{itemize}
 
-
-
-Next, I added the corresponding date and state name to each week and state index, respectively. In order to assign state names to their respective state labels, I used the label/name relationships established in the \texttt{sick\_users} data set (see section~\ref{sec:sick_user_exploratory}). Since tweets with state code ``56" predominantly stemmed from the Mexico and Canada or other areas outside the U.S. mainland (see Figure~\ref{fig:canexico_and_removed}), I removed all corresponding state/week pairs from the aggregated data set (223'352'319 tweets in total), resulting in a data set with 10'192 rows and 16 columns (see below), containing a total of 2'614'711'121 tweets from 15'229'049 users aggregated over states and weeks.
+Next, I added the corresponding date and state name to each week and state index, respectively. In order to assign state names to their respective state labels, I used the label/name relationships established in the \texttt{sick\_users} data set (see section~\ref{sec:sick_user_exploratory}). Since tweets with state code ``56" predominantly stemmed from the Mexico and Canada or other areas outside the U.S. mainland (see Figure~\ref{fig:canexico_and_removed}), I removed all corresponding state/week pairs from the aggregated data set (223'352'319 tweets), resulting in a data set with 10'192 rows and 16 columns (see below), containing 2'614'711'121 tweets from 15'229'049 users aggregated over states and weeks.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -666,21 +706,19 @@ Next, I added the corresponding date and state name to each week and state index
 \end{kframe}
 \end{knitrout}
 
-There were a total amount of 1'189'809 tweets labelled as ``sick", a number that is considerably larger than the 20'894 tweets labelled as ``sick" in the \texttt{sick\_users} data set. This further shows that the latter does not contain the full subset of tweets labelled as ``sick". Relatively speaking, 0.05~\% of all tweets in the \texttt{all\_tweets} data set were labelled as ``sick" (as opposed to 9.67~\% in the \texttt{sick\_users} data set).
+There were a total amount of 1'189'809 tweets labelled as ``sick", a number that is considerably larger than the 20'894 tweets labelled as ``sick" in the \texttt{sick\_users} data set. This further shows that the latter does not contain the full subset of tweets labelled as ``sick". Relatively speaking, 0.05\% of all tweets in the \texttt{all\_tweets} data set were labelled as ``sick" (as opposed to 9.67\% in the \texttt{sick\_users} data set).
 
-The total amount of users who have sent at least one tweet labelled as sick during the study period was 27'052. Note that this is an upper estimate, since a user could be classified as ``sick" more than once between 2011-03-05 and 2015-07-11. Since my analysis rests on weekly aggregated data, I was not be able to differentiate between a user who is classified as sick two times and two individual users who are classified as sick once. However, this is only a problem when assessing the total number of tweeters over the whole study period---it does not pose an obstacle when looking at the data categorised by weeks and/or states or at averaged data.
+The total amount of users who have sent at least one tweet labelled as sick during the study period was 27'052. Note that this is an upper estimate, since a user could be classified as ``sick" more than once during the study period. Since my analysis rests on weekly aggregated data, I was not be able to differentiate between a user who is classified as sick two times and two individual users who are classified as sick once. However, this is only a problem when assessing the total number of tweeters over the whole study period---it does not pose an obstacle when looking at the data categorised by weeks and/or states or at averaged data.
 
 What is peculiar, however, is the fact that the total number of sick users found in the Twitter data set over the whole study period is considerably lower than the number reported in \cite{bodnar_data_2015} (27'052 vs. 182'801 users, respectively), despite the former being an upper estimate of the total number of individual sick users. On the other hand, the number of individual users found in the data set during the first year (2011) for the whole country is larger than the one reported by \cite{bodnar_data_2015}: 175'382 and 45'086, respectively.
 
-Using the information that only 3.1~\% of all users send geotagged tweets \citep{sloan2013knowing}, we can estimate the total number of Twitter users that were active in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an estimated average of 5'657'476 active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to 1'454'387 total active users in 2011. Both numbers are a far cry from the roughly 19 (March 2011) to 30 (December 2011) million of monthly active Twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}, even though part of this discrepancy might be explained by the first two months of 2011 are missing from the collection of the Twitter data sets Bodnar and I were working on.
+Using the information that only 3.1\% of all users send geotagged tweets \citep{sloan2013knowing}, we can estimate the total number of Twitter users that were active in 2011 based on the two mentioned sample estimates, respectively. While the former sample estimate gives us an estimated average of 5'657'476 active users in 2011, the latter estimate based on \cite{bodnar_data_2015} only amounts to 1'454'387 total active users in 2011. Both numbers are a far cry from the roughly 19--30 million of monthly active Twitter users officially reported by Twitter in 2011 \citep{twitter_annual_2013}, even though part of this discrepancy might be explained by the first two months of 2011 are missing from the collection of the Twitter data sets Bodnar and I were working on.These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I analysed. In addition, I could observe a peculiar difference in the mean tweet frequency between healthy and sick users. While healthy users had an unadjusted mean tweet rate of 31.42 tweets per week, sick users had an unadjusted mean tweet rate of 45.95 tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann--Whitney U-Test, $p$ =0). 
 
-In addition, I could observe a very peculiar difference in the mean tweet frequency between healthy and sick users. While healthy users had an unadjusted mean tweet rate of 31.42 tweets per week, sick users had an unadjusted mean tweet rate of 45.95 tweets per week (see Figure~\ref{fig:avg_tw_diff}), a difference that is highly significant (Mann--Whitney U-Test, $p$ =0).
+Also, the unadjusted mean tweet rate per week of all users combined (31.42) is six times smaller than the mean tweet rate over the whole study period (181.51). The same holds true for the unadjusted median tweet rate (32.53 tweets per user per week vs. 9 tweets per user over the whole study period). These differences make intuitive sense, since a user the relative weight of more active Twitter users is more pronounce when aggregating over the whole study period (i.e. over four years), instead of only aggregating over the course of a week.
 
-Also, the unadjusted mean tweet rate of all users combined (31.42) is six times smaller than the mean tweet rate per user reported in \cite{bodnar_data_2015} (175.59). The unadjusted median tweet rate (32.53), however, is considerably higher than the median tweet rate reported in \cite{bodnar_data_2015} (10). These points give additional reason to believe that the data reported in \cite{bodnar_data_2015} are not the same as the data I analysed for this thesis.
+Finally, by applying Equation~\ref{eq:3}, we can estimate the adjusted mean (114.6 tweets per user) and median (118.64 tweets per user) of the Twitter rate of the whole Twitter population in 2011, as well the mean tweet rate for sick (167.6 tweets per user) and healthy (114.58 tweets per user), respectively.
 
-Finally, by applying Equation~\ref{eq:3} described in Section~\ref{sec:sick_user_exploratory}, we can estimate the adjusted mean (114.6 tweets per user) and median (118.64 tweets per user) of the Twitter rate of the whole Twitter population in 2011, as well the mean tweet rate for sick (167.6 tweets per user) and healthy (114.58 tweets per user) subpopulation, respectively.\newpage
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{10_avg_tw_sick_healthy.pdf}
 \caption{The unadjusted mean number of tweets per week sent by sick users (dotted light blue), healthy user (dashed light blue), and total users (solid blue), respectively.}
@@ -712,22 +750,22 @@ Figure~\ref{fig:tweets_seasonal_full} shows the total number of tweets sent per 
 
 A Kolmogorov-Smirnov test reveals that the weekly activity of the tweets labelled as ``sick" is in fact significantly different from the weekly activity of the tweets labelled as ``healthy" ($p$ = 0.0264 and $p$ = 0 for the normalised and not normalised weekly tweet counts, respectively). As can be seen in Figure~\ref{fig:tweets_seasonal_healthy_sick} the tweets labelled as ``sick" follow a markedly different temporal pattern than those labelled as ``healthy". Also, the distribution of the latter is virtually indistinguishable from the distribution of the total amount of tweets.
 
-Repeating the calculations describe above using number of Twitter users instead of number of tweets yields similar results (see Figure~\ref{fig:tweets_seasonal_healthy_sick_user}; $p$ = 0 and $p$ = 0 for the normalised and not normalised weekly user activity, respectively), However, using Twitter users instead of single tweets as basis for the aggregation reduces the weekly fluctuations of the weekly ``sick" rates considerably (see Section~\ref{sec:comp_cdc} for further discussion.)
+Repeating the calculations described above using number of Twitter users instead of number of tweets yields similar results (see Figure~\ref{fig:tweets_seasonal_healthy_sick_user}; $p$ = 0 and $p$ = 0 for the normalised and not normalised weekly user activity, respectively), However, using Twitter users instead of single tweets as basis for the aggregation reduces the weekly fluctuations of the weekly ``sick" rates considerably (see Section~\ref{sec:comp_cdc} for further discussion.)
 
 Next, I looked at the total amount of tweets sent in each state. As can be seen in Figures~\ref{fig:tweets_state_full}, \ref{fig:tweets_state_full_scatter}, and \ref{fig:tweets_state_full_scatter_log} the relative distribution per state largely follows the relative distribution of the state population. Notable exceptions are Maryland, New Jersey, West Virginia, and Delaware, which were the origin of many more tweets than expected, as well as New York, Idaho, Montana, District of Columbia, Wyoming, and Vermont, from where considerably fewer tweets originated than would be expected with regard to its population.
 
-When comparing the relative number of tweets labelled as ``healthy" with those labelled as ``sick", we can see slight differences in the distribution, which become even more accentuated when normalising with the total number of tweets per state (Figure~\ref{fig:tweets_state_healthy_sick}). However, the states with the most pronounced differences (District of Columbia, Montana, South Dakotam, North Carolina) are almost all states or districts, respectively, with a very low overall tweet count (North Carolina being the exception). A Chi-squared test for independence between the two distributions gives a $p$-value of 0.0801. 
+When comparing the relative number of tweets labelled as ``healthy" with those labelled as ``sick", we can see slight differences in the distribution, which become even more accentuated when normalising with the total number of tweets per state (Figure~\ref{fig:tweets_state_healthy_sick}). However, the states with the most pronounced differences (District of Columbia, Montana, South Dakota, North Carolina) are almost all states or districts, respectively, with a very low overall tweet count (North Carolina being the exception). A Chi-squared test for independence between the two distributions gives a $p$-value of 0.0801. 
 
-Repeating the calculations described above using the number of Twitter users instead of the number of tweets yields similar results (Figures~\ref{fig:tweets_state_full_user}, \ref{fig:tweets_state_full_scatter_user}, \ref{fig:tweets_state_full_scatter_user_log}, and \ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0823).\newpage
+Repeating the calculations described above using the number of Twitter users instead of the number of tweets yields similar results (Figures~\ref{fig:tweets_state_full_user}, \ref{fig:tweets_state_full_scatter_user}, \ref{fig:tweets_state_full_scatter_user_log}, and \ref{fig:tweets_state_healthy_sick_user}; $p$ = 0.0823).
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{11_activity_total_date_Twitter_full_aggregated.pdf}
 \caption{Relative number of tweets sent per week in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 (bin size = 1 week).}
 \label{fig:tweets_seasonal_full}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{12_activity_sick_date_Twitter_full_aggregatedoverlay.pdf}
@@ -744,7 +782,7 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_seasonal_healthy_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{12B_activity_sick_user_date_Twitter_full_aggregatedoverlay.pdf}
@@ -761,7 +799,7 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_seasonal_healthy_sick_user}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{14_activity_total_state_Twitter_full_aggregated.pdf}
@@ -778,7 +816,7 @@ Repeating the calculations described above using the number of Twitter users ins
 \label{fig:tweets_state}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
  \begin{subfigure}[t]{0.6\textwidth}
   \includegraphics[width=1\linewidth]{16_ScatterTweetPop.pdf}
@@ -792,10 +830,10 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_state_full_scatter_log}
   \end{subfigure}
 
-\caption{Relative number of tweets sent per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logartihmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.95 in (a) and intercept = 0.58 and slope = 1.16 in (b), respectively.}
+\caption{Relative number of tweets sent per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logarithmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.95 in (a) and intercept = 0.58 and slope = 1.16 in (b), respectively.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
  \begin{subfigure}[t]{0.6\textwidth}
   \includegraphics[width=1\linewidth]{18_ScatterTweetPop_user.pdf}
@@ -809,10 +847,10 @@ Repeating the calculations described above using the number of Twitter users ins
   \label{fig:tweets_state_full_scatter_user_log}
   \end{subfigure}
 
-\caption{Relative number of Twitter users per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logartihmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.98 in (a) and intercept = 0.3 and slope = 1.09 in (b), respectively.}
+\caption{Relative number of Twitter users per state in the \texttt{all\_tweets} data set between 2011-03-05 and 2015-07-11 plotted against each state's relative population size on a linear (a) and logarithmic scale (b). Some labels were removed to improve readability. The regression lines indicate the best linear fit with intercept = 0 and slope = 0.98 in (a) and intercept = 0.3 and slope = 1.09 in (b), respectively.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{20_activity_sick_statename_Twitter_full_aggregatedoverlay.pdf}
@@ -824,11 +862,11 @@ Repeating the calculations described above using the number of Twitter users ins
   \caption{}
   \end{subfigure}
   
-  \caption{Histograms of numbers of tweets sent from eeach state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets labelled as ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent in each state without normalisation. The black lines indicate the relative number of sick or healthy tweets sent in each state normalised by the total amount of tweets sent that state.}
+  \caption{Histograms of numbers of tweets sent from each state during the 208 weeks between 2011-03-05 and 2015-07-11 (bin size = 1 week). (a) shows only tweets labelled as ``sick"; (b) shows only tweets labelled as ``healthy" by the classifier. The grey bars indicate the relative number of sick or healthy tweets sent in each state without normalisation. The black lines indicate the relative number of sick or healthy tweets sent in each state normalised by the total amount of tweets sent that state.}
   \label{fig:tweets_state_healthy_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{22_activity_sick_user_statename_Twitter_full_aggregatedoverlay.pdf}
@@ -848,11 +886,11 @@ Repeating the calculations described above using the number of Twitter users ins
 
 In order to assess the validity of the ILI predictions provided by the flu classifier, I compared the results from the Twitter classifier with the official ILI reports from the CDC on the national, regional and state level(extracted using the ``cdcfluview" package \citep{cdcfluview}).
 
-In a first step, I simply compared the official CDC ILI percentage data on the national level with the relative number of tweets labelled as ``sick" per week and the relative number of sick users per week, respectively. As can be seen from Figure~\ref{fig:naive_comparison_CDC_twitter}, the relative results from the Twitter classifer are an order of magnitude smaller than the official ILI data from the CDC.
+In a first step, I simply compared the official CDC ILI percentage data on the national level with the relative number of tweets labelled as ``sick" per week and the relative number of sick users per week, respectively. As can be seen from Figure~\ref{fig:naive_comparison_CDC_twitter}, the relative results from the Twitter classifier are an order of magnitude smaller than the official ILI data from the CDC.
 
 In order to make them directly comparable to each other, I normalised both time series by the total sum of relative tweets numbers and ILI percentages, respectively. Hence, the percentual values shown in Figure~\ref{fig:cdc_tw_comp_nat_ma1} do not represent weekly ILI percentage, but rather the percentual proportion of the relative number of tweets and the ILI percentages, respectively, of a given week within the whole 208 week study period (In other words: The percentages of each week add up to a 100\%, just like the histogram values shown in Figures~\ref{fig:tweets_seasonal_healthy_sick_user}--\ref{fig:tweets_seasonal_full}). Since the fluctuations in the Twitter data were very high, I plotted the data again after applying a two-week (Figure~\ref{fig:cdc_tw_comp_nat_ma2}) and four-week (Figure~\ref{fig:cdc_tw_comp_nat_ma4}) moving average smoother, using the ``forecast" package \citep{forecast}. This reduced the overall fluctuations a bit, but did not particularly improve the fit with the CDC curve. I did the same for each of the ten CDC flu surveillance regions (Figure~\ref{fig:cdc_tw_comp_regs_ma4}). The situation improves slightly if we use the relative amount of sick users per week (as opposed to the relative amount of sick tweets per week), as can be seen  from Figures~\ref{fig:cdc_tw_comp_nat_user_ma1}, \ref{fig:cdc_tw_comp_nat_user} and \ref{fig:cdc_tw_comp_regs_ma4_user}. In both cases, however, the correlation between the relative ILI estimates based on Twitter data and the official CDC data were abysmal (Spearman's Rho was 0.0077 and 0.0077 for tweet- and user-based four-week average curves, respectively). 
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{24_cdc_twitter_comp_nat_raw.pdf}
@@ -863,18 +901,18 @@ In order to make them directly comparable to each other, I normalised both time 
   \includegraphics[width=1\linewidth]{25_cdc_twitter_comp_nat_raw_user.pdf}
   \caption{}
   \end{subfigure}
-  \caption{Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. Not that the Twitter rates are given in order of per mille of all tweets and users, respectively (right y-axis), while CDC ILI rates ar given in order of percent of all patients visiting ILINet outpatient clinics (left y-axis).}
+  \caption{Comparison between weekly CDC ILI rates (red) and the results from the Twitter classifier (blue). (a) shows the relative amount of tweets labelled as sick during a given week. (b) shows the relative amount of users labelled as ``sick" by the classifier. Not that the Twitter rates are given in order of per mille of all tweets and users, respectively (right y-axis), while CDC ILI rates are given in order of percent of all patients visiting ILINet outpatient clinics (left y-axis).}
   \label{fig:naive_comparison_CDC_twitter}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \includegraphics[width=1\linewidth]{26_cdc_twitter_comp_nat_ma1.pdf}
   \caption{}
   \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of tweets labelled as ``sick" from the Twitter flu classifier (blue). The data has been normalised in order to make them comparable, i.e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period.}
     \label{fig:cdc_tw_comp_nat_ma1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{27_cdc_twitter_comp_nat_ma2.pdf}
@@ -891,21 +929,21 @@ In order to make them directly comparable to each other, I normalised both time 
   \label{fig:cdc_tw_comp_nat_tot}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{29_cdc_twitter_comp_regs_ma4.pdf}
 \caption{Relative number of tweets sent within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.}
 \label{fig:cdc_tw_comp_regs_ma4}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
   \includegraphics[width=1\linewidth]{30_cdc_twitter_comp_nat_ma1_user.pdf}
   \caption{}
   \caption{Comparison between weekly CDC ILI rates (red) and the relative amount of users who sent at least one tweet classified as ``sick" from the Twitter flu classifier (blue) during a specific week The data has been normalised in order to make them comparable, i.e. the percentages do not represent weekly ILI percentages, but instead sum up to a 100\% over the whole time period.}
     \label{fig:cdc_tw_comp_nat_user_ma1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{31_cdc_twitter_comp_nat_ma2_user.pdf}
@@ -922,7 +960,7 @@ In order to make them directly comparable to each other, I normalised both time 
   \label{fig:cdc_tw_comp_nat_user}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \includegraphics[width=1\linewidth]{33_cdc_twitter_comp_regs_ma4_user.pdf}
 \caption{Relative number of users who sent at least one tweet labelled as ``sick" within each CDC ILI surveillance region per week (blue) compared with weekly ILI percentages in those regions (red). Data has been normalised and processed with a four-week moving average smoother. Note that Region 2 contains ``Puerto Rico" and ``Virgin Islands", Region 9 contains ``Hawaii" and Region 10 contains ``Alaska", all of which are missing from the Twitter data set.}
@@ -931,15 +969,32 @@ In order to make them directly comparable to each other, I normalised both time 
 
 \subsection{Comparing classifier results with CDC activity levels}
 \label{sec:comp_cdc_ac}
-Next, I attempted to reduce the fluctations and increase the comparibility with the CDC data by grouping the percentual values into one of ten activity levels inspired by the CDC's same grouping used for reporting.
+Next, I attempted to reduce the fluctuations and increase the comparibility with the CDC data by grouping the percentual values into one of ten activity levels inspired by the CDC's same grouping used for reporting.
 
 The CDC differentiates between ten different ILI activity levels which represent the deviation relative to the ILI baseline values. The activity levels compare the mean reported percent of visits due to ILI for the current week to the ILI baseline based on the number of reported ILI cases during non-influenza weeks, which are defined as weeks with less than 2\% of reported patient visits due to ILI. More precisely, the baseline is calculated by averaging the percentages of recorded ILI patients during non-influenza weeks for the previous three seasons and then adding two standard deviations \citep{cdc_surveillance_2016}.
 
 An activity level of 1 corresponds to values that are below the baseline, level 2 corresponds to an ILI percentage less than 1 standard deviation above the baseline, level 3 corresponds to ILI more than 1, but less than 2 standard deviations above the baseline, and so on, with an activity level of 10 corresponding to ILI 8 or more standard deviations above the baseline \citep{cdc_surveillance_2016}.
   
-Since a similar threshold does not exist for the Twitter data, I simply used the relative number of tweets labelled as ``sick" during weeks outside the flu season (June to September; seasonal flu activity can begin as early as October and continue to occur as late as May) as source to calculate yearly baseline values during off-season weeks. I then used these baseline values to calculate the weekly activity levels according to the rationale describe above. Figure~\ref{fig:cdc_tw_comp_nat_ac_sick} and Figure~\ref{fig:cdc_tw_comp_regs_ac_sick} shows the comparison on the national and regional level, respectively. I then did the same using the relative number of sick users (as opposed to sick tweets) instead (Figure~\ref{fig:cdc_tw_comp_nat_ac_sick_user} and Figures~\ref{fig:cdc_tw_comp_regs_ac_sick_user}). Note that the Twitter data available to me only spanned the time period between 2011 and 2015. In order not too lose too many years worth of data to the baseline calculation, I only calculated the baseline based on the off-season weeks directly preceding a specific flu season (as opposed to calculating the baseline based on the off-season weeks of the three preceding weeks).\newpage
+Since a similar threshold does not exist for the Twitter data, I simply used the relative number of tweets labelled as ``sick" during weeks outside the flu season (June to September; seasonal flu activity can begin as early as October and continue to occur as late as May) as source to calculate yearly baseline values during off-season weeks. I then used these baseline values to calculate the weekly activity levels according to the rationale describe above. Figure~\ref{fig:cdc_tw_comp_nat_ac_sick} and Figure~\ref{fig:cdc_tw_comp_regs_ac_sick} shows the comparison on the national and regional level, respectively.\clearpage
 
-\begin{figure}[H]
+The regions are selected according to the ten regional offices of the U.S. Department of Health and Human Services \citep{hhs_offices_2014}, for which the CDC provides separate ILI rate estimates: 
+
+\begin{itemize}
+\item \textbf{Region 1} comprises Connecticut, Maine, Massachusetts, New Hampshire, Rhode island, and Vermont.
+\item \textbf{Region 2} comprises New Jersey, New York, Puerto Rico, and the U.S. Virgin Islands.
+\item \textbf{Region 3} comprises Delaware, the District of Columbia, Maryland, Pennsylvania, Virginia, and West Virginia.
+\item \textbf{Region 4} comprises Alabama, Florida, Georgia, Kentucky, Mississippi, North Carolina, South Carolina, and Tennessee.
+\item \textbf{Region 5} comprises Illinois, Indiana, Michigan, Minnesota, Ohio, and Wisconsin.
+\item \textbf{Region 6} comprises Arkansas, Louisiana, New Mexico, Oklahoma, and Texas.
+\item \textbf{Region 7} comprises Iowa, Kansas, Missouri, and Nebraska.
+\item \textbf{Region 8} comprises Colorado, Montana, North Dakota, South Dakota, Utah, and Wyoming.
+\item \textbf{Region 9} comprises Arizona, California, Hawaii, and Nevada.
+\item \textbf{Region 10} comprises Alaska, Idaho, Oregon, and Washington.
+\end{itemize}
+
+I then did the same using the relative number of sick users (as opposed to sick tweets) instead (Figure~\ref{fig:cdc_tw_comp_nat_ac_sick_user} and Figures~\ref{fig:cdc_tw_comp_regs_ac_sick_user}). Note that the Twitter data available to me only spanned the time period between 2011 and 2015. In order not too lose too many years worth of data to the baseline calculation, I only calculated the baseline based on the off-season weeks directly preceding a specific flu season (as opposed to calculating the baseline based on the off-season weeks of the three preceding weeks).
+
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{34_cdc_twitter_comp_nat_activity_sick.pdf}
@@ -956,61 +1011,67 @@ Since a similar threshold does not exist for the Twitter data, I simply used the
   \caption{Comparison between the weekly ILI activity levels reported by the CDC and the activity levels calculated based on the Twitter data set. (a) Twitter activity levels based on the relative number of sick tweets (b) Twitter activity levels calculated based on the relative number of sick users}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \includegraphics[width=1\linewidth]{36_cdc_twitter_comp_regs_activity_sick.pdf}
   \caption{Comparison between the regional weekly ILI activity levels reported by the CDC and the activity levels calculated based on the relative number of sick tweets per week.}
     \label{fig:cdc_tw_comp_regs_ac_sick}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \includegraphics[width=1\linewidth]{37_cdc_twitter_comp_regs_activity_sick_user.pdf}
   \caption{Comparison between the regional weekly ILI activity levels reported by the CDC and the activity levels calculated based on the relative number of sick users per week.}
     \label{fig:cdc_tw_comp_regs_ac_sick_user}
-\end{figure}\newpage
+\end{figure}\clearpage
 
-To get a better understanding of the spatio-temporal pattern of ILI activity levels, I additionally built a function that would take CDC ILI data as well as classified Twitter data and build a map of flu activity over time. Below, you can see the two videos showing the activity levels based on the ILI rates provided by the CDC and the flu rates indicated by the Twitter classifier, respectively. Video~\ref{fig:cdc_flu_regio} contains a visualisation of the ILI activation levels provided by the CDC and serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Video~\ref{fig:twitter_flu_regio} also shows regional activity levels, but the results from the Twitter classifier. 
+To get a better understanding of the spatio-temporal pattern of ILI activity levels, I additionally built a function that would take CDC ILI data as well as classified Twitter data and build a map of flu activity over time. The function was built using the ``R"-packages ``maps" \citep{maps_2016}, ``mgcv" \citep{mgcv_2006,mgcv_2016}, ``animation" \citep{animation_2015}, and ``grid" \citep{murrell_integrating_2003,murrell_grid_2007,zhou_fun_2010}. 
+
+Below, you can see the two videos showing the activity levels based on the ILI rates provided by the CDC and the flu rates indicated by the Twitter classifier, respectively. Video~\ref{fig:cdc_flu_regio} contains a visualisation of the ILI activation levels provided by the CDC and serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Video~\ref{fig:twitter_flu_regio} also shows regional activity levels, but with the results from the Twitter classifier. 
 
 \begin{center}
 \href{run:vids/1_cdc_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/1_cdc_flu_regio.png}}
 \end{center}
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \caption{ILI activity levels as provided by the CDC for the 10 surveillance regions. Red corresponds to activity level 10, while light yellow corresponds to activity level 1, which indicate the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
     \label{fig:cdc_flu_regio}
 \end{figure}
-
+\clearpage
 \begin{center}
 \href{run:vids/2_twitter_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/2_twitter_flu_regio.png}}
 \end{center}
-\begin{figure}[H]
+\vspace{-0.2in}
+\begin{figure}[htbp!]
 \centering
-  \caption{Flu activity levels as calculated based on the relative number of Twitter users classified as ``sick" in each week aggregated within each of the 10 surveillance regions. Dark blue corresponds to activity level 10, while light blue corresponds to activity level 1, which indicate the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
+  \caption{Flu activity levels as calculated based on the relative number of Twitter users classified as ``sick" in each week aggregated within each of the 10 surveillance regions. Dark blue corresponds to activity level 10, while light blue corresponds to activity level 1, i.e. the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
     \label{fig:twitter_flu_regio}
+\end{figure}
+\vspace{-0.6in}
+%\needspace{20\baselineskip}
+\begin{center}
+\href{run:vids/3_cdc_twitter_diff_user_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/3_cdc_twitter_diff_user_regio.png}}
+\end{center}
+\vspace{-0.2in}
+\begin{figure}[htbp!]
+\centering
+  \caption{Difference between the CDC ILI activity levels and those calculated based on the relative amount of sick Twitter users in each corresponding region and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
+    \label{fig:cdc_twitter_comp_regio}
 \end{figure}
 
 In order to directly compare the CDC and Twitter flu activity levels, I subtracted the Twitter activity levels in each week and region from each corresponding CDC activity level. I then remapped the values onto the USA over the whole 208 week interval for which I had data. Video~\ref{fig:cdc_twitter_comp_regio} shows performance of the Twitter classifier results over space and time. As can be seen, the Twitter ILI classifier hardly ever manages to emulate the CDC activity levels and when it does, it mainly happens during off-season weeks. 
 
-\begin{center}
-\href{run:vids/3_cdc_twitter_diff_user_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/3_cdc_twitter_diff_user_regio.png}}
-\end{center}
-\begin{figure}[H]
-\centering
-  \caption{Difference between the official ILI activity levels provided by the CDC and those calculated based on the relative amount of sick Twitter users in each corresponding region and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
-    \label{fig:cdc_twitter_comp_regio}
-\end{figure}
-
 \subsection{Comparing classifier results and ILI rates on the state level}
 \label{sec:comp_cdc_state}
 In a next step, I tried to assess the performance of Twitter flu classifier by looking at state-level data. To do so, I again calculated activity levels for each state and week based on the relative amount of tweets labelled as ``sick" and the relative number of users classified as ``sick", respectively. Since the fit with the CDC activity curves was worse than for the regional and national data, I did not include the individual time series to this thesis, but only the a video showing the spatio-temporal differences in ILI activity levels (all additional videos and figures can be found on Github, however). Video~\ref{fig:cdc_twitter_comp_state} contains the comparison with activity levels based on the relative number of users classified as ``sick" during a specific week and within a given state. Again, it is clear the activity levels based on the Twitter data fit the official CDC only poorly.
-
+\vspace{-0.4in}
 \begin{center}
 \href{run:vids/4_cdc_twitter_diff_user_state.avi}{\includegraphics[width=0.9\linewidth]{vids/4_cdc_twitter_diff_user_state.png}}
 \end{center}
-\begin{figure}[H]
+\vspace{-0.2in}
+\begin{figure}[htbp!]
 \centering
-  \caption{Difference between the official ILI activity levels provided by the CDC and those calculated based on the relative amount of sick Twitter users in each corresponding state and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
+  \caption{Difference between the CDC ILI activity levels and those calculated based on the relative amount of sick Twitter users in each corresponding state and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_state}
 \end{figure}
 
@@ -1023,7 +1084,8 @@ Below, you can see the spatio-temporal comparison of the performance of the Twit
 \begin{center}
 \href{run:vids/5_cdc_twitter_diff_user_jersey.avi}{\includegraphics[width=0.9\linewidth]{vids/5_cdc_twitter_diff_user_jersey.png}}
 \end{center}
-\begin{figure}[H]
+\vspace{-0.2in}
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of New Jersey. White means that the official and Twitter activity levels are exactly the same, red means that the state of New Jersey reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_jersey}
@@ -1032,7 +1094,8 @@ Below, you can see the spatio-temporal comparison of the performance of the Twit
 \begin{center}
 \href{run:vids/6_cdc_twitter_diff_user_oregon.avi}{\includegraphics[width=0.9\linewidth]{vids/6_cdc_twitter_diff_user_oregon.png}}
 \end{center}
-\begin{figure}[H]
+\vspace{-0.2in}
+\begin{figure}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of Oregon. White means that the official and Twitter activity levels are exactly the same, red means that the state of Oregon reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite.}
     \label{fig:cdc_twitter_comp_oregon}
@@ -1045,14 +1108,14 @@ As the results depicted above show, the output from the Twitter classifier that 
 \subsection{Reclassification of the raw Twitter data}
 As described in Chapter~\ref{ch:data_set_description}, the data set I was working with a data set that contained the output of the Twitter classifier described in Chapter~\ref{ch:intro}. Since there might very well be discrepancies between this data set and the one used in \citep{bodnar_data_2015}, I wanted to reclassify the geotagged raw Twitter data collected between 2011 and 2015 in order to assess whether these results would diverge from the data set I was working on.
 
-To do so, I retrieved the full Java-based Twitter classifier from Todd Bodnar's \href{https://github.com/ToddBodnar/Twitter-Parser}{Github repository}. However, some libraries used for building the classifier were missing from the repository, while others (most notably the \href{https://aws.amazon.com/de/sdk-for-java/}{Amazon Web Services (AWS) SDK for Java} have in the meantime been superceded by newer vesions which are not backwards compatible with older version and thus incompatible with the Twitter classifier. Even though I managed to retrieve the missing libraries through personal communication with Todd Bodnar and also managed to retrieve the same AWS SDK version that was used for the original version of the Twitter classifier, additional compilation errors remained, so I was unable to compile the classifier.
+To do so, I retrieved the full Java-based Twitter classifier from Todd Bodnar's \href{https://github.com/ToddBodnar/Twitter-Parser}{Github repository}. However, some libraries used for building the classifier were missing from the repository, while others (most notably the \href{https://aws.amazon.com/de/sdk-for-java/}{Amazon Web Services (AWS) SDK for Java} have in the meantime been replaced by newer versions which are not backwards compatible with older version and thus incompatible with the Twitter classifier. Even though I managed to retrieve the missing libraries through personal communication with Todd Bodnar and also managed to retrieve the same AWS SDK version that was used for the original version of the Twitter classifier, additional compilation errors remained, so I was unable to compile the classifier.
 
-Finally, I received a compiled version of the Twitter classifier (``TwitterParser.jar") directly from Todd Bodnar, allowing me to circumvent the necessity to debug the original code.  Unfortunately, the jar-file encountered runtime erros when trying to analyse raw Twitter files, both on Ubuntu 16.04.2 LTS as well as on Windows 7. Hence, I still failed to reclassify the raw Twitter data using the Twitter classifier. All files belonging to the Twitter classifier, including the compiled version of it, can be found on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github} in the folder ``Twitter\_Parser".
+Finally, I received a compiled version of the Twitter classifier (``TwitterParser.jar") directly from Todd Bodnar, allowing me to circumvent the necessity to debug the original code.  Unfortunately, the jar-file encountered runtime errors when trying to analyse raw Twitter files, both on Ubuntu 16.04.2 LTS as well as on Windows 7. Hence, I still failed to reclassify the raw Twitter data using the Twitter classifier. All files belonging to the Twitter classifier, including the compiled version of it, can be found on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github} in the folder ``Twitter\_Parser".
 
 \subsection{Reproduction of the SIR model described in \cite{bodnar_data_2015}}
-Since I was unable to reproduce the original results of the Twitter classifier due to compilation and runtime errors of said classifier, and hence was unable to assess the validiy of the data set I was working on, I went at it from the opposite direction: I started from the final results described in \cite{bodnar_data_2015} and tried to ``reverse engineer" them in order to learn how the excellent fit of the Twitter data with the CDC data came about. Specifically, I focused on chapter 4 of \cite{bodnar_data_2015} and tried to reproduce the findings shown in Figures~\ref{fig:cdc_fit_bodnar_thesis} and \ref{fig:cdc_fit_bodnar_thesis_SIR} as well as Table~\ref{tab:nationalparams}.
+Since I was unable to reproduce the original results of the Twitter classifier due to compilation and runtime errors of said classifier, and hence was unable to assess the validity of the data set I was working on, I went at it from the opposite direction: I started from the final results described in \cite{bodnar_data_2015} and tried to ``reverse engineer" them in order to learn how the excellent fit of the Twitter data with the CDC data came about. Specifically, I focused on chapter four of \cite{bodnar_data_2015} and tried to reproduce the findings shown in Figures~\ref{fig:cdc_fit_bodnar_thesis} and \ref{fig:cdc_fit_bodnar_thesis_SIR} as well as Table~\ref{tab:nationalparams}.
 
-In a first step, I asked Todd Bodnar for the data and the code used to create the SIR model as well as the figures. I received the R-files used to build the SIR model as well csv-files containing the data used to create Figures~\ref{fig:cdc_fit_bodnar_thesis} and \ref{fig:cdc_fit_bodnar_thesis_SIR}  However, I did not receive the R-files or the model specifications in order to create the data contained in said file from the Twitter data set. Hence, I could neither associate the data within these files to the raw results from the Twitter classifier nor to the R-code-files that were provided to me. A follow-up e-mail regarding this matter is pending response. Data and code files can be found on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github} in the folder ``PhDThesisBodnar".
+In a first step, I asked Todd Bodnar for the data and the code used to create the SIR model as well as the figures. I received the R-files used to build the SIR model as well CSV-files containing the data used to create Figures~\ref{fig:cdc_fit_bodnar_thesis} and \ref{fig:cdc_fit_bodnar_thesis_SIR}  However, I did not receive the R-files or the model specifications in order to create the data contained in said file from the Twitter data set. Hence, I could neither associate the data within these files to the raw results from the Twitter classifier nor to the R-code-files that were provided to me. A follow-up e-mail regarding this matter is pending response. Data and code files can be found on \href{https://github.com/salathegroup/2016_TwitterEpi}{Github} in the folder ``PhDThesisBodnar".
 
 In order to recreate the figures mentioned above, I used the data available in the file ``predictions\_r\_results.csv", which contained weekly ILI estimates from the CDC as well as additional ILI estimates using different autocorrelation models with or without using the data from the Twitter classifier. The data spanned a four year period, starting on October $3^{rd}$ 2011 (week 40) and ending on September $28^{th}$ 2014 (week 39). The 11 columns contained in the data set have the following meaning (Bodnar, personal communication):
 
@@ -1070,23 +1133,25 @@ In order to recreate the figures mentioned above, I used the data available in t
   \item \texttt{full\_both2} Retrospective AR(2) model based on the ``cdcoffset" data combined with the values from the retrospective Twitter base model
 \end{itemize}
 
-For the predictive models, only values between weeks $0$ and $t-1$ were used for model building, for the retrospective models the complete available data was used. As mentioned above, as of this point I do not know how the predictive or retrospective Twitter model relates to the results from the Twitter classifier. An email requesting additional information is pending response.
+For the predictive models, only values between weeks $0$ and $t-1$ were used for model building, for the retrospective models the complete available data was used. According to Bodnar \texttt{full\_base} column corresponds to the weekly aggregated results of the Twitter classifier (personal communication).
 
 I started with the replication of Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} and the corresponding parameters. I did so by using the grid-search method described in \cite{bodnar_data_2015}: 
 
 ``Specifically, we search through three variables, the two transmission parameters $\gamma$,$\beta$, and S(0), the initial susceptibility rate which may be less than 1 due to innate immunity or previous vaccination. Next, we generate a logarithmically spaced 25 by 25 by 25 grid of potential values over this range. We then set $I(0)$ to be the same as the first infection value in the data and $R(0)$ (sic!). We then solve an SIR model, with each of the parameter combinations." 
 
-Note that in the R-code I received the optimisation only happened for $\gamma$ and $\beta$, not for $S(0)$, as desribed. This makes intuitive sense: Since we know the initial value of $I(0)$ both for the CDC data as well as for the Twitter model, there is no need to algorithmically find the initial value of $S(0)$, since it can simply be calculated as $S(0)=1-I(0)$, while $R(0)=0$. Indeed, this is exactly the way the initial values were set in the algorithm.
+Note that in the R-code I received the optimisation only happened for $\gamma$ and $\beta$, not for $S(0)$, as described. This makes intuitive sense: Since we know the initial value of $I(0)$ both for the CDC data as well as for the Twitter model, there is no need to algorithmically find the initial value of $S(0)$, since it can simply be calculated as $S(0)=1-I(0)$, while $R(0)=0$. Indeed, this is exactly the way the initial values were set in the algorithm.
 
 First, I built the SIR model based on the CDC data, since this was the most straightforward way to go. As can be seen from Figure~\ref{fig:SIR_comparison_CDC}, the yearly and combined ILI curves calculated from the model are very similar to the ones depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}, however small deviations remain.
 
 Therefore, I went on to fit the very same SIR model that is shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}. To do so, I needed to know which data the model was built on. I extracted the three starting coordinates of the yearly curves shown in the figure and compared them with the data provided to me by Todd. It turned out that the starting coordinates of the curve only matched the values from the full retrospective Twitter model (i.e. retrospective AR(2) model based on the CDC data combined with the retrospective Twitter base model), so I built my second SIR model based on these values. As can be seen from Figure~\ref{fig:SIR_comparison_full}, the resulting yearly and combined ILI curves are virtually indistinguishable from the ones shown in \cite{bodnar_data_2015}.
 
-It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015}---even though the model curves seem to match. As can be seen from Table~\ref{tab:nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably from the ones depicted in Table~\ref{tab:nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. Hence, it is safe to assume that those values do \textit{not} represent the values that were used to calculate the curves shown in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.
+It is very peculiar, however, that the model parameters which I calculated for the two replicated SIR models described above do not match the yearly and combined values for $\gamma$ and $\beta$ presented in \citep{bodnar_data_2015}---even though the model curves seem to match. As can be seen from Table~\ref{tab:nationalparams_replicated}, the optimal yearly and combined values of $\gamma$ and $\beta$ deviate considerably from the ones depicted in Table~\ref{tab:nationalparams} (i.e. the values reported in \citep{bodnar_data_2015}). This is true for the SIR model based on the CDC data as well as for the SIR model based on the full retrospective model data. At the same time, however, the curves that result when creating an SIR model based on the values in Table~\ref{tab:nationalparams_replicated} and the \texttt{full\_both2} data provided to me are virtually indistinguishable from the curves depicted in \cite{bodnar_data_2015}, i.e. in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}. This implies that the $\beta$ and $\gamma$ values reported in \cite{bodnar_data_2015} are not the ones that were used to create Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}.
 
- \begin{table}[H]
+In order to corroborate this assumption, I recreated SIR model curves based on the values reported in Table~\ref{tab:nationalparams} and compared them to the SIR model curves resulting from the values in Table~\ref{tab:nationalparams_replicated}, which are depicted in cyan and blue, respectively, in Figure~\ref{fig:40A_40B_remodeling_comparison}. The comparison reveals a marked difference between the two model curves and makes clear that the model curves based on the recreated values in Table~\ref{tab:nationalparams_replicated} are much more similar to the original curves depicted in in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} than the model curves based on the values from \cite{bodnar_data_2015} depicted in Table~\ref{tab:nationalparams}.\clearpage
+
+ \begin{table}[htbp!]
 \centering
-\caption{National best-fit parameters for each year from the CDC's data (white) and Twitter base model data described in \cite{bodnar_data_2015} (grey).}
+\caption{Combined and yearly best-fit parameters for the SIR model I recalculated based on the CDC's data (white) and the Twitter base model data (grey) provided to me by Bodnar (personal communication).}
 \begin{tabular}{l l l l l}
  Year & \(\gamma\) & \(\beta\) & RSS\\ \hline
 & 0.3962286 & 0.4446748  & \ensuremath{4.0608281\times 10^{-4}}   \\ 
@@ -1101,28 +1166,26 @@ It is very peculiar, however, that the model parameters which I calculated for t
 \label{tab:nationalparams_replicated}
 \end{table}
 
-\newpage
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.png}
+  \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.pdf}
   \caption{}
   \end{subfigure}
   
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{38_SIR_model_cdc_data_25.pdf}
   \caption{}
-  \label{fig:SIR_comparison_CDC}
   \end{subfigure}
   \caption{Comparison between the SIR model depicted in \cite{bodnar_data_2015} (a) and a replication based on the official CDC ILI rates (b).}
+  \label{fig:SIR_comparison_CDC}
   %\label{fig:SIR_comparison}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.png}
+  \includegraphics[width=1\linewidth]{02_todd_bodnar_SIR.pdf}
   \caption{}
   \label{fig:SIR_comparison_original}
   \end{subfigure}
@@ -1133,31 +1196,47 @@ It is very peculiar, however, that the model parameters which I calculated for t
   \label{fig:SIR_comparison_full}
   \end{subfigure}
   \caption{Comparison between the SIR model depicted in \citep{bodnar_data_2015} (a) and a replication based on the full retrospective Twitter model (c).}
-  \label{fig:TwitterModel_comparison}
+    \label{fig:SIR_comparison_CDC_full_model}
 \end{figure}
 
-In addition, it is important to note again that the data used to calculate the SIR models is \textit{not} equivalent to the raw results of the Twitter classifier. In fact, the SIR models described above are built on the full retrospective model data which includes the information from the Twitter classifier as well as information from an AR(2) model based on the official CDC data. This stands in contrast to the report in \cite{bodnar_data_2015}, where the SIR models are depicted as being based on the information from the Twitter classifier only. However, this cannot be the case. Figure~\ref{fig:TwitterModel_comparison} clearly shows that the SIR model built solely on the data from the Twitter base model is clearly distinct from the SIR models built on the full retrospective model data.  
-
-\subsection{Attempt to reproduce the AR model described in \cite{bodnar_data_2015}}
-Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis}. The graph is described as the ``comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles)", therefory implying that the dashed and solid lines are produced based on the data from the Twitter classifier alone. However, this is clearly not the case. Figure~\ref{fig:TwitterModel_comparison_original} shows a reproduction of the original graph depicted in \citep{bodnar_data_2015}, including SIR model fits. However, this reproduction is based on the retrospective \textit{full} model, i.e. the model including information from the Twitter base model as well as from the AR(2) model based on the CDC data. In fact, if we only look at the data from the Twitter base model (Figure~\ref{fig:TwitterModel_comparison_base}), we can see that the fit with the official CDC data is much worse. Also, Figure~\ref{fig:TwitterModel_comparison_ar} shows that a simple AR(2) model based on the official CDC data achieves a model fit that is almost as good as the one from the full model which includes additional information from the Twitter base model.
-
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
+  \includegraphics[width=1\linewidth]{40A_SIR_model_full_model_25_comparison_yearly.pdf}
   \caption{}
   \end{subfigure}
   
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{41_SIR_model_full_AR2_100_colorised.pdf}
+  \includegraphics[width=1\linewidth]{40B_SIR_model_full_model_25_comparison_combined.pdf}
   \caption{}
-  \label{fig:TwitterModel_comparison_base_model}
+  \end{subfigure}
+  \caption{SIR model curves using yearly (a) and combined (b) parameters to model the ILI prevalence throughout one year. Red indicates the official ILI rates from the CDC, while cyan and blue show the SIR model curves based on the parameters reported in \cite{bodnar_data_2015} and the ones recalculated by me, respectively, based on the very same data (i.e. the \texttt{full\_both2} values).}
+  \label{fig:40A_40B_remodeling_comparison}
+  %\label{fig:SIR_comparison}
+\end{figure}
+
+\subsection{Attempt to reproduce the AR model described in \cite{bodnar_data_2015}}
+It is important to repeat that the data used to calculate the SIR models in \cite{bodnar_data_2015} are \textit{not} equivalent the \texttt{full\_base} data, which are supposed to represent the raw output from the Twitter classifier according to Bodnar (personal communication). In fact, the SIR models described above are built on the full retrospective model data which includes the information from the Twitter classifier as well as information from an AR(2) model based on the official CDC data. This stands in contrast to the report in \cite{bodnar_data_2015}, where the SIR models are depicted as being based on the information from the Twitter classifier only. However, as I have shown in the previous section, this cannot be the case and it is neither the case for the results shown in Figure~\ref{fig:cdc_fit_bodnar_thesis}.
+
+The graph is described as the ``comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles)", therefore implying that the dashed and solid lines are produced based on the data from the Twitter classifier alone. However, this is clearly not the case. Figure~\ref{fig:TwitterModel_original} shows a reproduction of the original graph depicted in \citep{bodnar_data_2015}, including SIR model fits. However, this reproduction is based on the retrospective \textit{full} model, i.e. the model corresponding to the \texttt{full\_both2} data and including information from the Twitter base model as well as from the AR(2) model based on the CDC data. If we only look at the data from the Twitter base model (Figure~\ref{fig:TwitterModel_comparison_base}), we can see that the fit with the official CDC data is worse and that the corresponding SIR model is also decidedly different from the SIR model based on the \texttt{full\_both2} values. Also, Figure~\ref{fig:TwitterModel_comparison_ar} shows that a simple AR(2) model based on the official CDC data achieves a model fit that is almost as good as the one from the full model which includes additional information from the Twitter base model.
+
+\begin{figure}[htbp!]
+\centering
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
+  \caption{}
+  \label{fig:TwitterModel_original}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{1\textwidth}
+  \includegraphics[width=1\linewidth]{41_SIR_model_full_AR2_25_colorised.pdf}
+  \caption{}
   \end{subfigure}
   \caption{Comparison between the full retrospective Twitter model depicted in \cite{bodnar_data_2015} (a) and a replication consisting of a simple retrospective AR(2) model based only on CDC ILI rates (b). The black lines indicate the results of the corresponding SIR models using yearly (solid) and combined (yearly) parameters.}
   \label{fig:TwitterModel_comparison_ar}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
   \begin{subfigure}[t]{1\textwidth}
   \includegraphics[width=1\linewidth]{40_SIR_model_full_both_25_colorised.pdf}
@@ -1165,9 +1244,8 @@ Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bo
   \end{subfigure}
   
   \begin{subfigure}[t]{1\textwidth}
-  \includegraphics[width=1\linewidth]{42_SIR_model_full_base_model_100_colorised.pdf}
+  \includegraphics[width=1\linewidth]{42_SIR_model_full_base_model_50_colorised.pdf}
   \caption{}
-  \label{fig:TwitterModel_comparison_AR2}
   \end{subfigure}
   \caption{Comparison between the full retrospective Twitter model depicted in \cite{bodnar_data_2015} (a) and a replication consisting of the retrospective Twitter base model (b). The black lines indicate the results of the corresponding best-fit SIR models using yearly (solid) and combined (yearly) parameters.}
   \label{fig:TwitterModel_comparison_base}
@@ -1181,7 +1259,7 @@ Finally, I tried to reproduce the results depicted in Figure~\ref{fig:cdc_fit_bo
 
 In this last chapter, I will first discuss the findings summarised in Chapters~\ref{ch:data_set_description} and~\ref{ch:results} with a special emphasis on potential future applications of the Twitter classifier or related methods for flu surveillance.
 
-In a second part, I will then put emphasis on the discussion of the different issues of reproducibiliy that I have outlined in Chapter~\ref{ch:reproducibility} and that have arisen during the course of this work. I will also make suggestions about how to overcome such issues in the future. 
+In a second part, I will then put emphasis on the discussion of the different issues of reproducibility that I have outlined in Chapter~\ref{ch:reproducibility} and that have arisen during the course of this work. I will also make suggestions about how to overcome such issues in the future. 
 
 \section{Has ``Larry the Bird" deserved our trust?}
 \label{sec:disc_data_set}
@@ -1193,31 +1271,31 @@ The classifier has shown that it can faithfully predict the Influenza peaks recu
 
 However, one can also see from these figures that the peaks are very short and sharp. This might be explained by the way the Twitter classifier labels a certain tweet---and thereby its author---as ``sick". The classifier does so by aggregating the daily signals within a 4-week-window in order to classify the tweets of the first day either as ``sick" or ``healthy" (see Section~\ref{sec:on_the_ground} for details). 
 
-But this way of assigning disease status has one problematic implication, namely that information from future tweets is incorporated while information from past tweets is ignored. This is insofar counterintuitive as a Twitter user who tweeted about being sick on day 1, will most certainly still be sick on day 2---regardless of what he tweets about. However, the algorithm will not take this into account, so when shifting the onset of the 4-week-sliding window to day 2, all information from day 1 will be lost. If there are no additional flu keywords to be found in the tweets sent within the following 4-week-sliding window, the algorithm will mistakenly classify the user as being healthy again.
+But this way of assigning disease status has one problematic implication, namely that information from future tweets is incorporated while information from past tweets is ignored. This is insofar counter-intuitive as a Twitter user who tweeted about being sick on day 1, will most certainly still be sick on day 2---regardless of what he tweets about. However, the algorithm will not take this into account, so when shifting the onset of the 4-week-sliding window to day 2, all information from day 1 will be lost. If there are no additional flu keywords to be found in the tweets sent within the following 4-week-sliding window, the algorithm will mistakenly classify the user as being healthy again.
 
 In addition, the algorithm is bound to classify tweets too early as being sick. For example, if particularly strong ``flu" signal turns appears, the algorithm might classify the user as being ``sick" up to four weeks before the actual onset of the sickness. In other words; instead of assuming that a user remains sick for some time after she has tweeted about being sick, the algorithm might give the faulty impression that the user has been sick up to the point where she tweeted about it---but not afterwards.
 
 Of course, one can argue that a Twitter user does not necessarily tweet about her flu symptoms on the first day of the onset of the symptoms so that the exact start of the disease is difficult to assess in any case. This is true, but as long as we do not have any additional information about the probability distribution of when the user tweets about her sickness, it would be prudent to assume a uniform distribution and treat each day of the disease as having equal probability of being a day during which the user tweets about her disease. 
 
-In any case, the fact that the classifier assigns disease status only on the first day of the 4-week-sliding window and only by taking into account prospective information, might artificially shorten the duration in which a user is classified as having the flu. On a population level, this might lead to the sharp and short peaks we can observe in the figures referenced above. Future revisions of the Twitter classifier should therefore also take into consideration retrospective information from a Twitter user's timeline and not classify the tweets of the first day of the 4-week-sliding window, but the tweets of the 14th or 15th day, i.e. a day in the middle of said window.
+In any case, the fact that the classifier assigns disease status only on the first day of the 4-week-sliding window and only by taking into account prospective information, might artificially shorten the duration in which a user is classified as having the flu. On a population level, this might lead to the sharp and short peaks we can observe in the figures referenced above. Future revisions of the Twitter classifier should therefore also take into consideration retrospective information from a Twitter user's timeline and not classify the tweets of the first day of the 4-week-sliding window, but the tweets of the $14^{th}$ or $15^{th}$ day, i.e. a day in the middle of said window.
 
 \subsection{The Twitter classifier might be able to detect ILI symptoms in summer}
-Another peculiar finding from the comparison of CDC and Twitter classifier data is the overestimation of ILI symptoms in summer by the classifer. This can clearly be seen in Figures~\ref{fig:naive_comparison_CDC_twitter}, \ref{fig:cdc_tw_comp_nat_tot}, and \ref{fig:cdc_tw_comp_nat_user} as well as in Video~\ref{fig:twitter_flu_regio} and is most prominent in the summer of 2011. 
+Another peculiar finding from the comparison of CDC and Twitter classifier data is the overestimation of ILI symptoms in summer by the classifier. This can clearly be seen in Figures~\ref{fig:naive_comparison_CDC_twitter}, \ref{fig:cdc_tw_comp_nat_tot}, and \ref{fig:cdc_tw_comp_nat_user} as well as in Video~\ref{fig:twitter_flu_regio} and is most prominent in the summer of 2011. 
 
 Since the classifier was built using confirmed medical records that could be correlated on an individual basis with the output of specific Twitter users, it is very unlikely that the peaks in summer are due to overfitting, especially because the set of users on which the classifier was validated was very small. 
 
-However, as outlined in Section~\ref{sec:on_the_ground}, the small sample size that served to build the classifier in combination with its low temporal resolution could have introduced other biases which might jeopardise the generalisability of the classifier up to the point at which it is useless outside the very specific enviroment in which it was built (the Pennsylvania State University and part of its student body in the year 2011--2012). However, if that were the case, we would expect the classifier to fail to detect the flu peaks in winter, for example. Since this is not the case, however, we can safely assume that rules which the classifier uses to detect flu-related tweets can be applied on national level data as well. 
+However, as outlined in Section~\ref{sec:on_the_ground}, the small sample size that served to build the classifier in combination with its low temporal resolution could have introduced other biases which might jeopardise the generalisability of the classifier up to the point at which it is useless outside the very specific environment in which it was built (the Pennsylvania State University and part of its student body in the year 2011--2012). However, if that were the case, we would expect the classifier to fail to detect the flu peaks in winter, for example. Since this is not the case, however, we can safely assume that rules which the classifier uses to detect flu-related tweets can be applied on national level data as well. 
 
 Hence, the most likely explanation for the peaks in summer might also be the most promising: If we can assume that the classifier is able to pick up ILI symptoms with some reliability, then we should expect the classifier to detect these signals regardless of whether the Twitter user has the flu or another disease that symptomatically resembles the flu. This is true for common colds, which lead to symptoms such as sore throat, runny nose, coughing, sneezing, headaches, and body aches, and whose occurrence coincide with that of the flu, but which are most often caused by rhinoviruses \citep{heikkinen2003common,cdc_rhinovirus_2017}. 
 
-However, there are also many cold viruses that predominantly spread during the summer, the non-polio enteroviruses being the most notorious representative  \citep{pons2015epidemiology}. An infected person can exhibit symptoms akin to those of the flu, such as fever, runny noze, sneezing, coughing, body and muscle aches \citep{pons2015epidemiology,cdc_enterovirus_2016}.
+However, there are also many cold viruses that predominantly spread during the summer, the non-polio enteroviruses being the most notorious representative  \citep{pons2015epidemiology}. An infected person can exhibit symptoms akin to those of the flu, such as fever, runny nose, sneezing, coughing, body and muscle aches \citep{pons2015epidemiology,cdc_enterovirus_2016}.
 
 Hence, the off-season peaks of the Twitter classifier in 2011, 2012, 2013, and 2014 could be caused by other infectious diseases that exhibit similar symptoms to that of the flu. Further assessments of the validity of the flu classifier should take this into account, for example by comparing its performance with the surveillance data of other infectious disease capable of causing ILI symptoms.
 
 \subsection{Autoregression trumps Twitter data}
-As \cite{paul_twitter_2014} noted, autoregressive models are very strong baseline models to forecast ILI prevalence---better than only using Twitter for this task. The same can also be observed in Figure~\ref{fig:TwitterModel_comparison}. A simple retrospective AR(2) model based only on CDC ILI rates (b) is able to reproduce the true CDC rates almost completely and shows a considerably stronger correlation then the Twitter base model (c). As already explained in Section~\ref{sec:on_the_ground}, the Twitter base model is not equivalent with the raw results from the Twitter classifier, but most likely consists of these results combined with additional sources information. 
+As \cite{paul_twitter_2014} noted, autoregressive models are very strong baseline models to forecast ILI prevalence---better than only using Twitter for this task. This can also be observed in Figures~\ref{fig:TwitterModel_comparison_base} and \ref{fig:TwitterModel_comparison_ar}, which show that a simple retrospective AR(2) correlates much better with the official CDC ILI rates than the Twitter base model. As already explained in Section~\ref{sec:on_the_ground}, the Twitter base model is not equivalent with the raw results from the Twitter classifier, but most likely consists of these results combined with additional sources information. 
 
-However, Twitter data can still be of use, especially when it comes to nowcast ILI rates, i.e. to assess the current prevalence of influenza-like symptoms based on the preliminary CDC data that has been published \citep{paul_worldwide_2015}. This can also be seen in Figure~\ref{fig:TwitterModel_comparison}, where the AR(2) model based on CDC data combined with the Twitter baseline model (a) shows slightly better results than the AR(2) model alone (b). 
+However, Twitter data can still be of use, especially when it comes to now-cast ILI rates, i.e. to assess the current prevalence of influenza-like symptoms based on the preliminary CDC data that has been published \citep{paul_worldwide_2015}. This can also be seen in Figures~\ref{fig:TwitterModel_comparison_ar} and ~\ref{fig:TwitterModel_comparison_base}, which show that the the CDC AR(2) combined with the Twitter baseline model provide slightly better results than the AR(2) model alone, respectively. 
 
 It should be noted that most disease models, including the ones described in this thesis, are using \textit{revised} CDC data which are already corrected for mistakes by the CDC \citep{paul_twitter_2014}. However, Twitter data might be much more useful when used with the unrevised data instead. As \cite{aramaki_twitter_2011} report, Twitter data is most useful for the early detection of influenza epidemics, increasing the speed of flu surveillance and the reliability of the uncorrected ILI data from the CDC. 
 
@@ -1239,67 +1317,168 @@ Using Twitter data for epidemiological purposes has the potential to provide fas
 The failure to replicate the findings from \citep{bodnar_data_2015} can have multiple reasons: 
 
 \begin{itemize}
-\item Coding errors distoring the aggregation and analysis of the Twitter data set
-\item The findings from \citep{bodnar_data_2015} are based on a different data set
-\item There are errors present in the Twitter classifier code
-\item The findings can only be replicated by using the classified tweets as a starting point for more intricate models
+\item Errors in the aggregation and processing of the Twitter data set.
+\item The findings from \citep{bodnar_data_2015} are based on a different data set.
+\item There are errors present in the Twitter classifier code.
+\item The raw output from the Twitter classifier is not enough.
 \end{itemize}
 
 I will shortly address each one of these steps in the following passages and explain what I have done to address them during my thesis. 
 
-\section{Errors in the aggregation and processing of the Twitter data set}
+\subsection{Errors in the aggregation and processing of the Twitter data set}
 This is the most obvious, but also most frequent source of errors to occur. Handling huge data sets does not only put a strain on the computer's hardware, but also on the computer user's software, since it requires a different way of handling, aggregating and manipulating data sets in order to prevent memory overflow errors or calculations that take until the end of the universe to finish.
 
 It should not come as surprise, though, that very often in the course of this thesis I have been forced to rewrite various parts of my code or try to find a new a approach to a specific problem. It has occurred very often, too, that seemingly nonsensical code output could quickly be fixed by finding the misplaced column index or the redundant loop.
 
-Nevertheless, for which I am fairly confident that the results reported in this thesis do not contain any fundamental errors based on faulty code. For almost every step in the description, aggregation and analyis of the data I have usually chosen at least two different approaches (not all of them are reported in this thesis, but the complete code source and all results are available on Github.) Partially, because I usually encountered better methods along the way, partially because I wanted to have a control for my code in order to prevent any unintentional mistakes. Barring any obscure bugs in the packages I used (which seems extremely unlikely), the failure to reproduced the findings from \citep{bodnar_data_2015} should not stem from any coding errors. Nevertheless, the code set I generated is comparable large and not at all as clean and simple as I wished it to be, thereby also increasing the probability for unwanted errors sneaking in. Hence, in order to make this thesis as resproducible as possible and in order to facilitate any follow-up analysis, I will further clean up the code and the database structure.
+Nevertheless, for which I am fairly confident that the results reported in this thesis do not contain any fundamental errors based on faulty code. For almost every step in the description, aggregation and analysis of the data I have usually chosen at least two different approaches (not all of them are reported in this thesis, but the complete code source and all results are available on Github.) Partially, because I usually encountered better methods along the way, partially because I wanted to have a control for my code in order to prevent any unintentional mistakes. Barring any obscure bugs in the packages I used (which seems extremely unlikely), the failure to reproduced the findings from \citep{bodnar_data_2015} should not stem from any coding errors. Nevertheless, the code set I generated is comparable large and not at all as clean and simple as I wished it to be, thereby also increasing the probability for unwanted errors sneaking in. Hence, in order to make this thesis as reproducible as possible and in order to facilitate any follow-up analysis, I will further clean up the code and the database structure.
 
-\section{The findings from \cite{bodnar_data_2015} are based on a different data set}
+\subsection{The findings from \cite{bodnar_data_2015} are based on a different data set}
 \label{sec:diff_data_set}
-As written in the Chapter~\ref{ch:data_set_description}, there is ample evidence that the data set I used was not identical to the one used in \cite{bodnar_data_2015}. Basic statistical properties such as the average tweet rate, total number of sick users or total number of users were considerably different. One reason for this could be that the data set I analysed was processed by a different Twitter classifier. This is not too unlikely, since Bodnar described several different flu classifiers in his thesis, of which apparently only one was used to fit to the official CDC data. Nevertheless, personal e-mail correspondance with Bodnar confirmed that the data set described in his thesis and the one stored in the data base dumps of the Salathé research group were in fact the same. In this case, the only explanation would be that the data set was inadvertently changed at some point after the end of Bodnar's thesis.
+As written in the Chapter~\ref{ch:data_set_description}, there is ample evidence that the data set I used was not identical to the one used in \cite{bodnar_data_2015}. Basic statistical properties such as the average tweet rate, total number of sick users or total number of users were considerably different. One reason for this could be that the data set I analysed was processed by a different Twitter classifier. This is not too unlikely, since Bodnar described several different flu classifiers in his thesis, of which apparently only one was used to fit to the official CDC data. Nevertheless, personal e-mail correspondence with Bodnar confirmed that the data set described in his thesis and the one stored in the data base dumps of the Salathé research group supposedly have to be the same. In this case, the only remaining explanation would be that the data set was inadvertently changed at some point after the end of Bodnar's thesis.
 
 Any additional explanation might be that I was working with a processed version of the results of the Twitter classifier. As \cite{bodnar_data_2015} noted, he removed both Spam-bots with very high tweet rates as well as infrequent tweeters with less then 10 tweets over the whole study period from the data set. However, this explanation is contradicted by the fact that the data set I used still contained Twitter users who only sent one tweet over the whole study period as well as very spammy accounts with almost 1.5 million tweets sent between the beginning of 2011 and the beginning of 2015.
 
-\section{There are errors present in the Twitter flu classifier}
-This is an idea that I entertained early on and that was in fact the original starting point of this thesis: The attempt to replicate the Twitter flu classifier analysis in a first step in order to improve it in a second step.
+\subsection{There are errors present in the Twitter flu classifier}
+This idea was in some regards the starting point of this thesis: The attempt to replicate the Twitter flu classifier analysis in a first step in order to improve it in a second step.
 
-However, in order to assess the quality of and improve said Twitter flu classifier one would not only need access to it, but also get it up and running. Unforunately, I was unable to reclassify the Twitter data in order to confirm my assumptions due to missing / deprecated libraries and runtime errors in the Twitter classifer, respectively. Hence, debugging and updating the Twitter classifier should be a main goal for future replication attempts.
+However, in order to assess the quality of and improve said Twitter flu classifier one would not only need access to it, but also get it up and running. Unfortunately, I was unable to reclassify the Twitter data in order to confirm my assumptions due to missing / deprecated libraries and runtime errors in the Twitter classifier, respectively. Hence, debugging and updating the Twitter classifier should be a main goal for future replication attempts.
 
-\section{The findings can only be replicated by using the classified tweets as a starting point for more intricate models}
-In my eyes, this is the most likely explanation for the abysmal fit between the Twitter data and the official CDC data. In fact, \citep{paul_worldwide_2015} report that autoregressive models of CDC data are very strong baseline models and in general better than Twitter models alone. This shows that Twitter cannot predict CDC ILI rates on its own but should rather be used as an additional source of information to complement already existng estimates and reduce the error. As I have shown in Chapter~\ref{ch:results}, this is also true for the Twitter data used in \citep{bodnar_data_2015}: The Twitter base model alone was not able to fit the official CDC data tightly and was clearly outperformed by a simple AR(2) model based on the official CDC data. 
+\subsection{The raw output from the Twitter classifier is not enough}
+In my eyes, this is the most likely explanation for the abysmal fit between the Twitter data and the official CDC data. In fact, \citep{paul_worldwide_2015} report that autoregressive models of CDC data are very strong baseline models and in general better than Twitter models alone. This shows that Twitter cannot predict CDC ILI rates on its own but should rather be used as an additional source of information to complement already existing estimates and reduce the error. As I have shown in Chapter~\ref{ch:results}, this is also true for the Twitter data used in \citep{bodnar_data_2015}: The Twitter base model alone was not able to fit the official CDC data tightly and was clearly outperformed by a simple AR(2) model based on the official CDC data. 
 
-In fact, \citep{bodnar_data_2015} fitted an SIR model to the results from the Twitter flu classifier in order to compare results. However, he reported that the model had to be refitted for every individual year based on the official CDC data (again, defeating the purpose of having a classifier independent of population level data). Also, the model fit was much lower (see Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR}) and in no way comparable to the extraordinary fit shown in Figure~\ref{fig:cdc_fit_bodnar_thesis}). In the meantime, I received the code used to fit the SIR model as well as the data used to produce Figure~\ref{fig:cdc_fit_bodnar_thesis}. As of yet, it is unclear to me how exactly this data was produced based on the model parameters fitted in the SIR model. An answer to a follow-up e-mail to Todd Bodnar with regard to this is currently pending.
+In fact, \citep{bodnar_data_2015} fitted two kinds of models based on the results from the Twitter flu classifier in order: A linear regression model, including autoregressive information from the CDC ILI data (see Equation~\ref{eq:2}), and an SIR model (see Equations~\ref{eq:0}). However, the SIR model reported in \cite{bodnar_data_2015} and depicted in Figure~\ref{fig:cdc_fit_bodnar_thesis_SIR} was not based on the output of the Twitter classifier, but rather on the results from the linear regression model described in Equation~\ref{eq:2}, partially defeating the purpose of having a classifier independent of population level data. In addition, the results I was able to receive from the Twitter classifier results were an order of magnitude smaller than both the official CDC data and the Twitter \texttt{base\_full} model data provided to my by Bodnar (personal communication). It is therefore unclear how exactly the Twitter classifier data reported in \cite{bodnar_data_2015} came about. 
 
-In any case, however, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are worrying. Whatever the reason, it is clear that the information from the Twitter classifier on its own cannot be used to reliably predict CDC ILI rates. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for the figures and tables in \cite{bodnar_data_2015}, many discrepancies are found. It seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
+In any case, the discrepancies between the model fits described in \citep{bodnar_data_2015} and the results presented in Chapter~\ref{ch:results} of this thesis are problematic. Even when disregarding the raw results from the raw Twitter classifier (described in ~\ref{ch:data_set_description}) and only focusing on the (processed) data that supposedly served as basis for the figures and tables in \cite{bodnar_data_2015}, many discrepancies are found. Also, it seems as if the models relying on the results from the Twitter classifier are widely outperformed by a simple AR(2) model based on the CDC data.
 
-\newpage
+\cleardoublepage
+
 % \nocite{R}
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{\bfseries{Bibliography}}
+\thispagestyle{plain}\markboth{Bibliography}{Bibliography}
+\setlength{\bibsep}{0pt}
+\renewcommand{\baselinestretch}{1} 
+\renewcommand{\bibname}{}
 \bibliographystyle{mywiley}
 \bibliography{Masterarbeit.bib}
-
-\newpage
-\bibliographystylepackages{mywiley}
-\bibliographypackages{RPackages.bib}
-
+%\defbibheading{bibliography}[\refname]{} %removes heading over bibliography
 
 %\bibliography{Consulting}
 %\printbibliography
 
-\vfill
+\cleardoublepage
 
-\footnotesize
-
-{\bf \prog{R} version and packages used to generate this report:}
-
-\prog{R} version: \textsf{R version 3.4.1 (2017-06-30)}
-
-Base packages: \textsf{stats, graphics, grDevices, utils, datasets, methods, base}
-
-Other packages: \textsf{data.table, knitr}
-
-This document was generated on August 16, 2017 at 18:34.
+\chapter*{Appendices} 
+\addcontentsline{toc}{chapter}{\bfseries{Appendices}}
+\thispagestyle{plain}\markboth{Appendices}{Appendices}
+\section*{R-Packages} 
+\addcontentsline{toc}{section}{R-Packages}
+\thispagestyle{plain}\markboth{R-Packages}{R-Packages}
+\label{app:packages}
 
 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{print}\hlstd{(} \hlkwd{sessionInfo}\hlstd{(),} \hlkwc{locale}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## R version 3.4.1 (2017-06-30)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.2 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/libblas/libblas.so.3.6.0
+## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
+## 
+## attached base packages:
+##  [1] parallel  grid      compiler  stats     graphics  grDevices utils    
+##  [8] datasets  methods   base     
+## 
+## other attached packages:
+##  [1] usmap_0.2.0            tseries_0.10-37        sfsmisc_1.1-1         
+##  [4] openWAR_0.2.3.9001     mosaic_0.14.4          Matrix_1.2-10         
+##  [7] mosaicData_0.14.0      MASS_7.3-45            maps_3.1.1            
+## [10] geosphere_1.5-5        forecast_7.3           timeDate_3012.100     
+## [13] zoo_1.7-14             dplyr_0.5.0            doParallel_1.0.10     
+## [16] iterators_1.0.8        deSolve_1.14           XML_3.98-1.5          
+## [19] vcd_1.4-3              timezone_0.1           proj4_1.0-8           
+## [22] tabulizer_0.1.24       stringr_1.1.0          scales_0.4.1          
+## [25] rworldxtra_1.01        rworldmap_1.3-6        rvest_0.3.2           
+## [28] xml2_1.1.1             R.utils_2.5.0          R.oo_1.21.0           
+## [31] R.methodsS3_1.7.1      rgeos_0.3-22           RCurl_1.95-4.8        
+## [34] bitops_1.0-6           qdap_2.2.5             RColorBrewer_1.1-2    
+## [37] qdapTools_1.3.1        qdapRegex_0.7.2        qdapDictionaries_1.0.6
+## [40] profvis_0.3.3          png_0.1-7              plotrix_3.6-4         
+## [43] pdftools_1.2           pageviews_0.3.0        mgcv_1.8-17           
+## [46] nlme_3.1-131           maptools_0.8-41        sp_1.2-4              
+## [49] lubridate_1.6.0        lattice_0.20-35        hexbin_1.27.1         
+## [52] gtable_0.2.0           gridExtra_2.2.1        gridBase_0.4-7        
+## [55] ggplot2_2.2.1          ggdendro_0.1-20        gganimate_0.1         
+## [58] feather_0.3.1          devtools_1.12.0        chron_2.3-49          
+## [61] cdcfluview_0.5.1       bit64_0.9-5            bit_1.1-12            
+## [64] bigtabulate_1.1.5      biganalytics_1.1.14    biglm_0.9-1           
+## [67] DBI_0.5-1              foreach_1.4.3          bigalgebra_0.8.4      
+## [70] bigmemory_4.5.19       bigmemory.sri_0.1.3    animation_2.4         
+## [73] data.table_1.10.4      knitr_1.15.1          
+## 
+## loaded via a namespace (and not attached):
+##  [1] backports_1.0.5     spam_1.4-0          Hmisc_4.0-2        
+##  [4] plyr_1.8.4          igraph_1.0.1        lazyeval_0.2.0     
+##  [7] splines_3.4.1       openNLP_0.2-6       digest_0.6.12      
+## [10] htmltools_0.3.5     gender_0.5.1        gdata_2.17.0       
+## [13] magrittr_1.5        checkmate_1.8.2     memoise_1.0.0      
+## [16] xlsx_0.5.7          tm_0.6-2            cluster_2.0.6      
+## [19] readr_1.0.0         wordcloud_2.5       Sxslt_0.91-4       
+## [22] colorspace_1.3-2    jsonlite_1.2        survival_2.40-1    
+## [25] V8_1.2              Rcpp_0.12.12        htmlTable_1.9      
+## [28] foreign_0.8-69      Formula_1.2-1       htmlwidgets_0.8    
+## [31] httr_1.2.1          acepack_1.4.1       rJava_0.9-8        
+## [34] openNLPdata_1.5.3-2 nnet_7.3-12         venneuler_1.1-0    
+## [37] reshape2_1.4.2      munsell_0.4.3       tools_3.4.1        
+## [40] evaluate_0.10       purrr_0.2.2         slam_0.1-40        
+## [43] curl_2.3            tibble_1.2          stringi_1.1.2      
+## [46] highr_0.6           fields_8.10         tabulizerjars_0.9.2
+## [49] lmtest_0.9-34       R6_2.2.0            latticeExtra_0.6-28
+## [52] KernSmooth_2.23-15  codetools_0.2-15    reports_0.1.4      
+## [55] gtools_3.5.0        assertthat_0.1      xlsxjars_0.6.1     
+## [58] withr_1.0.2         fracdiff_1.4-2      hms_0.3            
+## [61] quadprog_1.5-5      rpart_4.1-10        tidyr_0.6.1        
+## [64] NLP_0.1-9           base64enc_0.1-3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+% \vfill
+% \footnotesize
+% 
+% {\bf \prog{R} version and packages used to generate this report:}
+% 
+% \prog{R} version: \textsf{sessionInfo()$R.version$version.string}
+% 
+% Base packages: \textsf{paste(sessionInfo()$basePkgs, collapse = ", ")}
+% 
+% Other packages: \textsf{paste(names(sessionInfo()$otherPkgs), collapse = ", ")}
+\cleardoublepage
+
+\section*{Github} 
+\addcontentsline{toc}{section}{Github}
+\thispagestyle{plain}\markboth{Github}{Github}
+\label{app:github}
+
+In order to provide the reader with all the information needed to reproduce the findings reported in this thesis and to build upon it, all code files, processed data sets, and figures are publicly available on Github (\url{https://github.com/salathegroup/2016_TwitterEpi}). The repository contains the following main folders: 
+
+\begin{itemize}
+  \item \textbf{DataCleansing} contains all code files needed for aggregating, transforming and pruning the raw output from the Twitter classifier. It also contains the processed data sets. 
+  \item \textbf{StatisticalAnalysis} contains all code files needed to perform the statistical analyses of the data sets and the comparisons with the CDC data. It also contains the corresponding figures and output summaries.
+   \item \textbf{PhDThesisBodnar} contains all information revolving around Todd Bodnar's PhD thesis, including a summary of his communication to me. it also includes the code files and corresponding results of my reproduction attempts.
+   \item \textbf{TwitterParse} contains all information provided to me by Todd Bodnar with regard to the Java-based Twitter classifier, as well as my own additions.
+  \item \textbf{TestingCode} contains a collection of code files which just served for ``quick-and-dirty" testing and will most likely not work without some tweaking. They are just included for completeness' sake. and to satisfy the especially curious ones. None of the output is directly used for this report, yet some of the code elements have found their way into the final code version provided in the other folder.
+  \item \textbf{Report} contains all necessary files to reproduce this Master thesis.
+\end{itemize}
+
+However, due to limited storage space and size limitations on Github, the raw files are not available. People interested in working with the original data can get in touch with EPFL's \href{https://www.digitalepidemiologylab.org/}{Digital Epidemiology Lab}.
 
 \end{document}
 

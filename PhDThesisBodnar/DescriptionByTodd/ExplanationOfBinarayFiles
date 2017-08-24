@@ -1,0 +1,223 @@
+
+more details on the folder
+___________________
+
+Gianrocco Lazzari, M.Sc.
+PhD student
+School of Life Sciences,  
+EDBB - Ecole Doctorale Biotechnology and Bioengineering
+EPFL - Ecole Polytechnique Fédérale Lausanne
+
+Campus Biotech
+Bâtiment B1
+Ch. des Mines 9
+CH-1202 Geneva 
+
+> Begin forwarded message:
+>
+> From: Todd Bodnar <toddbodnar@gmail.com>
+> Subject: Re: Intro
+> Date: 27 October 2015 at 08:11:45 GMT+1
+> To: Lazzari Gianrocco <gianrocco.lazzari@epfl.ch>
+>
+> You have a CS background, right? Essentially, I stored the data in binary form instead of plain text because of size differences. For example, an integer takes up 4 bytes (see https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) but a String "12345678" would take up 8 bytes because you're storing (at least) 8 characters. Most analytic tools won't take a binary-encoded datafile natively, so you have to use the python script to convert it. (Assumably with some filters to select the subset of the data you really care about.)
+>
+> There are three separate datasets in salathegroup-publications-supplemental:
+>
+> all_tweets = ratings for all 2.7 billion Tweets
+> one_hundred = ratings for Tweets from users that have each posted at least 100 times in our dataset
+> sick_users = ratings for Tweets from users that have been determined to have been sick using the classifier
+>
+>
+> > from struct import *
+> > import sys
+>
+> > input = open(sys.stdin.fileno(),"rb")
+> //take the data in from stdin (rb = read+binary)
+> > while True:
+> >
+> > >raw_data = input.read(27)
+> //read one tweet's information
+> > > if not raw_data:
+> //if the data wasn't read
+> > > > break
+> //we're at the end of the file or some other IO issue, so quit
+> > > data = unpack('>qffqxh',raw_data)
+> //convert the line to an array of variables, see https://docs.python.org/2/library/struct.html#struct.unpack
+> > > sick = 1 if (data[4]/2) > 63 else 0
+> //python doesn't support bit extraction using unpack, so do it here, if data[4]/2>63, then the most significant bit is one, so the sick-flag is set to true, otherwise it is false. We divide by 2 to shift everything over by one (there's some padding)
+> > > state = round(data[4]/2)%64
+> //see the line before, this will remove the most significant bit, leaving you with just the state id. There are 50 US states, with a few extra regions, so this number will never need to be above 64
+> > > print(data[0],data[1],data[2],data[3],sick,state,sep=",")
+> //output the one tweet's information to stdout in plain text with commas separating the variables (and a new line ('\n') separating each tweet)
+>
+> Attached is a rough drawing of how the binary-encoded data is in memory.
+>
+> Inline image 1
+>
+> Top line = example values
+> numbers above boxes=bytes for each variable
+> number in each box=bits for each variable
+> text in each box=variable name
+>
+> uid = user id
+> lat = latitude
+> lon = longitude
+> time = unix time(?) of when the tweet was posted
+> sick = sick flag, 1 if sick, 0 otherwise
+> state = state id, values are 0-56
+> padding = extra space to make the memory requirements be a whole number of bytes (makes processing cleaner)
+>
+> On Mon, Oct 26, 2015 at 11:44 PM, Lazzari Gianrocco <gianrocco.lazzari@epfl.ch> wrote:
+>
+>     hi Todd, 
+>
+>
+>     could  you explain to me a bit better what your code does?
+>
+>     I didn’t have a lot of  time to play around…but still, too me the structure\type\content of those file are still obscure.  If you tell me what’s inside probably, also your code would be more clear to me.
+>
+>
+>     Thanks for your support,
+>     Gianrocco
+>
+>>     On 19 Oct 2015, at 18:07, Todd Bodnar <toddbodnar@gmail.com> wrote:
+>>
+>>     AWS should give you file sizes:
+>>     <image.png>
+>>
+>>     Probably best to download the files before running them through the script if you're planning on working locally, although I'm not sure how much compression actually takes place. 
+>>
+>>     Optimally you should set up a workflow that pipes the resulting csv file directly into whatever scripts you're making so the intermediary csv file won't need to be stored.
+>>
+>>     On Mon, Oct 19, 2015 at 8:52 AM, Lazzari Gianrocco <gianrocco.lazzari@epfl.ch> wrote:
+>>
+>>         Hi all,
+>>
+>>
+>>         actually it was not so slow...I finished alreadz 5 min ago...
+>>         it's 78 GB intotal.
+>>
+>>
+>>         best,
+>>         gr
+>>         ________________________________________
+>>         From: Marcel Salathé [marcel.salathe@epfl.ch]
+>>         Sent: Monday, October 19, 2015 5:44 PM
+>>         To: Lazzari Gianrocco
+>>         Cc: Todd Bodnar
+>>         Subject: Re: Intro
+>>
+>>         probably… can you see the size with the CLI?
+>>
+>>         Todd, any advice?
+>>
+>>         Marcel
+>>
+>>
+>>
+>>         > On Oct 19, 2015, at 5:28 PM, Lazzari Gianrocco <gianrocco.lazzari@epfl.ch> wrote:
+>>         >
+>>         > Dear prof,
+>>         >
+>>         >
+>>         > I am currently downloading the files, but I am not sure If it's what you (or Todd) meant.
+>>         > The folder seems pretty big and anctually,  I cannot even see the size of it on the S3 web page.
+>>         >
+>>         > Therefore, we were wondering with Yannis, if I should rather transform them in .CSV directly running the python script on
+>>         > EC2: is it that what should I do?
+>>         >
+>>         >
+>>         > best regards,
+>>         > Gianrocco
+>>         > ________________________________________
+>>         > From: marcel.salathe@epfl.ch [marcel.salathe@epfl.ch]
+>>         > Sent: Tuesday, October 13, 2015 10:51 AM
+>>         > To: Lazzari Gianrocco
+>>         > Subject: Re: Intro
+>>         >
+>>         > Hi Gianrocco
+>>         >
+>>         > Can you give this a shot and see if it works?
+>>         >
+>>         > Marcel
+>>         >
+>>         > Sent from my iPhone
+>>         >
+>>         > On Oct 12, 2015, at 5:23 PM, Todd Bodnar <toddbodnar@gmail.com<mailto:toddbodnar@gmail.com>> wrote:
+>>         >
+>>         > s3: salathegroup-publications-supplemental/longitude/tweet_ratings
+>>         >
+>>         > You should be able to process them by piping the files into the attached python code. Output will be a csv of form:
+>>         >
+>>         > userid,latitude,longitude,timestamp,sick/notsick,state(I think alphabetical ordered)
+>>         >
+>>         >
+>>         >
+>>         >
+>>         >
+>>         > from struct import *
+>>         >
+>>         > import sys
+>>         >
+>>         >
+>>         > input = open(sys.stdin.fileno(),"rb")
+>>         >
+>>         >
+>>         >
+>>         > while True:
+>>         >
+>>         > raw_data = input.read(27)
+>>         >
+>>         > if not raw_data:
+>>         >
+>>         > break
+>>         >
+>>         > data = unpack('>qffqxh',raw_data)
+>>         >
+>>         > sick = 1 if (data[4]/2) > 63 else 0
+>>         >
+>>         > state = round(data[4]/2)%64
+>>         >
+>>         > print(data[0],data[1],data[2],data[3],sick,state,sep=",")
+>>         >
+>>         >
+>>         > On Mon, Oct 12, 2015 at 12:58 AM, Marcel Salathé <marcel.salathe@epfl.ch<mailto:marcel.salathe@epfl.ch>> wrote:
+>>         >>
+>>         >> Hi Todd
+>>         >>
+>>         >> Hope all is well - I’m looking for to seeing you on Wednesday for your defense.
+>>         >>
+>>         >> I’m cc’ing Gianrocco who has just started as a PhD student with the group here. In this initial phase, he will explore the Twitter data set you’ve worked on (the geotagged one). What’s the status there? Are the three datasets ready for download somewhere (the compressed ones)?
+>>         >>
+>>         >> Gianrocco will contact you with more questions - thanks for your help in this transition phase.
+>>         >>
+>>         >> See you soon
+>>         >> Marcel
+>>         >>
+>>         >> _______________________
+>>         >>
+>>         >> Marcel Salathé, PhD
+>>         >> Associate Professor
+>>         >> School of Life Sciences, School of Computer and Communication Sciences
+>>         >> EPFL - Ecole Polytechnique Fédérale Lausanne
+>>         >>
+>>         >> AAB105, Station 15
+>>         >> 1015 Lausanne
+>>         >> Switzerland
+>>         >>
+>>         >> web: www.salathegroup.com<http://www.salathegroup.com>
+>>         >> twitter: @salathegroup
+>>         >> mobile: +41 79 901 8790
+>>         >>
+>>         >>
+>>         >>
+>>         >>
+>>         >>
+>>         >>
+>>
+>>
+>
+>
+
+

@@ -1,0 +1,44 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Predicting region Y's ILI prevalence simply based on the other 9 regions' current prevalences with a multivariable regression illustrates the strong relationship between the regions' disease levels.\relax }}{10}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Average correlation of the models' predictions and the CDC's national ILI prevalence.\relax }}{12}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Mean correlation of the results of a model trained on 9 regions and evaluated on the last.\relax }}{12}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Probability of keywords being Tweeted by a user during the month that he or she was diagnosed with influenza.\relax }}{20}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Confusion matrix of a Tweet-Classification based diagnosis system. Rows are of true values, columns are of predicted values.\relax }}{21}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Confusion matrix of the classifier based on anomalous tweeting rates. Rows are of true values, columns are of predicted values.\relax }}{22}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Results from an analysis of variance of the area under the ROC curve for classifiers based on tweets from an individual's social network. Factors are whether the data is from the user's friends or followers, the number of keywords chosen and the classifier. \relax }}{24}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Performance of the meta classifiers. The presented baseline is the classifier based on datamined keywords -- the highest preforming individual classifier.\relax }}{24}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Estimated R0 based on CDC and Twitter data}}{33}
+\contentsline {table}{\numberline {4.2}{\ignorespaces National best-fit parameters for each year from the CDC's data (white) and Twitter data (gray).\relax }}{33}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Estimated transmission based on CDC and Twitter data.}}{34}
+\contentsline {table}{\numberline {4.4}{\ignorespaces The average and variance of the number of other users that are within a given user of a distance and the R0 modification factor.}}{36}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Accuracy of different classification metrics from leave one out cross validation. In parenthesis are the optimal cutoff for a decision rule based solely on that metric.\relax }}{52}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Selection criteria shown to the Amazon Turk workers when coding the Twitter accounts.\relax }}{52}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Accuracy and standard deviation of the models considered for classifying user type determined by ten repetitions of 10-fold cross validation. ``Guess Mode'' is a simple rule that always classifies a user as the most common user type (``personal'') and provides a base line to compare the classifiers against. ``SVM'' = ``Support Vector Machine''\relax }}{54}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Representative messages for high and low states of activation for each of the four axes.\relax }}{55}
+\contentsline {table}{\numberline {5.5}{\ignorespaces The performance for each of the neutral/non-neutral classifiers selected from the test/train set on the validation set.\relax }}{58}
+\contentsline {table}{\numberline {5.6}{\ignorespaces The performance for each of the emotion polarity classifiers selected from the test/train set on the validation set. (LR = Logistic Regression, NB = Naive Bayes)\relax }}{59}
+\contentsline {table}{\numberline {5.7}{\ignorespaces The total number of retweets, hidden reproductions and total reproductions of a message.\relax }}{60}
+\contentsline {table}{\numberline {5.8}{\ignorespaces The number of each type of users in each of the three datasets. Note that the total counts are lower due to duplicates between the three datasets.\relax }}{62}
+\contentsline {table}{\numberline {5.9}{\ignorespaces The number of each type of users in each of the three datasets. Note that the total counts are lower due to duplicates between the three datasets.\relax }}{62}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Performance of various regression models to based on correlation coefficients of predicted and actual log(retweet) rates given the Tweet's textual content. Min N = Minimum number of times a word must appear to be included. SVMR = Support Vector Regression,.\relax }}{63}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Combined model performance on the test sets.}}{68}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Decrease in mean correlation when a feature is removed from the full model.\relax }}{69}
+\contentsline {table}{\numberline {5.13}{\ignorespaces The correlation coefficient for each of the models described. Models are compared with either each dataset individually or the combined dataset\relax }}{69}
+\contentsline {table}{\numberline {5.14}{\ignorespaces The mean absolute error for each of the models described. Models are compared with either each dataset individually or the combined dataset\relax }}{70}
+\contentsline {table}{\numberline {5.15}{\ignorespaces Performance of the final regression models on the validation datasets.\relax }}{70}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces The thirty keyword stems with the highest positive predictive power ranked by significance. The Twitter API limits searches to at most thirty keywords. Ratio is calculated as the rate of occurrence when a user is sick over the rate when a user is not sick.\relax }}{75}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Estimated R0 based on CDC and Twitter data with 5\% and 95\% percentiles in parentheses for each of the ten HHS regions}}{77}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Correlation of the output of various regression models used to predict log(retweet) rates given the Tweet's textual content on the three types of tweet propagation: Base API reposts (Retweets), Base reposts plus similar messages (Combined) and Combined with spam removed (No Spam).\relax }}{83}
+\contentsline {table}{\numberline {D.2}{\ignorespaces The correlation coefficient of models to predict the propagation count from messages in the H7N9 dataset. \relax }}{83}

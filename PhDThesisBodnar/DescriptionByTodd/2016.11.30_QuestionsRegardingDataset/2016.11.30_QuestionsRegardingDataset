@@ -1,0 +1,86 @@
+
+Hi Servan,
+
+See below.
+
+> On Nov 23, 2016, at 4:19 AM, Servan Grüninger <servan.grueninger@gmail.com> wrote:
+>
+> Dear Todd,
+>
+> I'm currently writing my Master thesis in Marcel Salathé's lab at EPFL.
+> I'm currently working on the Twitter flu classifier you developed. I'm
+> familiar with your thesis and publications on the topic and I understand
+> most of the code provided on github. However, there are still some open
+> questions with regard to the nature of the dataset used for analysis and
+> the binary files you provided to GIanrocco containing the classified
+> output of your classifier. More precisely, I'm stuck at the following
+> points:
+>
+> A) Binary Files
+>
+> I'm able to parse them and convert them to a different file format for
+> statistical analysis in R. However, I don't really understand, how they
+> were structured or classified. Gianrocco told me that:
+> all_tweets = ratings for all 2.7 billion Tweets
+> one_hundred = ratings for Tweets from users that have each posted at
+> least 100 times in our dataset
+> sick_users = ratings for Tweets from users that have been determined to
+> have been sick using the classifier
+>
+> But if only the "sick_users" were classified using the classifier, how
+> was the classification for the "one_hundred" or the "all_tweets" data
+> set determined? They also contain a "sick" column with 0/1 coding...
+>
+
+
+There's an overlap between the three datasets, all data from was run through the classifier, and users that were sick at any time were also stored in the sick_users dataset. Users that posted at least 100 times (regardless of whether there were ever classified as sick) are in the one_hundred data set, so it looks something like:
+
+
+
+> Furthermore, I don't really understand what the column "state" does in
+> the dataset. I used an adapted version of your python code to convert
+> the binaries into .feather files, and there I saw that the "state"
+> variable is newly defined based on a *different* arithmetic
+> transformation of the *same* value that were used to get the "sick"
+> value. I could not make any sense of this, however.
+
+
+State corresponds to one of the 50 states in the USA (alphabetically ordered, may also include DC).
+
+I can't find my notes for it, but the bits in that byte should look something like
+
+although I'm not 100% sure on the ordering.
+
+>
+> B) classifier
+>
+> In the classifier, you access the Twitter data from a SQL data based
+> stored locally. Could you tell me whether this database is stored
+> somewhere else so that I could get access to it? I'd like make a test
+> run with the Rcode based on the same dataset that you used for the
+> original analysis (just to see whether everything is up and running on
+> my system)
+
+For the longitudinal data, there was no SQL db, although we did do some stuff with apache hive. The table in it should be the same as what you would generate from the binary files (plus some indexes for performance...). 
+
+>
+> If you don't have access to the full dataset anymore, an overview over
+> the SQL database structure would be great  in order to recreate the database
+>
+>
+> Those are the two most urgent questions for the moment. Would you have
+> time to skype at some point this week? I'd be available tomorrow the
+> whole day as well as on Friday the whole day after 10am and before 4pm
+> Swiss time.
+>
+
+Right now I'm in UTC-8, so those times wouldn't work for skype...
+
+> Best and thanks already for your help =)
+>
+> Servan
+>
+>
+>
+
+

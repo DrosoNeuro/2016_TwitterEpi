@@ -1,0 +1,854 @@
+\begin{thebibliography}{100}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{www2013}
+\textsc{Bodnar, T.} and \textsc{M.~Salath{\'e}} (2013) \enquote{Validating
+  models for disease detection using twitter,} in \emph{Proceedings of the 22nd
+  international conference on World Wide Web companion}, International World
+  Wide Web Conferences Steering Committee, pp. 699--702.
+
+\bibitem{gft}
+\textsc{Carneiro, H.~A.} and \textsc{E.~Mylonakis} (2009) \enquote{Google
+  trends: a web-based tool for real-time surveillance of disease outbreaks,}
+  \emph{Clinical infectious diseases}, \textbf{49}(10), pp. 1557--1564.
+
+\bibitem{culotta2010towards}
+\textsc{Culotta, A.} (2010) \enquote{Towards detecting influenza epidemics by
+  analyzing Twitter messages,} in \emph{Proceedings of the first workshop on
+  social media analytics}, ACM, pp. 115--122.
+
+\bibitem{culotta2013lightweight}
+---{}---{}--- (2013) \enquote{Lightweight methods to estimate influenza rates
+  and alcohol sales volume from Twitter messages,} \emph{Language resources and
+  evaluation}, \textbf{47}(1), pp. 217--238.
+
+\bibitem{signorini2011use}
+\textsc{Signorini, A.}, \textsc{A.~M. Segre}, and \textsc{P.~M. Polgreen}
+  (2011) \enquote{The use of Twitter to track levels of disease activity and
+  public concern in the US during the influenza A H1N1 pandemic,} \emph{PloS
+  one}, \textbf{6}(5), p. e19467.
+
+\bibitem{butler2013google}
+\textsc{Butler, D.} (2013) \enquote{When Google got flu wrong.} \emph{Nature},
+  \textbf{494}(7436), p. 155.
+
+\bibitem{copeland2013google}
+\textsc{Copeland, P.}, \textsc{R.~Romano}, \textsc{T.~Zhang},
+  \textsc{G.~Hecht}, \textsc{D.~Zigmond}, and \textsc{C.~Stefansen} (2013)
+  \enquote{Google Disease Trends: An update,} \emph{Nature}, \textbf{457}, pp.
+  1012--1014.
+
+\bibitem{lazer2014twitter}
+\textsc{Lazer, D.}, \textsc{R.~Kennedy}, \textsc{G.~King}, and
+  \textsc{A.~Vespignani} (2014) \enquote{Twitter: Big data opportunities
+  Response,} \emph{Science}, \textbf{345}(6193), pp. 148--149.
+
+\bibitem{lazer2014google}
+\textsc{Lazer, D.~M.}, \textsc{R.~Kennedy}, \textsc{G.~King}, and
+  \textsc{A.~Vespignani} (2014) \enquote{Google Flu Trends Still Appears Sick:
+  An Evaluation of the 2013-2014 Flu Season,} \emph{Available at SSRN}.
+
+\bibitem{lamb2013separating}
+\textsc{Lamb, A.}, \textsc{M.~J. Paul}, and \textsc{M.~Dredze} (2013)
+  \enquote{Separating Fact from Fear: Tracking Flu Infections on Twitter.} in
+  \emph{HLT-NAACL}, pp. 789--795.
+
+\bibitem{world2006communicable}
+\textsc{{\relax World Health Organization}} \textsc{et~al.} (2006)
+  \enquote{Communicable disease surveillance and response systems: guide to
+  monitoring and evaluating,} .
+\newline\urlprefix\url{http://www.who.int/csr/resources/publications/
+  surveillance/WHO\_CDS\_EPR\_LYO\_2006\_2.pdf}
+
+\bibitem{chunara2012new}
+\textsc{Chunara, R.}, \textsc{C.~C. Freifeld}, and \textsc{J.~S. Brownstein}
+  (2012) \enquote{New technologies for reporting real-time emergent
+  infections,} \emph{Parasitology}, \textbf{139}(14), pp. 1843--1851.
+
+\bibitem{goel2010predicting}
+\textsc{Goel, S.}, \textsc{J.~M. Hofman}, \textsc{S.~Lahaie}, \textsc{D.~M.
+  Pennock}, and \textsc{D.~J. Watts} (2010) \enquote{Predicting consumer
+  behavior with Web search,} \emph{Proceedings of the National Academy of
+  Sciences}, \textbf{107}(41), pp. 17486--17490.
+
+\bibitem{kim2013use}
+\textsc{Kim, E.~K.}, \textsc{J.~H. Seok}, \textsc{J.~S. Oh}, \textsc{H.~W.
+  Lee}, and \textsc{K.~H. Kim} (2013) \enquote{Use of hangeul twitter to track
+  and predict human influenza infection,} \emph{PloS one}, \textbf{8}(7), p.
+  e69305.
+
+\bibitem{yaari2013modelling}
+\textsc{Yaari, R.}, \textsc{G.~Katriel}, \textsc{A.~Huppert},
+  \textsc{J.~Axelsen}, and \textsc{L.~Stone} (2013) \enquote{Modelling seasonal
+  influenza: the role of weather and punctuated antigenic drift,} \emph{Journal
+  of The Royal Society Interface}, \textbf{10}(84), p. 20130298.
+
+\bibitem{salathe2010high}
+\textsc{Salath{\'e}, M.}, \textsc{M.~Kazandjieva}, \textsc{J.~W. Lee},
+  \textsc{P.~Levis}, \textsc{M.~W. Feldman}, and \textsc{J.~H. Jones} (2010)
+  \enquote{A high-resolution human contact network for infectious disease
+  transmission,} \emph{Proceedings of the National Academy of Sciences},
+  \textbf{107}(51), pp. 22020--22025.
+
+\bibitem{Cauchemez:2011cp}
+\textsc{Cauchemez, S.}, \textsc{A.~Bhattarai}, \textsc{T.~L. Marchbanks},
+  \textsc{R.~P. Fagan}, \textsc{S.~Ostroff}, \textsc{N.~M. Ferguson},
+  \textsc{D.~Swerdlow}, and \textsc{{Pennsylvania H1N1 working group}} (2011)
+  \enquote{{Role of social networks in shaping disease transmission during a
+  community outbreak of 2009 H1N1 pandemic influenza.}} \emph{Proceedings of
+  the National Academy of Sciences of the United States of America},
+  \textbf{108}(7), pp. 2825--2830.
+
+\bibitem{Ferrari:2011ht}
+\textsc{Ferrari, M.~J.}, \textsc{S.~E. Perkins}, \textsc{L.~W. Pomeroy}, and
+  \textsc{O.~N. Bj{\o}rnstad} (2011) \enquote{{Pathogens, social networks, and
+  the paradox of transmission scaling.}} \emph{Interdisciplinary perspectives
+  on infectious diseases}, \textbf{2011}, p. 267049.
+
+\bibitem{Salathe:2011gr}
+\textsc{Salath{\'e}, M.} and \textsc{S.~Khandelwal} (2011) \enquote{{Assessing
+  vaccination sentiments with online social media: implications for infectious
+  disease dynamics and control.}} \emph{PLoS computational biology},
+  \textbf{7}(10), p. e1002199.
+
+\bibitem{Wells:2013tp}
+\textsc{Wells, C.~R.}, \textsc{E.~Y. Klein}, and \textsc{C.~T. Bauch} (2013)
+  \enquote{{Policy resistance undermines superspreader vaccination strategies
+  for influenza},} \emph{PLoS computational biology}.
+
+\bibitem{Seale:2010br}
+\textsc{Seale, H.}, \textsc{A.~E. Heywood}, \textsc{M.-L. McLaws},
+  \textsc{K.~F. Ward}, \textsc{C.~P. Lowbridge}, \textsc{D.~Van}, and
+  \textsc{C.~R. MacIntyre} (2010) \enquote{{Why do I need it? I am not at risk!
+  Public perceptions towards the pandemic (H1N1) 2009 vaccine},} \emph{BMC
+  infectious diseases}, \textbf{10}(1), p.~99.
+
+\bibitem{Larson:2013kh}
+\textsc{Larson, H.~J.}, \textsc{D.~M. Smith}, \textsc{P.~Paterson},
+  \textsc{M.~Cumming}, \textsc{E.~Eckersberger}, \textsc{C.~C. Freifeld},
+  \textsc{I.~Ghinai}, \textsc{C.~Jarrett}, \textsc{L.~Paushter}, \textsc{J.~S.
+  Brownstein}, and \textsc{L.~C. Madoff} (2013) \enquote{{Measuring vaccine
+  confidence: analysis of data obtained by a media surveillance system used to
+  analyse public concerns about vaccines},} \emph{The Lancet Infectious
+  Diseases}, \textbf{13}(7), pp. 606--613.
+
+\bibitem{Bansal:2006di}
+\textsc{Bansal, S.}, \textsc{B.~Pourbohloul}, and \textsc{L.~A. Meyers} (2006)
+  \enquote{{A comparative analysis of influenza vaccination programs.}}
+  \emph{PLoS medicine}, \textbf{3}(10), p. e387.
+
+\bibitem{Salathe:2008ct}
+\textsc{Salath{\'e}, M.} and \textsc{S.~Bonhoeffer} (2008) \enquote{The effect
+  of opinion clustering on disease outbreaks,} \emph{Journal of The Royal
+  Society Interface}, \textbf{5}(29), pp. 1505--1508.
+
+\bibitem{Huang:2013ed}
+\textsc{Huang, Z.}, \textsc{U.~Kumar}, and \textsc{T.~Bodnar} (2013)
+  \enquote{{Understanding population displacements on location-based call
+  records using road data},} in \emph{MobiGIS '13: Proceedings of the Second
+  ACM SIGSPATIAL International Workshop on Mobile Geographic Information
+  Systems}, ACM Request Permissions.
+
+\bibitem{Balcan:2009ub}
+\textsc{Balcan, D.}, \textsc{V.~Colizza}, \textsc{B.~Goncalves},
+  \textsc{H.~Hu}, \textsc{J.~J. Ramasco}, and \textsc{A.~Vespignani} (2009)
+  \enquote{{Multiscale mobility networks and the spatial spreading of
+  infectious diseases},} .
+
+\bibitem{Afzal:2011bc}
+\textsc{Afzal, S.}, \textsc{R.~Maciejewski}, and \textsc{D.~S. Ebert} (2011)
+  \enquote{{Visual analytics decision support environment for epidemic modeling
+  and response evaluation},} in \emph{Visual Analytics Science and Technology
+  (VAST), 2011 IEEE Conference on}, pp. 191--200.
+
+\bibitem{Funk:2010cc}
+\textsc{Funk, S.}, \textsc{M.~Salath{\'e}}, and \textsc{V.~A. Jansen} (2010)
+  \enquote{Modelling the influence of human behaviour on the spread of
+  infectious diseases: a review,} \emph{Journal of the Royal Society
+  Interface}, \textbf{7}(50), pp. 1247--1256.
+
+\bibitem{Jones:2009cv}
+\textsc{Jones, J.~H.}, \textsc{M.~Salathe}, \textsc{et~al.} (2009)
+  \enquote{Early assessment of anxiety and behavioral response to novel
+  swine-origin influenza A (H1N1),} \emph{PLoS one}, \textbf{4}(12), p. e8032.
+
+\bibitem{Funk:2009ks}
+\textsc{Gilad, E.} and \textsc{C.~Watkins} (2009) \enquote{{The spread of
+  awareness and its impact on epidemic outbreaks.}} \emph{Proceedings of the
+  National Academy of Sciences}, \textbf{106}(16), pp. 6872--6877.
+
+\bibitem{Tudor:2008kh}
+\textsc{Tudor, A.} (2003) \enquote{A (macro) sociology of fear?} \emph{The
+  Sociological Review}, \textbf{51}(2), pp. 238--256.
+
+\bibitem{GruneYanoff:2011hl}
+\textsc{Gr{\"u}ne-Yanoff, T.} (2011) \enquote{{Agent-Based Models as Policy
+  Decision Tools: The Case of Smallpox Vaccination},} \emph{Simulation {\&}
+  Gaming}, \textbf{42}(2), pp. 225--242.
+
+\bibitem{Glasser:2004is}
+\textsc{Glasser, J.}, \textsc{M.~Meltzer}, and \textsc{B.~Levin} (2004)
+  \enquote{Mathematical modeling and public policy: responding to health
+  crises.} \emph{Emerging infectious diseases}, \textbf{10}(11), pp.
+  2050--2051.
+
+\bibitem{Eyssartier:2008jy}
+\textsc{Eyssartier, C.}, \textsc{A.~H. Ladio}, and \textsc{M.~Lozada} (2008)
+  \enquote{{Cultural transmission of traditional knowledge in two populations
+  of North-western Patagonia.}} \emph{Journal of ethnobiology and
+  ethnomedicine}, \textbf{4}, p.~25.
+
+\bibitem{CavalliSforza:1982we}
+\textsc{Cavalli-Sforza, L.~L.}, \textsc{K.~H. Chen}, and \textsc{S.~M.
+  Dornbusch} (1982) \enquote{{Theory and observation in cultural
+  transmission.}} \emph{Science (New York, N.Y.)}, \textbf{218}(4567), pp.
+  19--27.
+
+\bibitem{Rendell:2010go}
+\textsc{Rendell, L.}, \textsc{R.~Boyd}, \textsc{D.~Cownden},
+  \textsc{M.~Enquist}, \textsc{K.~Eriksson}, \textsc{M.~W. Feldman},
+  \textsc{L.~Fogarty}, \textsc{S.~Ghirlanda}, \textsc{T.~Lillicrap}, and
+  \textsc{K.~N. Laland} (2010) \enquote{Why copy others? Insights from the
+  social learning strategies tournament,} \emph{Science}, \textbf{328}(5975),
+  pp. 208--213.
+
+\bibitem{Traulsen:2010ja}
+\textsc{Helbing, D.} and \textsc{W.~Yu} (2010) \enquote{The future of social
+  experimenting,} \emph{Proceedings of the National Academy of Sciences},
+  \textbf{107}(12), pp. 5265--5266.
+
+\bibitem{Centola:2010ki}
+\textsc{Centola, D.} (2010) \enquote{{The spread of behavior in an online
+  social network experiment.}} \emph{Science (New York, N.Y.)},
+  \textbf{329}(5996), pp. 1194--1197.
+
+\bibitem{Bond:2012ff}
+\textsc{Bond, R.~M.}, \textsc{C.~J. Fariss}, \textsc{J.~J. Jones},
+  \textsc{A.~D.~I. Kramer}, \textsc{C.~Marlow}, \textsc{J.~E. Settle}, and
+  \textsc{J.~H. Fowler} (2012) \enquote{{A 61-million-person experiment in
+  social influence and political mobilization},} \emph{Nature},
+  \textbf{489}(7415), pp. 295--298.
+
+\bibitem{timimi2013shape}
+\textsc{Timimi, F.~K.} (2013) \enquote{The Shape of Digital Engagement: Health
+  Care and Social Media,} \emph{The Journal of ambulatory care management},
+  \textbf{36}(3), pp. 187--192.
+
+\bibitem{Kinsman:2012wi}
+\textsc{Kinsman, J.} (2012) \enquote{{``A time of fear'': local, national, and
+  international responses to a large Ebola outbreak in Uganda},} \emph{Global
+  Health}.
+
+\bibitem{bakshy2014www}
+\textsc{Bakshy, E.}, \textsc{D.~Eckles}, and \textsc{M.~S. Bernstein} (2014)
+  \enquote{Designing and Deploying Online Field Experiments,} in
+  \emph{Proceedings of the 23rd ACM conference on the World Wide Web}, ACM.
+
+\bibitem{mcmahan2013ad}
+\textsc{McMahan, H.~B.}, \textsc{G.~Holt}, \textsc{D.~Sculley},
+  \textsc{M.~Young}, \textsc{D.~Ebner}, \textsc{J.~Grady}, \textsc{L.~Nie},
+  \textsc{T.~Phillips}, \textsc{E.~Davydov}, \textsc{D.~Golovin},
+  \textsc{et~al.} (2013) \enquote{Ad click prediction: a view from the
+  trenches,} in \emph{Proceedings of the 19th ACM SIGKDD international
+  conference on Knowledge discovery and data mining}, ACM, pp. 1222--1230.
+
+\bibitem{www2014}
+\textsc{Bodnar, T.}, \textsc{V.~C. Barclay}, \textsc{N.~Ram}, \textsc{C.~S.
+  Tucker}, and \textsc{M.~Salath{\'e}} (2014) \enquote{On the ground validation
+  of online diagnosis with Twitter and medical records,} in \emph{Proceedings
+  of the companion publication of the 23rd international conference on World
+  wide web companion}, International World Wide Web Conferences Steering
+  Committee, pp. 651--656.
+
+\bibitem{hawelka2014geo}
+\textsc{Hawelka, B.}, \textsc{I.~Sitko}, \textsc{E.~Beinat},
+  \textsc{S.~Sobolevsky}, \textsc{P.~Kazakopoulos}, and \textsc{C.~Ratti}
+  (2014) \enquote{Geo-located Twitter as proxy for global mobility patterns,}
+  \emph{Cartography and Geographic Information Science}, \textbf{41}(3), pp.
+  260--271.
+
+\bibitem{leetaru2013mapping}
+\textsc{Leetaru, K.}, \textsc{S.~Wang}, \textsc{G.~Cao},
+  \textsc{A.~Padmanabhan}, and \textsc{E.~Shook} (2013) \enquote{Mapping the
+  global Twitter heartbeat: The geography of Twitter,} \emph{First Monday},
+  \textbf{18}(5).
+
+\bibitem{tatem2014mapping}
+\textsc{Tatem, A.~J.} (2014) \enquote{Mapping population and pathogen
+  movements,} \emph{International health}, \textbf{6}(1), pp. 5--11.
+
+\bibitem{isella2011close}
+\textsc{Isella, L.}, \textsc{M.~Romano}, \textsc{A.~Barrat},
+  \textsc{C.~Cattuto}, \textsc{V.~Colizza}, \textsc{W.~Van~den Broeck},
+  \textsc{F.~Gesualdo}, \textsc{E.~Pandolfi}, \textsc{L.~Rav{\`a}},
+  \textsc{C.~Rizzo}, \textsc{et~al.} (2011) \enquote{Close encounters in a
+  pediatric ward: measuring face-to-face proximity and mixing patterns with
+  wearable sensors,} \emph{PloS one}, \textbf{6}(2), p. e17144.
+
+\bibitem{smieszek2014should}
+\textsc{Smieszek, T.}, \textsc{V.~C. Barclay}, \textsc{I.~Seeni}, \textsc{J.~J.
+  Rainey}, \textsc{H.~Gao}, \textsc{A.~Uzicanin}, and \textsc{M.~Salath{\'e}}
+  (2014) \enquote{How should social mixing be measured: comparing web-based
+  survey and sensor-based methods,} \emph{BMC infectious diseases},
+  \textbf{14}(1), p. 136.
+
+\bibitem{yang2015inference}
+\textsc{Yang, W.}, \textsc{M.~Lipsitch}, and \textsc{J.~Shaman} (2015)
+  \enquote{Inference of seasonal and pandemic influenza transmission dynamics,}
+  \emph{Proceedings of the National Academy of Sciences}, \textbf{112}(9), pp.
+  2723--2728.
+
+\bibitem{moser1979outbreak}
+\textsc{Moser, M.~R.}, \textsc{T.~R. Bender}, \textsc{H.~S. Margolis},
+  \textsc{G.~R. Noble}, \textsc{A.~P. Kendal}, and \textsc{D.~G. Ritter} (1979)
+  \enquote{An outbreak of influenza aboard a commercial airliner,}
+  \emph{American journal of epidemiology}, \textbf{110}(1), pp. 1--6.
+
+\bibitem{klontz1989outbreak}
+\textsc{Klontz, K.~C.}, \textsc{N.~A. Hynes}, \textsc{R.~A. Gunn},
+  \textsc{M.~H. Wilder}, \textsc{M.~W. Harmon}, and \textsc{A.~P. Kendal}
+  (1989) \enquote{An outbreak of influenza A/Taiwan/1/86 (H1N1) infections at a
+  naval base and its association with airplane travel,} \emph{American journal
+  of epidemiology}, \textbf{129}(2), pp. 341--348.
+
+\bibitem{Suh:2010uw}
+\textsc{Suh, B.}, \textsc{L.~Hong}, \textsc{P.~Pirolli}, and \textsc{E.~H. Chi}
+  (2010) \enquote{Want to be retweeted? large scale analytics on factors
+  impacting retweet in twitter network,} , pp. 177--184.
+
+\bibitem{Kim2012retweet}
+\textsc{Kim, J.} and \textsc{J.~Yoo} (2012) \enquote{Role of Sentiment in
+  Message Propagation: Reply vs. Retweet Behavior in Political Communication,}
+  in \emph{Proceedings of the 2012 International Conference on Social
+  Informatics}, SOCIALINFORMATICS '12, IEEE Computer Society, Washington, DC,
+  USA, pp. 131--136.
+\newline\urlprefix\url{http://dx.doi.org/10.1109/SocialInformatics.2012.33}
+
+\bibitem{Stieglitz2012politics}
+\textsc{Stieglitz, S.} and \textsc{L.~Dang-Xuan} (2012) \enquote{Political
+  Communication and Influence Through Microblogging--An Empirical Analysis of
+  Sentiment in Twitter Messages and Retweet Behavior,} in \emph{Proceedings of
+  the 2012 45th Hawaii International Conference on System Sciences}, HICSS '12,
+  IEEE Computer Society, Washington, DC, USA, pp. 3500--3509.
+\newline\urlprefix\url{http://dx.doi.org/10.1109/HICSS.2012.476}
+
+\bibitem{gransee2012}
+\textsc{Gransee, S.}, \textsc{R.~McAfee}, and \textsc{A.~Wilson},
+  \enquote{Twitter Retweet Prediction,} \\
+  \url{http://www.webcitation.org/6ajmw1B7o}, accessed: 2014-10-08.
+
+\bibitem{Zhao:2012vz}
+\textsc{Zhao, K.}, \textsc{J.~Yen}, \textsc{G.~Greer}, \textsc{B.~Qiu},
+  \textsc{P.~Mitra}, and \textsc{K.~Portier} (2014) \enquote{Finding
+  influential users of online health communities: a new metric based on
+  sentiment influence,} \emph{Journal of the American Medical Informatics
+  Association}, \textbf{21}(e2), pp. e212--e218.
+
+\bibitem{Bollen:2011wv}
+\textsc{Bollen, J.}, \textsc{H.~Mao}, and \textsc{A.~Pepe} (2011)
+  \enquote{{Modeling public mood and emotion: Twitter sentiment and
+  socio-economic phenomena.}} \emph{ICWSM}.
+
+\bibitem{Ofek:ug}
+\textsc{Ofek, N.}, \textsc{C.~Caragea}, \textsc{L.~Rokach}, \textsc{P.~Biyani},
+  \textsc{P.~Mitra}, \textsc{J.~Yen}, \textsc{K.~Portier}, and
+  \textsc{G.~Greer} (2013) \enquote{Improving sentiment analysis in an online
+  cancer survivor community using dynamic sentiment lexicon,} , pp. 109--113.
+
+\bibitem{russell1977evidence}
+\textsc{Russell, J.~A.} and \textsc{A.~Mehrabian} (1977) \enquote{Evidence for
+  a three-factor theory of emotions,} \emph{Journal of research in
+  Personality}, \textbf{11}(3), pp. 273--294.
+
+\bibitem{plutchik2001nature}
+\textsc{Plutchik, R.} (2001) \enquote{The nature of emotions,} \emph{American
+  Scientist}, \textbf{89}(4), pp. 344--350.
+
+\bibitem{Cambria2011}
+\textsc{Cambria, E.}, \textsc{A.~Livingstone}, and \textsc{A.~Hussain} (2012)
+  \enquote{The Hourglass of Emotions,} in \emph{Proceedings of the 2011
+  International Conference on Cognitive Behavioural Systems}, COST'11,
+  Springer-Verlag, Berlin, Heidelberg, pp. 144--157.
+\newline\urlprefix\url{http://dx.doi.org/10.1007/978-3-642-34584-5\_11}
+
+\bibitem{Bodnar:2013we}
+\textsc{Bodnar, T.} and \textsc{M.~Salath{\'e}} (2013) \enquote{Validating
+  Models for Disease Detection Using Twitter,} in \emph{Proceedings of the 22Nd
+  International Conference on World Wide Web Companion}, WWW '13 Companion,
+  International World Wide Web Conferences Steering Committee, Republic and
+  Canton of Geneva, Switzerland, pp. 699--702.
+\newline\urlprefix\url{http://dl.acm.org/citation.cfm?id=2487788.2488027}
+
+\bibitem{Salathe:2012ez}
+\textsc{Salath{\'e}, M.}, \textsc{L.~Bengtsson}, \textsc{T.~J. Bodnar},
+  \textsc{D.~D. Brewer}, \textsc{J.~S. Brownstein}, \textsc{C.~Buckee},
+  \textsc{E.~M. Campbell}, \textsc{C.~Cattuto}, \textsc{S.~Khandelwal},
+  \textsc{P.~L. Mabry}, and \textsc{A.~Vespignani} (2012) \enquote{{Digital
+  epidemiology.}} \emph{PLoS computational biology}, \textbf{8}(7), p.
+  e1002616.
+
+\bibitem{Goel:2010jf}
+\textsc{Goel, S.}, \textsc{J.~M. Hofman}, \textsc{S.~Lahaie}, \textsc{D.~M.
+  Pennock}, and \textsc{D.~J. Watts} (2010) \enquote{{Predicting consumer
+  behavior with Web search.}} \emph{Proceedings of the National Academy of
+  Sciences of the United States of America}, \textbf{107}(41), pp.
+  17486--17490.
+
+\bibitem{Butler:2013uh}
+\textsc{Butler, D.} (2013) \enquote{{When Google got flu wrong},}
+  \emph{Nature}, \textbf{494}(7436), pp. 155--156.
+
+\bibitem{Carneiro:2009ft}
+\textsc{Carneiro, H.~A.} and \textsc{E.~Mylonakis} (2009) \enquote{{Google
+  Trends: A Web‐Based Tool for Real‐Time Surveillance of Disease
+  Outbreaks},} \emph{Clinical Infectious Diseases}, \textbf{49}(10), pp.
+  1557--1564.
+
+\bibitem{Signorini:2011cw}
+\textsc{Signorini, A.}, \textsc{A.~M. Segre}, and \textsc{P.~M. Polgreen}
+  (2011) \enquote{{The use of Twitter to track levels of disease activity and
+  public concern in the U.S. during the influenza A H1N1 pandemic.}} \emph{PloS
+  one}, \textbf{6}(5), p. e19467.
+
+\bibitem{Culotta:2010hx}
+\textsc{Culotta, A.} (2010) \enquote{{Towards detecting influenza epidemics by
+  analyzing Twitter messages },} in \emph{the First Workshop}, ACM Press, New
+  York, New York, USA, pp. 115--122.
+
+\bibitem{Dugas:2012ek}
+\textsc{Dugas, A.~F.}, \textsc{Y.~H. Hsieh}, \textsc{S.~R. Levin},
+  \textsc{J.~M. Pines}, \textsc{D.~P. Mareiniss}, \textsc{A.~Mohareb},
+  \textsc{C.~A. Gaydos}, \textsc{T.~M. Perl}, and \textsc{R.~E. Rothman} (2012)
+  \enquote{{Google Flu Trends: Correlation With Emergency Department Influenza
+  Rates and Crowding Metrics},} \emph{Clinical Infectious Diseases},
+  \textbf{54}(4), pp. 463--469.
+
+\bibitem{Hawn:2009tt}
+\textsc{Hawn, C.} (2009) \enquote{{Take Two Aspirin And Tweet Me In The
+  Morning: How Twitter, Facebook, And Other Social Media Are Reshaping Health
+  Care},} \emph{Health Affairs}, \textbf{28}(2), pp. 361--368.
+
+\bibitem{StLouis:2012wc}
+\textsc{St~Louis, C.} and \textsc{G.~Zorlu} (2012) \enquote{{Can Twitter
+  predict disease outbreaks?}} \emph{BMJ (Clinical research ed.)},
+  \textbf{344}, p. e2353.
+
+\bibitem{DelaTorreDiez:2012cf}
+\textsc{De~la Torre-D{\'\i}ez, I.}, \textsc{F.~J. D{\'\i}az-Pernas}, and
+  \textsc{M.~Ant{\'o}n-Rodr{\'\i}guez} (2012) \enquote{{A content analysis of
+  chronic diseases social groups on facebook and twitter.}} \emph{Telemedicine
+  journal and e-health : the official journal of the American Telemedicine
+  Association}, \textbf{18}(6), pp. 404--408.
+
+\bibitem{Ginsberg:2009ep}
+\textsc{Ginsberg, J.}, \textsc{M.~H. Mohebbi}, \textsc{R.~S. Patel},
+  \textsc{L.~Brammer}, \textsc{M.~S. Smolinski}, and \textsc{L.~Brilliant}
+  (2009) \enquote{Detecting influenza epidemics using search engine query
+  data,} \emph{Nature}, \textbf{457}(7232), pp. 1012--1014.
+
+\bibitem{Marsland:2009uj}
+\textsc{Marsland, S.} (2014) \emph{Machine learning: an algorithmic
+  perspective}, CRC press.
+
+\bibitem{Smola:1997uwa}
+\textsc{Vapnik, V.} (1997) \enquote{{Support vector regression machines},}
+  \emph{Advances in neural information processing systems}, \textbf{9}, pp.
+  155--161.
+
+\bibitem{Bodnar:2014:GVO:2567948.2579272}
+\textsc{Bodnar, T.}, \textsc{V.~C. Barclay}, \textsc{N.~Ram}, \textsc{C.~S.
+  Tucker}, and \textsc{M.~Salath{\'e}} (2014) \enquote{{On the Ground
+  Validation of Online Diagnosis with Twitter and Medical Records},} in
+  \emph{Proceedings of the Companion Publication of the 23rd International
+  Conference on World Wide Web Companion}, International World Wide Web
+  Conferences Steering Committee, International World Wide Web Conferences
+  Steering Committee, Republic and Canton of Geneva, Switzerland, pp. 651--656.
+
+\bibitem{Chan2010}
+\textsc{Chan, E.~H.}, \textsc{T.~F. Brewer}, \textsc{L.~C. Madoff},
+  \textsc{M.~P. Pollack}, \textsc{A.~L. Sonricker}, \textsc{M.~Keller},
+  \textsc{C.~C. Freifeld}, \textsc{M.~Blench}, \textsc{A.~Mawudeku}, and
+  \textsc{J.~S. Brownstein} (2010) \enquote{Global capacity for emerging
+  infectious disease detection,} \emph{Proceedings of the National Academy of
+  Sciences}, \textbf{107}(50), pp. 21701--21706,
+  \eprint{http://www.pnas.org/content/107/50/21701.full.pdf+html}.
+\newline\urlprefix\url{http://www.pnas.org/content/107/50/21701.abstract}
+
+\bibitem{Heymann:2001}
+\textsc{Heymann, D.~L.} and \textsc{G.~R. Rodier} (2001) \enquote{Hot spots in
+  a wired world: \{WHO\} surveillance of emerging and re-emerging infectious
+  diseases,} \emph{The Lancet Infectious Diseases}, \textbf{1}(5), pp. 345 --
+  353.
+
+\bibitem{Marquet:2005tb}
+\textsc{Marquet, R.~L.}, \textsc{A.~I. Bartelds}, \textsc{S.~P. van Noort},
+  \textsc{C.~E. Koppeschaar}, \textsc{J.~Paget}, \textsc{F.~G. Schellevis}, and
+  \textsc{J.~van~der Zee} (2006) \enquote{{Internet-based monitoring of
+  influenza-like illness (ILI) in the general population of the Netherlands
+  during the 2003-2004 influenza season},} \emph{BMC public health},
+  \textbf{6}(1), p. 242.
+
+\bibitem{VanNoort:2007uk}
+\textsc{van Noort, S.~P.}, \textsc{M.~Muehlen}, \textsc{H.~Rebelo~de Andrade},
+  \textsc{C.~Koppeschaar}, \textsc{J.~M. Lima~Lourenco}, and \textsc{M.~G.
+  Gomes} (2007) \enquote{{{G}ripenet: an internet-based system to monitor
+  influenza-like illness uniformly across {E}urope},} \emph{Euro Surveill.},
+  \textbf{12}(7), pp. 5--6.
+
+\bibitem{Olson:2013bo}
+\textsc{Olson, D.~R.}, \textsc{K.~J. Konty}, \textsc{M.~Paladini},
+  \textsc{C.~Viboud}, and \textsc{L.~Simonsen} (2013) \enquote{{Reassessing
+  Google Flu Trends Data for Detection of Seasonal and Pandemic Influenza: A
+  Comparative Epidemiological Study at Three Geographic Scales},} \emph{PLoS
+  computational biology}, \textbf{9}(10), p. e1003256.
+
+\bibitem{Lamb:2013to}
+\textsc{Lamb, A.}, \textsc{M.~J. Paul}, and \textsc{M.~Dredze} (2013)
+  \enquote{Separating Fact from Fear: Tracking Flu Infections on Twitter,} in
+  \emph{Proceedings of the 2013 Conference of the North American Chapter of the
+  Association for Computational Linguistics: Human Language Technologies},
+  Association for Computational Linguistics, Atlanta, Georgia, pp. 789--795.
+\newline\urlprefix\url{http://www.aclweb.org/anthology/N13-1097}
+
+\bibitem{Porter:1980dd}
+\textsc{Porter, M.~F.} (1980) \enquote{{An algorithm for suffix stripping},}
+  \emph{Program: electronic library and information systems}, \textbf{14}(3),
+  pp. 130--137.
+
+\bibitem{Grubs:1969ab}
+\textsc{Grubbs, F.~E.} (1969) \enquote{{Procedures for Detecting Outlying
+  Observations in Samples},} \emph{Technometrics}, \textbf{11}(1), pp. 1--21.
+
+\bibitem{Todorovski:2003hk}
+\textsc{Todorovski, L.} and \textsc{S.~D\v{z}eroski} (2003) \enquote{Combining
+  Classifiers with Meta Decision Trees,} \emph{Mach. Learn.}, \textbf{50}(3),
+  pp. 223--249.
+\newline\urlprefix\url{http://dx.doi.org/10.1023/A:1021709817809}
+
+\bibitem{Frossyniotis:2004wx}
+\textsc{Tsirogiannis, G.}, \textsc{D.~Frossyniotis}, \textsc{K.~Nikita}, and
+  \textsc{A.~Stafylopatis} (2004) \enquote{A Meta-classifier Approach for
+  Medical Diagnosis,} in \emph{Methods and Applications of Artificial
+  Intelligence} (G.~Vouros and T.~Panayiotopoulos, eds.), vol. 3025 of
+  \emph{Lecture Notes in Computer Science}, Springer Berlin Heidelberg, pp.
+  154--163.
+
+\bibitem{cosme2015}
+\textsc{Adrover, C.}, \textsc{T.~Bodnar}, \textsc{Z.~Huang},
+  \textsc{A.~Telenti}, and \textsc{M.~Salath{\'e}} (2015) \enquote{Identifying
+  Adverse Effects of HIV Drug Treatment and Associated Sentiments Using
+  Twitter,} \emph{JMIR Public Health Surveillillance}, \textbf{1}(2), p.~e7.
+\newline\urlprefix\url{http://publichealth.jmir.org/2015/2/e7/}
+
+\bibitem{bilge2014uniqueness}
+\textsc{Bilge, A.~H.}, \textsc{F.~Samanlioglu}, and \textsc{O.~Ergonul} (2014)
+  \enquote{On the uniqueness of epidemic models fitting a normalized curve of
+  removed individuals,} \emph{Journal of mathematical biology}, pp. 1--28.
+
+\bibitem{newman2003social}
+\textsc{Newman, M.~E.} and \textsc{J.~Park} (2003) \enquote{Why social networks
+  are different from other types of networks,} \emph{Physical Review E},
+  \textbf{68}(3), p. 036122.
+
+\bibitem{Smieszek:2013gg}
+\textsc{Smieszek, T.} and \textsc{M.~Salath{\'e}} (2013) \enquote{A low-cost
+  method to assess the epidemiological importance of individuals in controlling
+  infectious disease outbreaks,} \emph{BMC medicine}, \textbf{11}(1), p.~35.
+
+\bibitem{fraser2004factors}
+\textsc{Fraser, C.}, \textsc{S.~Riley}, \textsc{R.~M. Anderson}, and
+  \textsc{N.~M. Ferguson} (2004) \enquote{Factors that make an infectious
+  disease outbreak controllable,} \emph{Proceedings of the National Academy of
+  Sciences of the United States of America}, \textbf{101}(16), pp. 6146--6151.
+
+\bibitem{read2013determining}
+\textsc{Read, M.}, \textsc{P.~S. Andrews}, \textsc{J.~Timmis}, \textsc{R.~A.
+  Williams}, \textsc{R.~B. Greaves}, \textsc{H.~Sheng}, \textsc{M.~Coles}, and
+  \textsc{V.~Kumar} (2013) \enquote{Determining disease intervention strategies
+  using spatially resolved simulations,} .
+
+\bibitem{mossong2008social}
+\textsc{Mossong, J.}, \textsc{N.~Hens}, \textsc{M.~Jit}, \textsc{P.~Beutels},
+  \textsc{K.~Auranen}, \textsc{R.~Mikolajczyk}, \textsc{M.~Massari},
+  \textsc{S.~Salmaso}, \textsc{G.~S. Tomba}, \textsc{J.~Wallinga},
+  \textsc{et~al.} (2008) \enquote{Social contacts and mixing patterns relevant
+  to the spread of infectious diseases,} \emph{PLoS Med}, \textbf{5}(3), p.
+  e74.
+
+\bibitem{diekmann2012mathematical}
+\textsc{Diekmann, O.}, \textsc{H.~Heesterbeek}, and \textsc{T.~Britton} (2012)
+  \emph{Mathematical tools for understanding infectious disease dynamics},
+  Princeton University Press.
+
+\bibitem{heesterbeek2002brief}
+\textsc{Heesterbeek, J.} (2002) \enquote{A brief history of R 0 and a recipe
+  for its calculation,} \emph{Acta biotheoretica}, \textbf{50}(3), pp.
+  189--204.
+
+\bibitem{Cattuto:2010id}
+\textsc{Cattuto, C.}, \textsc{W.~Van~den Broeck}, \textsc{A.~Barrat},
+  \textsc{V.~Colizza}, \textsc{J.-F. Pinton}, and \textsc{A.~Vespignani} (2010)
+  \enquote{{Dynamics of person-to-person interactions from distributed RFID
+  sensor networks.}} \emph{PloS one}, \textbf{5}(7), p. e11596.
+
+\bibitem{liem2005lack}
+\textsc{Liem, N.~T.}, \textsc{I.~A. I.~I. Team}, and \textsc{W.~L. Vietnam}
+  (2005) \enquote{Lack of H5N1 avian influenza transmission to hospital
+  employees, Hanoi, 2004,} \emph{Emerging infectious diseases}, \textbf{11}(2),
+  p. 210.
+
+\bibitem{cdcnoflu}
+\textsc{\relax Center~for Disease~Control} (2014).
+\newline\urlprefix\url{http://www.cdc.gov/flu/takingcare.htm
+  (http://www.webcitation.org/6axXG9nMV)}
+
+\bibitem{morstatter2013sample}
+\textsc{Morstatter, F.}, \textsc{J.~Pfeffer}, \textsc{H.~Liu}, and
+  \textsc{K.~M. Carley} (2013) \enquote{Is the sample good enough? comparing
+  data from twitter's streaming api with twitter's firehose,} \emph{arXiv
+  preprint arXiv:1306.5204}.
+
+\bibitem{banzhaf1998genetic}
+\textsc{Banzhaf, W.}, \textsc{P.~Nordin}, \textsc{R.~E. Keller}, and
+  \textsc{F.~D. Francone} (1998) \emph{Genetic programming: an introduction},
+  vol.~1, Morgan Kaufmann San Francisco.
+
+\bibitem{cowling2010protective}
+\textsc{Cowling, B.~J.}, \textsc{S.~Ng}, \textsc{E.~S. Ma}, \textsc{C.~K.
+  Cheng}, \textsc{W.~Wai}, \textsc{V.~J. Fang}, \textsc{K.-H. Chan},
+  \textsc{D.~K. Ip}, \textsc{S.~S. Chiu}, \textsc{J.~M. Peiris},
+  \textsc{et~al.} (2010) \enquote{Protective efficacy of seasonal influenza
+  vaccination against seasonal and pandemic influenza virus infection during
+  2009 in Hong Kong,} \emph{Clinical infectious diseases}, \textbf{51}(12), pp.
+  1370--1379.
+
+\bibitem{weinstein2003transmission}
+\textsc{Weinstein, R.~A.}, \textsc{C.~B. Bridges}, \textsc{M.~J. Kuehnert}, and
+  \textsc{C.~B. Hall} (2003) \enquote{Transmission of influenza: implications
+  for control in health care settings,} \emph{Clinical Infectious Diseases},
+  \textbf{37}(8), pp. 1094--1101.
+
+\bibitem{cowling2009facemasks}
+\textsc{Cowling, B.~J.}, \textsc{K.-H. Chan}, \textsc{V.~J. Fang},
+  \textsc{C.~K. Cheng}, \textsc{R.~O. Fung}, \textsc{W.~Wai}, \textsc{J.~Sin},
+  \textsc{W.~H. Seto}, \textsc{R.~Yung}, \textsc{D.~W. Chu}, \textsc{et~al.}
+  (2009) \enquote{Facemasks and hand hygiene to prevent influenza transmission
+  in households: a cluster randomized trial,} \emph{Annals of Internal
+  Medicine}, \textbf{151}(7), pp. 437--446.
+
+\bibitem{olinky2004unexpected}
+\textsc{Olinky, R.} and \textsc{L.~Stone} (2004) \enquote{Unexpected epidemic
+  thresholds in heterogeneous networks: The role of disease transmission,}
+  \emph{Physical Review E}, \textbf{70}(3), p. 030902.
+
+\bibitem{molina2012modelling}
+\textsc{Molina, C.} and \textsc{L.~Stone} (2012) \enquote{Modelling the spread
+  of diseases in clustered networks,} \emph{Journal of theoretical biology},
+  \textbf{315}, pp. 110--118.
+
+\bibitem{thompson2004influenza}
+\textsc{Thompson, W.~W.}, \textsc{D.~K. Shay}, \textsc{E.~Weintraub},
+  \textsc{L.~Brammer}, \textsc{C.~B. Bridges}, \textsc{N.~J. Cox}, and
+  \textsc{K.~Fukuda} (2004) \enquote{Influenza-associated hospitalizations in
+  the United States,} \emph{Jama}, \textbf{292}(11), pp. 1333--1340.
+
+\bibitem{yelpgps}
+\textsc{Glidden, M.} and \textsc{J.~Blomo} (2012), \enquote{GPS vs WiFi: The
+  Battle for Location Accuracy Using Yelp Check-Ins,}
+  \url{http://engineeringblog.yelp.com/2012/08/gps-vs-wifi-the-battle-
+  for-location-accuracy-using-yelp-check-ins.html}.
+
+\bibitem{zandbergen2011positional}
+\textsc{Zandbergen, P.~A.} and \textsc{S.~J. Barbeau} (2011)
+  \enquote{Positional accuracy of assisted gps data from high-sensitivity
+  gps-enabled mobile phones,} \emph{Journal of Navigation}, \textbf{64}(03),
+  pp. 381--399.
+
+\bibitem{djuknic2001geolocation}
+\textsc{Djuknic, G.~M.} and \textsc{R.~E. Richton} (2001) \enquote{Geolocation
+  and assisted GPS,} \emph{Computer}, \textbf{34}(2), pp. 123--125.
+
+\bibitem{modsching2006field}
+\textsc{Modsching, M.}, \textsc{R.~Kramer}, and \textsc{K.~ten Hagen} (2006)
+  \enquote{Field trial on GPS Accuracy in a medium size city: The influence of
+  built-up,} in \emph{3rd Workshop on Positioning, Navigation and
+  Communication}, pp. 209--218.
+
+\bibitem{defcon}
+\textsc{Street, J.~E.} (2010) \enquote{Deceiving the heavens to cross the sea,}
+  {DEFCON 18}.
+\newline\urlprefix\url{https://www.youtube.com/watch?v=EzGwO5L9oq4}
+
+\bibitem{boshmaf2011socialbot}
+\textsc{Boshmaf, Y.}, \textsc{I.~Muslukhov}, \textsc{K.~Beznosov}, and
+  \textsc{M.~Ripeanu} (2011) \enquote{The socialbot network: when bots
+  socialize for fame and money,} in \emph{Proceedings of the 27th Annual
+  Computer Security Applications Conference}, ACM, pp. 93--102.
+
+\bibitem{Krause:2012uz}
+\textsc{Krause, B.}, \textsc{C.~Schmitz}, \textsc{A.~Hotho}, and
+  \textsc{G.~Stumme} (2008) \enquote{{The anti-social tagger: detecting spam in
+  social bookmarking systems},} in \emph{AIRWeb '08: Proceedings of the 4th
+  international workshop on Adversarial information retrieval on the web}, ACM.
+
+\bibitem{Biro:2008wd}
+\textsc{B{\'\i}r{\'o}, I.}, \textsc{J.~Szab{\'o}}, and \textsc{A.~A.
+  Bencz{\'u}r} (2008) \enquote{Latent dirichlet allocation in web spam
+  filtering,} , pp. 29--32.
+
+\bibitem{Anonymous:iQRVCsVz}
+\textsc{Castillo, C.}, \textsc{M.~Mendoza}, and \textsc{B.~Poblete} (2011)
+  \enquote{Information credibility on twitter,} , pp. 675--684.
+
+\bibitem{salathe2013dynamics}
+\textsc{Salath{\'e}, M.}, \textsc{D.~Q. Vu}, \textsc{S.~Khandelwal}, and
+  \textsc{D.~R. Hunter} (2013) \enquote{The dynamics of health behavior
+  sentiments on a large online social network,} \emph{EPJ Data Science},
+  \textbf{2}(1), pp. 1--12.
+
+\bibitem{salathe2011assessing}
+\textsc{Salath{\'e}, M.} and \textsc{S.~Khandelwal} (2011) \enquote{Assessing
+  vaccination sentiments with online social media: implications for infectious
+  disease dynamics and control,} \emph{PLoS computational biology},
+  \textbf{7}(10), p. e1002199.
+
+\bibitem{Ediger:cn}
+\textsc{Ediger, D.}, \textsc{K.~Jiang}, \textsc{J.~Riedy}, \textsc{D.~Bader},
+  \textsc{C.~Corley}, \textsc{R.~Farber}, \textsc{W.~N. Reynolds},
+  \textsc{et~al.} (2010) \enquote{Massive social network analysis: Mining
+  twitter for social good,} in \emph{Parallel Processing (ICPP), 2010 39th
+  International Conference on}, IEEE, pp. 583--593.
+
+\bibitem{Weng:2012dd}
+\textsc{Weng, L.}, \textsc{A.~Flammini}, \textsc{A.~Vespignani}, and
+  \textsc{F.~Menczer} (2012) \enquote{{Competition among memes in a world with
+  limited attention.}} \emph{Scientific reports}, \textbf{2}, p. 335.
+
+\bibitem{Osborne2011rt}
+\textsc{Osborne, M.} and \textsc{V.~Lavrenko} (2011) \enquote{Rt to win!
+  predicting message propagation in twitter,} in \emph{ICWSM}.
+
+\bibitem{Lerman:2010vo}
+\textsc{Lerman, K.} and \textsc{R.~Ghosh} (2010) \enquote{Information
+  Contagion: An Empirical Study of the Spread of News on Digg and Twitter
+  Social Networks.} \emph{ICWSM}, \textbf{10}, pp. 90--97.
+
+\bibitem{kwak2010twitter}
+\textsc{Kwak, H.}, \textsc{C.~Lee}, \textsc{H.~Park}, and \textsc{S.~Moon}
+  (2010) \enquote{What is Twitter, a social network or a news media?} in
+  \emph{Proceedings of the 19th international conference on World wide web},
+  ACM, pp. 591--600.
+
+\bibitem{Dou:2012vy}
+\textsc{Dou, W.}, \textsc{X.~Wang}, \textsc{D.~Skau}, \textsc{W.~Ribarsky}, and
+  \textsc{M.~X. Zhou} (2012) \enquote{Leadline: Interactive visual analysis of
+  text data through event identification and exploration,} , pp. 93--102.
+
+\bibitem{fan2013anger}
+\textsc{Fan, R.}, \textsc{J.~Zhao}, \textsc{Y.~Chen}, and \textsc{K.~Xu} (2013)
+  \enquote{Anger is more influential than joy: sentiment correlation in Weibo,}
+  \emph{arXiv preprint arXiv:1309.2402}.
+
+\bibitem{Thoits:1989va}
+\textsc{Thoits, P.~A.} (1989) \enquote{The sociology of emotions,} \emph{Annual
+  review of sociology}, pp. 317--342.
+
+\bibitem{Burger:2011wl}
+\textsc{Burger, J.~D.}, \textsc{J.~Henderson}, \textsc{G.~Kim}, and
+  \textsc{G.~Zarrella} (2011) \enquote{{Discriminating gender on Twitter},} in
+  \emph{EMNLP '11: Proceedings of the Conference on Empirical Methods in
+  Natural Language Processing}, Association for Computational Linguistics.
+
+\bibitem{Go:2009ut}
+\textsc{Go, A.}, \textsc{R.~Bhayani}, and \textsc{L.~Huang} (2009)
+  \enquote{{Twitter sentiment classification using distant supervision},}
+  \emph{CS224N Project Report}.
+
+\bibitem{anti2008krause}
+\textsc{Krause, B.}, \textsc{C.~Schmitz}, \textsc{A.~Hotho}, and
+  \textsc{G.~Stumme} (2008) \enquote{{The Anti-Social Tagger - Detecting Spam
+  in Social Bookmarking Systems},} in \emph{Proc. of the Fourth International
+  Workshop on Adversarial Information Retrieval on the Web}.
+
+\bibitem{snow2008cheap}
+\textsc{Snow, R.}, \textsc{B.~O'Connor}, \textsc{D.~Jurafsky}, and
+  \textsc{A.~Y. Ng} (2008) \enquote{Cheap and fast---but is it good?:
+  evaluating non-expert annotations for natural language tasks,} in
+  \emph{Proceedings of the conference on empirical methods in natural language
+  processing}, Association for Computational Linguistics, pp. 254--263.
+
+\bibitem{scikit-learn}
+\textsc{Pedregosa, F.}, \textsc{G.~Varoquaux}, \textsc{A.~Gramfort},
+  \textsc{V.~Michel}, \textsc{B.~Thirion}, \textsc{O.~Grisel},
+  \textsc{M.~Blondel}, \textsc{P.~Prettenhofer}, \textsc{R.~Weiss},
+  \textsc{V.~Dubourg}, \textsc{J.~Vanderplas}, \textsc{A.~Passos},
+  \textsc{D.~Cournapeau}, \textsc{M.~Brucher}, \textsc{M.~Perrot}, and
+  \textsc{E.~Duchesnay} (2011) \enquote{Scikit-learn: Machine Learning in
+  {P}ython,} \emph{Journal of Machine Learning Research}, \textbf{12}, pp.
+  2825--2830.
+
+\bibitem{viboud2004risk}
+\textsc{Viboud, C.}, \textsc{P.-Y. Bo{\"e}lle}, \textsc{S.~Cauchemez},
+  \textsc{A.~Lavenu}, \textsc{A.-J. Valleron}, \textsc{A.~Flahault}, and
+  \textsc{F.~Carrat} (2004) \enquote{Risk factors of influenza transmission in
+  households,} \emph{British Journal of General Practice}, \textbf{54}(506),
+  pp. 684--689.
+
+\bibitem{mounts1999case}
+\textsc{Mounts, A.~W.}, \textsc{H.~Kwong}, \textsc{H.~S. Izurieta},
+  \textsc{Y.-y. Ho}, \textsc{T.-k. Au}, \textsc{M.~Lee}, \textsc{C.~B.
+  Bridges}, \textsc{S.~W. Williams}, \textsc{K.~H. Mak}, \textsc{J.~M. Katz},
+  \textsc{et~al.} (1999) \enquote{Case-control study of risk factors for avian
+  influenza A (H5N1) disease, Hong Kong, 1997,} \emph{Journal of Infectious
+  Diseases}, \textbf{180}(2), pp. 505--508.
+
+\bibitem{dinh2006risk}
+\textsc{Dinh, P.~N.}, \textsc{H.~T. Long}, \textsc{N.~T.~K. Tien},
+  \textsc{N.~T. Hien}, \textsc{L.~T.~Q. Mai}, \textsc{L.~H. Phong},
+  \textsc{L.~Van~Tuan}, \textsc{H.~Van~Tan}, \textsc{N.~B. Nguyen},
+  \textsc{P.~Van~Tu}, \textsc{et~al.} (2006) \enquote{Risk factors for human
+  infection with avian influenza A H5N1, Vietnam, 2004,} \emph{Emerging
+  infectious diseases}, \textbf{12}(12), p. 1841.
+
+\bibitem{o2010risk}
+\textsc{O’Riordan, S.}, \textsc{M.~Barton}, \textsc{Y.~Yau}, \textsc{S.~E.
+  Read}, \textsc{U.~Allen}, and \textsc{D.~Tran} (2010) \enquote{Risk factors
+  and outcomes among children admitted to hospital with pandemic H1N1
+  influenza,} \emph{Canadian Medical Association Journal}, \textbf{182}(1), pp.
+  39--44.
+
+\bibitem{LeCun:2015dt}
+\textsc{LeCun, Y.}, \textsc{Y.~Bengio}, and \textsc{G.~Hinton} (2015)
+  \enquote{{Deep learning.}} \emph{Nature}, \textbf{521}(7553), pp. 436--444.
+
+\bibitem{el1995hierarchical}
+\textsc{El~Hihi, S.} and \textsc{Y.~Bengio} (1995) \enquote{{Hierarchical
+  Recurrent Neural Networks for Long-Term Dependencies.}} in \emph{NIPS}, pp.
+  493--499.
+
+\bibitem{ferrari2008constrained}
+\textsc{Ferrari, S.} and \textsc{M.~Jensenius} (2008) \enquote{A constrained
+  optimization approach to preserving prior knowledge during incremental
+  training,} \emph{Neural Networks, IEEE Transactions on}, \textbf{19}(6), pp.
+  996--1009.
+
+\bibitem{Pascanu:2012tw}
+\textsc{Pascanu, R.}, \textsc{T.~Mikolov}, and \textsc{Y.~Bengio} (2012)
+  \enquote{{On the difficulty of training Recurrent Neural Networks},}
+  \emph{arXiv.org}, \eprint{1211.5063v2}.
+
+\bibitem{sutskever2011generating}
+\textsc{Sutskever, I.}, \textsc{J.~Martens}, and \textsc{G.~E. Hinton} (2011)
+  \enquote{{Generating text with recurrent neural networks},} in
+  \emph{Proceedings of the 28th International Conference on Machine Learning
+  (ICML-11)}, pp. 1017--1024.
+
+\bibitem{Graves:2013wt}
+\textsc{Graves, A.}, \textsc{A.-r. Mohamed}, and \textsc{G.~Hinton} (2013)
+  \enquote{{Speech Recognition with Deep Recurrent Neural Networks},}
+  \emph{arXiv.org}, \eprint{1303.5778v1}.
+
+\end{thebibliography}

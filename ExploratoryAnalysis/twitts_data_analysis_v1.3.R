@@ -81,7 +81,7 @@
   tag <- "sick_df_West Coast"
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=1000,log_scale=TRUE)
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=500,log_scale=TRUE)
-  hexbin_plot_plus(df,tag=tag,summary=df_summary,coord = c(-125,-112,32,40),path="plots/",xbins=100,root=10)
+  hexbin_plot_plus(df,tag=tag,summary=df_summary,coord = c(-80,-66,38,43),path="plots/",xbins=300,root=10)
   hexbin_plot_plus(df,tag=tag,coord = c(-80,-66,38,43),path="plots/",xbins=100,log_scale=TRUE)
   
   #time lapse of sick tweets

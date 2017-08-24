@@ -1,0 +1,4 @@
+s3://salathegroup-papers-rawstorage
+s3://twitter-uhs-salathegroup
+
+aws s3 sync s3://bucket_name/bucket_subpath  path_where_u_want2copy

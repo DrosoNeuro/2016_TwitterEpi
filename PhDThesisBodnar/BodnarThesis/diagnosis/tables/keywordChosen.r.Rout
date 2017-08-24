@@ -1,0 +1,132 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> Sys.setenv(NOAWT = TRUE)
+> 
+> library(Snowball)
+Warning message:
+package ‘Snowball’ was built under R version 2.15.3 
+> library(epitools)
+> #test stemmer
+> l = c("mined","miners","mining","miner","mines")
+> SnowballStemmer(l)
+---Registering Weka Editors---
+Registering weka.classifiers.meta.ensembleSelection.EnsembleSelectionLibrary weka.gui.EnsembleSelectionLibraryEditor
+Registering weka.classifiers.meta.generators.NominalAttributeGenerator weka.gui.GenericObjectEditor
+Registering weka.classifiers.meta.generators.NumericAttributeGenerator weka.gui.GenericObjectEditor
+Refreshing GOE props...
+Trying to add database driver (JDBC): RmiJdbc.RJDriver - Warning, not in CLASSPATH?
+Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+Trying to add database driver (JDBC): org.gjt.mm.mysql.Driver - Warning, not in CLASSPATH?
+Trying to add database driver (JDBC): com.mckoi.JDBCDriver - Warning, not in CLASSPATH?
+Trying to add database driver (JDBC): org.hsqldb.jdbcDriver - Warning, not in CLASSPATH?
+[KnowledgeFlow] Loading properties and plugins...
+[KnowledgeFlow] Initializing KF...
+[1] "mine"  "miner" "mine"  "miner" "mine" 
+> 
+> 
+> library(tm)
+Warning message:
+package ‘tm’ was built under R version 2.15.2 
+> library("RWeka")
+Warning message:
+package ‘RWeka’ was built under R version 2.15.3 
+> library(RWekajars)
+Warning message:
+package ‘RWekajars’ was built under R version 2.15.3 
+> 
+> 
+> makeWordVector <- function(text){
++     return(unique(SnowballStemmer(NGramTokenizer(tolower(text),Weka_control(min=1,max=1)))))
++ }
+> 
+> 
+> nice_p <- function(x)
++ {
++ if(x > .0001)
++ {
++ return(round(x,digits=4))
++ }
++ return(" \\textless 0.0001 ")
++ }
+> 
+> library(RMySQL)
+Loading required package: DBI
+> proc.time() -> startTime
+> mydb = dbConnect(MySQL(), user='root',password='root',dbname='uhs_stalker', host='127.0.0.1', port=8889)
+> 
+> for(keyword in makeWordVector("flu influenza sick cough cold medicine fever")){
++ 
++ tweets = fetch(dbSendQuery(mydb, 'select * from tweets where user in (select userID from users)'),n=-1)
++ sick_neg = 0
++ sick_pos = 0
++ 
++ total = 0 
++ 
++ nsick_neg = 0
++ nsick_pos = 0
++ 
++ for(ct in 1:length(tweets$sick_month))
++ #for(ct in 1:100)
++ {
++ total = total + 1
++ if(!is.na(tweets[ct,]$sick_month))
++ {
++ if(keyword %in% makeWordVector(tweets[ct,]$text))
++ {
++ sick_pos = sick_pos + 1
++ }
++ else
++ {
++ sick_neg = sick_neg + 1
++ }
++ }else{
++ if(keyword %in% makeWordVector(tweets[ct,]$text))
++ {
++ nsick_pos = nsick_pos + 1
++ }
++ else
++ {
++ nsick_neg = nsick_neg + 1
++ }
++ 
++ }
++ }
++ cat(keyword,"&",(sick_pos+nsick_pos),"&",format(round(oddsratio.fisher(c(sick_pos,sick_neg,nsick_pos,nsick_neg))$measure[2,1],digits=2),nsmall=2),"&",nice_p(oddsratio.fisher(c(sick_pos,sick_neg,nsick_pos,nsick_neg))$p.value[2,3]),"\\ \\\\ \\hline \n",sep="",file="keyword_expert_odds.tex",append=TRUE)
++ cat(keyword,",",sick_pos,",",sick_neg,",",nsick_pos,",",nsick_neg,",",total,"\n")
++ }
+flu , 16 , 1593 , 9 , 35981 , 37599 
+influenza , 0 , 1609 , 1 , 35989 , 37599 
+sick , 24 , 1585 , 104 , 35886 , 37599 
+cough , 3 , 1606 , 15 , 35975 , 37599 
+cold , 5 , 1604 , 77 , 35913 , 37599 
+medicin , 3 , 1606 , 6 , 35984 , 37599 
+fever , 7 , 1602 , 6 , 35984 , 37599 
+There were 12 warnings (use warnings() to see them)
+> 
+> cat("\n\nCompleted in ",(proc.time() - startTime))
+
+
+Completed in  633.568 41.312 686.641 0 0> 
+> proc.time()
+   user  system elapsed 
+637.186  41.584 691.963 

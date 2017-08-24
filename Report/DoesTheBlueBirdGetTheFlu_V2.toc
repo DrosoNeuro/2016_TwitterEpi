@@ -2,11 +2,11 @@
 \contentsline {section}{\numberline {1.1}Complementary epidemiology}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Digital epidemiology}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}What can ``Larry the Bird" tell us about the flu?}{4}{section.1.3}
-\contentsline {chapter}{\numberline {2}The challenge of reproducibility}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}To replicate or to reproduce?}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Ensuring reproducibility: easier said than done}{11}{section.2.2}
+\contentsline {chapter}{\numberline {2}The challenge of reproducibility}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}To replicate or to reproduce?}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Ensuring reproducibility: easier said than done}{12}{section.2.2}
 \contentsline {section}{\numberline {2.3}Putting emphasis on methods reproducibility}{13}{section.2.3}
-\contentsline {section}{\numberline {2.4}On the ground validation of online diagnosis}{14}{section.2.4}
+\contentsline {section}{\numberline {2.4}On the ground validation of online diagnosis}{15}{section.2.4}
 \contentsline {chapter}{\numberline {3}(Almost) big data: How to analyse 2.8 billion tweets}{21}{chapter.3}
 \contentsline {section}{\numberline {3.1}The nature of the data beast}{21}{section.3.1}
 \contentsline {section}{\numberline {3.2}Description of the \texttt {sick\_users} data set}{22}{section.3.2}
@@ -14,22 +14,26 @@
 \contentsline {chapter}{\numberline {4}What does the classified Twitter data set reveal about the flu?}{35}{chapter.4}
 \contentsline {section}{\numberline {4.1}Can the Twitter classifier compete for gold?}{35}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Spatio-temporal patterns of Twitter usage}{36}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Comparing the flu classifier results with CDC ILI rates}{46}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Comparing classifier results with CDC activity levels}{53}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Comparing classifier results and ILI rates on the state level}{60}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the county level}{61}{subsection.4.1.5}
-\contentsline {section}{\numberline {4.2}Attempts to reproduce key figures and findings from \cite {bodnar_data_2015}}{63}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{63}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{64}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \cite {bodnar_data_2015}}{69}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Discussion and outlook}{73}{chapter.5}
-\contentsline {section}{\numberline {5.1}Has ``Larry the Bird" deserved our trust?}{73}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}The Twitter classifier can detect seasonal flu peaks on a national level}{73}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}The Twitter classifier might be able to detect ILI symptoms in summer}{74}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Autoregression trumps Twitter data}{75}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Low signal to noise ratio on regional, state, and county level}{76}{subsection.5.1.4}
-\contentsline {section}{\numberline {5.2}What the failure to reproduce can teach us}{77}{section.5.2}
-\contentsline {section}{\numberline {5.3}Errors in the aggregation and processing of the Twitter data set}{78}{section.5.3}
-\contentsline {section}{\numberline {5.4}The findings from \cite {bodnar_data_2015} are based on a different data set}{79}{section.5.4}
-\contentsline {section}{\numberline {5.5}There are errors present in the Twitter flu classifier}{79}{section.5.5}
-\contentsline {section}{\numberline {5.6}The findings can only be replicated by using the classified tweets as a starting point for more intricate models}{80}{section.5.6}
+\contentsline {subsection}{\numberline {4.1.2}Comparing the flu classifier results with CDC ILI rates}{37}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Comparing classifier results with CDC activity levels}{45}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Comparing classifier results and ILI rates on the state level}{59}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Comparing classifier results and ILI rates on the county level}{60}{subsection.4.1.5}
+\contentsline {section}{\numberline {4.2}Attempts to reproduce key figures and findings from \cite {bodnar_data_2015}}{61}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Reclassification of the raw Twitter data}{61}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Reproduction of the SIR model described in \cite {bodnar_data_2015}}{62}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Attempt to reproduce the AR model described in \cite {bodnar_data_2015}}{65}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Discussion and outlook}{71}{chapter.5}
+\contentsline {section}{\numberline {5.1}Has ``Larry the Bird" deserved our trust?}{71}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}The Twitter classifier can detect seasonal flu peaks on a national level}{71}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}The Twitter classifier might be able to detect ILI symptoms in summer}{72}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Autoregression trumps Twitter data}{73}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Low signal to noise ratio on regional, state, and county level}{74}{subsection.5.1.4}
+\contentsline {section}{\numberline {5.2}What the failure to reproduce can teach us}{75}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Errors in the aggregation and processing of the Twitter data set}{75}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}The findings from \cite {bodnar_data_2015} are based on a different data set}{76}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}There are errors present in the Twitter flu classifier}{77}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}The raw output from the Twitter classifier is not enough}{77}{subsection.5.2.4}
+\contentsline {chapter}{\bfseries {Bibliography}}{79}{chapter*.45}
+\contentsline {chapter}{\bfseries {Appendices}}{91}{chapter*.47}
+\contentsline {section}{R-Packages}{91}{section*.48}
+\contentsline {section}{Github}{93}{section*.49}

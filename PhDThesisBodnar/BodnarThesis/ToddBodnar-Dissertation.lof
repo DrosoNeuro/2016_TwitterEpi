@@ -1,0 +1,36 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces SVM-regression for the 2011-2012 Influenza season using multiple datasets.}}{3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Results from (a) SVM regression, (b) multivariable regression, and (c) single regression for each dataset compared to the CDC's national reported ILI levels during the 2011-2012 influenza season. Each data point is the result of a model trained on the other 33 week's data.\relax }}{14}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces As with figure 2.1\hbox {}, but results for region 10 from models trained on regions 1-9.\relax }}{15}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The professionally diagnosed Influenza cases during the 2012-2013 season in our sample.\relax }}{18}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The ROC of classifiers that use hand chosen keywords (a) and algorithmically chosen keywords (b) to determine if an individual is ill. The top 10 (solid line), 100 (dashed line) and 1000 (dotted line) were selected as the features.\relax }}{21}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The ROC of classifiers based off Tweets from (a) accounts that follow a user and (b) accounts that a user follows. Line coloring and style are equivalent to figure 3.2\hbox {}.\relax }}{23}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces The accuracy of the previous classifiers (a) and the accuracy of various classifiers that use the previous classifier's results as features (b). \relax }}{25}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles) for national (A), HHS Region 1 (B), and Seattle area (C).\relax }}{33}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The CDC's estimates (circles) of influenza rates for a three year period compared to the best fit SIR models from the Twitter data using combined (dashed line) or yearly (solid line) parameters.\relax }}{34}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The relationship between the US Census's population count and number of Twitter users in our dataset.\relax }}{35}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Estimated peer-to-peer transmission rates based on maximum distances between users.\relax }}{37}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Effects of differing time and temporal windows on predicted R0. Note the increase in time after 14 days.}}{39}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces The adjusted number of individuals that a person is likely to infect during her disease. Note that the log-transformed x-axis does not include cases where zero transmission occurs.\relax }}{40}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Example of a cluster of influenza in Seattle over a two week period.\relax }}{43}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of differing disease rates in nearby cities in Pennsylvania. Note the differences in Pittsburgh (south west) compared to Philadelphia (south east).\relax }}{44}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Disease rates for three days over a 6 month period of our dataset. Best viewed in full screen.\relax }}{45}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The distribution of each of the four parameters of emotion from the hand rated training sets for the Autism (blue), H7N9 (red) and MMR (orange) datasets.\relax }}{56}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces A comparison between regular retweets (solid) and hidden retweets (dashed). Hidden retweets show an exponential distribution in the distance between the tweet and it's message's origin, and regular retweets show a star topology, never being more than one hop from the origin (A). The time between when a message is posted and when a message is reposted is similar between the two types of reposts (B). However, hidden retweets may be multimodal with an additional high point in the seconds range, possibly indicating false positives.\relax }}{60}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The frequency of reposts of a message by each of the four types of users (A) and the estimated probability density function of a message's posts normalize by the number of individuals that the original poster is followed by (B). Note that the non-normalized post counts have a power-law-like distribution with the dashed line representing a log-log function fit to the data. All distributions are significantly different. Occurrences are defined by the number of retweets + 1. Where we add one to account for the initial posting.\relax }}{61}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The number of times a tweet is posted based on the number of followers the original poster has.\relax }}{62}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The mean Valence (A) and Aptitude (B) of tweets from each of the four user types in each of our three datasets. \relax }}{65}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles) for each of the 10 HHS regions.\relax }}{80}
+\contentsline {figure}{\numberline {C.2}{\ignorespaces Comparison of Twitter's forecasting (dashed lines) and retroactive measurements (solid lines) to the CDC's reported Influenza rates (circles) for King County and Tarrant County.\relax }}{81}
+\addvspace {10\p@ }
