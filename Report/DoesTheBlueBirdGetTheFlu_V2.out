@@ -29,11 +29,14 @@
 \BOOKMARK [2][-]{subsection.5.1.3}{Autoregression trumps Twitter data}{section.5.1}% 29
 \BOOKMARK [2][-]{subsection.5.1.4}{Low signal to noise ratio on regional, state, and county level}{section.5.1}% 30
 \BOOKMARK [1][-]{section.5.2}{What the failure to reproduce can teach us}{chapter.5}% 31
-\BOOKMARK [2][-]{subsection.5.2.1}{Errors in the aggregation and processing of the Twitter data set}{section.5.2}% 32
-\BOOKMARK [2][-]{subsection.5.2.2}{The findings from bodnardata2015 are based on a different data set}{section.5.2}% 33
-\BOOKMARK [2][-]{subsection.5.2.3}{There are errors present in the Twitter flu classifier}{section.5.2}% 34
-\BOOKMARK [2][-]{subsection.5.2.4}{The raw output from the Twitter classifier is not enough}{section.5.2}% 35
+\BOOKMARK [2][-]{subsection.5.2.1}{Faulty data handling}{section.5.2}% 32
+\BOOKMARK [2][-]{subsection.5.2.2}{Differences in the data set}{section.5.2}% 33
+\BOOKMARK [2][-]{subsection.5.2.3}{Classification errors}{section.5.2}% 34
+\BOOKMARK [2][-]{subsection.5.2.4}{Additional modelling needed}{section.5.2}% 35
 \BOOKMARK [0][-]{chapter*.45}{Bibliography}{}% 36
-\BOOKMARK [0][-]{chapter*.47}{Appendices}{}% 37
-\BOOKMARK [1][-]{section*.48}{R-Packages}{chapter*.47}% 38
-\BOOKMARK [1][-]{section*.49}{Github}{chapter*.47}% 39
+\BOOKMARK [0][-]{appendix.A}{Appendices}{}% 37
+\BOOKMARK [0][-]{appendix.A}{Appendices}{}% 38
+\BOOKMARK [1][-]{section.A.1}{R-Packages}{appendix.A}% 39
+\BOOKMARK [1][-]{section.A.1}{R-Packages}{appendix.A}% 40
+\BOOKMARK [1][-]{section.A.2}{Github}{appendix.A}% 41
+\BOOKMARK [1][-]{section.A.2}{Github}{appendix.A}% 42

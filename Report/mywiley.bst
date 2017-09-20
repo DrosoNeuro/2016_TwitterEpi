@@ -995,7 +995,7 @@ FUNCTION {sort.format.names}
       s nameptr "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}" format.name$ 't := % <= here
       nameptr numnames = t "others" = and
 	{ "{\it et al.}" * }   % quax
-%	{ "et al." * }   % orig
+	%{ "et al." * }   % orig
 	{ t sortify * }
       if$
       nameptr #1 + 'nameptr :=
