@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {5.2.2}Differences in the data set}{76}{subsection.5.2.2}
 \contentsline {subsection}{\numberline {5.2.3}Classification errors}{77}{subsection.5.2.3}
 \contentsline {subsection}{\numberline {5.2.4}Additional modelling needed}{77}{subsection.5.2.4}
-\contentsline {chapter}{\bfseries {Bibliography}}{79}{chapter*.45}
+\contentsline {chapter}{\bfseries {Bibliography}}{79}{chapter*.39}
 \contentsline {chapter}{\numberline {A}Appendices}{89}{appendix.A}
 \contentsline {chapter}{\bfseries {Appendices}}{89}{appendix.A}
 \contentsline {section}{\numberline {A.1}R-Packages}{89}{section.A.1}

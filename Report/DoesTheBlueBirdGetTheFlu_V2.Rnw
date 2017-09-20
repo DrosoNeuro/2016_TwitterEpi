@@ -23,7 +23,7 @@
 \usepackage{subcaption}
 \usepackage[toc,page]{appendix}
 \usepackage{needspace}
-
+%\usepackage[monochrome]{xcolor} %for pure black white printings
 
 \usepackage[authoryear,round,sectionbib]{natbib} %sectionbib option lets bibliography start right after text
 \usepackage[resetlabels]{multibib}
@@ -76,6 +76,12 @@
   footskip=15mm
 }
 
+% ======================================
+% Define video float
+\newfloat{video}{thp}{lop}[chapter]
+\floatname{video}{Video}
+\captionsetup[video]{margin=0pt}
+% ======================================
 
 % =======================================
 % Personalized layout
@@ -1024,79 +1030,79 @@ I then did the same using the relative number of sick users (as opposed to sick 
 
 To get a better understanding of the spatio-temporal pattern of ILI activity levels, I additionally built a function that would take CDC ILI data as well as classified Twitter data and build a map of flu activity over time. The function was built using the ``R"-packages ``maps" \citep{maps_2016}, ``mgcv" \citep{mgcv_2006,mgcv_2016}, ``animation" \citep{animation_2015}, and ``grid" \citep{murrell_integrating_2003,murrell_grid_2007,zhou_fun_2010}. 
 
- Figure~\ref{fig:cdc_flu_regio} contains a visualisation of the regional ILI activity levels provided by the CDC. It serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Figure~\ref{fig:twitter_flu_regio} also shows regional activity levels, but with the results from the Twitter classifier.
+Video~\ref{vid:cdc_flu_regio} contains a visualisation of the regional ILI activity levels provided by the CDC. It serves as proof of principle for the validity of the time-lapsed flu map, allowing for a direct visualisation of the yearly flu epidemics in the USA. Video~\ref{vid:twitter_flu_regio} also shows regional activity levels, but with the results from the Twitter classifier.
 
 \begin{center}
 \href{run:vids/1_cdc_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/1_cdc_flu_regio.png}}
 \end{center}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{ILI activity levels as provided by the CDC for the 10 surveillance regions. Red corresponds to activity level 10, while light yellow corresponds to activity level 1, which indicate the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
-    \label{fig:cdc_flu_regio}
-\end{figure}
+    \label{vid:cdc_flu_regio}
+\end{video}
 \clearpage
 \begin{center}
 \href{run:vids/2_twitter_flu_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/2_twitter_flu_regio.png}}
 \end{center}
 \vspace{-0.2in}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{Flu activity levels as calculated based on the relative number of Twitter users classified as ``sick" in each week aggregated within each of the 10 surveillance regions. Dark blue corresponds to activity level 10, while light blue corresponds to activity level 1, \textit{i.e.} the highest and lowest ILI activity, respectively. The PDF-version of this thesis contains a playable video.}
-    \label{fig:twitter_flu_regio}
-\end{figure}
+    \label{vid:twitter_flu_regio}
+\end{video}
 \vspace{-0.6in}
 %\needspace{20\baselineskip}
 \begin{center}
 \href{run:vids/3_cdc_twitter_diff_user_regio.avi}{\includegraphics[width=0.9\linewidth]{vids/3_cdc_twitter_diff_user_regio.png}}
 \end{center}
 \vspace{-0.2in}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{Difference between the CDC ILI activity levels and those calculated based on the relative amount of sick Twitter users in each corresponding region and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite. The PDF-version of this thesis contains a playable video.}
-    \label{fig:cdc_twitter_comp_regio}
-\end{figure}
+    \label{vid:cdc_twitter_comp_regio}
+\end{video}
 
-In order to directly compare the CDC and Twitter flu activity levels, I subtracted the Twitter activity levels in each week and region from each corresponding CDC activity level. I then remapped the values onto the USA over the whole 208 week interval for which I had data. Figure~\ref{fig:cdc_twitter_comp_regio} shows performance of the Twitter classifier results over space and time. As can be seen, the Twitter ILI classifier hardly ever manages to emulate the CDC activity levels and when it does, it mainly happens during off-season weeks. 
+In order to directly compare the CDC and Twitter flu activity levels, I subtracted the Twitter activity levels in each week and region from each corresponding CDC activity level. I then remapped the values onto the USA over the whole 208 week interval for which I had data. Video~\ref{vid:cdc_twitter_comp_regio} shows performance of the Twitter classifier results over space and time. As can be seen, the Twitter ILI classifier hardly ever manages to emulate the CDC activity levels and when it does, it mainly happens during off-season weeks. 
 
 \subsection{Comparing classifier results and ILI rates on the state level}
 \label{sec:comp_cdc_state}
-In a next step, I assessed the performance of the Twitter flu classifier by looking at state-level data. I again calculated activity levels for each state and week based on the relative amount of tweets labelled as ``sick" and the relative number of users classified as ``sick", respectively. Since the fit with the CDC activity curves was worse than for the regional and national data, I did not include the individual time series to this thesis, but only a video showing the spatio-temporal differences in ILI activity levels (all additional videos and figures can be found on Github, however). Figure~\ref{fig:cdc_twitter_comp_state} contains the comparison with activity levels based on the relative number of users classified as ``sick" during a specific week and within a given state.
+In a next step, I assessed the performance of the Twitter flu classifier by looking at state-level data. I again calculated activity levels for each state and week based on the relative amount of tweets labelled as ``sick" and the relative number of users classified as ``sick", respectively. Since the fit with the CDC activity curves was worse than for the regional and national data, I did not include the individual time series to this thesis, but only a video showing the spatio-temporal differences in ILI activity levels (all additional videos and figures can be found on Github, however). Video~\ref{vid:cdc_twitter_comp_state} contains the comparison with activity levels based on the relative number of users classified as ``sick" during a specific week and within a given state.
 \vspace{-0.18in}
 \begin{center}
 \href{run:vids/4_cdc_twitter_diff_user_state.avi}{\includegraphics[width=0.9\linewidth]{vids/4_cdc_twitter_diff_user_state.png}}
 \end{center}
 \vspace{-0.2in}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{Difference between the CDC ILI activity levels and those calculated based on the relative amount of sick Twitter users in each corresponding state and week. White means that CDC and Twitter activity levels are exactly the same, red means that the CDC reported higher ILI activity levels in a given state and week than those calculated from the Twitter data set, blue indicates the opposite. The PDF-version of this thesis contains a playable video.}
-    \label{fig:cdc_twitter_comp_state}
-\end{figure}
+    \label{vid:cdc_twitter_comp_state}
+\end{video}
 
 \subsection{Comparing classifier results and ILI rates on the county level}
 \label{sec:comp_cdc_county}
 In order to assess the performance of the classifier on the county level, I contacted 18 state health departments (Arkansas, California, Florida, Illinois, Iowa, Louisiana, Maine, Michigan, Minnesota, Mississippi, Missouri, New Jersey, New York, North Dakota, Oregon, South Dakota), asking them for their county-level or regional ILI data between 2011 and 2015. I only received the county-level data from the state of Oregon, while the state of California provided me with state-level data only. All other states did either not answer or declined my request. Luckily, the states of New Jersey and Mississippi provided (almost) complete county-level ILI data on their website for the requested time period. Since the data was only provided in PDF-format, I built a scraper for both states in order to retrieve the relevant information. 
 
-Below, you can see the spatio-temporal comparison of the performance of the Twitter flu classifier for the counties of New Jersey (Figure~\ref{fig:cdc_twitter_comp_jersey}) and Oregon (Figure~\ref{fig:cdc_twitter_comp_oregon}). Note that Oregon did not provide ILI estimates for all counties (most of the northeastern counties are missing, for example).
+Below, you can see the spatio-temporal comparison of the performance of the Twitter flu classifier for the counties of New Jersey (Video~\ref{vid:cdc_twitter_comp_jersey}) and Oregon (Video~\ref{vid:cdc_twitter_comp_oregon}). Note that Oregon did not provide ILI estimates for all counties (most of the northeastern counties are missing, for example).
 
 \begin{center}
 \href{run:vids/5_cdc_twitter_diff_user_jersey.avi}{\includegraphics[width=0.9\linewidth]{vids/5_cdc_twitter_diff_user_jersey.png}}
 \end{center}
 \vspace{-0.2in}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of New Jersey. White means that the official and Twitter activity levels are exactly the same, red means that the state of New Jersey reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite. The PDF-version of this thesis contains a playable video.}
-    \label{fig:cdc_twitter_comp_jersey}
-\end{figure}
+    \label{vid:cdc_twitter_comp_jersey}
+\end{video}
 
 \begin{center}
 \href{run:vids/6_cdc_twitter_diff_user_oregon.avi}{\includegraphics[width=0.9\linewidth]{vids/6_cdc_twitter_diff_user_oregon.png}}
 \end{center}
 \vspace{-0.2in}
-\begin{figure}[htbp!]
+\begin{video}[htbp!]
 \centering
   \caption{Difference between the official ILI activity levels provided by the state of New Jersey and those calculated based on the relative amount of sick Twitter users in each corresponding week and county of Oregon. White means that the official and Twitter activity levels are exactly the same, red means that the state of Oregon reported higher ILI activity levels in a given county and week than those calculated from the Twitter data set, blue indicates the opposite. The PDF-version of this thesis contains a playable video.}
-    \label{fig:cdc_twitter_comp_oregon}
-\end{figure}
+    \label{vid:cdc_twitter_comp_oregon}
+\end{video}
 
 \section{Attempts to reproduce key figures and findings from \cite{bodnar_data_2015}}
 \label{sec:methods_reproduce}
